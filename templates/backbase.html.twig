@@ -4,7 +4,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Corona Admin</title>
+    <title>{% block title %} Dashboard {% endblock %} </title>
     <!-- plugins:css -->
 
    
@@ -41,11 +41,10 @@
   <body>
     <div class="container-scroller">
       <!-- partial:partials/_sidebar.html -->
+        
     <nav class="sidebar sidebar-offcanvas" id="sidebar">
       <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
-        {# <a class="sidebar-brand brand-logo" href="index.html"><img src="assets/images/logo.svg" alt="logo" /></a>
-        <a class="sidebar-brand brand-logo-mini" href="index.html"><img src="assets/images/logo-mini.svg"
-            alt="logo" /></a> #}
+        <a class="sidebar-brand brand-logo"><img src="{{ asset('asset/images/logo.jpg') }}"></a>
       </div>
       <ul class="nav">
         <li class="nav-item profile">
@@ -100,7 +99,7 @@
           </div>
         </li>
         <li class="nav-item nav-category">
-          <span class="nav-link">Gestion</span>
+          <span class="nav-link">Mes Gestion :</span>
         </li>
         <li class="nav-item menu-items">
           <a class="nav-link" href="index.html">
@@ -150,8 +149,9 @@
             <span class="menu-title">Charts</span>
           </a>
         </li>
+        
         <li class="nav-item menu-items">
-          <a class="nav-link" href="pages/icons/mdi.html">
+          <a class="nav-link" href=" {{ path ('app_livreur') }} ">
             <span class="menu-icon">
               <i class="mdi mdi-contacts"></i>
             </span>
@@ -406,7 +406,7 @@
                      <img src="{{ asset('assets/img/logo/loder.jpg') }}" alt="" class="gradient-corona-img img-fluid" alt="">
                     </div>
                     <div class="col-5 col-sm-7 col-xl-8 p-0">
-                      <h4 class="mb-1 mb-sm-0">ONEWAY</h4>
+                     
                       
 
                     </div>

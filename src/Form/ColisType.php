@@ -31,8 +31,7 @@ class ColisType extends AbstractType
                     'Meubles' => 'Meubles',
                     'Pièces Automobiles' => 'Pièces Automobiles',
                 ],
-               
-            ])
+                 ])
             
             
 
