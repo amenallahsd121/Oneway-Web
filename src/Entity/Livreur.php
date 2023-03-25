@@ -3,7 +3,9 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use App\Repository\LivreurRepository;
+use App\Entity\Utilisateur;
+use ORM\Table;
 
  
 #[ORM\Entity(repositoryClass: LivreurRepository::class)]
