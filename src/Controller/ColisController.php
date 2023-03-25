@@ -33,7 +33,7 @@ class ColisController extends AbstractController
     #[Route('/colis', name: 'app_colis')]
     public function index(): Response
     {
-        dump("Afficher");
+        
         $data = $this->getDoctrine()->getRepository(Colis::class)->findAll();
         return $this->render('colis/index.html.twig', [
             'list' => $data   
@@ -47,7 +47,7 @@ class ColisController extends AbstractController
 
     #[Route('/colis/add', name: 'add_colis')]
     public function addcolis(ManagerRegistry $doctrine,Request $req): Response {
-        dump("Ajouter");
+      
         $em = $doctrine->getManager();
         $colis = new Colis();
         $form = $this->createForm(ColisType::class,$colis);
@@ -78,7 +78,7 @@ class ColisController extends AbstractController
 
 #[Route('/colis/update/{id}', name: 'update_colis')]
     public function update(Request $req, $id) {
-      dump("OK");
+      
       $colis = $this->getDoctrine()->getRepository(Colis::class)->find($id); 
       $form = $this->createForm(ColisType::class,$colis);
       $form->handleRequest($req);
@@ -113,7 +113,7 @@ class ColisController extends AbstractController
 public function delete($id) {
  
  
-    dump("Hello");
+   
     $data = $this->getDoctrine()->getRepository(Colis::class)->find($id); 
 
       $em = $this->getDoctrine()->getManager();
