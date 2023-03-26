@@ -3,6 +3,8 @@
 namespace App\Entity;
 use App\Entity\Colis;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\LivraisonRepository;
+use App\Repository\ColisRepository;
 
 
  
@@ -19,9 +21,12 @@ class Livraison
     #[ORM\Column(length:50)]
     private ?string $etat = null ;
    
-    // #[ORM\ManyToOne(inversedBy: 'Colis')]
-    // private ?int $idColis = null ;
 
+    #[ORM\ManyToOne(targetEntity: Colis::class)]
+    #[ORM\JoinColumn(name: "idColis", referencedColumnName: "id_colis")]
+    protected $Colis;
+
+    
 
     // #[ORM\ManyToOne(inversedBy: 'Livreur')]
     // private ?int $idLivreur = null ;
@@ -44,17 +49,17 @@ class Livraison
         return $this;
     }
 
-    // public function getIdColis(): ?Colis
-    // {
-    //     return $this->idColis;
-    // }
+    public function getIdColis(): ?Colis
+    {
+        return $this->Colis;
+    }
 
-    // public function setIdColis(?Colis $idColis): self
-    // {
-    //     $this->idColis = $idColis;
+    public function setIdColis(?Colis $Colis): self
+    {
+        $this->Colis = $Colis;
 
-    //     return $this;
-    // }
+        return $this;
+    }
 
     // public function getIdLivreur(): ?Livreur
     // {

@@ -3,7 +3,9 @@
 namespace App\Entity;
 
 use App\Repository\ColisRepository;
+use App\Repository\LivraisonRepository;
 use App\Entity\Utilisateur;
+use App\Entity\Livraison;
 use ORM\Table;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -45,6 +47,8 @@ protected $id_client;
 
     
     
+#[ORM\OneToMany(mappedBy: 'Colis', targetEntity: Livraison::class)]
+    private $livraisons;
 
 
     public function getIdColis(): ?int

@@ -1,0 +1,75 @@
+{% extends 'backbase.html.twig' %}
+
+
+{% block title %}
+	Liste des Livreurs
+{% endblock %}
+
+
+{% block body %}
+
+
+	<div class="row ">
+		<div class="col-12 grid-margin">
+			<div class="card">
+				<div class="card-body">
+
+					<h4 class="card-title">Liste des Colis Non Affectés</h4>
+
+
+					<div class="table-responsive">
+						<table class="table">
+							<thead>
+								<tr>
+									<th>
+										Poids
+									</th>
+									<th>
+										Type
+									</th>
+									<th>
+										Prix
+									</th>
+									<th>
+										Lieu Départ
+									</th>
+									<th>
+										Lieu Arrivé
+									</th>
+									<th>
+										Affecter Colis
+									</th>
+
+								</tr>
+							</thead>
+
+							{% for data in list %}
+								<tr>
+
+									<td>
+										{{ data.poids }}
+									</td>
+									<td>
+										{{ data.typeColis }}
+									</td>
+									<td>
+										{{ data.prix }}</td>
+									<td>
+										{{ data.lieuDepart }}
+									</td>
+
+									<td>
+										{{ data.lieuArrive }}
+									</td>
+
+
+									<td>
+										<a href="{{ path('update_livreur', {'id': data.idColis}) }}" class="btn btn-outline-success btn-fw;">
+											Affecter</a>
+									</td>
+								</tr>
+
+							{% endfor %}
+
+
+						{% endblock %}
