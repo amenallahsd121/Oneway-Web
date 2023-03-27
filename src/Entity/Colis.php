@@ -19,7 +19,7 @@ class Colis
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private ?int $idColis = null ;
+    private ?int $id_colis = null ;
 
 
     #[ORM\Column]
@@ -45,15 +45,18 @@ class Colis
 #[ORM\JoinColumn(name: "id_client", referencedColumnName: "id")]
 protected $id_client;
 
-    
-    
-#[ORM\OneToMany(mappedBy: 'Colis', targetEntity: Livraison::class)]
+
+
+
+#[ORM\OneToOne(targetEntity: Livraison::class, mappedBy: 'colis')]
     private $livraisons;
+
+
 
 
     public function getIdColis(): ?int
     {
-        return $this->idColis;
+        return $this->id_colis;
     }
 
     public function getPoids(): ?float

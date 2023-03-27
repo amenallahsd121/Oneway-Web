@@ -2,8 +2,10 @@
 
 namespace App\Entity;
 use App\Entity\Colis;
+use App\Entity\Livreur;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\LivraisonRepository;
+use App\Repository\LivreurRepository;
 use App\Repository\ColisRepository;
 
 
@@ -22,14 +24,17 @@ class Livraison
     private ?string $etat = null ;
    
 
-    #[ORM\ManyToOne(targetEntity: Colis::class)]
-    #[ORM\JoinColumn(name: "idColis", referencedColumnName: "id_colis")]
-    protected $Colis;
+    #[ORM\OneToOne(targetEntity: Colis::class, inversedBy: 'livraisons')]
+    #[ORM\JoinColumn(name: "id_colis", referencedColumnName: "id_colis")]
+    protected $colis;
 
     
 
-    // #[ORM\ManyToOne(inversedBy: 'Livreur')]
-    // private ?int $idLivreur = null ;
+
+    #[ORM\ManyToOne(targetEntity: Livreur::class)]
+    #[ORM\JoinColumn(name: "id_livreur", referencedColumnName: "id_livreur")]
+    protected $livreur;
+    
     
 
     public function getIdLivraison(): ?int
@@ -49,29 +54,30 @@ class Livraison
         return $this;
     }
 
-    public function getIdColis(): ?Colis
+    public function getColis(): ?Colis
     {
-        return $this->Colis;
+        return $this->colis;
     }
 
-    public function setIdColis(?Colis $Colis): self
+    public function setColis(?Colis $colis): self
     {
-        $this->Colis = $Colis;
+        $this->colis = $colis;
 
         return $this;
     }
 
-    // public function getIdLivreur(): ?Livreur
-    // {
-    //     return $this->idLivreur;
-    // }
 
-    // public function setIdLivreur(?Livreur $idLivreur): self
-    // {
-    //     $this->idLivreur = $idLivreur;
+    public function getLivreur(): ?Livreur
+    {
+        return $this->livreur;
+    }
 
-    //     return $this;
-    // }
+    public function setLivreur(?Livreur $livreur): self
+    {
+        $this->livreur = $livreur;
+
+        return $this;
+    }
 
 
 }

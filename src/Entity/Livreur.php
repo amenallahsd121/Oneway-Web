@@ -15,7 +15,7 @@ class Livreur
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private ?int $idLivreur = null ;
+    private ?int $id_livreur = null ;
     
 
     #[ORM\Column(length:50)]
@@ -38,7 +38,7 @@ class Livreur
 
     public function getIdLivreur(): ?int
     {
-        return $this->idLivreur;
+        return $this->id_livreur;
     }
 
     public function getCinLivreur(): ?string
