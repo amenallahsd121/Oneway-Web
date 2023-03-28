@@ -3,6 +3,12 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\ReclamationRepository;
+use App\Entity\Utilisateur;
+use App\Entity\Reclamation;
+use ORM\Table;
+
+#[ORM\Entity(repositoryClass: ReclamationRepository::class)]
 
 /**
  * Reponse
@@ -10,62 +16,59 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="reponse", indexes={@ORM\Index(name="reponse_ibfk_1", columns={"id_reclamation"})})
  * @ORM\Entity
  */
+
+
+
 class Reponse
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id_reponse", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $idReponse;
+   
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    private ?int $id_reponse = null;
+    
+  
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="text_rep", type="string", length=255, nullable=false)
-     */
-    private $textRep;
+    #[ORM\Column(length: 250)]
+    private ?string $text_rep = null;
 
-    /**
-     * @var \Reclamation
-     *
-     * @ORM\ManyToOne(targetEntity="Reclamation")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_reclamation", referencedColumnName="id_reclamation")
-     * })
-     */
-    private $idReclamation;
+
+    
+    #[ORM\OneToOne(targetEntity: Reclamation::class, inversedBy: 'reponse')]
+    #[ORM\JoinColumn(name: "id_reclamation", referencedColumnName: "id_reclamation")]
+    protected $reclamation;
+
 
     public function getIdReponse(): ?int
     {
-        return $this->idReponse;
+        return $this->id_reponse;
     }
 
     public function getTextRep(): ?string
     {
-        return $this->textRep;
+        return $this->text_rep;
     }
 
-    public function setTextRep(string $textRep): self
+    public function setTextRep(string $text_rep): self
     {
-        $this->textRep = $textRep;
+        $this->text_rep = $text_rep;
 
         return $this;
     }
 
-    public function getIdReclamation(): ?Reclamation
+    public function getReclamation(): ?Reclamation
     {
-        return $this->idReclamation;
+        return $this->reclamation;
     }
 
-    public function setIdReclamation(?Reclamation $idReclamation): self
+    public function setReclamation(?Reclamation $reclamation): self
     {
-        $this->idReclamation = $idReclamation;
+        $this->reclamation = $reclamation;
 
         return $this;
     }
 
 
-}
+
+
+     }

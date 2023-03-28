@@ -131,5 +131,39 @@ protected $id_client;
         return $this;
     }
 
+    public function getIdClient(): ?Utilisateur
+    {
+        return $this->id_client;
+    }
+
+    public function setIdClient(?Utilisateur $id_client): self
+    {
+        $this->id_client = $id_client;
+
+        return $this;
+    }
+
+    public function getLivraisons(): ?Livraison
+    {
+        return $this->livraisons;
+    }
+
+    public function setLivraisons(?Livraison $livraisons): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($livraisons === null && $this->livraisons !== null) {
+            $this->livraisons->setColis(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($livraisons !== null && $livraisons->getColis() !== $this) {
+            $livraisons->setColis($this);
+        }
+
+        $this->livraisons = $livraisons;
+
+        return $this;
+    }
+
 
 }
