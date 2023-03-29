@@ -3,20 +3,14 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use App\Repository\ReclamationRepository;
+use App\Repository\ReponseRepository;
 use App\Entity\Utilisateur;
 use App\Entity\Reclamation;
 use ORM\Table;
 
-#[ORM\Entity(repositoryClass: ReclamationRepository::class)]
 
-/**
- * Reponse
- *
- * @ORM\Table(name="reponse", indexes={@ORM\Index(name="reponse_ibfk_1", columns={"id_reclamation"})})
- * @ORM\Entity
- */
 
+#[ORM\Entity(repositoryClass: ReponseRepository::class)]
 
 
 class Reponse
@@ -39,15 +33,30 @@ class Reponse
     protected $reclamation;
 
 
+    
+
     public function getIdReponse(): ?int
     {
         return $this->id_reponse;
     }
 
+    public function getId_Reponse(): ?int
+    {
+        return $this->id_reponse;
+    }
+
+
+
+
+    public function getText_Rep(): ?string
+    {
+        return $this->text_rep;
+    }
     public function getTextRep(): ?string
     {
         return $this->text_rep;
     }
+
 
     public function setTextRep(string $text_rep): self
     {
@@ -55,6 +64,16 @@ class Reponse
 
         return $this;
     }
+    public function setText_Rep(string $text_rep): self
+    {
+        $this->text_rep = $text_rep;
+
+        return $this;
+    }
+
+
+
+
 
     public function getReclamation(): ?Reclamation
     {

@@ -54,15 +54,16 @@
 										{{ data.text_rep }}
                                         </td>
 									
-									{# <td>
-										<a href="{{ path('delete_livraison', {'id': data.idLivraison}) }}" class="btn btn-outline-danger btn-fw;">Supprimer</a>
+									<td>
+                                    
+										<a href="{{ path('delete_reponse', {'id': data.id_reponse}) }}"  class="btn btn-outline-danger btn-fw;">Supprimer</a>
 									</td>
 
-
+                                   
 									<td>
-										<a href="{{ path('update_livraison', {'id': data.idLivraison}) }}" class="btn btn-outline-warning btn-fw;">
+										<a  href="{{ path('update_reponse', {'id': data.id_reponse}) }}" class="btn btn-outline-warning btn-fw;">
 											Modifier</a>
-									</td> #}
+									</td>
 								</tr>
 
 							{% endfor %}

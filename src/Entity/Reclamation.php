@@ -50,10 +50,7 @@ class Reclamation
         return $this->id_reclamation;
     }
 
-    public function getReclamation(): ?int
-    {
-        return $this->id_reclamation;
-    }
+
 
     public function getTextRec(): ?string
     {
