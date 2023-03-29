@@ -1,0 +1,122 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %}
+	Ajouter Colis
+{% endblock %}
+
+
+{% block body %}
+
+	<style>
+		body {
+			background-color: #000c20;
+		}
+		.form-container {
+			margin-top: -120px;
+
+		}
+		form {
+
+			padding: 200px;
+			background-color: #000c20;
+			margin-left: 400px; /* add margin to move form to the right */
+
+
+		}
+		input[type="text"],
+		select {
+			width: 500px; /* set width of text inputs and select */
+			font-size: 19px; /* set font size for text inputs and select */
+			padding: 18px; /* set padding for text inputs and select */
+			border: none; /* remove border */
+			background-color: white; /* set background color for text inputs and select */
+			border-radius: 5px; /* round the corners of text inputs and select */
+			margin-bottom: 10px; /* add some space between form fields */
+		}
+		label {
+			display: inline-block;
+			width: 0; /* adjust as needed */
+			margin-right: 7px; /* adjust as needed */
+			font-size: 16px; /* set font size for labels */
+			font-weight: bold; /* make labels bold */
+			color: white;
+		}
+
+
+		.form-table {
+			width: 100%;
+			max-width: 600px;
+			margin: -80px auto 0 -145px;
+			border-collapse: collapse;
+		}
+
+		.form-table td {
+			padding: 20px;
+
+		}
+
+		.form-table td:first-child {
+			width: 150px;
+
+			font-weight: bold;
+		}
+		
+	</style>
+
+
+	<div class="form-container">
+
+
+		{% block form %}
+			{{form_start(form,{'attr': {'novalidate': 'novalidate'}}
+			)}}
+
+
+			<table class="form-table">
+
+				<tr>
+
+					<h1 style="color: white; padding: 45px 20px; font-size: 23px; margin-left: 10px">
+						Veuillez saisir les details de votre reclamation</h1>
+
+					<td>
+						{{ form_label(form.sujet,'Sujet' , {'label_attr': {'style': 'font-size: 20px'}}) }}
+					</td>
+					<td>
+						{{ form_widget(form.sujet) }}
+					</td>
+					<td>
+						{{ form_errors(form.sujet) }}
+					</td>
+				</tr>
+				<br>
+
+				<tr>
+					<td>
+						{{ form_label(form.text_rec, 'Text reclamation', {'label_attr': {'style': 'font-size: 20px;'}}) }}
+					</td>
+					<td>
+						{{ form_widget(form.text_rec, {'attr': {'rows': 5}})}}
+					</td>
+					<td>
+						{{ form_errors(form.text_rec) }}
+					</td>
+				</tr>
+
+
+				<br>
+
+
+				<tr>
+					<td colspan="2">{{ form_widget(form.Reclamer, {'attr': {'style': 'font-size: 18px; padding: 15px 20px; margin-left: 150px; margin-top: 10px;'}}
+						) }}</td>
+				</tr>
+			</table>
+
+
+			{{form_end(form)}}
+		{% endblock %}
+
+
+	{% endblock %}
