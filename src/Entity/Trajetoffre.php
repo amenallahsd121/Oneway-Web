@@ -13,41 +13,56 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Trajetoffre
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    
-    private ?int $idtrajetoffre = null;
-    
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="IdTrajetOffre", type="bigint", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $idtrajetoffre;
 
-    
-#[ORM\Column]
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="LimiteKmOffre", type="integer", nullable=false)
+     */
+    private $limitekmoffre;
 
-private ?int $limitekmoffre = null;
-    
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(name="AddArriveOffre", type="string", length=255, nullable=true, options={"default"="NULL"})
+     */
+    private $addarriveoffre = 'NULL';
 
-    #[ORM\Column(length: 255)]
-    private ?string $addarriveoffre= null;
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(name="AddDepartOffre", type="string", length=255, nullable=true, options={"default"="NULL"})
+     */
+    private $adddepartoffre = 'NULL';
 
+    /**
+     * @var int|null
+     *
+     * @ORM\Column(name="NbreEscaleOffre", type="integer", nullable=true, options={"default"="NULL"})
+     */
+    private $nbreescaleoffre = NULL;
 
-    #[ORM\Column(length: 255)]
-    private ?string $adddepartoffre= null;
-    
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="nbreOffre", type="integer", nullable=false)
+     */
+    private $nbreoffre = '0';
 
-    #[ORM\Column]
-
-private ?int $nbreescaleoffre = null;
-
-    
-#[ORM\Column]
-
-private ?int $nbreoffre = null;
-    
-   
-
-    #[ORM\Column(length: 255)]
-    private ?string $description= null;
-    
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(name="description", type="string", length=255, nullable=true, options={"default"="NULL"})
+     */
+    private $description = 'NULL';
 
     public function getIdtrajetoffre(): ?string
     {

@@ -1,15 +1,13 @@
 <?php
 
-namespace App\Entity ;
+namespace App\Entity;
 
 use App\Repository\ColisRepository;
-
-use Doctrine\ORM\Mapping as ORM;
 use App\Entity\Utilisateur;
+use ORM\Table;
+use Doctrine\ORM\Mapping as ORM;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
-use Doctrine\DBAL\Types\Types;
+
 
 #[ORM\Entity(repositoryClass: ColisRepository::class)]
 
