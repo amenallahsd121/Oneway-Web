@@ -2,70 +2,58 @@
 
 namespace App\Entity;
 
+use App\Entity\Evenement;
+use App\Entity\Utilisateur;
+use App\Repository\ParticipationRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * Participation
- *
- * @ORM\Table(name="participation", indexes={@ORM\Index(name="id_user", columns={"id_user"}), @ORM\Index(name="fk_participEvent", columns={"id_event"})})
- * @ORM\Entity
- */
+
+
+#[ORM\Entity(repositoryClass: ParticipationRepository::class)]
+
+
 class Participation
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id_participation", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $idParticipation;
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    private ?int $idParticipation= null;
 
-    /**
-     * @var \Evenement
-     *
-     * @ORM\ManyToOne(targetEntity="Evenement")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_event", referencedColumnName="id_event")
-     * })
-     */
-    private $idEvent;
+    #[ORM\ManyToOne(targetEntity: Evenement::class)]
+    #[ORM\JoinColumn(name: "id_event", referencedColumnName: "id_event")]
+    protected $id_event;
+   
 
-    /**
-     * @var \Utilisateur
-     *
-     * @ORM\ManyToOne(targetEntity="Utilisateur")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_user", referencedColumnName="id")
-     * })
-     */
-    private $idUser;
+    #[ORM\ManyToOne(targetEntity: Utilisateur::class)]
+#[ORM\JoinColumn(name: "id_user", referencedColumnName: "id")]
+protected $id_user;
+    
 
     public function getIdParticipation(): ?int
     {
         return $this->idParticipation;
     }
 
-    public function getIdEvent(): ?Evenement
+    public function getid_Event(): ?Evenement
     {
-        return $this->idEvent;
+        return $this->id_event;
     }
 
-    public function setIdEvent(?Evenement $idEvent): self
+    public function setid_Event(?Evenement $id_event): self
     {
-        $this->idEvent = $idEvent;
+        $this->id_event = $id_event;
 
         return $this;
     }
 
-    public function getIdUser(): ?Utilisateur
+    public function getId_user(): ?Utilisateur
     {
-        return $this->idUser;
+        return $this->id_user;
     }
 
-    public function setIdUser(?Utilisateur $idUser): self
+    public function setId_user(?Utilisateur $id_user): self
     {
-        $this->idUser = $idUser;
+        $this->id_user = $id_user;
 
         return $this;
     }

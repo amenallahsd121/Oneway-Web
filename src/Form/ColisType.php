@@ -21,8 +21,6 @@ class ColisType extends AbstractType
 
             ->add('poids')
             ->add('prix')
-            
-
 
             ->add('typeColis', ChoiceType::class, [
                 'choices' => [

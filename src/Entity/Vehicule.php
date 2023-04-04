@@ -1,49 +1,40 @@
 <?php
 
 namespace App\Entity;
+use App\Repository\VehiculeRepository;
+use App\Entity\Categorie;
+
+
+
 
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * Vehicule
- *
- * @ORM\Table(name="vehicule", indexes={@ORM\Index(name="FK_vehiculeCategorie", columns={"id_categorie"})})
- * @ORM\Entity
- */
+
+
+ #[ORM\Entity(repositoryClass: VehiculeRepository::class)]
+
 class Vehicule
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id_vehicule", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $idVehicule;
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    private ?int $idVehicule = null ;
+   
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="matricule", type="string", length=50, nullable=false)
-     */
-    private $matricule;
+    
+    #[ORM\Column(length:50)]
+    private ?string $matricule = null ;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="marque", type="string", length=50, nullable=false)
-     */
-    private $marque;
+    
+    #[ORM\Column(length:50)]
+    private ?string $marque = null ;
 
-    /**
-     * @var \Categorie
-     *
-     * @ORM\ManyToOne(targetEntity="Categorie")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_categorie", referencedColumnName="id_categorie")
-     * })
-     */
-    private $idCategorie;
+    #[ORM\ManyToOne(targetEntity: Categorie::class)]
+    #[ORM\JoinColumn(name: "id_categorie", referencedColumnName: "id_categorie")]
+    protected $idCategorie;
+
+   
+   
 
     public function getIdVehicule(): ?int
     {

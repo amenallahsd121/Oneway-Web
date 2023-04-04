@@ -1,64 +1,60 @@
 <?php
 
 namespace App\Entity;
-
+use App\Repository\EvenementRepository;
+use App\Entity\Participation;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * Evenement
- *
- * @ORM\Table(name="evenement")
- * @ORM\Entity
- */
+
+
+
+
+
+
+
+#[ORM\Entity(repositoryClass: EvenementRepository::class)]
+
+
+
 class Evenement
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id_event", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $idEvent;
+  
+    
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    private ?int $id_event = null ;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="nom", type="string", length=50, nullable=false)
-     */
-    private $nom;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="description", type="string", length=255, nullable=false)
-     */
-    private $description;
+    #[ORM\Column(length:50)]
+    private ?string $nom = null ;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="date_debut_event", type="string", length=20, nullable=false)
-     */
-    private $dateDebutEvent;
+    #[ORM\Column(length:50)]
+    private ?string $description = null ;
+   
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="date_fin_event", type="string", length=20, nullable=false)
-     */
-    private $dateFinEvent;
+    #[ORM\Column(length:50)]
+    private ?string $dateDebutEvent = null ;
+ 
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="awards", type="string", length=255, nullable=false)
-     */
-    private $awards;
+    #[ORM\Column(length:50)]
+    private ?string $dateFinEvent = null ;
+
+    #[ORM\Column(length:50)]
+    private ?string $awards = null ;
+    
+    #[ORM\OneToOne(targetEntity: Participation::class, mappedBy: 'id_event')]
+    private $Participation;
+
+
+    public function getId_Event(): ?int
+    {
+        return $this->id_event;
+    }
 
     public function getIdEvent(): ?int
     {
-        return $this->idEvent;
+        return $this->id_event;
     }
 
     public function getNom(): ?string
@@ -120,6 +116,9 @@ class Evenement
 
         return $this;
     }
-
+    public function getParticipation(): ?Participation
+    {
+        return $this->Participation;
+    }
 
 }

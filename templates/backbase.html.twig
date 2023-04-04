@@ -136,22 +136,50 @@
 							<span class="menu-title">Form Elements</span>
 						</a>
 					</li>
+
+
+
 					<li class="nav-item menu-items">
-						<a class="nav-link" href="pages/tables/basic-table.html">
+						<a class="nav-link" href=" {{ path ('app_evenement') }} ">
 							<span class="menu-icon">
 								<i class="mdi mdi-table-large"></i>
 							</span>
-							<span class="menu-title">Tables</span>
+							<span class="menu-title">Evenement</span>
 						</a>
 					</li>
-					<li class="nav-item menu-items">
-						<a class="nav-link" href="pages/charts/chartjs.html">
-							<span class="menu-icon">
-								<i class="mdi mdi-chart-bar"></i>
-							</span>
-							<span class="menu-title">Charts</span>
-						</a>
-					</li>
+
+
+
+
+
+<li class="nav-item menu-items">
+  <a class="nav-link" data-toggle="collapse" href="#reclamation" aria-expanded="false" aria-controls="reclamation">
+    <span class="menu-icon">
+      <i class="mdi mdi-note-outline" style="color: red;"></i>
+    </span>
+    <span class="menu-title">Réclamation</span>
+    <i class="menu-arrow"></i>
+  </a>
+  <div class="collapse" id="reclamation">
+    <ul class="nav flex-column sub-menu">
+      <li class="nav-item">
+        <a class="nav-link" href="{{ path('app_reclamation_reponse') }}">
+          Réclamation
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ path('app_reponse') }}">
+          Réclamation Répondus
+        </a>
+      </li>
+    </ul>
+  </div>
+</li>
+
+
+
+
+
 
 					<li class="nav-item menu-items">
 						<a class="nav-link" href=" {{ path ('app_livreur') }} ">
@@ -163,31 +191,33 @@
 					</li>
 
 
+
 					<li class="nav-item menu-items">
-						<a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
-							<span class="menu-icon">
-								<i class="mdi mdi-truck-delivery"></i>
-							</span>
-							<span class="menu-title">Livraison</span>
-							<i class="menu-arrow"></i>
-						</a>
-						<div class="collapse" id="auth">
-							<ul class="nav flex-column sub-menu">
-								<li class="nav-item">
-                <a class="nav-link" href=" {{ path ('app_livraison_colis') }} ">	
-										Colis Non Affectés
-									</a>
-								</li>
-								<li class="nav-item">
-                 <a class="nav-link" href=" {{ path ('app_livraison') }} ">	
-										Colis Affectés
-									</a>
-								</li>
+  <a class="nav-link" data-toggle="collapse" href="#livraison" aria-expanded="false" aria-controls="livraison">
+    <span class="menu-icon">
+      <i class="mdi mdi-truck-delivery"></i>
+    </span>
+    <span class="menu-title">Livraison</span>
+    <i class="menu-arrow"></i>
+  </a>
+  <div class="collapse" id="livraison">
+    <ul class="nav flex-column sub-menu">
+      <li class="nav-item">
+        <a class="nav-link" href="{{ path('app_livraison_colis') }}">
+          Colis Non Affectés
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ path('app_livraison') }}">
+          Colis Affectés
+        </a>
+      </li>
+    </ul>
+  </div>
+</li>
 
 
-							</ul>
-						</div>
-					</li>
+
 					<li class="nav-item menu-items">
 						<a class="nav-link" href="pages/samples/blank-page.html">
 							<span class="menu-icon">

@@ -36,7 +36,7 @@
 		}
 		label {
 			display: inline-block;
-			width: 100px; /* adjust as needed */
+			width: 0; /* adjust as needed */
 			margin-right: 7px; /* adjust as needed */
 			font-size: 16px; /* set font size for labels */
 			font-weight: bold; /* make labels bold */
@@ -44,31 +44,26 @@
 		}
 
 
-        .form-table {
-    width: 100%;
-    max-width: 600px;
-    margin: 0 auto;
-    border-collapse: collapse;
-    margin-left: -145px;
-    	margin-top: -80px;
-}
+		.form-table {
+			width: 100%;
+			max-width: 600px;
+			margin: -80px auto 0 -145px;
+			border-collapse: collapse;
+		}
 
-.form-table td {
-    padding: 10px;
-  
-}
+		.form-table td {
+			padding: 20px;
 
-.form-table td:first-child {
-    width: 150px;
-    font-weight: bold;
-}
+		}
 
+		.form-table td:first-child {
+			width: 150px;
 
-
-
-
-
+			font-weight: bold;
+		}
+		
 	</style>
+
 
 	<div class="form-container">
 
@@ -76,13 +71,17 @@
 		{% block form %}
 			{{form_start(form,{'attr': {'novalidate': 'novalidate'}}
 			)}}
+
+
 			<table class="form-table">
-				<h1 style="color: white; font-size: 26px;">
-					Veuillez saisir votre reclamation</h1>
+
 				<tr>
 
+					<h1 style="color: white; padding: 45px 20px; font-size: 23px; margin-left: 10px">
+						Veuillez saisir les details de votre reclamation</h1>
+
 					<td>
-						{{ form_label(form.sujet,'Sujet' , {'label_attr': {'style': 'font-size: 20px;'}}) }}
+						{{ form_label(form.sujet,'Sujet' , {'label_attr': {'style': 'font-size: 20px'}}) }}
 					</td>
 					<td>
 						{{ form_widget(form.sujet) }}
@@ -92,24 +91,21 @@
 					</td>
 				</tr>
 				<br>
-					<tr></tr>
-					<tr>
-						<td>
-							{{ form_label(form.text_rec, 'Text reclamation', {'label_attr': {'style': 'font-size: 20px;'}}) }}
 
-						</td>
-						<td>
-							{{ form_widget(form.text_rec)}}
-						</td>
-						<td>
-							{{ form_errors(form.text_rec) }}
-						</td>
-					</tr>
-					<br>
+				<tr>
+					<td>
+						{{ form_label(form.text_rec, 'Text reclamation', {'label_attr': {'style': 'font-size: 20px;'}}) }}
+					</td>
+					<td>
+						{{ form_widget(form.text_rec, {'attr': {'rows': 5}})}}
+					</td>
+					<td>
+						{{ form_errors(form.text_rec) }}
+					</td>
+				</tr>
 
 
-					
-					
+				<br>
 
 
 				<tr>
@@ -122,6 +118,10 @@
 			{{form_end(form)}}
 		{% endblock %}
 
-		
 
 	{% endblock %}
+
+
+
+
+		
