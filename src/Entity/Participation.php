@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Participation
  *
- * @ORM\Table(name="participation", indexes={@ORM\Index(name="id_user", columns={"id_user"}), @ORM\Index(name="fk_participEvent", columns={"id_event"})})
+ * @ORM\Table(name="participation", indexes={@ORM\Index(name="fk_participEvent", columns={"id_event"}), @ORM\Index(name="id_user", columns={"id_user"})})
  * @ORM\Entity
  */
 class Participation
@@ -22,16 +22,6 @@ class Participation
     private $idParticipation;
 
     /**
-     * @var \Evenement
-     *
-     * @ORM\ManyToOne(targetEntity="Evenement")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_event", referencedColumnName="id_event")
-     * })
-     */
-    private $idEvent;
-
-    /**
      * @var \Utilisateur
      *
      * @ORM\ManyToOne(targetEntity="Utilisateur")
@@ -41,34 +31,15 @@ class Participation
      */
     private $idUser;
 
-    public function getIdParticipation(): ?int
-    {
-        return $this->idParticipation;
-    }
-
-    public function getIdEvent(): ?Evenement
-    {
-        return $this->idEvent;
-    }
-
-    public function setIdEvent(?Evenement $idEvent): self
-    {
-        $this->idEvent = $idEvent;
-
-        return $this;
-    }
-
-    public function getIdUser(): ?Utilisateur
-    {
-        return $this->idUser;
-    }
-
-    public function setIdUser(?Utilisateur $idUser): self
-    {
-        $this->idUser = $idUser;
-
-        return $this;
-    }
+    /**
+     * @var \Evenement
+     *
+     * @ORM\ManyToOne(targetEntity="Evenement")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_event", referencedColumnName="id_event")
+     * })
+     */
+    private $idEvent;
 
 
 }

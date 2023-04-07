@@ -364,6 +364,6 @@ class __TwigTemplate_3fa51783b07a6e3e3c0c82ed9fb7aa08 extends Template
 \t\t\t\t\t\t\t</div>
 \t\t\t\t\t\t</div>
 \t\t\t\t\t</div></div></div></div></div> #}
-", "colis/index.html.twig", "C:\\Users\\utilisateur\\Downloads\\Oneway-symfony--Gestion_colis\\Oneway-symfony--Gestion_colis\\templates\\colis\\index.html.twig");
+", "colis/index.html.twig", "C:\\Users\\utilisateur\\MeryemGIT\\OneWay-symfony-\\templates\\colis\\index.html.twig");
     }
 }

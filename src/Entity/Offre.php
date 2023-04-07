@@ -1,13 +1,15 @@
 <?php
 
 namespace App\Entity;
-
+use App\Entity\Utilisateur;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\OffreRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 #[ORM\Entity(repositoryClass: OffreRepository::class)]
 
- 
+
 
 class Offre
 {
@@ -53,14 +55,17 @@ private ?string $etat= null;
 
 private ?int $nbredemande = null;
 
-#[ORM\ManyToOne (inversed8y: 'Offres')]
+#[ORM\ManyToOne (targetEntity:'App\Entity\Categorieoffre')]
+#[ORM\JoinColumn(name:"CatOffreId", referencedColumnName:"idcatoffre")]
 private ?Categorieoffre $catoffreid = null;
 
-
-#[ORM\ManyToOne (inversed8y: 'Offres')]
+#[ORM\ManyToOne (targetEntity:'App\Entity\Trajetoffre')]
+#[ORM\JoinColumn(name:"IdTrajetOffre", referencedColumnName:"idtrajetoffre")]
 private ?Trajetoffre $idtrajetoffre = null;
 
-#[ORM\ManyToOne (inversed8y: 'Offres')]
+
+#[ORM\ManyToOne (targetEntity:'App\Entity\Utilisateur')]
+#[ORM\JoinColumn(name: "iduser",referencedColumnName:"id")]
 private ?Utilisateur $iduser = null;
     
 
@@ -81,25 +86,25 @@ private ?Utilisateur $iduser = null;
         return $this;
     }
 
-    public function getCatoffreid(): ?string
+    public function getCatoffreid(): ?Categorieoffre
     {
         return $this->catoffreid;
     }
 
-    public function setCatoffreid(?CategorieOffre $catoffreid): self
+    public function setCatoffreid( ?Categorieoffre $catoffreid): self
     {
         $this->catoffreid = $catoffreid;
 
         return $this;
     }
 
-    public function getIdtrajetoffre(): ?string
+    public function getIdtrajetoffre(): ?Trajetoffre
     {
         return $this->idtrajetoffre;
     }
     public function setIdtrajetoffre(?TrajetOffre $idtrajetoffre ): self
     {
-        $this->$idtrajetoffre 
+        $this->idtrajetoffre 
         = $idtrajetoffre ;
 
         return $this;
@@ -190,18 +195,18 @@ private ?Utilisateur $iduser = null;
         return $this;
     }
 
-    public function getIduser(): ?int
+    public function getIduser(): ?Utilisateur
     {
         return $this->iduser;
     }
 
-    public function setUtilisateur(?Utilisateur $iduser ): self
+ 
+    public function setIduser(?Utilisateur $iduser): self
     {
-        $this->$iduser 
-        = $iduser ;
+        $this->iduser = $iduser;
 
         return $this;
     }
-
+  
 
 }

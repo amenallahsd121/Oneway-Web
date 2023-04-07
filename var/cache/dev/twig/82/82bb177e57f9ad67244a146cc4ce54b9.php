@@ -154,6 +154,6 @@ class __TwigTemplate_7f49c17cb98496471484df496cac41f2 extends Template
     </ul>
 </div>
 {% endblock %}
-", "livraison/index.html.twig", "C:\\Users\\utilisateur\\Downloads\\Oneway-symfony--Gestion_colis\\Oneway-symfony--Gestion_colis\\templates\\livraison\\index.html.twig");
+", "livraison/index.html.twig", "C:\\Users\\utilisateur\\MeryemGIT\\OneWay-symfony-\\templates\\livraison\\index.html.twig");
     }
 }

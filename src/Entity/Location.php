@@ -49,58 +49,5 @@ class Location
      */
     private $idRelai;
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
-
-    public function getAdresse(): ?string
-    {
-        return $this->adresse;
-    }
-
-    public function setAdresse(string $adresse): self
-    {
-        $this->adresse = $adresse;
-
-        return $this;
-    }
-
-    public function getXaxe(): ?float
-    {
-        return $this->xaxe;
-    }
-
-    public function setXaxe(float $xaxe): self
-    {
-        $this->xaxe = $xaxe;
-
-        return $this;
-    }
-
-    public function getYaxe(): ?float
-    {
-        return $this->yaxe;
-    }
-
-    public function setYaxe(float $yaxe): self
-    {
-        $this->yaxe = $yaxe;
-
-        return $this;
-    }
-
-    public function getIdRelai(): ?int
-    {
-        return $this->idRelai;
-    }
-
-    public function setIdRelai(int $idRelai): self
-    {
-        $this->idRelai = $idRelai;
-
-        return $this;
-    }
-
 
 }

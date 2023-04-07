@@ -41,34 +41,5 @@ class Affectationopcolis
      */
     private $idColis;
 
-    public function getIdAff(): ?int
-    {
-        return $this->idAff;
-    }
-
-    public function getIdOpp(): ?Opportinute
-    {
-        return $this->idOpp;
-    }
-
-    public function setIdOpp(?Opportinute $idOpp): self
-    {
-        $this->idOpp = $idOpp;
-
-        return $this;
-    }
-
-    public function getIdColis(): ?Colis
-    {
-        return $this->idColis;
-    }
-
-    public function setIdColis(?Colis $idColis): self
-    {
-        $this->idColis = $idColis;
-
-        return $this;
-    }
-
 
 }

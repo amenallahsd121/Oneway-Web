@@ -28,22 +28,5 @@ class Categorie
      */
     private $type;
 
-    public function getIdCategorie(): ?int
-    {
-        return $this->idCategorie;
-    }
-
-    public function getType(): ?string
-    {
-        return $this->type;
-    }
-
-    public function setType(string $type): self
-    {
-        $this->type = $type;
-
-        return $this;
-    }
-
 
 }

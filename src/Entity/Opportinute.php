@@ -2,7 +2,6 @@
 
 namespace App\Entity;
 
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -63,83 +62,6 @@ class Opportinute
      * @ORM\Column(name="description", type="string", length=255, nullable=false)
      */
     private $description;
-
-    public function getIdOpp(): ?int
-    {
-        return $this->idOpp;
-    }
-
-    public function getDate(): ?\DateTimeInterface
-    {
-        return $this->date;
-    }
-
-    public function setDate(\DateTimeInterface $date): self
-    {
-        $this->date = $date;
-
-        return $this;
-    }
-
-    public function getDepart(): ?string
-    {
-        return $this->depart;
-    }
-
-    public function setDepart(string $depart): self
-    {
-        $this->depart = $depart;
-
-        return $this;
-    }
-
-    public function getHeurDepart(): ?float
-    {
-        return $this->heurDepart;
-    }
-
-    public function setHeurDepart(float $heurDepart): self
-    {
-        $this->heurDepart = $heurDepart;
-
-        return $this;
-    }
-
-    public function getArrivee(): ?string
-    {
-        return $this->arrivee;
-    }
-
-    public function setArrivee(string $arrivee): self
-    {
-        $this->arrivee = $arrivee;
-
-        return $this;
-    }
-
-    public function getHeurArrivee(): ?float
-    {
-        return $this->heurArrivee;
-    }
-
-    public function setHeurArrivee(float $heurArrivee): self
-    {
-        $this->heurArrivee = $heurArrivee;
-
-        return $this;
-    }
-
-    public function getDescription(): ?string
-    {
-        return $this->description;
-    }
-
-    public function setDescription(string $description): self
-    {
-        $this->description = $description;
-
-        return $this;
-    }
 
 
 }

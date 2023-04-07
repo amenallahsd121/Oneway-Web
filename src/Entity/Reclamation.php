@@ -2,7 +2,6 @@
 
 namespace App\Entity;
 
-
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -45,47 +44,6 @@ class Reclamation
      * })
      */
     private $idUser;
-
-    public function getIdReclamation(): ?int
-    {
-        return $this->idReclamation;
-    }
-
-    public function getTextRec(): ?string
-    {
-        return $this->textRec;
-    }
-
-    public function setTextRec(string $textRec): self
-    {
-        $this->textRec = $textRec;
-
-        return $this;
-    }
-
-    public function getSujet(): ?string
-    {
-        return $this->sujet;
-    }
-
-    public function setSujet(string $sujet): self
-    {
-        $this->sujet = $sujet;
-
-        return $this;
-    }
-
-    public function getIdUser(): ?Utilisateur
-    {
-        return $this->idUser;
-    }
-
-    public function setIdUser(?Utilisateur $idUser): self
-    {
-        $this->idUser = $idUser;
-
-        return $this;
-    }
 
 
 }

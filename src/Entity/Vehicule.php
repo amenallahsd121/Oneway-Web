@@ -45,46 +45,5 @@ class Vehicule
      */
     private $idCategorie;
 
-    public function getIdVehicule(): ?int
-    {
-        return $this->idVehicule;
-    }
-
-    public function getMatricule(): ?string
-    {
-        return $this->matricule;
-    }
-
-    public function setMatricule(string $matricule): self
-    {
-        $this->matricule = $matricule;
-
-        return $this;
-    }
-
-    public function getMarque(): ?string
-    {
-        return $this->marque;
-    }
-
-    public function setMarque(string $marque): self
-    {
-        $this->marque = $marque;
-
-        return $this;
-    }
-
-    public function getIdCategorie(): ?Categorie
-    {
-        return $this->idCategorie;
-    }
-
-    public function setIdCategorie(?Categorie $idCategorie): self
-    {
-        $this->idCategorie = $idCategorie;
-
-        return $this;
-    }
-
 
 }

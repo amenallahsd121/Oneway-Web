@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Trajetoffre index{% endblock %}
+
+{% block body %}
+    <h1>Trajetoffre index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Idtrajetoffre</th>
+                <th>Limitekmoffre</th>
+                <th>Addarriveoffre</th>
+                <th>Adddepartoffre</th>
+                <th>Nbreescaleoffre</th>
+                <th>Nbreoffre</th>
+                <th>Description</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for trajetoffre in trajetoffres %}
+            <tr>
+                <td>{{ trajetoffre.idtrajetoffre }}</td>
+                <td>{{ trajetoffre.limitekmoffre }}</td>
+                <td>{{ trajetoffre.addarriveoffre }}</td>
+                <td>{{ trajetoffre.adddepartoffre }}</td>
+                <td>{{ trajetoffre.nbreescaleoffre }}</td>
+                <td>{{ trajetoffre.nbreoffre }}</td>
+                <td>{{ trajetoffre.description }}</td>
+                <td>
+                    <a href="{{ path('app_trajetoffre_show', {'idtrajetoffre': trajetoffre.idtrajetoffre}) }}">show</a>
+                    <a href="{{ path('app_trajetoffre_edit', {'idtrajetoffre': trajetoffre.idtrajetoffre}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_trajetoffre_new') }}">Create new</a>
+{% endblock %}

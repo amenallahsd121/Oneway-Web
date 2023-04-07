@@ -11,12 +11,13 @@ use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ColisRepository::class)]
 
+
 class Colis
 {
     
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\Column(name:"id_colis")]
     private ?int $idColis = null ;
 
 
@@ -118,6 +119,18 @@ protected $id_client;
     }
 
     public function setUtilisateur(?Utilisateur $id_client): self
+    {
+        $this->id_client = $id_client;
+
+        return $this;
+    }
+
+    public function getIdClient(): ?Utilisateur
+    {
+        return $this->id_client;
+    }
+
+    public function setIdClient(?Utilisateur $id_client): self
     {
         $this->id_client = $id_client;
 

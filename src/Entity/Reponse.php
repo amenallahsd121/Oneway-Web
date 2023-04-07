@@ -38,34 +38,5 @@ class Reponse
      */
     private $idReclamation;
 
-    public function getIdReponse(): ?int
-    {
-        return $this->idReponse;
-    }
-
-    public function getTextRep(): ?string
-    {
-        return $this->textRep;
-    }
-
-    public function setTextRep(string $textRep): self
-    {
-        $this->textRep = $textRep;
-
-        return $this;
-    }
-
-    public function getIdReclamation(): ?Reclamation
-    {
-        return $this->idReclamation;
-    }
-
-    public function setIdReclamation(?Reclamation $idReclamation): self
-    {
-        $this->idReclamation = $idReclamation;
-
-        return $this;
-    }
-
 
 }

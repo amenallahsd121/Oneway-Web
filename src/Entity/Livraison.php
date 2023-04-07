@@ -1,72 +1,52 @@
 <?php
 
 namespace App\Entity;
-use App\Entity\Colis;
+
 use Doctrine\ORM\Mapping as ORM;
 
-
- 
- #[ORM\Entity(repositoryClass: LivraisonRepository::class)]
-
+/**
+ * Livraison
+ *
+ * @ORM\Table(name="livraison", indexes={@ORM\Index(name="livraison_ibfk_1", columns={"id_colis"}), @ORM\Index(name="livraison_ibfk_2", columns={"id_livreur"})})
+ * @ORM\Entity
+ */
 class Livraison
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $idLivraison = null ;
-   
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id_livraison", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $idLivraison;
 
-    #[ORM\Column(length:50)]
-    private ?string $etat = null ;
-   
-    // #[ORM\ManyToOne(inversedBy: 'Colis')]
-    // private ?int $idColis = null ;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="etat", type="string", length=50, nullable=false)
+     */
+    private $etat;
 
+    /**
+     * @var \Livreur
+     *
+     * @ORM\ManyToOne(targetEntity="Livreur")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_livreur", referencedColumnName="id_livreur")
+     * })
+     */
+    private $idLivreur;
 
-    // #[ORM\ManyToOne(inversedBy: 'Livreur')]
-    // private ?int $idLivreur = null ;
-    
-
-    public function getIdLivraison(): ?int
-    {
-        return $this->idLivraison;
-    }
-
-    public function getEtat(): ?string
-    {
-        return $this->etat;
-    }
-
-    public function setEtat(string $etat): self
-    {
-        $this->etat = $etat;
-
-        return $this;
-    }
-
-    // public function getIdColis(): ?Colis
-    // {
-    //     return $this->idColis;
-    // }
-
-    // public function setIdColis(?Colis $idColis): self
-    // {
-    //     $this->idColis = $idColis;
-
-    //     return $this;
-    // }
-
-    // public function getIdLivreur(): ?Livreur
-    // {
-    //     return $this->idLivreur;
-    // }
-
-    // public function setIdLivreur(?Livreur $idLivreur): self
-    // {
-    //     $this->idLivreur = $idLivreur;
-
-    //     return $this;
-    // }
+    /**
+     * @var \Colis
+     *
+     * @ORM\ManyToOne(targetEntity="Colis")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_colis", referencedColumnName="id_colis")
+     * })
+     */
+    private $idColis;
 
 
 }

@@ -453,6 +453,6 @@ label {
 {{form_end(form)}}
 {% endblock %}
 
-{% endblock %}", "colis/modifier.html.twig", "C:\\Users\\utilisateur\\Downloads\\Oneway-symfony--Gestion_colis\\Oneway-symfony--Gestion_colis\\templates\\colis\\modifier.html.twig");
+{% endblock %}", "colis/modifier.html.twig", "C:\\Users\\utilisateur\\MeryemGIT\\OneWay-symfony-\\templates\\colis\\modifier.html.twig");
     }
 }

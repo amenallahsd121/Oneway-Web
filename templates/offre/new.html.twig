@@ -1,0 +1,246 @@
+{% extends 'baseFront.html.twig' %}
+
+{% block title %}New Offre{% endblock %}
+
+{% block body %}
+
+<style>
+
+body {
+  background-color: #000c20;
+}
+.cont {
+width: 700px;
+  height: 500px;
+    }
+main{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+input[type="text"], select {
+    border: 1px solid blue;
+    border-radius: 20%;
+    background-color: #000c20;
+  width: 400px; /* set width of text inputs and select */
+  font-size: 19px; /* set font size for text inputs and select */
+  padding: 25px; /* set padding for text inputs and select */
+  border: none; /* remove border */
+  background-color: white; /* set background color for text inputs and select */
+  border-radius: 5px; /* round the corners of text inputs and select */
+  margin-bottom: 40px; /* add some space between form fields */
+  display: block;
+}
+ 
+ .page {
+              display: none;
+
+    }
+
+
+
+form {
+
+  padding: 50px;
+  background-color: #000c20;
+  margin-right: 400px; /* add margin to move form to the right */
+     
+ 
+}
+
+
+
+
+label {
+
+  display: inline-block;   
+  width: 100px; /* adjust as needed */
+  margin-right: 7px; /* adjust as needed */
+  font-size: 16px; /* set font size for labels */
+  font-weight: bold; /* make labels bold */
+       color: white;
+}
+
+
+.divv {
+      display: inline-block;   
+
+  margin-right: 7px; /* adjust as needed */
+  font-size: 16px; /* set font size for labels */
+       color: white;
+    padding-left: 150px;
+
+}
+
+
+
+
+header{
+    display: flex;
+    justify-content: space-between;
+}
+
+.page-num{
+      display: inline-block;   
+  margin-left:25px; /* adjust as needed */
+  margin-right:0px; /* adjust as needed */
+
+    border: 1px solid blue;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+font-size:15px;
+
+    padding: 30px;
+}
+
+.active{
+    color: white;
+    background-color: blue;
+}
+
+button{border: 1px solid blue;
+    border-radius: 20%;
+    
+     text-align: center;
+font-size:15px;
+ color: white;
+    background-color: #000c20;
+     width:300px;
+    height: 30px;
+    margin-left:150px;
+}
+
+
+
+
+</style>
+
+
+ {% block form %}
+
+
+{{form_start(form,{'attr': {'novalidate': 'novalidate'}} )}}
+
+        <header>
+        </header>
+        <div class="cont" >
+        <tr><div class ='divv'></div></tr>
+
+       <div class="page" id="page1">
+       
+<table>
+
+<tr>
+
+<td> {{ form_label(form.descriptionoffre,"Description")  }} 
+ </td>
+<td>  {{ form_widget(form.descriptionoffre) }} 
+</td>  
+<td> {{ form_errors(form.descriptionoffre)}} 
+</td>
+</tr>
+<br>
+
+<tr>
+
+
+
+<tr>
+<td>  {{ form_label(form.datesortieoffre,"Date De Sortie") }} 
+</td> 
+<td> {{ form_widget(form.datesortieoffre)}} 
+ </td> 
+<td>  {{ form_errors(form.datesortieoffre) }} 
+</td> 
+</tr>
+<br>
+
+
+<tr>
+<td>  {{ form_label(form.maxretard,"retard") }} 
+</td> 
+<td> {{ form_widget(form.maxretard)}} 
+ </td> 
+<td>  {{ form_errors(form.maxretard) }} 
+</td> 
+</tr>
+<br>
+
+<td>  {{ form_label(form.prixoffre,"Prix") }} 
+</td> 
+<td> {{ form_widget(form.prixoffre)}} 
+ </td> 
+<td>  {{ form_errors(form.prixoffre) }} 
+</td> 
+</tr>
+<br>
+
+
+
+<tr>
+  <td colspan="2"></td>
+</tr>
+</table>
+                <button class="next" type="button">Suivant</button>
+</div>
+<div class="page" id="page2">
+                <table>
+<h1 style="color: white; font-size: 26px;"> Ajouter un colis</h1>
+<tr>
+
+<td> {{ form_label(form.idtrajetoffre," Votre Trajet")  }} 
+ </td>
+<td>  {{ form_widget(form.idtrajetoffre) }} 
+</td>  
+<td> {{ form_errors(form.idtrajetoffre) }} 
+</td>
+</tr>
+<br>
+</table>
+                <button class="prev" type="button">Précédent</button>
+                <button class="next" type="button">Suivant</button>
+</div>
+<div class="page" id="page3">
+                <table>
+<h1 style="color: white; font-size: 26px;"> Ajouter un colis</h1>
+<tr>
+
+<td> {{ form_label(form.catoffreid,"catoffreid")  }} 
+ </td>
+<td>  {{ form_widget(form.catoffreid) }} 
+</td>  
+<td> {{ form_errors(form.catoffreid) }} 
+</td>
+</tr>
+<br>
+
+
+</tr>
+
+   </table>
+                   <button class="prev" type="button">Précédent</button>
+
+  <td colspan="2">{{ form_widget(form.save, {'attr': {'style': 'font-size: 15px; padding: 15px 20px; margin-left: 110px; margin-top: 10px;'}} ) }}</td>
+
+</div>             
+
+        {{form_end(form)}}
+</main>
+
+<script type="text/javascript">
+        $(document).ready(function() {
+            $('.js-datepicker').datepicker({
+                format: 'yyyy-mm-dd',
+                autoclose: true,
+                todayHighlight: true,
+                startDate: new Date()
+            });
+        });
+    </script>
+{% endblock %}
+</div>
+
+{% endblock %}

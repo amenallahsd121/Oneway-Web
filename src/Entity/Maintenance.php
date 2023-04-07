@@ -45,46 +45,5 @@ class Maintenance
      */
     private $idVehicule;
 
-    public function getIdMaintenance(): ?int
-    {
-        return $this->idMaintenance;
-    }
-
-    public function getEtat(): ?string
-    {
-        return $this->etat;
-    }
-
-    public function setEtat(string $etat): self
-    {
-        $this->etat = $etat;
-
-        return $this;
-    }
-
-    public function getNomSosRep(): ?string
-    {
-        return $this->nomSosRep;
-    }
-
-    public function setNomSosRep(string $nomSosRep): self
-    {
-        $this->nomSosRep = $nomSosRep;
-
-        return $this;
-    }
-
-    public function getIdVehicule(): ?Vehicule
-    {
-        return $this->idVehicule;
-    }
-
-    public function setIdVehicule(?Vehicule $idVehicule): self
-    {
-        $this->idVehicule = $idVehicule;
-
-        return $this;
-    }
-
 
 }

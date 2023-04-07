@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Trajetoffre{% endblock %}
+
+{% block body %}
+    <h1>Trajetoffre</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Idtrajetoffre</th>
+                <td>{{ trajetoffre.idtrajetoffre }}</td>
+            </tr>
+            <tr>
+                <th>Limitekmoffre</th>
+                <td>{{ trajetoffre.limitekmoffre }}</td>
+            </tr>
+            <tr>
+                <th>Addarriveoffre</th>
+                <td>{{ trajetoffre.addarriveoffre }}</td>
+            </tr>
+            <tr>
+                <th>Adddepartoffre</th>
+                <td>{{ trajetoffre.adddepartoffre }}</td>
+            </tr>
+            <tr>
+                <th>Nbreescaleoffre</th>
+                <td>{{ trajetoffre.nbreescaleoffre }}</td>
+            </tr>
+            <tr>
+                <th>Nbreoffre</th>
+                <td>{{ trajetoffre.nbreoffre }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ trajetoffre.description }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_trajetoffre_index') }}">back to list</a>
+
+    <a href="{{ path('app_trajetoffre_edit', {'idtrajetoffre': trajetoffre.idtrajetoffre}) }}">edit</a>
+
+    {{ include('trajetoffre/_delete_form.html.twig') }}
+{% endblock %}

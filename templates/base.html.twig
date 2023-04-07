@@ -20,6 +20,7 @@
     <!-- CSS here -->
 
     {% block css %}
+
     <link rel="stylesheet" href={{asset('assets/css/bootstrap.min.css')}}>
     <link rel="stylesheet" href={{asset('assets/css/owl.carousel.min.css')}}>
     <link rel="stylesheet" href={{asset('assets/css/slicknav.css')}}>
@@ -113,7 +114,14 @@
                                             </ul>  
 
                                             </li> 
-                                            <li><a href="blog.html">Offre et demande</a></li>
+                                            <li><a >Offre et demande</a>                                   
+                                                   <ul class="submenu">
+
+                                                    <li><a href=" {{ path ('app_offre_index') }} ">Offre</a>
+                                                    </li>
+                                                    <li><a href=" {{ path ('app_demande_index') }} ">Demande</a></li>
+                                                  
+                                            </ul></li>
                                             <li><a href="blog.html">Opportunité</a></li>
                                             <li><a href="blog.html">Réclamation</a></li>
                                             
@@ -232,6 +240,7 @@
 
     <!-- JS here -->
     {% block js %}
+   
     <script src="{{asset('./assets/js/vendor/modernizr-3.5.0.min.js')}}"></script>
     <!-- Jquery, Popper, Bootstrap -->
     <script src="{{asset('./assets/js/vendor/jquery-1.12.4.min.js')}}"></script>
@@ -265,14 +274,19 @@
     <script src="{{asset('./chosen/chosen.jquery.min.js')}}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
 
+<script src="{{asset('./assets/js/script.js')}}"></script>
 
     <script>
   $(document).ready(function() {
     $('.chosen-select').chosen();
   });
 </script>
+           
+
     {% endblock %}
+    
      
+
 </body>
 
 </html>

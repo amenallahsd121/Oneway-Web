@@ -3,15 +3,15 @@
 namespace App\Controller;
 
 use App\Entity\Colis;
-use App\Entity\Utilisateur;
 use App\Form\ColisType;
+use App\Entity\Utilisateur;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
+use SebastianBergmann\Environment\Console;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Doctrine\ORM\EntityManagerInterface;
-use SebastianBergmann\Environment\Console;
 
 class ColisController extends AbstractController
 {

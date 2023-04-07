@@ -1,0 +1,94 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Offre index{% endblock %}
+
+{% block body %}
+<style>
+
+body {
+  background-color: #000c20;
+}
+
+
+
+label {
+
+  display: inline-block;   
+  width: 100px; /* adjust as needed */
+  margin-right: 7px; /* adjust as needed */
+  font-size: 16px; /* set font size for labels */
+  font-weight: bold; /* make labels bold */
+       color: white;
+}
+th{
+
+  font-weight: bold; /* make labels bold */
+       color: white;
+}
+
+
+
+td{ font-weight: bold; /* make labels bold */
+       color: white;
+}
+
+
+
+
+
+
+
+
+
+</style>
+
+    <h1>Offre index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Idoffre</th>
+                <th>Idcatcolis</th>
+                <th>Descriptionoffre</th>
+                                <th>categorie</th>
+
+                <th>Maxretard</th>
+                <th>Prixoffre</th>
+                <th>Dateoffre</th>
+                <th>Datesortieoffre</th>
+                <th>Etat</th>
+                <th>Nbredemande</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for offre in offres %}
+            <tr>
+                <td>{{ offre.idoffre }}</td>
+                <td>{{ offre.idcatcolis }}</td>
+                <td>{{ offre.descriptionoffre }}</td>
+                <td>{{ offre.catoffreid.typeoffre }}</td>
+
+                <td>{{ offre.maxretard }}</td>
+                <td>{{ offre.prixoffre }}</td>
+                <td>{{ offre.dateoffre }}</td>
+                <td>{{ offre.datesortieoffre }}</td>
+                <td>{{ offre.etat }}</td>
+                <td>{{ offre.nbredemande }}</td>
+                <td>
+                    <a href="{{ path('app_offre_show', {'idoffre': offre.idoffre}) }}">show</a>
+                    <a href="{{ path('app_offre_edit', {'idoffre': offre.idoffre}) }}">edit</a>
+                        <a href="{{ path('app_offre_demande', {'idoffre': offre.idoffre}) }}">Demande</a>
+
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="10">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_offre_new') }}">Create new</a>
+{% endblock %}
