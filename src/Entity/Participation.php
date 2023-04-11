@@ -58,5 +58,29 @@ protected $id_user;
         return $this;
     }
 
+    public function getIdEvent(): ?Evenement
+    {
+        return $this->id_event;
+    }
+
+    public function setIdEvent(?Evenement $id_event): self
+    {
+        $this->id_event = $id_event;
+
+        return $this;
+    }
+
+    public function getIdUser(): ?Utilisateur
+    {
+        return $this->id_user;
+    }
+
+    public function setIdUser(?Utilisateur $id_user): self
+    {
+        $this->id_user = $id_user;
+
+        return $this;
+    }
+
 
 }

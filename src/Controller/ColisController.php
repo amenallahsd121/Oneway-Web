@@ -97,7 +97,7 @@ class ColisController extends AbstractController
         $em->flush();
 
 
-        $this->addFlash('notice' , 'Colis à jours');
+    
 
         return $this->redirectToRoute('app_colis');
     }
@@ -121,7 +121,6 @@ public function delete($id) {
       $em->flush();
 
 
-      $this->addFlash('notice' , 'Colis Supprimé');
 
       return $this->redirectToRoute('app_colis');
   }

@@ -2,12 +2,15 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use ORM\Table;
+use Symfony\Component\Validator\Constraints as Assert;
+use App\Entity\Livraison;
+use App\Entity\Utilisateur;
+use Doctrine\ORM\Mapping as ORM;
 use App\Repository\ColisRepository;
 use App\Repository\LivraisonRepository;
-use App\Entity\Utilisateur;
-use App\Entity\Livraison;
-use ORM\Table;
-use Doctrine\ORM\Mapping as ORM;
 
 
 
@@ -15,41 +18,58 @@ use Doctrine\ORM\Mapping as ORM;
 
 class Colis
 {
-    
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private ?int $id_colis = null ;
+    private ?int $id_colis = null;
+
 
 
     #[ORM\Column]
-    private ?float $poids = null ;
+    #[Assert\NotBlank(message: "Tu dois saisir le poids de ton colis")]
+    #[Assert\GreaterThan(value: 0.1, message: "Le poids doit être 0.1 Kg au minimum")]
+    private ?float $poids = null;
+    
+
+
 
 
     #[ORM\Column]
-    private ?float $prix = null ;
+    #[Assert\NotBlank(message: "Tu dois saisir le poids de ton colis")]
+    private ?float $prix = null;
 
-    #[ORM\Column(length:50)]
-    private ?string $typeColis = null ;
-
-
-    #[ORM\Column(length:50)]
-    private ?string $lieuDepart = null ;
-
-    #[ORM\Column(length:50)]
-    private ?string $lieuArrive = null ;
-   
+    #[ORM\Column(length: 50)]
+    private ?string $typeColis = null;
 
 
-#[ORM\ManyToOne(targetEntity: Utilisateur::class)]
-#[ORM\JoinColumn(name: "id_client", referencedColumnName: "id")]
-protected $id_client;
+    #[ORM\Column(length: 50)]
+    private ?string $lieuDepart = null;
+
+    #[ORM\Column(length: 50)]
+    private ?string $lieuArrive = null;
 
 
 
+    #[ORM\ManyToOne(targetEntity: Utilisateur::class)]
+    #[ORM\JoinColumn(name: "id_client", referencedColumnName: "id")]
+    protected $id_client;
 
-#[ORM\OneToOne(targetEntity: Livraison::class, mappedBy: 'colis')]
+
+
+
+    #[ORM\OneToOne(targetEntity: Livraison::class, mappedBy: 'colis')]
     private $livraisons;
+
+
+    
+    #[ORM\OneToMany(mappedBy: 'joinColis', targetEntity: Affectationopcolis::class)]
+    protected $affectationopcolis;
+
+
+
+
+  
 
 
 
@@ -165,5 +185,33 @@ protected $id_client;
         return $this;
     }
 
+    /**
+     * @return Collection<int, Affectationopcolis>
+     */
+    public function getAffectationopcolis(): Collection
+    {
+        return $this->affectationopcolis;
+    }
 
+    public function addAffectationopcoli(Affectationopcolis $affectationopcoli): self
+    {
+        if (!$this->affectationopcolis->contains($affectationopcoli)) {
+            $this->affectationopcolis->add($affectationopcoli);
+            $affectationopcoli->setJoinColis($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAffectationopcoli(Affectationopcolis $affectationopcoli): self
+    {
+        if ($this->affectationopcolis->removeElement($affectationopcoli)) {
+            // set the owning side to null (unless already changed)
+            if ($affectationopcoli->getJoinColis() === $this) {
+                $affectationopcoli->setJoinColis(null);
+            }
+        }
+
+        return $this;
+    }
 }

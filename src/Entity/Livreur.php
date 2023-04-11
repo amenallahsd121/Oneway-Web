@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Repository\LivreurRepository;
 use App\Entity\Utilisateur;
 use ORM\Table;
+use Symfony\Component\Validator\Constraints as Assert;
 
  
 #[ORM\Entity(repositoryClass: LivreurRepository::class)]
@@ -18,16 +19,33 @@ class Livreur
     private ?int $id_livreur = null ;
     
 
-    #[ORM\Column(length:50)]
-    private ?string $cinLivreur = null ;
+    #[ORM\Column(length:8)]
+    #[Assert\NotBlank(message: "Tu dois saisir le CIN du livreur")]
+    #[Assert\Regex(
+        pattern: '/^[0-9]{8}$/',
+        message: "Le CIN du livreur doit contenir exactement 8 chiffres."
+    )]
+    private ?string $cinLivreur = null;
+
    
 
-    #[ORM\Column(length:50)]
-    private ?string $nom = null ;
+    #[ORM\Column(length: 50)]
+    #[Assert\NotBlank(message: "Tu dois saisir le nom du livreur")]
+    #[Assert\Regex(
+        pattern: '/^[a-zA-Z]+$/',
+        message: "Le nom du livreur doit contenir des caractères alphabétiques uniquement."
+    )]
+    private ?string $nom = null;
+
     
 
 
     #[ORM\Column(length:50)]
+    #[Assert\NotBlank(message:"Tu dois saisir le prenom du livreur" )]
+    #[Assert\Regex(
+        pattern: '/^[a-zA-Z]+$/',
+        message: "Le nom du livreur doit contenir des caractères alphabétiques uniquement."
+    )]
     private ?string $prenom = null ;
    
     

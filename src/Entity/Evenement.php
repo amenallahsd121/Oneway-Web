@@ -121,4 +121,21 @@ class Evenement
         return $this->Participation;
     }
 
+    public function setParticipation(?Participation $Participation): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($Participation === null && $this->Participation !== null) {
+            $this->Participation->setIdEvent(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($Participation !== null && $Participation->getIdEvent() !== $this) {
+            $Participation->setIdEvent($this);
+        }
+
+        $this->Participation = $Participation;
+
+        return $this;
+    }
+
 }

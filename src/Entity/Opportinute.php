@@ -2,84 +2,71 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\OpportinuteRepository;
+use Symfony\Component\Validator\Constraints\Date;
 
-/**
- * Opportinute
- *
- * @ORM\Table(name="opportinute")
- * @ORM\Entity
- */
+
+
+#[ORM\Entity(repositoryClass: OpportinuteRepository::class)]
+
+ 
 class Opportinute
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id_opp", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $idOpp;
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    private ?int $idOpp = null ;
+   
 
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="date", type="date", nullable=false)
-     */
-    private $date;
+    #[ORM\Column(type: "date")]
+    private ?\DateTimeInterface $date = null;
+    
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="depart", type="string", length=50, nullable=false)
-     */
-    private $depart;
+    #[ORM\Column(length:50)]
+    private ?string $depart = null ;
+    
 
-    /**
-     * @var float
-     *
-     * @ORM\Column(name="heur_depart", type="float", precision=10, scale=0, nullable=false)
-     */
-    private $heurDepart;
+    #[ORM\Column(length:50)]
+    private ?float $heurDepart = null ;
+    
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="arrivee", type="string", length=255, nullable=false)
-     */
-    private $arrivee;
+    #[ORM\Column(length:50)]
+    private ?string $arrivee = null ;
+   
 
-    /**
-     * @var float
-     *
-     * @ORM\Column(name="heur_arrivee", type="float", precision=10, scale=0, nullable=false)
-     */
-    private $heurArrivee;
+    #[ORM\Column(length:50)]
+    private ?float $heurArrivee = null ;
+ 
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="description", type="string", length=255, nullable=false)
-     */
-    private $description;
+    #[ORM\Column(length:50)]
+    private ?string $description = null ;
+
+
+
+    
+   
+
+
+
+
+    #[ORM\OneToMany(mappedBy: 'relation', targetEntity: Affectationopcolis::class)]
+    protected $affectationopcolis;
+
+    
+
+   
+    
 
     public function getIdOpp(): ?int
     {
         return $this->idOpp;
     }
 
-    public function getDate(): ?\DateTimeInterface
-    {
-        return $this->date;
-    }
-
-    public function setDate(\DateTimeInterface $date): self
-    {
-        $this->date = $date;
-
-        return $this;
-    }
+    
 
     public function getDepart(): ?string
     {
@@ -137,6 +124,46 @@ class Opportinute
     public function setDescription(string $description): self
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getDate(): ? \DateTimeInterface
+    {
+        return $this->date ;
+    }
+
+    public function setDate(\DateTimeInterface $date): void
+    {
+        $this->date = $date;
+    }
+
+    /**
+     * @return Collection<int, Affectationopcolis>
+     */
+    public function getAffectationopcolis(): Collection
+    {
+        return $this->affectationopcolis;
+    }
+
+    public function addAffectationopcoli(Affectationopcolis $affectationopcoli): self
+    {
+        if (!$this->affectationopcolis->contains($affectationopcoli)) {
+            $this->affectationopcolis->add($affectationopcoli);
+            $affectationopcoli->setRelation($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAffectationopcoli(Affectationopcolis $affectationopcoli): self
+    {
+        if ($this->affectationopcolis->removeElement($affectationopcoli)) {
+            // set the owning side to null (unless already changed)
+            if ($affectationopcoli->getRelation() === $this) {
+                $affectationopcoli->setRelation(null);
+            }
+        }
 
         return $this;
     }
