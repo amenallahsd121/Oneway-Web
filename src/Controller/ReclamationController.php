@@ -39,10 +39,12 @@ class ReclamationController extends AbstractController
     public function addreclamation(ManagerRegistry $doctrine,Request $req): Response {
       
         $em = $doctrine->getManager();
+        // em lehi bel base
         $reclamation = new Reclamation();
         $form = $this->createForm(ReclamationType::class,$reclamation);
         // cree une nouvelle formulaire pour recuperer les recs
         $form->handleRequest($req);
+        // valider la rec
         
 
         if($form->isSubmitted() && $form->isValid()) {
@@ -50,8 +52,8 @@ class ReclamationController extends AbstractController
         $id=68;
         $utilisateur = $this->entityManager->getRepository(Utilisateur::class)->find($id);
         $reclamation->setIdUser($utilisateur);
+         // affecter le user au rec
         $this->entityManager->persist($reclamation);
-        // affecter le user au rec
         $this->entityManager->flush();
         // mise a jour
 
