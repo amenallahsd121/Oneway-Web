@@ -19,7 +19,7 @@ class Opportinute
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private ?int $idOpp = null ;
+    private ?int $id_opp = null ;
    
 
     #[ORM\Column(type: "date")]
@@ -46,24 +46,14 @@ class Opportinute
     private ?string $description = null ;
 
 
-
-    
-   
-
-
-
-
-    #[ORM\OneToMany(mappedBy: 'relation', targetEntity: Affectationopcolis::class)]
-    protected $affectationopcolis;
-
     
 
    
     
 
-    public function getIdOpp(): ?int
+    public function getId_Opp(): ?int
     {
-        return $this->idOpp;
+        return $this->id_opp;
     }
 
     
@@ -138,35 +128,35 @@ class Opportinute
         $this->date = $date;
     }
 
-    /**
-     * @return Collection<int, Affectationopcolis>
-     */
-    public function getAffectationopcolis(): Collection
-    {
-        return $this->affectationopcolis;
-    }
+    // /**
+    //  * @return Collection<int, Affectationopcolis>
+    //  */
+    // public function getAffectationopcolis(): Collection
+    // {
+    //     return $this->affectationopcolis;
+    // }
 
-    public function addAffectationopcoli(Affectationopcolis $affectationopcoli): self
-    {
-        if (!$this->affectationopcolis->contains($affectationopcoli)) {
-            $this->affectationopcolis->add($affectationopcoli);
-            $affectationopcoli->setRelation($this);
-        }
+    // public function addAffectationopcoli(Affectationopcolis $affectationopcoli): self
+    // {
+    //     if (!$this->affectationopcolis->contains($affectationopcoli)) {
+    //         $this->affectationopcolis->add($affectationopcoli);
+    //         $affectationopcoli->setRelation($this);
+    //     }
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
-    public function removeAffectationopcoli(Affectationopcolis $affectationopcoli): self
-    {
-        if ($this->affectationopcolis->removeElement($affectationopcoli)) {
-            // set the owning side to null (unless already changed)
-            if ($affectationopcoli->getRelation() === $this) {
-                $affectationopcoli->setRelation(null);
-            }
-        }
+    // public function removeAffectationopcoli(Affectationopcolis $affectationopcoli): self
+    // {
+    //     if ($this->affectationopcolis->removeElement($affectationopcoli)) {
+    //         // set the owning side to null (unless already changed)
+    //         if ($affectationopcoli->getRelation() === $this) {
+    //             $affectationopcoli->setRelation(null);
+    //         }
+    //     }
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
 
 }

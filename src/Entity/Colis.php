@@ -63,8 +63,8 @@ class Colis
 
 
     
-    #[ORM\OneToMany(mappedBy: 'joinColis', targetEntity: Affectationopcolis::class)]
-    protected $affectationopcolis;
+    #[ORM\OneToOne(mappedBy: 'id_colis', targetEntity: Affectationopcolis::class)]
+    protected $id_coliss;
 
 
 
@@ -185,33 +185,33 @@ class Colis
         return $this;
     }
 
-    /**
-     * @return Collection<int, Affectationopcolis>
-     */
-    public function getAffectationopcolis(): Collection
-    {
-        return $this->affectationopcolis;
-    }
+    // /**
+    //  * @return Collection<int, Affectationopcolis>
+    //  */
+    // public function getAffectationopcolis(): Collection
+    // {
+    //     return $this->affectationopcolis;
+    // }
 
-    public function addAffectationopcoli(Affectationopcolis $affectationopcoli): self
-    {
-        if (!$this->affectationopcolis->contains($affectationopcoli)) {
-            $this->affectationopcolis->add($affectationopcoli);
-            $affectationopcoli->setJoinColis($this);
-        }
+    // public function addAffectationopcoli(Affectationopcolis $affectationopcoli): self
+    // {
+    //     if (!$this->affectationopcolis->contains($affectationopcoli)) {
+    //         $this->affectationopcolis->add($affectationopcoli);
+    //         $affectationopcoli->setJoinColis($this);
+    //     }
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
-    public function removeAffectationopcoli(Affectationopcolis $affectationopcoli): self
-    {
-        if ($this->affectationopcolis->removeElement($affectationopcoli)) {
-            // set the owning side to null (unless already changed)
-            if ($affectationopcoli->getJoinColis() === $this) {
-                $affectationopcoli->setJoinColis(null);
-            }
-        }
+    // public function removeAffectationopcoli(Affectationopcolis $affectationopcoli): self
+    // {
+    //     if ($this->affectationopcolis->removeElement($affectationopcoli)) {
+    //         // set the owning side to null (unless already changed)
+    //         if ($affectationopcoli->getJoinColis() === $this) {
+    //             $affectationopcoli->setJoinColis(null);
+    //         }
+    //     }
 
-        return $this;
-    }
+    //     return $this;
+    // }
 }

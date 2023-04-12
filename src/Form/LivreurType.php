@@ -29,7 +29,7 @@ class LivreurType extends AbstractType
 
             ->add('Ajouter', SubmitType::class);
            
-        ;
+        
     }
 
     public function configureOptions(OptionsResolver $resolver): void
