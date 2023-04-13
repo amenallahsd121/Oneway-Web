@@ -1,0 +1,66 @@
+{% extends 'backbase.html.twig' %}
+
+
+{% block title %}
+	Liste des Evenement
+{% endblock %}
+
+
+{% block body %}
+
+
+
+	 <div class="row ">
+            <div class="col-12 grid-margin">
+              <div class="card">
+                <div class="card-body">
+
+               <h4 class="card-title">Liste des Evenement<a href=" {{ path ('add_evenement') }} " class="btn btn-success btn-fw float-right">Ajouter Evenement</a></h4>
+               <h4 class="card-title"><a href=" {{ path ('app_participation') }}" class="btn btn-success btn-fw float-right">list participant</a></h4>
+
+
+                  <div class="table-responsive">
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th> NOM </th>
+                          <th> Description </th>
+                          <th> Date début </th>
+                          <th> Date Fin </th>
+                          <th> Awards </th>
+                         
+                        </tr>
+                      </thead>
+
+                      {% for data in list %}
+                        <tr>
+                         
+                          <td> {{ data.nom }} </td>
+                          <td> {{ data.description }} </td>
+                          
+                          <td> {{ data.dateDebutEvent|date("m/d/Y") }} </td>
+                          <td> {{ data.dateFinEvent|date("m/d/Y") }} </td>
+                          
+                          <td> {{ data.awards }} </td>
+                       
+
+
+                      
+                          <td>
+  <a href="{{ path('delete_evenement', {'id': data.idEvent}) }}" class="btn btn-outline-danger btn-fw;">Supprimer</a>
+</td>
+
+
+                          <td>
+                             <a href="{{ path('update_evenement', {'id': data.idEvent}) }}"  class="btn btn-outline-warning btn-fw;"> Modifier</a>
+                          </td>
+                        </tr> 
+                          
+                         {% endfor %}
+                       
+                         
+                
+
+{% endblock %}
+
+

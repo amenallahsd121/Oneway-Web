@@ -1,0 +1,91 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes Reclamations
+{% endblock %}
+
+{% block body %}
+
+
+	<style>
+
+		body {
+			background-color: #000c20;
+		}
+
+		.note-icon {
+			font-size: 5rem; /* Set the font size to 2 times the default size */
+			color: white; /* Set the color to white */
+			margin-bottom: 1rem;
+
+		}
+		p {
+			margin-top: 3rem; /* Add a 1-rem margin to the top of the title and description elements */
+		}
+	</style>
+
+	<div class="categories-area section-padding30">
+		<div class="container">
+
+			<div class="row">
+				<div
+					class="col-lg-12">
+					<!-- Section Title -->
+					<div class="section-title text-center mb-80">
+						<h2 style="font-size: 32px; color: white; margin-top: -70px; margin-right: 10px;">Mes Reclamations</h>
+
+
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+
+				{% for data in list %}
+
+					<div class="col-lg-4 col-md-6 col-sm-6">
+						<div class="single-cat text-center mb-50">
+							<div class="cat-icon">
+								<span<i class="bi bi-sticky note-icon"></i>
+							</span>
+						</div>
+						<div class="cat-cap">
+							<h5>
+								<a style="font-size: 28px; color: white;  margin-top: 30px;">Détails de Reclamation :
+								</a>
+							</h5>
+							<p style="font-size: 22px; color: white;">
+								Sujet :
+								{{ data.sujet}}
+							</p>
+							<p style="font-size: 22px; color: white; max-height: 200px; overflow: auto; word-wrap: break-word;">
+								Text reclamation:
+								{{ data.text_rec }}
+							</p>
+
+
+							<p style="font-size: 22px; color: white; max-height: 200px; overflow: auto; word-wrap: break-word;">
+								Text Réponse:
+								{% if data.reponse is null %}
+									En Cours
+								{% else %}
+									{{ data.reponse.text_rep }}
+								{% endif %}
+							</p>
+
+
+							<a href="{{ path('delete_reclamation', {'id': data.id_reclamation}) }}" class="btn btn-light" style="padding: 0.75rem 1rem;">
+								<i class="bi bi-trash"></i>
+							</a>
+							<a href="{{ path('update_reclamation', {'id': data.id_reclamation}) }}" class="btn btn-light" style="padding: 0.75rem 1rem; margin-left: 10px;">
+								<i class="bi bi-arrow-clockwise"></i>
+							</a>
+
+
+						</div>
+					</div>
+				</div>
+			{% endfor %}
+
+		</div>
+	</div>
+</div>{% endblock %}
