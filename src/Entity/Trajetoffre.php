@@ -114,9 +114,9 @@ private ?string  $description = null;
         return $this->description;
     }
 
-    public function setDescription(?string $adddepartoffre,?string $addarrivoffre): self
+    public function setDescription(): self
     {
-        $this->description = $adddepartoffre+$addarrivoffre;
+        $this->description = $this->getAdddepartoffre() . ' - ' . $this->getAddarriveoffre();
 
         return $this;
     }

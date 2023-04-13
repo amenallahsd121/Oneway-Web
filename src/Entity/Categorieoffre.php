@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use App\Repository\CategorieoffreRepository;
-
+use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Entity(repositoryClass: CategorieoffreRepository::class)]
 #[ORM\Table(name: "Categorieoffre")]
 #[ORM\Index(name: "typeoffre", columns: ["typeoffre"])]
@@ -20,14 +20,20 @@ class Categorieoffre
 private ?int  $idcatoffre  = null;
 
 #[ORM\Column]
+#[Assert\NotBlank (message:"le champ est vide!")]
+#[Assert\Type(type:"float", message:"Ce champ doit être de type float")]
+
 private ?float $poidsoffre = null;
    
 
     #[ORM\Column]
+    #[Assert\NotBlank (message:"le champ est vide!")]
 
 private ?int $nbrecolisoffre = null;
 
 #[ORM\Column(name:"typeoffre",unique:true)]  
+#[Assert\NotBlank (message:"le champ est vide!")]
+
 private ?string  $typeoffre = null;
 
     public function getIdcatoffre(): ?int

@@ -8,9 +8,21 @@ use App\Entity\Categorieoffre;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Validator\Constraints\Range;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\Callback;
+use Symfony\Component\Validator\Constraints\DateTime;
+
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Positive;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use Symfony\Component\Form\Extension\Core\DataTransformer\DateTimeToStringTransformer;
 
 class OffreType extends AbstractType
@@ -18,38 +30,67 @@ class OffreType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('descriptionoffre')
-            ->add('maxretard')
-            ->add('prixoffre')
-            ->add('datesortieoffre' , DateTimeType::class, [
-                'widget' => 'single_text',
-                'html5' => false,
-                'attr' => [
-                    'data-date-format' => 'yyyy-mm-dd',
+            ->add('descriptionoffre', TextType::class, [
+                'constraints' => [
+                    new NotBlank(['message' => 'La description est obligatoire.']),
+                    new Length([
+                        'min' => 3,
+                        'max' => 255,
+                        'minMessage' => 'La description doit contenir au moins {{ limit }} caractères.',
+                        'maxMessage' => 'La description doit contenir au maximum {{ limit }} caractères.',
+                    ]),
+                ],
+            ])
+            ->add('maxretard', IntegerType::class, [
+                'constraints' => [
+                    new NotBlank(['message' => 'Le nombre maximum de minutes de retard est obligatoire.']),
+                    new Positive(['message' => 'Le nombre maximum de minutes de retard doit être un entier positif.']),
+                ],
+            ])
+            ->add('prixoffre', MoneyType::class, [
+                'currency' => 'DT',
+                'constraints' => [
+                    new NotBlank(['message' => 'Le prix est obligatoire.']),
+                    new Positive(['message' => 'Le prix doit être un nombre positif.']),
+                    new Range([
+                        'min' => 5,
+                        
+                        'minMessage' => 'Le prix doit être supérieur à 5 DT.',
+                    ]),],
+            ])
+            ->add('datesortieoffre', TextType::class, [
+                'required' => false,
+                
+               
+                'constraints' => [
+                    new NotBlank(['message' => 'Le Date est obligatoire.']),
+                    new Callback([$this, 'validateDatesortieoffre']),
                 ],
             ])
             ->add('catoffreid', EntityType::class, [
                 'class' => Categorieoffre::class,
-                'choice_label' => function ($catoffreid) {
-                    return $catoffreid->getTypeoffre();
-                },
-              
-                
-                ])
-            ->add('idtrajetoffre' , EntityType::class, [
+                'choice_label' => 'typeoffre',
+                'constraints' => [
+                    new NotBlank(['message' => 'La catégorie d\'offre est obligatoire.']),
+                ],
+            ])
+            ->add('idtrajetoffre', EntityType::class, [
                 'class' => Trajetoffre::class,
-                'choice_label' => function ($idtrajetoffre) {
-                    return $idtrajetoffre->getDescription();
-                    
-                   
-                    
-                }
-                ])
-                ->add('save', SubmitType::class, ['label' => 'Save'])
-
-        ;
-        
+                'choice_label' => 'description',
+                'constraints' => [
+                    new NotBlank(['message' => 'Le trajet est obligatoire.']),
+                ],
+            ])
+            ->add('save', SubmitType::class, ['label' => 'Enregister']) ;
     }
+    public function validateDatesortieoffre($value, ExecutionContextInterface $context)
+    {
+        if ($value && $value >= new \DateTime()) {
+            $context->buildViolation('La date de sortie doit être supérieure à la date actuelle.')
+                ->addViolation();
+        }
+    }
+
 
     public function configureOptions(OptionsResolver $resolver): void
     {

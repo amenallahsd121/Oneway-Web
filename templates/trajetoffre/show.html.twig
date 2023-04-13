@@ -1,14 +1,16 @@
-{% extends 'base.html.twig' %}
+{% extends 'backbase.html.twig' %}
 
 {% block title %}Trajetoffre{% endblock %}
 
 {% block body %}
-    <h1>Trajetoffre</h1>
+    <a href="{{ path('app_trajetoffre_index') }}">Retour</a>
+
+    <h1>Trajet : {{ trajetoffre.description }} </h1>
 
     <table class="table">
         <tbody>
             <tr>
-                <th>Idtrajetoffre</th>
+                <th>Id</th>
                 <td>{{ trajetoffre.idtrajetoffre }}</td>
             </tr>
             <tr>
@@ -38,9 +40,8 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_trajetoffre_index') }}">back to list</a>
 
-    <a href="{{ path('app_trajetoffre_edit', {'idtrajetoffre': trajetoffre.idtrajetoffre}) }}">edit</a>
+    <a href="{{ path('app_trajetoffre_edit', {'idtrajetoffre': trajetoffre.idtrajetoffre}) }}"> Modifier</a>
 
     {{ include('trajetoffre/_delete_form.html.twig') }}
 {% endblock %}

@@ -4,12 +4,14 @@ namespace App\Controller;
 
 use App\Entity\Categorieoffre;
 use App\Form\Categorieoffre1Type;
+use App\Repository\OffreRepository;
+use Symfony\UX\Chartjs\Model\Chart;
 use App\Repository\CategorieoffreRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
+use Symfony\UX\Chartjs\Builder\ChartBuilderInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 #[Route('/categorieoffre')]
 class CategorieoffreController extends AbstractController
 {
@@ -22,7 +24,7 @@ class CategorieoffreController extends AbstractController
     }
 
     #[Route('/new', name: 'app_categorieoffre_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, CategorieoffreRepository $categorieoffreRepository): Response
+    public function new(Request $request, CategorieoffreRepository $categorieoffreRepository,OffreRepository $offreRepository,ChartBuilderInterface $chartBuilder): Response
     {
         $categorieoffre = new Categorieoffre();
         $form = $this->createForm(Categorieoffre1Type::class, $categorieoffre);
@@ -33,10 +35,38 @@ class CategorieoffreController extends AbstractController
 
             return $this->redirectToRoute('app_categorieoffre_index', [], Response::HTTP_SEE_OTHER);
         }
-
+        
+        $categories = $categorieoffreRepository->findAll();
+        $label = [];
+        foreach ($categories as $category) {
+            $label[] = $category->getTypeoffre();
+        }
+    
+    // Get the number of offers associated with each category
+    $chartData = [];
+    foreach ($categories as $category) {
+        $poid = $category->getPoidsoffre();
+       $nbre=$category->getNbrecolisoffre();
+    $som=$poid*$nbre;
+        $chartData[] = $som;
+    }
+        $chart = $chartBuilder->createChart(Chart::TYPE_DOUGHNUT);
+        $chart->setData([
+            'labels'   => $label,
+            'datasets' => [
+                [
+                    'label'           => 'les categories utilisees:',
+                    'backgroundColor' => ['rgb(51, 153, 255)', 'rgb(255, 99, 132)', 'rgb(75, 192, 192)'],
+                    'borderColor'     => ['rgb(51, 153, 255)', 'rgb(255, 99, 132)', 'rgb(75, 192, 192)'],
+                    'data'            => $chartData,
+                ],
+            ],
+            'hoverOffset'   => 4,
+        ]);
         return $this->renderForm('categorieoffre/new.html.twig', [
             'categorieoffre' => $categorieoffre,
             'form' => $form,
+            'chart' => $chart
         ]);
     }
 
@@ -75,4 +105,8 @@ class CategorieoffreController extends AbstractController
 
         return $this->redirectToRoute('app_categorieoffre_index', [], Response::HTTP_SEE_OTHER);
     }
+
+    
+   
 }
+

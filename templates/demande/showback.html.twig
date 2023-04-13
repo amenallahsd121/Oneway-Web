@@ -1,0 +1,29 @@
+{% extends 'backbase.html.twig' %}
+
+{% block title %}Demande  {% endblock %}
+
+{% block body %}
+    <a href="{{ path('app_demande_indexoffre', {'idoffre': demande.idoffre.idoffre}) }}">Retour</a>
+
+    <h1>Demande Details:</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>IdDemande :</th>
+                <td>{{ demande.iddemande }}</td>
+            </tr>
+            <tr>
+                <th>Description De Demande :</th>
+                <td>{{ demande.descriptiondemande }}</td>
+            </tr>
+            <tr>
+                <th>Prix Proposée :</th>
+                <td>{{ demande.prix }} DT</td>
+            </tr>
+        </tbody>
+    </table>
+
+
+
+{% endblock %}

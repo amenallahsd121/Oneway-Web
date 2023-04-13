@@ -1,9 +1,27 @@
-{% extends 'baseFront.html.twig' %}
+{% extends 'backbase.html.twig' %}
 
-{% block title %}Offre{% endblock %}
+{% block title %}Offre {% endblock %}
 
 {% block body %}
-    <h1>Offre</h1>
+   <a href="{{ path('app_offre_index') }}">retour</a>
+<a style="margin-bottom: -47px; margin-left: 100px" class="btn btn-primary" data-toggle="modal" data-target="#dataModal" href="{{ path('pdf_generator',{'idoffre': offre.idoffre})  }}" id="editProfile">
+PDF</a>
+    <h1>Offre 
+ <!-- dataModal -->
+
+    <div id="dataModal" class="modal fade">  
+        <div class="modal-dialog">  
+            <div class="modal-content">  
+                <div class="modal-header">  
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>  
+                    <h4 class="modal-title" id="modal-title">PDF Enregistrer </h4>  
+                </div>  
+
+                
+            </div>  
+        </div>  
+    </div>  
+</h1>
 
     <table class="table">
         <tbody>
@@ -29,11 +47,11 @@
             </tr>
             <tr>
                 <th>Dateoffre</th>
-                <td>{{ offre.dateoffre }}</td>
+                <td>{{ offre.dateoffre| date ('y-m-d') }}</td>
             </tr>
             <tr>
                 <th>Datesortieoffre</th>
-                <td>{{ offre.datesortieoffre }}</td>
+                <td>{{ offre.datesortieoffre | date ('y-m-d') }}</td>
             </tr>
             <tr>
                 <th>Etat</th>
@@ -46,9 +64,24 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_offre_index') }}">back to list</a>
+ 
+                
 
-    <a href="{{ path('app_offre_edit', {'idoffre': offre.idoffre}) }}">edit</a>
-
-    {{ include('offre/_delete_form.html.twig') }}
-{% endblock %}
+<script>
+        $(document).ready(function () {
+            $('#editProfile').click(function () {
+                //Afficher Le titre de popup
+                $('#modal-title').html("Modifier profile");
+                // ATTENTION POUR LES apostrophes ET les guillemets
+                $.ajax({
+                    type: 'post',
+                    url: url,
+                    success: function (data) {
+                        // résultat de action edit : formulaire inclure dans popup
+                        //Affichage de nouvelle popup
+                        $('#dataModal').modal("show");
+                    }
+                });
+            });
+        });
+    </script>{% endblock %}

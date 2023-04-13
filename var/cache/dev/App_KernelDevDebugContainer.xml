@@ -20,6 +20,8 @@
       <parameter key="MonologBundle">Symfony\Bundle\MonologBundle\MonologBundle</parameter>
       <parameter key="MakerBundle">Symfony\Bundle\MakerBundle\MakerBundle</parameter>
       <parameter key="SensioFrameworkExtraBundle">Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle</parameter>
+      <parameter key="ChartjsBundle">Symfony\UX\Chartjs\ChartjsBundle</parameter>
+      <parameter key="WebpackEncoreBundle">Symfony\WebpackEncoreBundle\WebpackEncoreBundle</parameter>
     </parameter>
     <parameter key="kernel.bundles_metadata" type="collection">
       <parameter key="FrameworkBundle" type="collection">
@@ -65,6 +67,14 @@
       <parameter key="SensioFrameworkExtraBundle" type="collection">
         <parameter key="path">C:\Users\utilisateur\MeryemGIT\OneWay-symfony-\vendor\sensio\framework-extra-bundle\src</parameter>
         <parameter key="namespace">Sensio\Bundle\FrameworkExtraBundle</parameter>
+      </parameter>
+      <parameter key="ChartjsBundle" type="collection">
+        <parameter key="path">C:\Users\utilisateur\MeryemGIT\OneWay-symfony-\vendor\symfony\ux-chartjs</parameter>
+        <parameter key="namespace">Symfony\UX\Chartjs</parameter>
+      </parameter>
+      <parameter key="WebpackEncoreBundle" type="collection">
+        <parameter key="path">C:\Users\utilisateur\MeryemGIT\OneWay-symfony-\vendor\symfony\webpack-encore-bundle\src</parameter>
+        <parameter key="namespace">Symfony\WebpackEncoreBundle</parameter>
       </parameter>
     </parameter>
     <parameter key="kernel.charset">UTF-8</parameter>
@@ -369,6 +379,7 @@
     <service id="App\Controller\OffreController" class="App\Controller\OffreController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="container.service_subscriber"/>
+      <argument type="service" id="kernel"/>
       <call method="setContainer">
         <argument type="service" id=".service_locator.mx0UMmY.App\Controller\OffreController"/>
       </call>
@@ -382,6 +393,7 @@
     </service>
     <service id="App\Form\Categorieoffre1Type" class="App\Form\Categorieoffre1Type" autowire="true" autoconfigure="true">
       <tag name="form.type"/>
+      <argument type="service" id="doctrine.orm.default_entity_manager"/>
     </service>
     <service id="App\Form\CategorieoffreType" class="App\Form\CategorieoffreType" autowire="true" autoconfigure="true">
       <tag name="form.type"/>
@@ -397,6 +409,7 @@
     </service>
     <service id="App\Form\Trajetoffre1Type" class="App\Form\Trajetoffre1Type" autowire="true" autoconfigure="true">
       <tag name="form.type"/>
+      <argument type="service" id="doctrine.orm.default_entity_manager"/>
     </service>
     <service id="App\Form\TrajetoffreType" class="App\Form\TrajetoffreType" autowire="true" autoconfigure="true">
       <tag name="form.type"/>
@@ -566,6 +579,9 @@
         <argument key="cache.security_expression_language" type="service" id="cache.security_expression_language" on-invalid="ignore_uninitialized"/>
         <argument key="monolog.handler.main" type="service" id="monolog.handler.main" on-invalid="ignore_uninitialized"/>
         <argument key="monolog.handler.console" type="service" id="monolog.handler.console" on-invalid="ignore_uninitialized"/>
+        <argument key="webpack_encore.tag_renderer" type="service" id="webpack_encore.tag_renderer" on-invalid="ignore_uninitialized"/>
+        <argument key="cache.webpack_encore" type="service" id="cache.webpack_encore" on-invalid="ignore_uninitialized"/>
+        <argument key="webpack_encore.entrypoint_lookup[_default]" type="service" id="webpack_encore.entrypoint_lookup[_default]" on-invalid="ignore_uninitialized"/>
         <argument key=".debug.http_client" type="service" id=".debug.http_client" on-invalid="ignore_uninitialized"/>
       </argument>
       <argument type="collection">
@@ -640,6 +656,15 @@
           <argument>reset</argument>
         </argument>
         <argument key="monolog.handler.console" type="collection">
+          <argument>reset</argument>
+        </argument>
+        <argument key="webpack_encore.tag_renderer" type="collection">
+          <argument>reset</argument>
+        </argument>
+        <argument key="cache.webpack_encore" type="collection">
+          <argument>reset</argument>
+        </argument>
+        <argument key="webpack_encore.entrypoint_lookup[_default]" type="collection">
           <argument>reset</argument>
         </argument>
         <argument key=".debug.http_client" type="collection">
@@ -784,6 +809,7 @@
         <argument>cache.doctrine.orm.default.result</argument>
         <argument>cache.doctrine.orm.default.query</argument>
         <argument>cache.security_expression_language</argument>
+        <argument>cache.webpack_encore</argument>
       </argument>
       <call method="setName">
         <argument>cache:pool:clear</argument>
@@ -819,6 +845,7 @@
         <argument>cache.doctrine.orm.default.result</argument>
         <argument>cache.doctrine.orm.default.query</argument>
         <argument>cache.security_expression_language</argument>
+        <argument>cache.webpack_encore</argument>
       </argument>
       <call method="setName">
         <argument>cache:pool:delete</argument>
@@ -842,6 +869,7 @@
         <argument>cache.doctrine.orm.default.result</argument>
         <argument>cache.doctrine.orm.default.query</argument>
         <argument>cache.security_expression_language</argument>
+        <argument>cache.webpack_encore</argument>
       </argument>
       <call method="setName">
         <argument>cache:pool:list</argument>
@@ -1494,6 +1522,7 @@
         <argument key="cache.property_info" type="service" id="cache.property_info" on-invalid="ignore_uninitialized"/>
         <argument key="cache.validator_expression_language" type="service" id="cache.validator_expression_language" on-invalid="ignore_uninitialized"/>
         <argument key="cache.security_expression_language" type="service" id="cache.security_expression_language" on-invalid="ignore_uninitialized"/>
+        <argument key="cache.webpack_encore" type="service" id="cache.webpack_encore" on-invalid="ignore_uninitialized"/>
       </argument>
     </service>
     <service id="cache.global_clearer" class="Symfony\Component\HttpKernel\CacheClearer\Psr6CacheClearer" public="true">
@@ -1510,6 +1539,7 @@
         <argument key="cache.doctrine.orm.default.result" type="service" id="cache.doctrine.orm.default.result" on-invalid="ignore_uninitialized"/>
         <argument key="cache.doctrine.orm.default.query" type="service" id="cache.doctrine.orm.default.query" on-invalid="ignore_uninitialized"/>
         <argument key="cache.security_expression_language" type="service" id="cache.security_expression_language" on-invalid="ignore_uninitialized"/>
+        <argument key="cache.webpack_encore" type="service" id="cache.webpack_encore" on-invalid="ignore_uninitialized"/>
       </argument>
     </service>
     <service id="identity_translator" class="Symfony\Component\Translation\IdentityTranslator"/>
@@ -1558,9 +1588,14 @@
       <argument type="service" id=".debug.http_client"/>
       <deprecated package="symfony/framework-bundle" version="5.3">The "%service_id%" service is deprecated, use "assets.json_manifest_version_strategy" instead.</deprecated>
     </service>
+    <service id="assets._version__default" class="Symfony\Component\Asset\VersionStrategy\JsonManifestVersionStrategy">
+      <argument>C:\Users\utilisateur\MeryemGIT\OneWay-symfony-/public/build/manifest.json</argument>
+      <argument type="service" id=".debug.http_client" on-invalid="null"/>
+      <argument>false</argument>
+    </service>
     <service id="assets._default_package" class="Symfony\Component\Asset\PathPackage">
       <argument></argument>
-      <argument type="service" id="assets.empty_version_strategy"/>
+      <argument type="service" id="assets._version__default"/>
       <argument type="service" id="assets.context"/>
     </service>
     <service id="http_client.abstract_retry_strategy" class="Symfony\Component\HttpClient\Retry\GenericRetryStrategy" abstract="true">
@@ -1972,6 +2007,8 @@
           <argument>C:\Users\utilisateur\MeryemGIT\OneWay-symfony-\vendor\symfony\monolog-bundle/translations</argument>
           <argument>C:\Users\utilisateur\MeryemGIT\OneWay-symfony-\vendor\symfony\maker-bundle\src/translations</argument>
           <argument>C:\Users\utilisateur\MeryemGIT\OneWay-symfony-\vendor\sensio\framework-extra-bundle\src/translations</argument>
+          <argument>C:\Users\utilisateur\MeryemGIT\OneWay-symfony-\vendor\symfony\ux-chartjs/translations</argument>
+          <argument>C:\Users\utilisateur\MeryemGIT\OneWay-symfony-\vendor\symfony\webpack-encore-bundle\src/translations</argument>
         </argument>
         <argument key="cache_vary" type="collection">
           <argument key="scanned_directories" type="collection">
@@ -1990,6 +2027,8 @@
             <argument>C:\Users\utilisateur\MeryemGIT\OneWay-symfony-\vendor\symfony\monolog-bundle/translations</argument>
             <argument>C:\Users\utilisateur\MeryemGIT\OneWay-symfony-\vendor\symfony\maker-bundle\src/translations</argument>
             <argument>C:\Users\utilisateur\MeryemGIT\OneWay-symfony-\vendor\sensio\framework-extra-bundle\src/translations</argument>
+            <argument>C:\Users\utilisateur\MeryemGIT\OneWay-symfony-\vendor\symfony\ux-chartjs/translations</argument>
+            <argument>C:\Users\utilisateur\MeryemGIT\OneWay-symfony-\vendor\symfony\webpack-encore-bundle\src/translations</argument>
           </argument>
         </argument>
       </argument>
@@ -2259,6 +2298,14 @@
         <argument type="collection">
           <argument type="service_closure" id="security.context_listener.0"/>
           <argument>onKernelResponse</argument>
+        </argument>
+        <argument>0</argument>
+      </call>
+      <call method="addListener">
+        <argument>kernel.exception</argument>
+        <argument type="collection">
+          <argument type="service_closure" id="webpack_encore.exception_listener"/>
+          <argument>onKernelException</argument>
         </argument>
         <argument>0</argument>
       </call>
@@ -2771,6 +2818,14 @@
         <argument type="collection">
           <argument type="service_closure" id="framework_extra_bundle.event.is_granted"/>
           <argument>onKernelControllerArguments</argument>
+        </argument>
+        <argument>0</argument>
+      </call>
+      <call method="addListener">
+        <argument>kernel.finish_request</argument>
+        <argument type="collection">
+          <argument type="service_closure" id="Symfony\WebpackEncoreBundle\EventListener\ResetAssetsEventListener"/>
+          <argument>resetAssets</argument>
         </argument>
         <argument>0</argument>
       </call>
@@ -3991,6 +4046,10 @@
         <argument>cache.security_expression_language</argument>
         <argument type="service" id="cache.security_expression_language"/>
       </call>
+      <call method="addInstance">
+        <argument>cache.webpack_encore</argument>
+        <argument type="service" id="cache.webpack_encore"/>
+      </call>
     </service>
     <service id="cache_pool_clearer.cache_warmer" class="Symfony\Bundle\FrameworkBundle\CacheWarmer\CachePoolClearerCacheWarmer">
       <tag name="kernel.cache_warmer" priority="64"/>
@@ -4859,6 +4918,15 @@
       </call>
       <call method="addExtension">
         <argument type="service" id="twig.extension.webprofiler"/>
+      </call>
+      <call method="addExtension">
+        <argument type="service" id="chartjs.twig_extension"/>
+      </call>
+      <call method="addExtension">
+        <argument type="service" id="webpack_encore.twig_entry_files_extension"/>
+      </call>
+      <call method="addExtension">
+        <argument type="service" id="webpack_encore.twig_stimulus_extension"/>
       </call>
       <call method="addGlobal">
         <argument>app</argument>
@@ -6196,6 +6264,85 @@
     <service id="framework_extra_bundle.argument_name_convertor" class="Sensio\Bundle\FrameworkExtraBundle\Request\ArgumentNameConverter">
       <argument type="service" id="argument_metadata_factory"/>
     </service>
+    <service id="chartjs.builder" class="Symfony\UX\Chartjs\Builder\ChartBuilder"/>
+    <service id="chartjs.twig_extension" class="Symfony\UX\Chartjs\Twig\ChartExtension">
+      <tag name="twig.extension"/>
+      <argument type="service" id="webpack_encore.twig_stimulus_extension"/>
+    </service>
+    <service id=".1_ServiceLocator~SZ4bq2F" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="webpack_encore.entrypoint_lookup_collection" type="service_closure" id="webpack_encore.entrypoint_lookup_collection"/>
+        <argument key="webpack_encore.tag_renderer" type="service_closure" id="webpack_encore.tag_renderer"/>
+      </argument>
+    </service>
+    <service id="webpack_encore.entrypoint_lookup_collection" class="Symfony\WebpackEncoreBundle\Asset\EntrypointLookupCollection">
+      <argument type="service" id=".service_locator.Yi4Ff.p"/>
+      <argument>_default</argument>
+    </service>
+    <service id="webpack_encore.tag_renderer" class="Symfony\WebpackEncoreBundle\Asset\TagRenderer">
+      <tag name="kernel.reset" method="reset"/>
+      <argument type="service" id="webpack_encore.entrypoint_lookup_collection"/>
+      <argument type="service" id="assets.packages"/>
+      <argument type="collection"/>
+      <argument type="collection">
+        <argument key="defer">true</argument>
+      </argument>
+      <argument type="collection"/>
+      <argument type="service" id="debug.event_dispatcher"/>
+    </service>
+    <service id="webpack_encore.twig_entry_files_extension" class="Symfony\WebpackEncoreBundle\Twig\EntryFilesTwigExtension">
+      <tag name="twig.extension"/>
+      <argument type="service" id=".1_ServiceLocator~SZ4bq2F"/>
+    </service>
+    <service id="webpack_encore.twig_stimulus_extension" class="Symfony\WebpackEncoreBundle\Twig\StimulusTwigExtension">
+      <tag name="twig.extension"/>
+    </service>
+    <service id="webpack_encore.entrypoint_lookup.cache_warmer" class="Symfony\WebpackEncoreBundle\CacheWarmer\EntrypointCacheWarmer">
+      <tag name="kernel.cache_warmer"/>
+      <argument type="collection">
+        <argument key="_default">C:\Users\utilisateur\MeryemGIT\OneWay-symfony-/public/build/entrypoints.json</argument>
+      </argument>
+      <argument>C:\Users\utilisateur\MeryemGIT\OneWay-symfony-\var\cache\dev/webpack_encore.cache.php</argument>
+    </service>
+    <service id="webpack_encore.cache" class="Symfony\Component\Cache\Adapter\PhpArrayAdapter">
+      <argument>C:\Users\utilisateur\MeryemGIT\OneWay-symfony-\var\cache\dev/webpack_encore.cache.php</argument>
+      <argument type="service" id="cache.webpack_encore"/>
+      <factory class="Symfony\Component\Cache\Adapter\PhpArrayAdapter" method="create"/>
+    </service>
+    <service id="cache.webpack_encore" class="Symfony\Component\Cache\Adapter\TraceableAdapter">
+      <tag name="cache.pool"/>
+      <tag name="kernel.reset" method="reset"/>
+      <argument type="service" id="cache.webpack_encore.recorder_inner"/>
+    </service>
+    <service id="webpack_encore.exception_listener" class="Symfony\WebpackEncoreBundle\EventListener\ExceptionListener">
+      <tag name="kernel.event_listener" event="kernel.exception"/>
+      <argument type="service" id="webpack_encore.entrypoint_lookup_collection"/>
+      <argument type="collection">
+        <argument>_default</argument>
+      </argument>
+    </service>
+    <service id="Symfony\WebpackEncoreBundle\EventListener\ResetAssetsEventListener" class="Symfony\WebpackEncoreBundle\EventListener\ResetAssetsEventListener">
+      <tag name="kernel.event_subscriber"/>
+      <tag name="container.hot_path"/>
+      <argument type="service" id="webpack_encore.entrypoint_lookup_collection"/>
+      <argument type="collection">
+        <argument>_default</argument>
+      </argument>
+    </service>
+    <service id="webpack_encore.entrypoint_lookup[_default]" class="Symfony\WebpackEncoreBundle\Asset\EntrypointLookup">
+      <tag name="kernel.reset" method="reset"/>
+      <argument>C:\Users\utilisateur\MeryemGIT\OneWay-symfony-/public/build/entrypoints.json</argument>
+      <argument>null</argument>
+      <argument>_default</argument>
+      <argument>true</argument>
+    </service>
+    <service id=".service_locator.Yi4Ff.p" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="_default" type="service_closure" id="webpack_encore.entrypoint_lookup[_default]"/>
+      </argument>
+    </service>
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\CategorieoffreController" class="App\Controller\CategorieoffreController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\CategorieoffreController" class="App\Controller\CategorieoffreController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\CategorieoffreController" class="App\Controller\CategorieoffreController" autowire="true" autoconfigure="true" abstract="true"/>
@@ -6590,6 +6737,14 @@
         <argument key="categorieoffreRepository" type="service_closure" id="App\Repository\CategorieoffreRepository"/>
       </argument>
     </service>
+    <service id=".service_locator.RSwt_75" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="categorieoffreRepository" type="service_closure" id="App\Repository\CategorieoffreRepository"/>
+        <argument key="chartBuilder" type="service_closure" id="chartjs.builder"/>
+        <argument key="offreRepository" type="service_closure" id="App\Repository\OffreRepository"/>
+      </argument>
+    </service>
     <service id=".service_locator.4Q4Nqb9" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -6634,6 +6789,13 @@
         <argument key="offreRepository" type="service_closure" id="App\Repository\OffreRepository"/>
       </argument>
     </service>
+    <service id=".service_locator.lXnPGki" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="categorieoffreRepository" type="service_closure" id="App\Repository\CategorieoffreRepository"/>
+        <argument key="offreRepository" type="service_closure" id="App\Repository\OffreRepository"/>
+      </argument>
+    </service>
     <service id=".service_locator.6rKICIw" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -6647,9 +6809,24 @@
         <argument key="offreRepository" type="service_closure" id="App\Repository\OffreRepository"/>
       </argument>
     </service>
+    <service id=".service_locator.ZEyIfb3" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="kernel" type="service_closure" id="kernel"/>
+        <argument key="offre" type="service_closure" id=".errored..service_locator.ZEyIfb3.App\Entity\Offre"/>
+      </argument>
+    </service>
     <service id=".service_locator.3BqWL_x" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
+        <argument key="trajetoffreRepository" type="service_closure" id="App\Repository\TrajetoffreRepository"/>
+      </argument>
+    </service>
+    <service id=".service_locator.F5ORLwU" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="chartBuilder" type="service_closure" id="chartjs.builder"/>
+        <argument key="offreRepository" type="service_closure" id="App\Repository\OffreRepository"/>
         <argument key="trajetoffreRepository" type="service_closure" id="App\Repository\TrajetoffreRepository"/>
       </argument>
     </service>
@@ -6666,30 +6843,34 @@
         <argument key="trajetoffreRepository" type="service_closure" id="App\Repository\TrajetoffreRepository"/>
       </argument>
     </service>
-    <service id=".service_locator.S.MVAQh" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.D0jhK6E" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Controller\CategorieoffreController::delete" type="service_closure" id=".service_locator.rOSfREu"/>
         <argument key="App\Controller\CategorieoffreController::edit" type="service_closure" id=".service_locator.rOSfREu"/>
         <argument key="App\Controller\CategorieoffreController::index" type="service_closure" id=".service_locator.2s0_CjA"/>
-        <argument key="App\Controller\CategorieoffreController::new" type="service_closure" id=".service_locator.2s0_CjA"/>
+        <argument key="App\Controller\CategorieoffreController::new" type="service_closure" id=".service_locator.RSwt_75"/>
         <argument key="App\Controller\CategorieoffreController::show" type="service_closure" id=".service_locator.4Q4Nqb9"/>
         <argument key="App\Controller\ColisController::addcolis" type="service_closure" id=".service_locator.GQZbvNR"/>
         <argument key="App\Controller\DemandeController::delete" type="service_closure" id=".service_locator.whSsKfw"/>
         <argument key="App\Controller\DemandeController::edit" type="service_closure" id=".service_locator.whSsKfw"/>
         <argument key="App\Controller\DemandeController::index" type="service_closure" id=".service_locator.vwssv54"/>
+        <argument key="App\Controller\DemandeController::indexbyoffre" type="service_closure" id=".service_locator.vwssv54"/>
         <argument key="App\Controller\DemandeController::new" type="service_closure" id=".service_locator.vwssv54"/>
         <argument key="App\Controller\DemandeController::show" type="service_closure" id=".service_locator.RFYj4bd"/>
+        <argument key="App\Controller\DemandeController::showback" type="service_closure" id=".service_locator.RFYj4bd"/>
+        <argument key="App\Controller\OffreController::FrontList" type="service_closure" id=".service_locator.ZDu8hFs"/>
         <argument key="App\Controller\OffreController::delete" type="service_closure" id=".service_locator.uQRUBkf"/>
         <argument key="App\Controller\OffreController::demande" type="service_closure" id=".service_locator.uQRUBkf"/>
         <argument key="App\Controller\OffreController::edit" type="service_closure" id=".service_locator.uQRUBkf"/>
         <argument key="App\Controller\OffreController::index" type="service_closure" id=".service_locator.ZDu8hFs"/>
-        <argument key="App\Controller\OffreController::new" type="service_closure" id=".service_locator.ZDu8hFs"/>
+        <argument key="App\Controller\OffreController::new" type="service_closure" id=".service_locator.lXnPGki"/>
+        <argument key="App\Controller\OffreController::pdf" type="service_closure" id=".service_locator.ZEyIfb3"/>
         <argument key="App\Controller\OffreController::show" type="service_closure" id=".service_locator.6rKICIw"/>
         <argument key="App\Controller\TrajetoffreController::delete" type="service_closure" id=".service_locator.aKYUUrp"/>
         <argument key="App\Controller\TrajetoffreController::edit" type="service_closure" id=".service_locator.aKYUUrp"/>
         <argument key="App\Controller\TrajetoffreController::index" type="service_closure" id=".service_locator.3BqWL_x"/>
-        <argument key="App\Controller\TrajetoffreController::new" type="service_closure" id=".service_locator.3BqWL_x"/>
+        <argument key="App\Controller\TrajetoffreController::new" type="service_closure" id=".service_locator.F5ORLwU"/>
         <argument key="App\Controller\TrajetoffreController::show" type="service_closure" id=".service_locator.O7K0vWk"/>
         <argument key="App\Kernel::loadRoutes" type="service_closure" id=".service_locator.xUrKPVU"/>
         <argument key="App\Kernel::registerContainerConfiguration" type="service_closure" id=".service_locator.xUrKPVU"/>
@@ -6698,24 +6879,28 @@
         <argument key="App\Controller\CategorieoffreController:delete" type="service_closure" id=".service_locator.rOSfREu"/>
         <argument key="App\Controller\CategorieoffreController:edit" type="service_closure" id=".service_locator.rOSfREu"/>
         <argument key="App\Controller\CategorieoffreController:index" type="service_closure" id=".service_locator.2s0_CjA"/>
-        <argument key="App\Controller\CategorieoffreController:new" type="service_closure" id=".service_locator.2s0_CjA"/>
+        <argument key="App\Controller\CategorieoffreController:new" type="service_closure" id=".service_locator.RSwt_75"/>
         <argument key="App\Controller\CategorieoffreController:show" type="service_closure" id=".service_locator.4Q4Nqb9"/>
         <argument key="App\Controller\ColisController:addcolis" type="service_closure" id=".service_locator.GQZbvNR"/>
         <argument key="App\Controller\DemandeController:delete" type="service_closure" id=".service_locator.whSsKfw"/>
         <argument key="App\Controller\DemandeController:edit" type="service_closure" id=".service_locator.whSsKfw"/>
         <argument key="App\Controller\DemandeController:index" type="service_closure" id=".service_locator.vwssv54"/>
+        <argument key="App\Controller\DemandeController:indexbyoffre" type="service_closure" id=".service_locator.vwssv54"/>
         <argument key="App\Controller\DemandeController:new" type="service_closure" id=".service_locator.vwssv54"/>
         <argument key="App\Controller\DemandeController:show" type="service_closure" id=".service_locator.RFYj4bd"/>
+        <argument key="App\Controller\DemandeController:showback" type="service_closure" id=".service_locator.RFYj4bd"/>
+        <argument key="App\Controller\OffreController:FrontList" type="service_closure" id=".service_locator.ZDu8hFs"/>
         <argument key="App\Controller\OffreController:delete" type="service_closure" id=".service_locator.uQRUBkf"/>
         <argument key="App\Controller\OffreController:demande" type="service_closure" id=".service_locator.uQRUBkf"/>
         <argument key="App\Controller\OffreController:edit" type="service_closure" id=".service_locator.uQRUBkf"/>
         <argument key="App\Controller\OffreController:index" type="service_closure" id=".service_locator.ZDu8hFs"/>
-        <argument key="App\Controller\OffreController:new" type="service_closure" id=".service_locator.ZDu8hFs"/>
+        <argument key="App\Controller\OffreController:new" type="service_closure" id=".service_locator.lXnPGki"/>
+        <argument key="App\Controller\OffreController:pdf" type="service_closure" id=".service_locator.ZEyIfb3"/>
         <argument key="App\Controller\OffreController:show" type="service_closure" id=".service_locator.6rKICIw"/>
         <argument key="App\Controller\TrajetoffreController:delete" type="service_closure" id=".service_locator.aKYUUrp"/>
         <argument key="App\Controller\TrajetoffreController:edit" type="service_closure" id=".service_locator.aKYUUrp"/>
         <argument key="App\Controller\TrajetoffreController:index" type="service_closure" id=".service_locator.3BqWL_x"/>
-        <argument key="App\Controller\TrajetoffreController:new" type="service_closure" id=".service_locator.3BqWL_x"/>
+        <argument key="App\Controller\TrajetoffreController:new" type="service_closure" id=".service_locator.F5ORLwU"/>
         <argument key="App\Controller\TrajetoffreController:show" type="service_closure" id=".service_locator.O7K0vWk"/>
         <argument key="kernel:loadRoutes" type="service_closure" id=".service_locator.xUrKPVU"/>
         <argument key="kernel:registerContainerConfiguration" type="service_closure" id=".service_locator.xUrKPVU"/>
@@ -7379,12 +7564,12 @@
       <argument type="service" id="security.token_storage"/>
     </service>
     <service id="debug.argument_resolver.service.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
-      <argument type="service" id=".service_locator.S.MVAQh"/>
+      <argument type="service" id=".service_locator.D0jhK6E"/>
     </service>
     <service id="debug.argument_resolver.default.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver"/>
     <service id="debug.argument_resolver.variadic.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\VariadicValueResolver"/>
     <service id="debug.argument_resolver.not_tagged_controller.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
-      <argument type="service" id=".service_locator.S.MVAQh"/>
+      <argument type="service" id=".service_locator.D0jhK6E"/>
     </service>
     <service id="debug.traced.messenger.bus.default.inner" class="Symfony\Component\Messenger\MessageBus">
       <argument type="iterator">
@@ -7410,6 +7595,7 @@
     <service id=".errored..service_locator.whSsKfw.App\Entity\Demande" class="App\Entity\Demande"/>
     <service id=".errored..service_locator.6rKICIw.App\Entity\Offre" class="App\Entity\Offre"/>
     <service id=".errored..service_locator.uQRUBkf.App\Entity\Offre" class="App\Entity\Offre"/>
+    <service id=".errored..service_locator.ZEyIfb3.App\Entity\Offre" class="App\Entity\Offre"/>
     <service id=".errored..service_locator.O7K0vWk.App\Entity\Trajetoffre" class="App\Entity\Trajetoffre"/>
     <service id=".errored..service_locator.aKYUUrp.App\Entity\Trajetoffre" class="App\Entity\Trajetoffre"/>
     <service id=".console.command.about.lazy" class="Symfony\Component\Console\Command\LazyCommand">
@@ -8183,6 +8369,14 @@
       <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
+    <service id="cache.webpack_encore.recorder_inner" class="Symfony\Component\Cache\Adapter\AdapterInterface">
+      <argument>mmVkQomBrQ</argument>
+      <argument>0</argument>
+      <argument>%container.build_id%</argument>
+      <argument>C:\Users\utilisateur\MeryemGIT\OneWay-symfony-\var\cache\dev/pools/system</argument>
+      <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
+      <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
+    </service>
     <service id=".service_locator.pTeli0u" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -8355,9 +8549,12 @@
     <service id="Psr\Log\LoggerInterface" alias="monolog.logger"/>
     <service id="sensio_framework_extra.converter.doctrine.orm.expression_language" alias="sensio_framework_extra.converter.doctrine.orm.expression_language.default"/>
     <service id="sensio_framework_extra.security.expression_language" alias="sensio_framework_extra.security.expression_language.default"/>
+    <service id="Symfony\UX\Chartjs\Builder\ChartBuilderInterface" alias="chartjs.builder"/>
+    <service id="Symfony\WebpackEncoreBundle\Asset\EntrypointLookupCollectionInterface" alias="webpack_encore.entrypoint_lookup_collection"/>
+    <service id="Symfony\WebpackEncoreBundle\Asset\EntrypointLookupInterface" alias="webpack_encore.entrypoint_lookup[_default]"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.gSv9zYw" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.S.MVAQh"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.D0jhK6E"/>
     <service id="session" alias=".session.do-not-use" public="true">
       <deprecated package="symfony/framework-bundle" version="5.3">The "%alias_id%" service and "SessionInterface" alias are deprecated, use "$requestStack-&gt;getSession()" instead.</deprecated>
     </service>
@@ -8380,8 +8577,13 @@
     <service id="Psr\Log\LoggerInterface $deprecationLogger" alias="monolog.logger.deprecation"/>
     <service id=".service_locator.80edgLI" alias="messenger.receiver_locator"/>
     <service id=".service_locator.h8Jkkd2" alias="messenger.retry_strategy_locator"/>
+    <service id=".service_locator.XDGmiR3" alias=".1_ServiceLocator~SZ4bq2F"/>
     <service id=".service_locator.0GV1BZZ" alias=".service_locator.gSv9zYw"/>
-    <service id=".service_locator.sgZmOMr" alias=".service_locator.S.MVAQh"/>
+    <service id=".service_locator.TCV13j7" alias=".service_locator.RSwt_75"/>
+    <service id=".service_locator.M_fjZBN" alias=".service_locator.lXnPGki"/>
+    <service id=".service_locator.dF1upSS" alias=".service_locator.ZEyIfb3"/>
+    <service id=".service_locator.8V.gPmo" alias=".service_locator.F5ORLwU"/>
+    <service id=".service_locator.eTmQglJ" alias=".service_locator.D0jhK6E"/>
     <service id=".service_locator.wKF4yn1" alias=".service_locator.19_mNxd"/>
     <service id=".service_locator.Z760N9t" alias=".service_locator.8FvAEGE"/>
     <service id=".service_locator.nk0lT0X" alias=".service_locator.1kmbKC8"/>
@@ -8410,6 +8612,7 @@
     <service id="doctrine.orm.default_metadata_driver" alias=".doctrine.orm.default_metadata_driver"/>
     <service id=".service_locator.uo5c0SP" alias=".service_locator.xUrKPVU"/>
     <service id=".service_locator.KopgV2e" alias=".service_locator.2s0_CjA"/>
+    <service id=".service_locator.x8VxWvz" alias=".service_locator.RSwt_75"/>
     <service id=".service_locator.aoNjsh7" alias=".service_locator.4Q4Nqb9"/>
     <service id=".service_locator.Uw09fmL" alias=".service_locator.rOSfREu"/>
     <service id=".service_locator.FPFiL9q" alias=".service_locator.GQZbvNR"/>
@@ -8417,9 +8620,12 @@
     <service id=".service_locator.zEoJKJL" alias=".service_locator.RFYj4bd"/>
     <service id=".service_locator.EAp4xXj" alias=".service_locator.whSsKfw"/>
     <service id=".service_locator.jbMaTa6" alias=".service_locator.ZDu8hFs"/>
+    <service id=".service_locator.oXyBh71" alias=".service_locator.lXnPGki"/>
     <service id=".service_locator.0KAtJqa" alias=".service_locator.6rKICIw"/>
     <service id=".service_locator.kC.se5l" alias=".service_locator.uQRUBkf"/>
+    <service id=".service_locator.0w_BetQ" alias=".service_locator.ZEyIfb3"/>
     <service id=".service_locator.FSMcV5h" alias=".service_locator.3BqWL_x"/>
+    <service id=".service_locator.S0UeBLP" alias=".service_locator.F5ORLwU"/>
     <service id=".service_locator.wIeT6ig" alias=".service_locator.O7K0vWk"/>
     <service id=".service_locator.5OG7WEs" alias=".service_locator.aKYUUrp"/>
     <service id=".service_locator.A740LBW" alias=".service_locator.mx0UMmY"/>

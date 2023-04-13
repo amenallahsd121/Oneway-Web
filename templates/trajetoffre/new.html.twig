@@ -1,11 +1,22 @@
-{% extends 'base.html.twig' %}
+{% extends 'backbase.html.twig' %}
 
-{% block title %}New Trajetoffre{% endblock %}
+{% block title %} Trajetoffre{% endblock %}
 
 {% block body %}
-    <h1>Create new Trajetoffre</h1>
+    <a href="{{ path('app_trajetoffre_index') }}">Retour</a>
+
+<table class="table">
+<tr>
+<td  style="width:550px;">
+    <h1>Nouveau Trajet</h1>
 
     {{ include('trajetoffre/_form.html.twig') }}
 
-    <a href="{{ path('app_trajetoffre_index') }}">back to list</a>
+    
+    </td>
+   <td >
+   
+    </td>
+    <td style="width:450px; height: 150px;">{{ render_chart(chartes, {'class': 'ux-chart-doughnut'}) }}</td></tr>
+    </table>
 {% endblock %}

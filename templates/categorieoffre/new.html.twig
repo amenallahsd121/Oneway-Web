@@ -1,11 +1,21 @@
-{% extends 'base.html.twig' %}
+{% extends 'backbase.html.twig' %}
 
 {% block title %}New Categorieoffre{% endblock %}
 
 {% block body %}
-    <h1>Create new Categorieoffre</h1>
+    <a href="{{ path('app_categorieoffre_index') }}">retour</a>
+
+<table class="table">
+<tr>
+<td  style="width:550px;">
+    <h1>Nouvelle Categorie:</h1>
 
     {{ include('categorieoffre/_form.html.twig') }}
 
-    <a href="{{ path('app_categorieoffre_index') }}">back to list</a>
+    </td>
+   <td >
+   
+    </td>
+    <td style="width:450px; height: 150px;">{{ render_chart(chart, {'class': 'ux-chart-doughnut'}) }}</td></tr>
+    </table>
 {% endblock %}

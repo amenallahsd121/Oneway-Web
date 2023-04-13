@@ -1,4 +1,46 @@
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_start(form,{'attr':{'novalidate':'novalidate'}}) }}
+<div class="from-group">
+     {{ form_label(form.adddepartoffre,"Addresse De Depart :") }}
+     {{ form_widget(form.adddepartoffre,{'attr':{'class':'from-control'}}) }}
+     {% if form_errors(form.adddepartoffre) is not empty %}
+     <div class="alert alert-danger">
+     {{ form_errors(form.adddepartoffre) }}
+</div>
+{% endif %}
+</div>
+</br>
+<div class="from-group">
+     {{ form_label(form.addarriveoffre,"Addresse D'arrivee :") }}
+     {{ form_widget(form.addarriveoffre,{'attr':{'class':'from-control'}}) }}
+     {% if form_errors(form.addarriveoffre) is not empty %}
+     <div class="alert alert-danger">
+     {{ form_errors(form.addarriveoffre) }}
+</div>
+{% endif %}
+</div>
+</br>
+
+<div class="from-group">
+     {{ form_label(form.limitekmoffre,"Distance en Km :") }}
+     {{ form_widget(form.limitekmoffre,{'attr':{'class':'from-control'}}) }}
+     {% if form_errors(form.limitekmoffre) is not empty %}
+     <div class="alert alert-danger">
+     {{ form_errors(form.limitekmoffre) }}
+</div>
+{% endif %}
+</div>
+</br>
+
+<div class="from-group">
+     {{ form_label(form.nbreescaleoffre,"Nombre D'escale :") }}
+     {{ form_widget(form.nbreescaleoffre,{'attr':{'class':'from-control'}}) }}
+     {% if form_errors(form.nbreescaleoffre) is not empty %}
+     <div class="alert alert-danger">
+     {{ form_errors(form.nbreescaleoffre) }}
+</div>
+{% endif %}
+</div>
+</br>
+
+    <button class="btn">{{ button_label|default('Enregister') }}</button>
 {{ form_end(form) }}

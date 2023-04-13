@@ -1,21 +1,24 @@
-{% extends 'base.html.twig' %}
+{% extends 'backbase.html.twig' %}
 
 {% block title %}Trajetoffre index{% endblock %}
 
 {% block body %}
-    <h1>Trajetoffre index</h1>
+
+    <h1>Liste de Trajets  :<a href="{{ path('app_trajetoffre_new') }}"style="margin-left:650px ; font-size:17px ; color:white"><img src="{{ asset('asset/images/categorieoffre/add.png') }}"/>Ajouter</a>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Idtrajetoffre</th>
-                <th>Limitekmoffre</th>
+                <th>Id</th>
+                <th>Limitekm</th>
                 <th>Addarriveoffre</th>
                 <th>Adddepartoffre</th>
                 <th>Nbreescaleoffre</th>
-                <th>Nbreoffre</th>
+                <th>Nombre</th>
                 <th>Description</th>
-                <th>actions</th>
+                <th>Details</th>
+                <th>Modifier</th>
+
             </tr>
         </thead>
         <tbody>
@@ -29,8 +32,8 @@
                 <td>{{ trajetoffre.nbreoffre }}</td>
                 <td>{{ trajetoffre.description }}</td>
                 <td>
-                    <a href="{{ path('app_trajetoffre_show', {'idtrajetoffre': trajetoffre.idtrajetoffre}) }}">show</a>
-                    <a href="{{ path('app_trajetoffre_edit', {'idtrajetoffre': trajetoffre.idtrajetoffre}) }}">edit</a>
+                    <a href="{{ path('app_trajetoffre_show', {'idtrajetoffre': trajetoffre.idtrajetoffre}) }}"><img src="{{ asset('asset/images/offrefront/show.png') }}"/></a></td>
+                 <td>   <a href="{{ path('app_trajetoffre_edit', {'idtrajetoffre': trajetoffre.idtrajetoffre}) }}"><img src="{{ asset('asset/images/categorieoffre/edit.png') }}"/></a>
                 </td>
             </tr>
         {% else %}
@@ -41,5 +44,4 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_trajetoffre_new') }}">Create new</a>
 {% endblock %}

@@ -1,0 +1,118 @@
+
+{% extends 'baseback.html.twig' %}
+
+    {% block title %}Home{% endblock %}
+
+    {% block body %}
+        <div class="page-content-wrapper sp-y">
+            <div class="blog-details-page-wrapper">
+                <div class="container container-wide">
+
+                    <div class="row">
+                        <div class="col-12">
+														{% for offre in offres %}
+
+                            <article class="blog-post-details">
+                                <figure class="blog-post-thumb">
+                                    <img src="" alt="Blog" />
+                                </figure>
+
+                                <div class="blog-post-txt-wrap">
+                                    <div class="row">
+                                        <div class="col-md-3 col-lg-2 order-1 order-md-0"></div>
+
+                                        <div class="col-md-9 col-lg-8 m-auto order-0">
+                                            <div class="blog-post-txt">
+                                                <h1>{{offre.descriptionoffre}}</h1>
+                                                <h2>{{ offre.datesortieoffre |date("d/m/Y") }}</h2>
+                                                <h2>{{offre.etat }}</h2>
+                                                <h3>J- {{ offre.maxretard  }}</h3>
+                                                <p>{{offre.prixoffre}}</p>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </article>
+							        {% endfor %}
+
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="product-description-review">
+                                        <!-- Product Description Tab Menu -->
+                                        <ul class="nav nav-tabs desc-review-tab-menu" id="desc-review-tab" role="tablist">
+                                            <li>
+                                                <a class="active" id="desc-tab" data-toggle="tab" href="#descriptionContent" role="tab">Commentaire</a>
+                                            </li>
+                                        </ul>
+                            <div class="tab-content" id="myTabContent">
+                                <div class="tab-pane fade show active" id="descriptionContent">
+                                    <div class="description-content">
+
+                                    </div>
+                                </div>
+<div class="product-rating-wrap">
+                            <div class="display-ratings">
+                               
+                                    <h6>Le Commentaire :</h6>
+
+                                <div class="rating-item">
+                                    <div class="rating-author-txt">
+                                        <div class="rating-author-pic">
+                                        </div>
+                                        <div class="rating-meta">
+                                            <h3> av.nom </h3>
+                                            <span class="time">-   av.email </span>
+                                        </div>
+
+                                        <p>av.description</p>
+                                        <h3 align="right"> <i class="ion-ios-undo"></i></a></h3>
+                                    </div>
+
+                                </div>
+                                    <h6>Les réponses :</h6>
+                                        <div class="rating-item">
+                                            <div class="rating-author-txt">
+                                                <div class="rating-author-pic">
+                                                </div>
+                                                <div class="rating-meta">
+                                                    <h3> r.nom </h3>
+                                                    <span class="time">-   r.email </span>
+                                                </div>
+
+                                                <p>r.description</p>
+
+                                            </div>
+                                        </div>
+                                   
+
+
+
+                                        
+
+                                </div>
+
+                            </form>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+                            </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+   
+
+        </div>
+        <!--== End Slider Area Wrapper ==-->
+    {% endblock %}
+
+

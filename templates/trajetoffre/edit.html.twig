@@ -1,13 +1,19 @@
-{% extends 'base.html.twig' %}
+{% extends 'backbase.html.twig' %}
 
 {% block title %}Edit Trajetoffre{% endblock %}
 
 {% block body %}
-    <h1>Edit Trajetoffre</h1>
+    <a href="{{ path('app_trajetoffre_index') }}">Retour</a>
+<table class="table">
+<tr>
+<td  style="width:550px;">
+    <h1>Modifier Trajet </h1>
 
-    {{ include('trajetoffre/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('trajetoffre/_form.html.twig', {'button_label': 'Modifier'}) }}
 
-    <a href="{{ path('app_trajetoffre_index') }}">back to list</a>
 
     {{ include('trajetoffre/_delete_form.html.twig') }}
+    </td>
+      <td style="width:550px;Font-size:70px ;  text-align: center; "> De :{{trajetoffre.adddepartoffre}} </br>A : {{trajetoffre.addarriveoffre}} </td></tr></table>
+
 {% endblock %}

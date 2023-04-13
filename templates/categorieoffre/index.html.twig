@@ -1,18 +1,21 @@
-{% extends 'base.html.twig' %}
+{% extends 'backbase.html.twig' %}
 
-{% block title %}Categorieoffre index{% endblock %}
+{% block title %}Categorieoffre{% endblock %}
 
 {% block body %}
-    <h1>Categorieoffre index</h1>
+    <h1>Categories  :<a href="{{ path('app_categorieoffre_new') }}"style="margin-left:700px ; font-size:17px ; color:white"><img src="{{ asset('asset/images/categorieoffre/add.png') }}"/>Ajouter</a>
+</h1>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Idcatoffre</th>
-                <th>Poidsoffre</th>
-                <th>Nbrecolisoffre</th>
-                <th>Typeoffre</th>
-                <th>actions</th>
+                <th>Id</th>
+                <th>Poids</th>
+                <th>Nbrecolis</th>
+                <th>Type</th>
+                <th>details</th>
+                                <th>Modifier</th>
+
             </tr>
         </thead>
         <tbody>
@@ -23,17 +26,16 @@
                 <td>{{ categorieoffre.nbrecolisoffre }}</td>
                 <td>{{ categorieoffre.typeoffre }}</td>
                 <td>
-                    <a href="{{ path('app_categorieoffre_show', {'idcatoffre': categorieoffre.idcatoffre}) }}">show</a>
-                    <a href="{{ path('app_categorieoffre_edit', {'idcatoffre': categorieoffre.idcatoffre}) }}">edit</a>
-                </td>
+                    <a href="{{ path('app_categorieoffre_show', {'idcatoffre': categorieoffre.idcatoffre}) }}"><img src="{{ asset('asset/images/offrefront/show.png') }}"/></a></td>
+                 <td>   <a href="{{ path('app_categorieoffre_edit', {'idcatoffre': categorieoffre.idcatoffre}) }}"><img src="{{ asset('asset/images/categorieoffre/edit.png') }}"/></a></td>
+                
             </tr>
         {% else %}
             <tr>
-                <td colspan="5">no records found</td>
+                <td colspan="5">aucune categorie ! pouvez vous ajouter </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('app_categorieoffre_new') }}">Create new</a>
 {% endblock %}

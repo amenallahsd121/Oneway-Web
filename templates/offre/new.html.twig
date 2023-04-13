@@ -1,4 +1,4 @@
-{% extends 'baseFront.html.twig' %}
+{% extends 'baseback.html.twig' %}
 
 {% block title %}New Offre{% endblock %}
 
@@ -15,9 +15,9 @@ width: 700px;
     }
 main{
     position: absolute;
-    top: 50%;
+    top: 25%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-25%, -50%);
 }
 input[type="text"], select {
     border: 1px solid blue;
@@ -40,13 +40,15 @@ input[type="text"], select {
 
 
 
-form {
+.t {
 
-  padding: 50px;
+  margin-top: 25px; /* add margin to move form to the right */
   background-color: #000c20;
-  margin-right: 400px; /* add margin to move form to the right */
+  margin-right: 100px; /* add margin to move form to the right */
      
- 
+   margin-left: 200px; /* add margin to move form to the right */
+   margin-bottom: 200px; /* add margin to move form to the right */
+
 }
 
 
@@ -110,7 +112,8 @@ font-size:15px;
     background-color: #000c20;
      width:300px;
     height: 30px;
-    margin-left:150px;
+    margin-left:50px;
+    margin-top:15px;
 }
 
 
@@ -121,26 +124,27 @@ font-size:15px;
 
  {% block form %}
 
+<table class ="t">
+<tr>
+<td>
+      
 
-{{form_start(form,{'attr': {'novalidate': 'novalidate'}} )}}
-
-        <header>
-        </header>
-        <div class="cont" >
-        <tr><div class ='divv'></div></tr>
+      
 
        <div class="page" id="page1">
        
 <table>
 
 <tr>
-
-<td> {{ form_label(form.descriptionoffre,"Description")  }} 
- </td>
-<td>  {{ form_widget(form.descriptionoffre) }} 
-</td>  
-<td> {{ form_errors(form.descriptionoffre)}} 
-</td>
+<td><div class="from-group">
+     {{ form_label(form.descriptionoffre," Description :") }}
+     {{ form_widget(form.descriptionoffre,{'attr':{'class':'from-control'}}) }}
+     {% if form_errors(form.descriptionoffre) is not empty %}
+     <div class="alert alert-danger">
+     {{ form_errors(form.descriptionoffre) }}
+</div>
+{% endif %}
+</div></td> 
 </tr>
 <br>
 
@@ -149,32 +153,43 @@ font-size:15px;
 
 
 <tr>
-<td>  {{ form_label(form.datesortieoffre,"Date De Sortie") }} 
-</td> 
-<td> {{ form_widget(form.datesortieoffre)}} 
- </td> 
-<td>  {{ form_errors(form.datesortieoffre) }} 
-</td> 
+<td><div class="from-group">
+     {{ form_label(form.datesortieoffre," Date De Sortie :") }}
+     {{ form_widget(form.datesortieoffre,{'attr':{'class':'from-control'}}) }}
+     {% if form_errors(form.datesortieoffre) is not empty %}
+     <div class="alert alert-danger">
+     {{ form_errors(form.datesortieoffre) }}
+</div>
+{% endif %}
+</div></td> 
+
 </tr>
 <br>
 
 
 <tr>
-<td>  {{ form_label(form.maxretard,"retard") }} 
-</td> 
-<td> {{ form_widget(form.maxretard)}} 
- </td> 
-<td>  {{ form_errors(form.maxretard) }} 
-</td> 
+<td><div class="from-group">
+     {{ form_label(form.maxretard," Retard :") }}
+     {{ form_widget(form.maxretard,{'attr':{'class':'from-control'}}) }}
+     {% if form_errors(form.maxretard) is not empty %}
+     <div class="alert alert-danger">
+     {{ form_errors(form.maxretard) }}
+</div>
+{% endif %}
+</div></td> 
+
 </tr>
 <br>
-
-<td>  {{ form_label(form.prixoffre,"Prix") }} 
-</td> 
-<td> {{ form_widget(form.prixoffre)}} 
- </td> 
-<td>  {{ form_errors(form.prixoffre) }} 
-</td> 
+<tr>
+<td><div class="from-group">
+     {{ form_label(form.prixoffre," Prix :") }}
+     {{ form_widget(form.prixoffre,{'attr':{'class':'from-control'}}) }}
+     {% if form_errors(form.prixoffre) is not empty %}
+     <div class="alert alert-danger">
+     {{ form_errors(form.prixoffre) }}
+</div>
+{% endif %}
+</div></td> 
 </tr>
 <br>
 
@@ -188,15 +203,18 @@ font-size:15px;
 </div>
 <div class="page" id="page2">
                 <table>
-<h1 style="color: white; font-size: 26px;"> Ajouter un colis</h1>
+<h1 style="color: white; font-size: 26px;"> Preciser Votre categorie offre:</h1>
 <tr>
+<td><div class="from-group">
+     {{ form_label(form.idtrajetoffre," Votre Trajet :") }}
+     {{ form_widget(form.idtrajetoffre,{'attr':{'class':'from-control'}}) }}
+     {% if form_errors(form.idtrajetoffre) is not empty %}
+     <div class="alert alert-danger">
+     {{ form_errors(form.idtrajetoffre) }}
+</div>
+{% endif %}
+</div></td> 
 
-<td> {{ form_label(form.idtrajetoffre," Votre Trajet")  }} 
- </td>
-<td>  {{ form_widget(form.idtrajetoffre) }} 
-</td>  
-<td> {{ form_errors(form.idtrajetoffre) }} 
-</td>
 </tr>
 <br>
 </table>
@@ -205,31 +223,64 @@ font-size:15px;
 </div>
 <div class="page" id="page3">
                 <table>
-<h1 style="color: white; font-size: 26px;"> Ajouter un colis</h1>
+<h1 style="color: white; font-size: 26px;">Preciser Votre categorie offre:</h1>
 <tr>
-
-<td> {{ form_label(form.catoffreid,"catoffreid")  }} 
- </td>
-<td>  {{ form_widget(form.catoffreid) }} 
-</td>  
-<td> {{ form_errors(form.catoffreid) }} 
-</td>
+<td><div class="from-group">
+     {{ form_label(form.catoffreid," La Categorie D'offre  :") }}
+     {{ form_widget(form.catoffreid,{'attr':{'class':'from-control'}}) }}
+     {% if form_errors(form.catoffreid) is not empty %}
+     <div class="alert alert-danger">
+     {{ form_errors(form.catoffreid) }}
+</div>
+{% endif %}
+</div></td> 
 </tr>
 <br>
+    <button class="prev" type="button">Précédent</button>
 
-
+        
 </tr>
+ <td>     <button class="btn" style =" font-size: 15px; padding: 15px 20px; margin-left: 50px; margin-top: 10px;"><a href="{{ path('app_offre_Front' )}}">Enregistrer</a></button>
+</td>
+            
+</div> 
 
-   </table>
-                   <button class="prev" type="button">Précédent</button>
-
-  <td colspan="2">{{ form_widget(form.save, {'attr': {'style': 'font-size: 15px; padding: 15px 20px; margin-left: 110px; margin-top: 10px;'}} ) }}</td>
-
-</div>             
-
-        {{form_end(form)}}
+       
+</table>
 </main>
+</td>
+<td style="padding:150px ;width:500px;height: 300px
 
+
+">
+<table class ="table" style="width:350px ; height: 350px; padding:100px;margin-bottom:150px ;font-size:15px;color:white;"><thead><h1>liste de categorie:</h1>
+            <tr>
+                
+                <th>Type</th>
+                <th>Poids</th>
+                <th>Nbrecolis</th>
+                
+
+            </tr>
+        </thead>
+         <tbody>
+        {% for categorieoffre in categorieoffres %}
+            <tr>                <td>{{ categorieoffre.typeoffre }}</td>
+
+                <td>{{ categorieoffre.poidsoffre }} kg /colis</td>
+                <td>{{ categorieoffre.nbrecolisoffre }} colis</td>
+                
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">aucune categorie ! </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+</table>
+</td>
+</tr>
+</table>
 <script type="text/javascript">
         $(document).ready(function() {
             $('.js-datepicker').datepicker({

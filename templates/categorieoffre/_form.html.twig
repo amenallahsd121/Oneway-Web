@@ -1,4 +1,51 @@
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+<div class="container">
+{{ form_start(form,{'attr':{'novalidate':'novalidate'}}) }}
+<div class="from-group">
+     {{ form_label(form.typeoffre,"Type d'offre") }}
+     {{ form_widget(form.typeoffre,{'attr':{'class':'from-control'}}) }}
+     {% if form_errors(form.typeoffre) is not empty %}
+     <div class="alert alert-danger">
+     {{ form_errors(form.typeoffre) }}
+</div>
+{% endif %}
+</div>
+
+<div class="form-group">
+    {{ form_label(form.poidsoffre, "Poids d'offre") }}
+    {{ form_widget(form.poidsoffre, {'attr': {'class': 'form-control', 'id': 'poidsoffre'}}) }}
+    {% if form_errors(form.poidsoffre) is not empty %}
+        <div class="alert alert-danger">
+            {{ form_errors(form.poidsoffre) }}
+        </div>
+    {% endif %}
+</div>
+
+<div class="from-group">
+     {{ form_label(form.nbrecolisoffre,"Nombre de colis ") }}
+     {{ form_widget(form.nbrecolisoffre,{'attr':{'class':'from-control'}}) }}
+     {% if form_errors(form.nbrecolisoffre) is not empty %}
+     <div class="alert alert-danger">
+     {{ form_errors(form.nbrecolisoffre) }}
+</div>
+{% endif %}
+</div>
+
+
+
+
+    <button class="btn" style= 'font-size: 15px; padding: 15px 20px; margin-top: 10px;'>{{ button_label|default('Enregistrer') }}</button>
+
 {{ form_end(form) }}
+
+</div>
+<script>
+$(document).ready(function() {
+    $('#poidsoffre').on('input', function() {
+        var value = $(this).val();
+        if (value && isNaN(value)) {
+            $(this).val('');
+            alert('Le poids doit être un nombre décimal.');
+        }
+    });
+});
+</script>

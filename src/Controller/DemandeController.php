@@ -45,7 +45,7 @@ class DemandeController extends AbstractController
     $demande->setIdoffre($Offre);
             $demandeRepository->save($demande, true);
     
-            return $this->redirectToRoute('app_offre_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_offre_Front', [], Response::HTTP_SEE_OTHER);
         }
     
         return $this->renderForm('demande/new.html.twig', [

@@ -4,11 +4,14 @@ namespace App\Controller;
 
 use App\Entity\Trajetoffre;
 use App\Form\Trajetoffre1Type;
+use App\Repository\OffreRepository;
+use Symfony\UX\Chartjs\Model\Chart;
 use App\Repository\TrajetoffreRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\UX\Chartjs\Builder\ChartBuilderInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/trajetoffre')]
 class TrajetoffreController extends AbstractController
@@ -22,7 +25,7 @@ class TrajetoffreController extends AbstractController
     }
 
     #[Route('/new', name: 'app_trajetoffre_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, TrajetoffreRepository $trajetoffreRepository): Response
+    public function new(Request $request, TrajetoffreRepository $trajetoffreRepository,OffreRepository $offreRepository,ChartBuilderInterface $chartBuilder): Response
     {
         $trajetoffre = new Trajetoffre();
         $form = $this->createForm(Trajetoffre1Type::class, $trajetoffre);
@@ -33,10 +36,39 @@ class TrajetoffreController extends AbstractController
 
             return $this->redirectToRoute('app_trajetoffre_index', [], Response::HTTP_SEE_OTHER);
         }
+        $trajet = $trajetoffreRepository->findAll();
 
+        $label = [];
+        foreach ($trajet as $trajets) {
+            $label[] = $trajets->getDescription();
+        }
+    
+    // Get the number of offers associated with each category
+    $chartData = [];
+    foreach ($trajet as $trajets) {
+        $n = $offreRepository->findBy(['idtrajetoffre' => $trajets]);
+        
+        $chartData[] = count($n);
+    }
+        $chart = $chartBuilder->createChart(Chart::TYPE_DOUGHNUT);
+        $chart->setData([
+            'labels'   => $label,
+            'datasets' => [
+                [
+                    'label'           => 'les categories utilisees:',
+                    'backgroundColor' => ['rgb(51, 153, 255)', 'rgb(255, 99, 132)', 'rgb(75, 192, 192)'],
+                    'borderColor'     => ['rgb(51, 153, 255)', 'rgb(255, 99, 132)', 'rgb(75, 192, 192)'],
+                    'data'            => $chartData,
+                ],
+            ],
+            'hoverOffset'   => 4,
+        ]);
+       
         return $this->renderForm('trajetoffre/new.html.twig', [
             'trajetoffre' => $trajetoffre,
             'form' => $form,
+            'chartes' => $chart,
+
         ]);
     }
 

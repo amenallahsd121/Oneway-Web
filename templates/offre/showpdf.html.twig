@@ -1,0 +1,67 @@
+
+{% block title %}Offre{% endblock %}
+
+{% block body %}
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+    <h1>Offre</h1>
+
+ <div style="margin: 0 auto;display: block;width: 500px;">
+        <table width="100%" border="0">        <tbody>
+            <tr>
+                <th>Idoffre</th>
+                <td>{{ offre.idoffre }}</td>
+            </tr>
+            <tr>
+                <th>Idcatcolis</th>
+                <td>{{ offre.idcatcolis }}</td>
+            </tr>
+            <tr>
+                <th>Descriptionoffre</th>
+                <td>{{ offre.descriptionoffre }}</td>
+            </tr>
+            <tr>
+                <th>Maxretard</th>
+                <td>{{ offre.maxretard }}</td>
+            </tr>
+            <tr>
+                <th>Prixoffre</th>
+                <td>{{ offre.prixoffre }}</td>
+            </tr>
+            <tr>
+                <th>Dateoffre</th>
+                <td>{{ offre.dateoffre }}</td>
+            </tr>
+            <tr>
+                <th>Datesortieoffre</th>
+                <td>{{ offre.datesortieoffre }}</td>
+            </tr>
+            <tr>
+                <th>Etat</th>
+                <td>{{ offre.etat }}</td>
+            </tr>
+            <tr>
+                <th>Nbredemande</th>
+                <td>{{ offre.nbredemande }}</td>
+            </tr>
+        </tbody>
+    </table>
+ 
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+{% endblock %}
