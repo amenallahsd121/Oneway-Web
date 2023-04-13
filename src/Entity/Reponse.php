@@ -7,6 +7,7 @@ use App\Repository\ReponseRepository;
 use App\Entity\Utilisateur;
 use App\Entity\Reclamation;
 use ORM\Table;
+use Symfony\Component\Validator\Constraints as Assert;
 
 
 
@@ -24,6 +25,8 @@ class Reponse
   
 
     #[ORM\Column(length: 250)]
+    #[Assert\NotBlank(message: "Tu dois saisir le texte de votre reponse")]
+    #[Assert\Length(min: 3, minMessage: "Le texte de la réponse doit avoir au moins 3 caractères")]
     private ?string $text_rep = null;
 
 
