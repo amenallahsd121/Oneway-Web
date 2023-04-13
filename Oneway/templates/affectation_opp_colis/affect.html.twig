@@ -2,7 +2,7 @@
 
 
 {% block title %}
-	Participation
+	Affectation
 {% endblock %}
 
 
@@ -21,9 +21,10 @@
                     <table class="table">
                       <thead>
                         <tr>
-                          <th> id_participation </th>
-                          <th> user </th>
-                          <th> Event </th>
+                          <th> id_aff </th>
+                           <th> Depart </th>
+                          <th> Arriveé </th>
+                          <th> ref colis </th>
                          
                          
                         </tr>
@@ -32,10 +33,11 @@
                       {% for data in list %}
                         <tr>
                          
-                          <td> {{ data.idParticipation }} </td>
-                          <td> {{ data.id_user.name }} </td>
+                          <td> {{ data.id_aff }} </td>
+                          <td> {{ data.id_opp.depart  }} </td>
+                          <td> {{ data.id_opp.arrivee  }} </td>
                           
-                          <td> {{ data.id_event.nom }} </td>
+                          <td> {{ data.id_colis.typeColis }} </td>
                          
                        
 
@@ -43,7 +45,7 @@
                       
                           <td>
                           
-  <a href="{{ path('delete_participation', {'ide': data.idParticipation}) }}" class="btn btn-outline-danger btn-fw;">Supprimer</a>
+  <a href="{{ path('delete_Affectation', {'idk': data.id_aff}) }}" class="btn btn-outline-danger btn-fw;">Supprimer</a>
 </td>
 
 

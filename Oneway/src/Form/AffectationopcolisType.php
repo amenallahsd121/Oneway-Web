@@ -30,7 +30,7 @@ class AffectationopcolisType extends AbstractType
                         ->where('c.id_client = :userId')
                         ->setParameter('userId', $userId);
                 },
-                'choice_label' => 'id_colis',
+                'choice_label' => 'type_colis',
                 'multiple' => false,
                 'expanded' => false,
             ])

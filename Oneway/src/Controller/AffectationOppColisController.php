@@ -22,6 +22,14 @@ class AffectationOppColisController extends AbstractController
         $this->entityManager = $entityManager;
     }
 
+    #[Route('/affectation', name: 'app_affectation')]
+    public function indexparticipation(): Response
+    {
+        $data = $this->getDoctrine()->getRepository(Affectationopcolis::class)->findAll();
+        return $this->render('\affectation_opp_colis\affect.html.twig', [
+            'list' => $data   
+        ]);
+    }
 
 
 
@@ -68,12 +76,12 @@ class AffectationOppColisController extends AbstractController
 
         
 
-        #[Route('/affectation/delete/{idp}', name: 'delete_affectation')]
-        public function delete($idp) {
+        #[Route('/affectation/delete/{idk}', name: 'delete_Affectation')]
+        public function delete($idk) {
          
          
            
-            $data = $this->getDoctrine()->getRepository(Affectationopcolis::class)->find($idp); 
+            $data = $this->getDoctrine()->getRepository(Affectationopcolis::class)->find($idk); 
         
               $em = $this->getDoctrine()->getManager();
               $em->remove($data);
@@ -82,7 +90,7 @@ class AffectationOppColisController extends AbstractController
         
           
         
-              return $this->redirectToRoute('app_affectation_opportinute');
+              return $this->redirectToRoute('app_affectation');
           }
 
 

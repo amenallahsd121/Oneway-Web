@@ -62,6 +62,7 @@ use Doctrine\ORM\Mapping as ORM;
                                                  {
                                                      return $this->id_colis;
                                                  }
+                                                 
             
                                                  public function setJoinColis(?Colis $joinColis): self
                                                  {
@@ -74,6 +75,10 @@ use Doctrine\ORM\Mapping as ORM;
                                                  {
                                                      return $this->id_opp;
                                                  }
+                                                 public function getid_Opp(): ?Opportinute
+                                                 {
+                                                     return $this->id_opp;
+                                                 }
       
                                                  public function setIdOpp(?Opportinute $id_opp): self
                                                  {
@@ -83,6 +88,10 @@ use Doctrine\ORM\Mapping as ORM;
                                                  }
    
                                                  public function getIdColis(): ?Colis
+                                                 {
+                                                     return $this->id_colis;
+                                                 }
+                                                 public function getid_colis(): ?Colis
                                                  {
                                                      return $this->id_colis;
                                                  }
