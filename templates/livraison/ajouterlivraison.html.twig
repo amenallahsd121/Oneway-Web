@@ -1,0 +1,47 @@
+{% extends 'backbase.html.twig' %}
+
+
+{% block title %}
+	Ajouter Livreur
+{% endblock %}
+
+
+{% block body %}
+
+
+
+{{ form_start(form,{'attr': {'novalidate': 'novalidate'}}) }}
+<div class="col-12 grid-margin stretch-card">
+  <div class="card">
+    <div class="card-body">
+      <h4 class="card-title">Ajouter Livraison</h4>
+      <p class="card-description">Veuillez saisir les details de Livraison :</p>
+
+      <form class="forms-sample">
+        <div class="form-group mt-3">
+          {{ form_label(form.etat, "Etat") }}
+          {{ form_widget(form.etat, {'attr': {'class': 'form-control'}}) }}
+          {{ form_errors(form.etat) }}
+        </div>
+
+        <div class="form-group mt-3">
+          {{ form_label(form.livreur, "Livreur") }}
+          {{ form_widget(form.livreur, {'attr': {'class': 'form-control'}}) }}
+          {{ form_errors(form.livreur) }}
+        </div>
+
+
+        <div class="form-group mt-3">
+          {{ form_widget(form.Affecter) }}
+           
+         <a href="{{ path ('app_livraison_colis') }}" class="btn btn-dark">Annuler</a>
+
+
+      </form>
+    </div>
+  </div>
+</div>
+
+{{ form_end(form) }}
+
+{% endblock %}

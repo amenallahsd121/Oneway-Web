@@ -1,0 +1,62 @@
+{% extends 'backbase.html.twig' %}
+
+
+{% block title %}
+	Liste des Maintenances 
+{% endblock %}
+
+
+{% block body %}
+
+
+
+	 <div class="row ">
+            <div class="col-12 grid-margin">
+              <div class="card">
+                <div class="card-body">
+
+                <h4 class="card-title">Liste des Maintenances<a href=" {{ path ('add_maintenance') }} " class="btn btn-success btn-fw float-right">Ajouter Maintenance</a></h4> 
+
+
+                  <div class="table-responsive">
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th> etat </th>
+                          <th> nom de la sociéte  </th>
+                          <th> matricule  </th>
+                          
+                          <th> Suppression </th>
+                          <th> Modification </th>
+                        </tr>
+                      </thead>
+
+                      {% for data in list %}
+                        <tr>
+                         
+                          <td> {{ data.etat }} </td>
+                          <td> {{ data.nomSosRep }} </td>
+                          <td> {{ data.idVehicule.matricule }} </td>
+                          
+                       
+
+
+                      
+                          <td>
+  <a href="{{ path('delete_maintenance', {'id': data.idMaintenance}) }}" class="btn btn-outline-danger btn-fw;">Supprimer</a>
+</td>
+
+
+                          <td>
+                             <a href="{{ path('update_maintenance', {'id': data.idMaintenance}) }}"  class="btn btn-outline-warning btn-fw;"> Modifier</a>
+                          </td> 
+                        </tr>
+                          
+                         {% endfor %}
+                       
+                         
+                
+
+{% endblock %}
+
+
