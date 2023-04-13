@@ -24,7 +24,14 @@ class DemandeController extends AbstractController
             'demandes' => $demandeRepository->findAll(),
         ]);
     }
-
+    
+    #[Route('/{idoffre}', name: 'app_demande_indexoffre', methods: ['GET'])]
+    public function indexbyoffre(DemandeRepository $demandeRepository,$idoffre): Response
+    {
+        return $this->render('demande/indexback.html.twig', [
+            'demandes' => $demandeRepository->findBy(['idoffre' => $idoffre]),
+        ]);
+    }
     #[Route('/{idOffre}/new', name: 'app_demande_new', methods: ['GET', 'POST'])]
     public function new(Request $request, DemandeRepository $demandeRepository,$idOffre): Response
     {    
@@ -46,10 +53,17 @@ class DemandeController extends AbstractController
             'form' => $form,
         ]);
     }
-    #[Route('/{iddemande}', name: 'app_demande_show', methods: ['GET'])]
+    #[Route('/detail/{iddemande}', name: 'app_demande_show', methods: ['GET'])]
     public function show(Demande $demande): Response
     {
         return $this->render('demande/show.html.twig', [
+            'demande' => $demande,
+        ]);
+    }
+    #[Route('/detailback/{iddemande}', name: 'app_demande_showback', methods: ['GET'])]
+    public function showback(Demande $demande): Response
+    {
+        return $this->render('demande/showback.html.twig', [
             'demande' => $demande,
         ]);
     }

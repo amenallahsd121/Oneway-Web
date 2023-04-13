@@ -20,7 +20,6 @@
     <!-- CSS here -->
 
     {% block css %}
-
     <link rel="stylesheet" href={{asset('assets/css/bootstrap.min.css')}}>
     <link rel="stylesheet" href={{asset('assets/css/owl.carousel.min.css')}}>
     <link rel="stylesheet" href={{asset('assets/css/slicknav.css')}}>
@@ -103,7 +102,7 @@
                                     <nav> 
                                         <ul id="navigation">                                                                                          
                                             <li><a href="index.html">Mon Profil</a></li>
-                                            <li><a href="services.html">Evenement</a></li>
+                                            <li><a href=" ">Evenement</a></li>
                                             <li><a href= " {{ path ('app_colis') }} ">Colis</a> 
                                             
                                              <ul class="submenu">
@@ -114,16 +113,20 @@
                                             </ul>  
 
                                             </li> 
-                                            <li><a >Offre et demande</a>                                   
-                                                   <ul class="submenu">
 
-                                                    <li><a href=" {{ path ('app_offre_index') }} ">Offre</a>
-                                                    </li>
-                                                    <li><a href=" {{ path ('app_demande_index') }} ">Demande</a></li>
-                                                  
-                                            </ul></li>
+                                            <li><a href="blog.html">Offre et demande</a></li>
                                             <li><a href="blog.html">Opportunité</a></li>
-                                            <li><a href="blog.html">Réclamation</a></li>
+
+
+                                            <li><a href="  ">Réclamation</a>
+
+                                            <ul class="submenu">
+
+                                                    <li><a href="  ">Ajouter Réclamation</a></li>
+                                                    <li><a href="  ">Mes Réclamations</a></li>
+                                                  
+                                            </ul>
+                                            </li>
                                             
                                                 
                                             
@@ -228,6 +231,7 @@
 
 </footer>
 {% endblock %}
+
 <!-- Scroll Up -->
 <div id="back-top" >
     <a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
@@ -237,10 +241,8 @@
 
 
 
-
     <!-- JS here -->
     {% block js %}
-   
     <script src="{{asset('./assets/js/vendor/modernizr-3.5.0.min.js')}}"></script>
     <!-- Jquery, Popper, Bootstrap -->
     <script src="{{asset('./assets/js/vendor/jquery-1.12.4.min.js')}}"></script>
@@ -272,21 +274,16 @@
     <script src="{{asset('./assets/js/plugins.js')}}"></script>
     <script src="{{asset('./assets/js/main.js')}}"></script>
     <script src="{{asset('./chosen/chosen.jquery.min.js')}}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
+    
 
-<script src="{{asset('./assets/js/script.js')}}"></script>
 
     <script>
   $(document).ready(function() {
     $('.chosen-select').chosen();
   });
 </script>
-           
-
     {% endblock %}
-    
      
-
 </body>
 
 </html>
