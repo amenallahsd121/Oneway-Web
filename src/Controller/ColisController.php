@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Colis;
 use App\Entity\Utilisateur;
 use App\Form\ColisType;
+use App\Form\PaiementType;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -12,6 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Doctrine\ORM\EntityManagerInterface;
 use SebastianBergmann\Environment\Console;
+
 
 class ColisController extends AbstractController
 {
@@ -56,6 +58,7 @@ class ColisController extends AbstractController
 
         if($form->isSubmitted() && $form->isValid()) {
            
+ 
         $id=68;
         $utilisateur = $this->entityManager->getRepository(Utilisateur::class)->find($id);
         $colis->setUtilisateur($utilisateur);
@@ -127,6 +130,24 @@ public function delete($id) {
 
 
 
+
+  #[Route('/colis/payer', name: 'app_payer')]
+    public function payer(Request $req): Response {
+    {
+        $form = $this->createForm(PaiementType::class);
+        $form->handleRequest($req);
+        
+
+        if($form->isSubmitted() && $form->isValid()) {
+           
+      
+            return $this->redirectToRoute('app_colis');
+        }
+
+        return $this->renderForm('colis/paiement.html.twig',['form'=>$form]);
+    }
+
+
 }
 
-
+}

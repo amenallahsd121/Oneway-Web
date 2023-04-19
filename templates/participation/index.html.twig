@@ -2,7 +2,7 @@
 
 
 {% block title %}
-	Mes Evenements
+	 Evenements
 {% endblock %}
 
 
@@ -24,7 +24,7 @@
 					class="col-lg-12">
 					<!-- Section Title -->
 					<div class="section-title text-center mb-80">
-						<h2 style="font-size: 32px; color: white; margin-top: -70px; margin-right: 1050px;">Mes Evenements</h>
+						<h2 style="font-size: 32px; color: white; margin-top: -70px; margin-right: 1050px;"> Evenements</h>
 
 
 					</div>
@@ -54,11 +54,17 @@
 									{{ data.description }}</p>
 								<p style="font-size: 22px; color: white;">
 									date Debut :
-									{{ data.dateDebutEvent }}
+									 {{ data.dateDebutEvent|date("m/d/Y") }}
+
+
+
+
+
+
 								</p>
 								<p style="font-size: 22px; color: white;">
 									Date Fin :
-									{{ data.dateFinEvent }}</p>
+									 {{ data.dateFinEvent|date("m/d/Y") }}</p>
 								<p style="font-size: 22px; color: white;">
 									awards :
 									{{ data.awards }}</p>

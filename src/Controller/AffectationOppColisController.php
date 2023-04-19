@@ -48,7 +48,7 @@ class AffectationOppColisController extends AbstractController
         $aff->setRelation($opp);
 
         if($form->isSubmitted()) {
-        dump('ok');
+       
 
         $this->entityManager->persist($aff);
         $this->entityManager->flush();
@@ -68,12 +68,12 @@ class AffectationOppColisController extends AbstractController
 
         
 
-        #[Route('/affectation/delete/{ide}', name: 'delete_affectation')]
-        public function delete($ide) {
+        #[Route('/affectation/delete/{idp}', name: 'delete_affectation')]
+        public function delete($idp) {
          
          
            
-            $data = $this->getDoctrine()->getRepository(Affectationopcolis::class)->find($ide); 
+            $data = $this->getDoctrine()->getRepository(Affectationopcolis::class)->find($idp); 
         
               $em = $this->getDoctrine()->getManager();
               $em->remove($data);

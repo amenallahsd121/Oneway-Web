@@ -2,7 +2,7 @@
 
 
 {% block title %}
-	Liste des Livreurs
+	Liste des Evenement
 {% endblock %}
 
 
@@ -16,6 +16,7 @@
                 <div class="card-body">
 
                <h4 class="card-title">Liste des Evenement<a href=" {{ path ('add_evenement') }} " class="btn btn-success btn-fw float-right">Ajouter Evenement</a></h4>
+               <h4 class="card-title"><a href=" {{ path ('app_participation') }}" class="btn btn-success btn-fw float-right">list participant</a></h4>
 
 
                   <div class="table-responsive">
@@ -36,8 +37,10 @@
                          
                           <td> {{ data.nom }} </td>
                           <td> {{ data.description }} </td>
-                          <td> {{ data.dateDebutEvent }} </td>
-                          <td> {{ data.dateFinEvent }} </td>
+                          
+                          <td> {{ data.dateDebutEvent|date("m/d/Y") }} </td>
+                          <td> {{ data.dateFinEvent|date("m/d/Y") }} </td>
+                          
                           <td> {{ data.awards }} </td>
                        
 

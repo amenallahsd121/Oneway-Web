@@ -2,12 +2,40 @@
 
 
 {% block title %}
-	Ajouter Colis
+	Payer Colis
 {% endblock %}
 
 
 {% block body %}
 
+{% block scriptStripe %}
+   
+    <script src="https://js.stripe.com/v3/"></script>
+	
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{# 
 	<style>
 		body {
 			background-color: #000c20;
@@ -70,34 +98,34 @@
 			)}}
 			<table class="form-table">
 				<h1 style="color: white; font-size: 26px;">
-					Veuillez saisir les details de votre colis</h1>
+					Veuillez saisir les details de votre Carte de Paiement</h1>
 				<tr>
 
 					<td>
-						{{ form_label(form.poids,"Poids")  }}
+						{{ form_label(form.numcarte,"N° Carte :")  }}
 					</td>
 					<td>
-						{{ form_widget(form.poids) }}
+						{{ form_widget(form.numcarte) }}
 					</td>
 
 
 					<span style="font-size: 22px; ">
-						{{ form_errors(form.poids) }}
+						{{ form_errors(form.numcarte) }}
 					</span>
 
 
 				</tr>
 				<br>
-					<tr></tr>
+					
 					<tr>
 						<td>
-							{{ form_label(form.typeColis,"Type") }}
+							{{ form_label(form.mois,"Mois Exp") }}
 						</td>
 						<td>
-							{{ form_widget(form.typeColis)}}
+							{{ form_widget(form.mois)}}
 						</td>
 						<td>
-							{{ form_errors(form.typeColis) }}
+							{{ form_errors(form.mois) }}
 						</td>
 					</tr>
 					<br>
@@ -105,13 +133,13 @@
 
 					<tr>
 						<td>
-							{{ form_label(form.lieuDepart,"Lieu Départ") }}
+							{{ form_label(form.annee,"Annee Exp") }}
 						</td>
 						<td>
-							{{ form_widget(form.lieuDepart)}}
+							{{ form_widget(form.annee)}}
 						</td>
 						<td>
-							{{ form_errors(form.lieuDepart) }}
+							{{ form_errors(form.annee) }}
 						</td>
 					</tr>
 					<br>
@@ -119,62 +147,33 @@
 
 					<tr>
 						<td>
-							{{ form_label(form.lieuArrive,"Lieu Arrivé") }}
+							{{ form_label(form.cvc,"CVC") }}
 						</td>
 						<td>
-							{{ form_widget(form.lieuArrive)}}
+							{{ form_widget(form.cvc)}}
 						</td>
 						<td>
-							{{ form_errors(form.lieuArrive) }}
+							{{ form_errors(form.cvc) }}
 						</td>
 					</tr>
 					<br>
 
-					<tr>
-						<td>
-							{{ form_label(form.prix,"Prix") }}
-						</td>
-						<td>
-							{{ form_widget(form.prix, {'attr': {'readonly': true}}) }}
-						</td>
+					
 
-						
-
-					</tr>
-					<br>
-
-				</tr>
 				<br>
 
 
 				<tr>
-					<td colspan="2">{{ form_widget(form.Ajouter, {'attr': {'style': 'font-size: 18px; padding: 15px 20px; margin-left: 130px; margin-top: 10px;'}}
+					<td colspan="2">{{ form_widget(form.Payer, {'attr': {'style': 'font-size: 18px; padding: 15px 20px; margin-left: 130px; margin-top: 10px;'}}
 						) }}</td>
 				</tr>
 			</table>
 
 
-			{{form_end(form)}}
-		{% endblock %}
+			{{form_end(form)}} #}
+		{# {% endblock %} #}
 
-<script>
-    var poidsField = document.getElementById('{{ form.poids.vars.id }}');
-    var prixField = document.getElementById('{{ form.prix.vars.id }}');
 
-    poidsField.addEventListener('input', function () {
-        var poidsValue = parseFloat(poidsField.value) || 0;
-        var prixValue = 0;
-        if (poidsValue === 0) {
-            prixField.value = '0.00 DT';
-        } else if (poidsValue > 0 && poidsValue <= 1) {
-            prixValue = 7;
-            prixField.value = prixValue.toFixed(2);
-        } else {
-            prixValue = poidsValue * 7;
-            prixField.value = prixValue.toFixed(2);
-        }
-    });
-</script>
 
 
 	{% endblock %}

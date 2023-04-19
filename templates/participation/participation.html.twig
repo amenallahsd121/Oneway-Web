@@ -1,0 +1,60 @@
+{% extends 'backbase.html.twig' %}
+
+
+{% block title %}
+	Participation
+{% endblock %}
+
+
+{% block body %}
+
+
+
+	 <div class="row ">
+            <div class="col-12 grid-margin">
+              <div class="card">
+                <div class="card-body">
+
+               
+
+                  <div class="table-responsive">
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th> id_participation </th>
+                          <th> id_user </th>
+                          <th> id Event </th>
+                         
+                         
+                        </tr>
+                      </thead>
+
+                      {% for data in list %}
+                        <tr>
+                         
+                          <td> {{ data.idParticipation }} </td>
+                          <td> {{ data.id_user.name }} </td>
+                          
+                          <td> {{ data.id_event.nom }} </td>
+                         
+                       
+
+
+                      
+                          <td>
+                          
+  <a href="{{ path('delete_participation', {'ide': data.idParticipation}) }}" class="btn btn-outline-danger btn-fw;">Supprimer</a>
+</td>
+
+
+                        
+                        </tr> 
+                          
+                         {% endfor %}
+                       
+                         
+                
+
+{% endblock %}
+
+

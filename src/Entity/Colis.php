@@ -79,6 +79,7 @@ class Colis
         return $this->id_colis;
     }
 
+
     public function getPoids(): ?float
     {
         return $this->poids;
@@ -214,4 +215,26 @@ class Colis
 
     //     return $this;
     // }
+
+    public function getIdColiss(): ?Affectationopcolis
+    {
+        return $this->id_coliss;
+    }
+
+    public function setIdColiss(?Affectationopcolis $id_coliss): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($id_coliss === null && $this->id_coliss !== null) {
+            $this->id_coliss->setIdColis(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($id_coliss !== null && $id_coliss->getIdColis() !== $this) {
+            $id_coliss->setIdColis($this);
+        }
+
+        $this->id_coliss = $id_coliss;
+
+        return $this;
+    }
 }

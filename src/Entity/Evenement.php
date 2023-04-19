@@ -3,8 +3,10 @@
 namespace App\Entity;
 use App\Repository\EvenementRepository;
 use App\Entity\Participation;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
+use Symfony\Component\Validator\Constraints as Assert;
 
 
 
@@ -27,21 +29,34 @@ class Evenement
 
 
     #[ORM\Column(length:50)]
+    #[Assert\NotBlank(message: "Tu dois saisir le nom")]
     private ?string $nom = null ;
 
     #[ORM\Column(length:50)]
+    #[Assert\NotBlank(message: "Tu dois saisir la description")]  
     private ?string $description = null ;
    
 
-    #[ORM\Column(length:50)]
-    private ?string $dateDebutEvent = null ;
+    #[ORM\Column(type: "date")]
+    #[Assert\NotBlank(message: "Tu dois saisir la date debut de l'event")]
+    #[Assert\GreaterThanOrEqual("today", message: "La date doit être postérieure ou égale à aujourd'hui")]
+    private ?\DateTimeInterface $dateDebutEvent = null;
  
 
-    #[ORM\Column(length:50)]
-    private ?string $dateFinEvent = null ;
+
+    #[ORM\Column(type: "date")]
+    #[Assert\NotBlank(message: "Tu dois saisir la date de fin")]
+    #[Assert\GreaterThanOrEqual(propertyPath: "dateDebutEvent", message: "La date doit être postérieure ou égale à la date debut de l'event")]
+    private ?\DateTimeInterface $dateFinEvent = null;
+
+
+
 
     #[ORM\Column(length:50)]
+    #[Assert\NotBlank(message: "Tu dois saisir Awards")]
     private ?string $awards = null ;
+    
+
     
     #[ORM\OneToOne(targetEntity: Participation::class, mappedBy: 'id_event')]
     private $Participation;
@@ -81,29 +96,7 @@ class Evenement
         return $this;
     }
 
-    public function getDateDebutEvent(): ?string
-    {
-        return $this->dateDebutEvent;
-    }
-
-    public function setDateDebutEvent(string $dateDebutEvent): self
-    {
-        $this->dateDebutEvent = $dateDebutEvent;
-
-        return $this;
-    }
-
-    public function getDateFinEvent(): ?string
-    {
-        return $this->dateFinEvent;
-    }
-
-    public function setDateFinEvent(string $dateFinEvent): self
-    {
-        $this->dateFinEvent = $dateFinEvent;
-
-        return $this;
-    }
+    
 
     public function getAwards(): ?string
     {
@@ -136,6 +129,30 @@ class Evenement
         $this->Participation = $Participation;
 
         return $this;
+    }
+
+    public function getDateDebutEvent(): ?\DateTimeInterface
+    {
+        return $this->dateDebutEvent;
+    }
+
+    public function setDateDebutEvent(\DateTimeInterface $dateDebutEvent): void
+    {
+        $this->dateDebutEvent = $dateDebutEvent;
+
+        
+    }
+
+    public function getDateFinEvent(): ?\DateTimeInterface
+    {
+        return $this->dateFinEvent;
+    }
+
+    public function setDateFinEvent(\DateTimeInterface $dateFinEvent): void
+    {
+        $this->dateFinEvent = $dateFinEvent;
+
+       
     }
 
 }

@@ -38,7 +38,7 @@
 					<div class="col-lg-4 col-md-6 col-sm-6">
 						<div class="single-cat text-center mb-50">
 							<div class="cat-icon">
-								<span class="fas fa-calendar-alt"></span>
+								<span class="fas fa-handshake"></span>
 							</div>
 							<div class="cat-cap">
 								<h5>
@@ -71,24 +71,10 @@
  
 
 
-{# {{form_start(form,{'attr': {'novalidate': 'novalidate'}}
-			)}}
 
 
-                                    <p style="font-size: 22px; color: white;">
-									 Selectionne colis :
-									{{ form_label(form.joinColis,"Colis") }}
-						
-						        	{{ form_widget(form.joinColis)}}
-					
-					         		{{ form_errors(form.joinColis) }}
-                                    </p>
 
-                                    
-{{form_end(form)}} #}
-
-
-								 {# {% if data.idOpp is null %}  #}
+								 {% if data.Affectationopcolis is null %} 
                                 <p style="font-size: 22px; color: white;">
 											Affecter votre Colis Maintenant :
 										</p>
@@ -98,14 +84,14 @@
 
 									</a>
 
-								 {# {% else %}  #}
+								 {% else %} 
 <p style="font-size: 22px; color: white;">
 											Annuler Affectation :
 										</p>
-									<a href="{{ path('delete_affectation', {'ide': data.id_opp}) }}" class="btn btn-light" style="padding: 0.75rem 1rem; margin-left: 5px;">
+									<a href="{{ path('delete_affectation', {'idp': data.Affectationopcolis.id_aff}) }}" class="btn btn-light" style="padding: 0.75rem 1rem; margin-left: 5px;">
 										<i class="bi bi-trash"></i>
 									</a>
-								{# {% endif %} #}
+								{% endif %}
 
 							</div>
 						</div>

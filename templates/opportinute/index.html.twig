@@ -38,22 +38,23 @@
                           <td> {{ data.date|date("m/d/Y") }} </td>
                          
                           <td> {{ data.depart }} </td>
-                          <td> {{ data.heurDepart }} </td>
+                          <td>{{ data.heurDepart|number_format(2, '.', '') }}</td>
                           <td> {{ data.arrivee }} </td>
-                          <td> {{ data.heurArrivee }} </td>
+                         
+                           <td>{{ data.heurArrivee|number_format(2, '.', '') }}</td>
                           <td> {{ data.description }} </td>
                        
 
 
                       
                           <td>
-  <a href="{{ path('delete_opportinute', {'id': data.idOpp}) }}" class="btn btn-outline-danger btn-fw;">Supprimer</a>
+  <a href="{{ path('delete_opportinute', {'id': data.id_opp}) }}" class="btn btn-outline-danger btn-fw;">Supprimer</a>
   {# {{ path('delete_opportunite', {'id': data.idOpp}) }} #}
 </td>
 
 
                           <td>
-                             <a href="{{ path('update_opportinute', {'id': data.idOpp}) }}"   class="btn btn-outline-warning btn-fw;"> Modifier</a>
+                             <a href="{{ path('update_opportinute', {'id': data.id_opp}) }}"   class="btn btn-outline-warning btn-fw;"> Modifier</a>
                           </td>
                         </tr> 
                           

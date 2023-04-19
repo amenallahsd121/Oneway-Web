@@ -6,7 +6,9 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\Affectationopcolis;
 use App\Repository\OpportinuteRepository;
+use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Constraints\Date;
 
 
@@ -23,32 +25,53 @@ class Opportinute
    
 
     #[ORM\Column(type: "date")]
+    #[Assert\NotBlank(message: "Tu dois saisir la date d'opportunite")]
+    #[Assert\GreaterThanOrEqual("today", message: "La date doit être postérieure ou égale à aujourd'hui")]
     private ?\DateTimeInterface $date = null;
+    
+   
     
 
     #[ORM\Column(length:50)]
+    #[Assert\NotBlank(message: "Tu dois saisir le depart")]
     private ?string $depart = null ;
     
 
     #[ORM\Column(length:50)]
+    #[Assert\NotBlank(message: "Tu dois saisir l'heur depart")]
+    #[Assert\Regex(
+        pattern: "/^(0[0-9]|1[0-9]|2[0-3])\.([0-5][0-9])$/",
+        message: "The hour format should be HH.MM"
+    )]
     private ?float $heurDepart = null ;
     
 
     #[ORM\Column(length:50)]
+    #[Assert\NotBlank(message: "Tu dois saisir l'arrivee'")]
     private ?string $arrivee = null ;
    
 
     #[ORM\Column(length:50)]
+    #[Assert\NotBlank(message: "Tu dois saisir l'heur arrivee")]
+    #[Assert\Regex(
+        pattern: "/^(0[0-9]|1[0-9]|2[0-3])\.([0-5][0-9])$/",
+        message: "The hour format should be HH.MM"
+    )]
     private ?float $heurArrivee = null ;
  
 
     #[ORM\Column(length:50)]
+    #[Assert\NotBlank(message: "Tu dois saisir la Description d'opportunite")]
     private ?string $description = null ;
 
 
-    
+    #[ORM\OneToOne(targetEntity: Affectationopcolis::class, mappedBy: 'id_opp')]
+    private $Affectationopcolis;
 
    
+    
+
+    
     
 
     public function getId_Opp(): ?int
@@ -128,35 +151,34 @@ class Opportinute
         $this->date = $date;
     }
 
-    // /**
-    //  * @return Collection<int, Affectationopcolis>
-    //  */
-    // public function getAffectationopcolis(): Collection
-    // {
-    //     return $this->affectationopcolis;
-    // }
+  
 
-    // public function addAffectationopcoli(Affectationopcolis $affectationopcoli): self
-    // {
-    //     if (!$this->affectationopcolis->contains($affectationopcoli)) {
-    //         $this->affectationopcolis->add($affectationopcoli);
-    //         $affectationopcoli->setRelation($this);
-    //     }
+    public function getIdOpp(): ?int
+    {
+        return $this->id_opp;
+    }
 
-    //     return $this;
-    // }
+    public function getAffectationopcolis(): ?Affectationopcolis
+    {
+        return $this->Affectationopcolis;
+    }
 
-    // public function removeAffectationopcoli(Affectationopcolis $affectationopcoli): self
-    // {
-    //     if ($this->affectationopcolis->removeElement($affectationopcoli)) {
-    //         // set the owning side to null (unless already changed)
-    //         if ($affectationopcoli->getRelation() === $this) {
-    //             $affectationopcoli->setRelation(null);
-    //         }
-    //     }
+    public function setAffectationopcolis(?Affectationopcolis $Affectationopcolis): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($Affectationopcolis === null && $this->Affectationopcolis !== null) {
+            $this->Affectationopcolis->setIdOpp(null);
+        }
 
-    //     return $this;
-    // }
+        // set the owning side of the relation if necessary
+        if ($Affectationopcolis !== null && $Affectationopcolis->getIdOpp() !== $this) {
+            $Affectationopcolis->setIdOpp($this);
+        }
+
+        $this->Affectationopcolis = $Affectationopcolis;
+
+        return $this;
+    }
 
 
 }

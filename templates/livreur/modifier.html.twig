@@ -2,7 +2,7 @@
 
 
 {% block title %}
-	Ajouter Livreur
+	Modifier Livreur
 {% endblock %}
 
 
@@ -14,13 +14,14 @@
 <div class="col-12 grid-margin stretch-card">
   <div class="card">
     <div class="card-body">
-      <h4 class="card-title">Ajouter Livreur</h4>
+      <h4 class="card-title">Modifier Livreur</h4>
       <p class="card-description">Veuillez saisir les details de Livreur :</p>
 
       <form class="forms-sample">
         <div class="form-group mt-3">
           {{ form_label(form.cinLivreur, "CIN") }}
           {{ form_widget(form.cinLivreur, {'attr': {'class': 'form-control'}}) }}
+          
           {{ form_errors(form.cinLivreur) }}
         </div>
 
@@ -45,6 +46,8 @@
           
         <div class="form-group mt-3">
           {{ form_widget(form.Ajouter) }}
+           
+
 
 
         <a href="{{ path ('app_livreur') }}" class="btn btn-dark">Annuler</a>

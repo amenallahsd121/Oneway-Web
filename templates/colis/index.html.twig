@@ -14,8 +14,6 @@
 		body {
 			background-color: #000c20;
 		}
-
-		
 	</style>
 
 	<div class="categories-area section-padding30">
@@ -65,12 +63,25 @@
 									Lieu Arrivé :
 									{{ data.lieuArrive }}</p>
 
-								<a href="{{ path('delete_colis', {'id': data.idColis}) }}" class="btn btn-light" style="padding: 0.75rem 1rem;">
-									<i class="bi bi-trash"></i>
-								</a>
-								<a href="{{ path('update_colis', {'id': data.idColis}) }}" class="btn btn-light" style="padding: 0.75rem 1rem; margin-left: 10px;">
-									<i class="bi bi-arrow-clockwise"></i>
-								</a>
+								{% if '.' in data.typeColis %}
+									<a href="{{ path('delete_colis', {'id': data.idColis}) }}" class="btn btn-light" style="padding: 0.75rem 1rem;">
+										<i class="bi bi-trash"></i>
+									</a>
+
+								{% else %}
+
+									<a href="{{ path('delete_colis', {'id': data.idColis}) }}" class="btn btn-light" style="padding: 0.75rem 1rem;">
+										<i class="bi bi-trash"></i>
+									</a>
+									<a href="{{ path('update_colis', {'id': data.idColis}) }}" class="btn btn-light" style="padding: 0.75rem 1rem; margin-left: 10px;">
+										<i class="bi bi-arrow-clockwise"></i>
+									</a>
+									<a href="{{ path('checkout' , {'id': data.idColis}) }}" class="btn btn-light" style="padding: 0.75rem 1rem; margin-left: 10px;">
+										<i class="bi bi-credit-card"></i>
+									</a>
+
+
+								{% endif %}
 
 
 							</div>

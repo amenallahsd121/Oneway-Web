@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Payment Fail!
+{% endblock %}
+
+
+{% block body %}
+	{{ parent() }}
+	<style>
+		body {
+			background-color: #000c20;
+		}
+		h1,
+		p {
+			color: white;
+			font-size: 32px;
+			text-align: center;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+		}
+         p {
+            margin-top: 50px;
+        }
+	</style>
+
+	<h1>Paiement Annulé!</h1>
+	<p>
+		A la Prochaine
+	</p>
+
+{% endblock %}

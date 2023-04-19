@@ -83,7 +83,7 @@ class ColisType extends AbstractType
 
             ])
 
-            ->add('Payer', SubmitType::class);
+            ->add('Ajouter', SubmitType::class);
 
     }
 

@@ -25,6 +25,15 @@ class ParticipationController extends AbstractController
     }
 
 
+    #[Route('/participation', name: 'app_participation')]
+    public function indexparticipation(): Response
+    {
+        $data = $this->getDoctrine()->getRepository(Participation::class)->findAll();
+        return $this->render('\participation\participation.html.twig', [
+            'list' => $data   
+        ]);
+    }
+
 
 
     #[Route('/participation/evenement', name: 'app_participation_evenement')]
@@ -78,7 +87,7 @@ class ParticipationController extends AbstractController
         
           
         
-              return $this->redirectToRoute('app_participation_evenement');
+              return $this->redirectToRoute('app_participation');
           }
 
 
