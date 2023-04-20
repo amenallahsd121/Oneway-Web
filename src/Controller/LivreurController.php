@@ -2,13 +2,14 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Livreur;
 use App\Form\LivreurType;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 
 class LivreurController extends AbstractController
@@ -92,4 +93,31 @@ class LivreurController extends AbstractController
 
         return $this->redirectToRoute('app_livreur');
     }
-}
+
+
+
+    #[Route('/livreur/search', name: 'search_livreur')]
+    public function search(Request $req)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $list = $this->getDoctrine()->getRepository(Livreur::class)->findAll();                             
+    
+        if ($req->isMethod('POST')) {
+            $CIN = $req->request->get('CIN');
+            $data = $this->getDoctrine()->getRepository(Livreur::class)->findBy(['cinLivreur' => $CIN]);
+        }
+    
+        return $this->render('livreur/index.html.twig', ['list' => $data]);
+    }
+
+
+    
+
+
+
+    }
+    
+    
+
+
+
