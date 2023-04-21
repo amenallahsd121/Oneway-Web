@@ -144,7 +144,10 @@ class Colis
     {
         return $this->id_client;
     }
-
+    public function getId_client(): ?Utilisateur
+    {
+        return $this->id_client;
+    }
     public function setUtilisateur(?Utilisateur $id_client): self
     {
         $this->id_client = $id_client;

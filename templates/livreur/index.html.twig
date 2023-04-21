@@ -7,14 +7,13 @@
 
 
 {% block body %}
-<style>
-    .my-class {
-  color: red;
-  font-size: 18px;
-  text-align: center;
-}
-
-    </style>
+	<style>
+		.my-class {
+			color: red;
+			font-size: 18px;
+			text-align: center;
+		}
+	</style>
 
 	<div class="row">
 		<div class="col-12 grid-margin">
@@ -25,7 +24,7 @@
 					<form action="{{ path('search_livreur') }}" method="post" style="margin-top: 35px;">
 						<div class="form-group">
 							<div class="input-group">
-								<input type="text" name="CIN" class="form-control" id="searchField" placeholder="Entrez N° CIN du livreur">
+								<input type="text" name="CIN" class="form-control" id="searchField" placeholder="Entrez N° CIN du livreur" style="outline: none;color: #fff; ">
 								<div class="input-group-append">
 									<button class="btn btn-primary" type="submit" id="searchButton">Rechercher</button>
 								</div>
@@ -96,7 +95,6 @@
 								{% endfor %}
 							{% else %}
 								<p class="my-class">Aucun livreur ne correspond à votre recherche</p>
-
 
 
 							{% endif %}

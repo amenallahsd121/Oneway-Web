@@ -18,30 +18,29 @@
       <p class="card-description">Veuillez saisir les details de Livreur :</p>
 
       <form class="forms-sample">
-        <div class="form-group mt-3">
-          {{ form_label(form.cinLivreur, "CIN") }}
-          {{ form_widget(form.cinLivreur, {'attr': {'class': 'form-control'}}) }}
-          
-          {{ form_errors(form.cinLivreur) }}
-        </div>
+       <div class="form-group mt-3">
+						{{ form_label(form.cinLivreur, "CIN", {'attr': {'style': 'color: #fff;' }}) }}
+						{{ form_widget(form.cinLivreur, {'attr': {'class': 'form-control', 'style': 'color: #fff;' }}) }}
+						{{ form_errors(form.cinLivreur) }}
+					</div>
 
-        <div class="form-group mt-3">
-          {{ form_label(form.prenom, "Prenom") }}
-          {{ form_widget(form.prenom, {'attr': {'class': 'form-control'}}) }}
-          {{ form_errors(form.prenom) }}
-        </div>
+					<div class="form-group mt-3">
+						{{ form_label(form.prenom, "Prenom", {'attr': {'style': 'outline: none;color: #fff;'}}) }}
+						{{ form_widget(form.prenom, {'attr': {'class': 'form-control', 'style': 'color: #fff;' }}) }}
+						{{ form_errors(form.prenom) }}
+					</div>
 
-        <div class="form-group mt-3">
-          {{ form_label(form.nom, "Nom") }}
-          {{ form_widget(form.nom, {'attr': {'class': 'form-control'}}) }}
-          {{ form_errors(form.nom) }}
-        </div>
+					<div class="form-group mt-3">
+						{{ form_label(form.nom, "Nom", {'attr': {'style': 'outline: none;color: #fff;'}}) }}
+						{{ form_widget(form.nom, {'attr': {'class': 'form-control', 'style': 'color: #fff;' }}) }}
+						{{ form_errors(form.nom) }}
+					</div>
 
-        <div class="form-group mt-3">
-          {{ form_label(form.vehicule, "Véhicule") }}
-          {{ form_widget(form.vehicule, {'attr': {'class': 'form-control'}}) }}
-          {{ form_errors(form.vehicule) }}
-        </div>
+					<div class="form-group mt-3">
+						{{ form_label(form.vehicule, "Véhicule", {'attr': {'style': 'outline: none;color: #fff;'}}) }}
+						{{ form_widget(form.vehicule, {'attr': {'class': 'form-control', 'style': 'color: #fff;' }}) }}
+						{{ form_errors(form.vehicule) }}
+					</div>
 
           
         <div class="form-group mt-3">
