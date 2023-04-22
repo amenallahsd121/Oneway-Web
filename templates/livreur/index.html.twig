@@ -21,81 +21,69 @@
 				<div class="card-body">
 					<h4 class="card-title">Liste des Livreurs<a href="{{ path ('add_livreur') }}" class="btn btn-success btn-fw float-right">Ajouter Livreur</a>
 					</h4>
-					<form action="{{ path('search_livreur') }}" method="post" style="margin-top: 35px;">
-						<div class="form-group">
-							<div class="input-group">
-								<input type="text" name="CIN" class="form-control" id="searchField" placeholder="Entrez N° CIN du livreur" style="outline: none;color: #fff; ">
-								<div class="input-group-append">
-									<button class="btn btn-primary" type="submit" id="searchButton">Rechercher</button>
+
+					<div class="table-responsive">
+						<table class="table" id="table_id">
+							<thead>
+								<tr>
+									<th>N ° CIN</th>
+									<th>Prénom</th>
+									<th>Nom</th>
+									<th>Véhicule</th>
+									<th>Suppression</th>
+									<th>Modification</th>
+								</tr>
+							</thead>
+
+
+							<form>
+								<div class="form-group">
+									<label for="searchInput">Recherche Par Livreur :</label>
+									<input type="text" class="form-control" id="searchInput" placeholder="Enter name">
 								</div>
-							</div>
-						</div>
-					</form>
+							</form>
+							
 
 
-					{% if list is not empty %}
-
-
-						<div class="table-responsive">
-							<table class="table">
-								<thead>
-									<tr>
-										<th>
-											CIN
-										</th>
-										<th>
-											Prénom
-										</th>
-										<th>
-											Nom
-										</th>
-										<th>
-											Véhicule
-										</th>
-										<th>
-											Suppression
-										</th>
-										<th>
-											Modification
-										</th>
-									</tr>
-								</thead>
-
-
+							<tbody>
 								{% for data in list %}
-
 									<tr>
-
-										<td>
-											{{ data.cinLivreur }}
-										</td>
-										<td>
-											{{ data.prenom }}
-										</td>
-										<td>
-											{{ data.nom }}
-										</td>
-										<td>
-											{{ data.vehicule }}
-										</td>
-
-
+										<td>{{ data.cinLivreur }}</td>
+										<td>{{ data.prenom }}</td>
+										<td>{{ data.nom }}</td>
+										<td>{{ data.vehicule }}</td>
 										<td>
 											<a href="{{ path('delete_livreur', {'id': data.idLivreur}) }}" class="btn btn-outline-danger btn-fw;">Supprimer</a>
 										</td>
-
-
 										<td>
-											<a href="{{ path('update_livreur', {'id': data.idLivreur}) }}" class="btn btn-outline-warning btn-fw;">
-												Modifier</a>
+											<a href="{{ path('update_livreur', {'id': data.idLivreur}) }}" class="btn btn-outline-warning btn-fw;">Modifier</a>
 										</td>
 									</tr>
+									
+						<script>
+	$(document).ready(function () {
+		$('#searchInput').on('input', function () {
+			var name = $(this).val();
+			$.get('{{ path('livreur_search') }}', {
+				name: name
+			}, function (data) {
+				var resultsHtml = '';
+				for (var i = 0; i < data.length; i++) {
+					resultsHtml += '<a href="{{ path('app_livreur', {'id': data.idLivreur}) }}">' + data.nom + ' ' + data.prenom + '</a><br>';
 
+				}
+				$('#searchResults').html(resultsHtml);
+			});
+		});
+	});
+</script>
 
 								{% endfor %}
-							{% else %}
-								<p class="my-class">Aucun livreur ne correspond à votre recherche</p>
+							</tbody>
+						</table>
 
 
-							{% endif %}
-						{% endblock %}
+					</div>
+
+
+				{% endblock %}

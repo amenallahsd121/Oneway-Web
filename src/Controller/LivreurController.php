@@ -4,16 +4,36 @@ namespace App\Controller;
 
 use App\Entity\Livreur;
 use App\Form\LivreurType;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Yectep\Bundle\DatatableBundle\DataTable\DataTableFactory;
+
 
 
 class LivreurController extends AbstractController
 {
+
+
+
+    private $em;
+
+    public function __construct(EntityManagerInterface $em)
+    {
+        $this->em = $em;
+       
+    }
+
+
+
+
+
+
+
     #[Route('/livreur', name: 'app_livreur')]
     public function index(): Response
     {
@@ -96,23 +116,25 @@ class LivreurController extends AbstractController
 
 
 
-    #[Route('/livreur/search', name: 'search_livreur')]
-    public function search(Request $req)
-    {
-        $em = $this->getDoctrine()->getManager();
-        $list = $this->getDoctrine()->getRepository(Livreur::class)->findAll();                             
-    
-        if ($req->isMethod('POST')) {
-            $CIN = $req->request->get('CIN');
-            $data = $this->getDoctrine()->getRepository(Livreur::class)->findBy(['cinLivreur' => $CIN]);
-        }
-    
-        return $this->render('livreur/index.html.twig', ['list' => $data]);
+
+    #[Route('/livreur/search', name: 'livreur_search')]
+    public function searchLivreurAction(Request $request)
+{
+    $name = $request->request->get('search_input');
+    $livreurs = $this->getDoctrine()->getRepository(Livreur::class)->findBy(['name' => $name]);
+
+    $livreurArray = [];
+    foreach ($livreurs as $livreur) {
+        $livreurArray[] = [
+            'id' => $livreur->getId(),
+            'nom' => $livreur->getLastname(),
+            'prenom' => $livreur->getName(),
+            
+        ];
     }
 
-
-    
-
+    return new JsonResponse($livreurArray);
+}
 
 
     }
