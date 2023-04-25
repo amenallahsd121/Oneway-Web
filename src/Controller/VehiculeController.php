@@ -7,16 +7,35 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Vehicule;
+use App\Entity\Maintenance;
 use App\Form\VehiculeType;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
 use SebastianBergmann\Environment\Console;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Endroid\QrCode\Encoding\Encoding;
+use Endroid\QrCode\Builder\BuilderInterface;
+use Endroid\QrCode\Builder\Builder;
+use Endroid\QrCode\Builder\BuilderRegistryInterface;
+use Endroid\QrCode\ErrorCorrectionLevel;
+use Endroid\QrCode\LabelAlignment;
+use Endroid\QrCode\QrCode;
+use Endroid\QrCodeBundle\Response\QrCodeResponse;
 
 
 class VehiculeController extends AbstractController
 {
+    private $entityManager;
+    private $customQrCodeBuilder;
+    
+    public function __construct(EntityManagerInterface $entityManager, BuilderInterface $customQrCodeBuilder)
+    {
+        $this->entityManager = $entityManager;
+        $this->customQrCodeBuilder = $customQrCodeBuilder;
+    }
+
+
     #[Route('/vehicule', name: 'app_vehicule')]
     public function index(Request $request): Response
     {
@@ -101,4 +120,25 @@ class VehiculeController extends AbstractController
 
         return $this->redirectToRoute('app_vehicule');
     }
+
+     
+    #[Route('vehicule/qrcode/{id}', name: 'qrcode')]
+    public function qrcode(BuilderInterface $customQrCodeBuilder , $id ): Response
+    {
+        $vehicule = $this->entityManager->getRepository(Vehicule::class)->find($id);
+        $matricule = $vehicule->getMatricule();
+        $marque = $vehicule->getMarque();
+        $idCategorie = $vehicule->getIdCategorie();
+        $categorie = $idCategorie->getType();
+        
+    
+        $qrCode = $this->customQrCodeBuilder
+            ->size(400)
+            ->margin(20)
+            ->data('Les details de votre vehicule sont   : ' . $matricule . $marque . $categorie)
+            ->build();
+    
+        return new QrCodeResponse($qrCode);
+    } 
+    
 }

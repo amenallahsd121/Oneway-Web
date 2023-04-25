@@ -9,7 +9,8 @@
 {% block body %}
 
 
-{{ form_start(form) }}
+{{form_start(form,{'attr': {'novalidate': 'novalidate'}}
+			)}}
 
 <div class="col-12 grid-margin stretch-card">
   <div class="card">
