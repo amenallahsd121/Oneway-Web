@@ -27,7 +27,7 @@ class Vehicule
     #[Assert\NotBlank(message: "Remplir vos champs")]
     #[Assert\Regex(
         pattern: '/^([0-9]+TUN[0-9]+)$/',
-        message: "Le nom du livreur doit contenir des caractères alphabétiques uniquement."
+        message: "la matricule doit contenur des numéro et des lettres ."
     )]
     private ?string $matricule = null ;
 

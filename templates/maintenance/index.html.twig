@@ -28,6 +28,7 @@
                           
                           <th> Suppression </th>
                           <th> Modification </th>
+                          <th> Excel </th>
                         </tr>
                       </thead>
 
@@ -49,6 +50,10 @@
 
                           <td>
                              <a href="{{ path('update_maintenance', {'id': data.idMaintenance}) }}"  class="btn btn-outline-warning btn-fw;"> Modifier</a>
+                          </td> 
+                          <td>
+                            <a href="{{ path('excel_maintenance', {'id': data.idMaintenance}) }}">Exporter au format Excel</a>
+
                           </td> 
                         </tr>
                           
