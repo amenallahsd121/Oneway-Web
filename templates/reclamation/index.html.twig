@@ -21,7 +21,37 @@
 		p {
 			margin-top: 3rem; /* Add a 1-rem margin to the top of the title and description elements */
 		}
+
+		.pagination a {
+			display: inline-block;
+			padding: 15px 30px;
+			margin-right: 5px;
+			color: #fff;
+			background-color: #37434f;
+			border-radius: 5px;
+			text-decoration: none;
+			font-weight: bold;
+			font-size: 15px; /* add font size */
+			text-align: center; /* center the text */
+		}
+
+		.pagination {
+			display: flex;
+			justify-content: center;
+			margin-top: 50px;
+			align-items: center; /* center vertically */
+		}
+
+		.pagination a:hover {
+			background-color: #3d5466;
+		}
+
+		.pagination .active {
+			background-color: #fff;
+			color: #000c20;
+		}
 	</style>
+
 
 	<div class="categories-area section-padding30">
 		<div class="container">
@@ -67,18 +97,29 @@
 								Text Réponse:
 								{% if data.reponse is null %}
 									En Cours
+
 								{% else %}
 									{{ data.reponse.text_rep }}
 								{% endif %}
 							</p>
 
 
-							<a href="{{ path('delete_reclamation', {'id': data.id_reclamation}) }}" class="btn btn-light" style="padding: 0.75rem 1rem;">
-								<i class="bi bi-trash"></i>
-							</a>
-							<a href="{{ path('update_reclamation', {'id': data.id_reclamation}) }}" class="btn btn-light" style="padding: 0.75rem 1rem; margin-left: 10px;">
-								<i class="bi bi-arrow-clockwise"></i>
-							</a>
+							{% if data.reponse is null %}
+
+								<a href="{{ path('delete_reclamation', {'id': data.id_reclamation}) }}" class="btn btn-light" style="padding: 0.75rem 1rem;">
+									<i class="bi bi-trash"></i>
+								</a>
+								<a href="{{ path('update_reclamation', {'id': data.id_reclamation}) }}" class="btn btn-light" style="padding: 0.75rem 1rem; margin-left: 10px;">
+									<i class="bi bi-arrow-clockwise"></i>
+								</a>
+
+
+							{% else %}
+								<a href="{{ path('app_pdfr', {'id': data.id_reclamation}) }}" class="btn btn-light" style="padding: 0.75rem 1rem;">
+									<i class="bi bi-file-earmark-pdf"></i>
+								</a>
+
+							{% endif %}
 
 
 						</div>
@@ -87,5 +128,9 @@
 			{% endfor %}
 
 		</div>
+
+	</div>
+	<div class="pagination">
+		{{ knp_pagination_render(list) }}
 	</div>
 </div>{% endblock %}
