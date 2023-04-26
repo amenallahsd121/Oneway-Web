@@ -155,4 +155,9 @@ class Evenement
        
     }
 
+    public function __toString()
+    {
+        return (string)  $this->nom .''. $this->description . ''. $this->awards ;
+    }  
+
 }

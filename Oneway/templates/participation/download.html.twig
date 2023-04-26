@@ -1,0 +1,37 @@
+{% extends 'base-pdf.html.twig' %}
+
+
+
+
+{% block body %}
+{% for data in list %}
+
+    <h1>Liste des données de {{data.nom}} </h1>
+    <h2>les données</h2>
+    <table border=1>
+        <thead>
+            <tr>
+                         <th >Nom</th>
+                          <th>Description</th>
+                          <th >date debut </th>
+                          <th> date fin </th>
+                          <th> awards </th>
+                      
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ data.nom }}</td>
+                <td>{{ data.description }}</td>
+                <td>{{ data.dateDebutEvent|date("m/d/Y")  }}</td>
+                <td>{{ data.dateFinEvent|date("m/d/Y")  }}</td>
+                <td>{{ data.awards }}</td>
+            </tr>
+        </tbody>
+    </table>
+  
+    
+
+
+    {% endfor %}
+{% endblock %}

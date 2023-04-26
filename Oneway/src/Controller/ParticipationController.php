@@ -2,16 +2,22 @@
 
 namespace App\Controller;
 
+use Dompdf\Dompdf;
+use Dompdf\Options;
 use App\Entity\Evenement;
 use App\Entity\Utilisateur;
-use App\Entity\Participation;
 use App\Form\EvenementType;
+use App\Entity\Participation;
+use App\Repository\EvenementRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
+use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Contracts\EventDispatcher\Event;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Doctrine\ORM\EntityManagerInterface;
+
 
 class ParticipationController extends AbstractController
 {
@@ -26,9 +32,11 @@ class ParticipationController extends AbstractController
 
 
     #[Route('/participation', name: 'app_participation')]
-    public function indexparticipation(): Response
+    public function indexparticipation( ): Response
     {
         $data = $this->getDoctrine()->getRepository(Participation::class)->findAll();
+       
+
         return $this->render('\participation\participation.html.twig', [
             'list' => $data   
         ]);
@@ -37,11 +45,14 @@ class ParticipationController extends AbstractController
 
 
     #[Route('/participation/evenement', name: 'app_participation_evenement')]
-    public function index(): Response
+    public function index(EntityManagerInterface $entityManager, Request $request, PaginatorInterface $paginator): Response
     {
-        $data = $this->getDoctrine()->getRepository(Evenement::class)->findAll();
+        
+        $list= $entityManager->getRepository(Evenement::class)->findAll();
+        $pagination = $paginator->paginate( $list , $request->query->getInt('page', 1 ), 3);  
         return $this->render('\participation\index.html.twig', [
-            'list' => $data   
+            
+            'list' => $pagination
         ]);
        
     }
@@ -87,8 +98,73 @@ class ParticipationController extends AbstractController
         
           
         
-              return $this->redirectToRoute('app_participation');
+              return $this->redirectToRoute('app_participation_evenement');
           }
+          #[Route('/participationn/delete/{idt}', name: 'delete_participationn')]
+          public function delete2($idt) {
+           
+           
+             
+              $data = $this->getDoctrine()->getRepository(Participation::class)->find($idt); 
+          
+                $em = $this->getDoctrine()->getManager();
+                $em->remove($data);
+                $em->flush();
+          
+          
+            
+          
+                return $this->redirectToRoute('app_participation');
+            }
+
+            #[Route('/events/data', name: 'event_data')]
+    public function usersData()
+    {
+        return $this->render('evenement/data.html.twig');
+    }
+
+ 
+    #[Route('/events/data/download/{ident}', name: 'event_data_download')]
+    public function EvenDataDownload($ident)
+    {
+        $data = $this->getDoctrine()->getRepository(Evenement::class)->find($ident);
+        // On définit les options du PDF
+        $pdfOptions = new Options();
+        // Police par défaut
+        $pdfOptions->set('defaultFont', 'Arial');
+        $pdfOptions->setIsRemoteEnabled(true);
+
+        // On instancie Dompdf
+        $dompdf = new Dompdf($pdfOptions);
+        $context = stream_context_create([
+            'ssl' => [
+                'verify_peer' => FALSE,
+                'verify_peer_name' => FALSE,
+                'allow_self_signed' => TRUE
+            ]
+        ]);
+        $dompdf->setHttpContext($context);
+
+        // On génère le html
+        $html = $this->renderView('participation/download.html.twig' , [
+            'list' => $data   
+        ]);
+
+        $dompdf->loadHtml($html);
+        $dompdf->setPaper('A4', 'portrait');
+        $dompdf->render();
+
+        // On génère un nom de fichier
+        $fichier = 'Event-data-' .'.pdf';
+
+        // On envoie le PDF au navigateur
+        $dompdf->stream($fichier, [
+            'Attachment' => true
+        ]);
+
+        return new Response();
+    }
+
 
 
       

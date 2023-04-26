@@ -2,14 +2,18 @@
 
 namespace App\Controller;
 
+use Dompdf\Dompdf;
+use Dompdf\Options;
 use App\Entity\Evenement;
 use App\Form\EvenementType;
+use App\Repository\EvenementRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Doctrine\ORM\EntityManagerInterface;
 
 class EvenementController extends AbstractController
 {
@@ -29,11 +33,29 @@ class EvenementController extends AbstractController
 
 
     #[Route('/evenement', name: 'app_evenement')]
-    public function index(): Response
+    public function index(EntityManagerInterface $entityManager, Request $request, EvenementRepository $offreRepo, PaginatorInterface $paginator ): Response
     {
-        $data = $this->getDoctrine()->getRepository(Evenement::class)->findAll();
+        
+        
+        // $data = $this->getDoctrine()->getRepository(Evenement::class)->findAll();
+        $list= $entityManager->getRepository(Evenement::class)->findAll();
+        $pagination = $paginator->paginate( $list , $request->query->getInt('page', 1 ), 3);  
         return $this->render('\evenement\index.html.twig', [
-            'list' => $data   
+            
+            'list' => $pagination
+        ]);
+    }
+
+
+    #[Route('/qrcode/{id_event}', name: 'app_evenement_qrcode')]
+    public function index3( Evenement $evenements ): Response
+    {
+        
+        
+      
+        return $this->render('\evenement\data.html.twig', [
+            
+            'evenement' => $evenements
         ]);
     }
 
@@ -101,6 +123,8 @@ public function delete($id) {
       return $this->redirectToRoute('app_evenement');
   }
 
+  
+    
 
 
 }
