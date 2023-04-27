@@ -1,0 +1,81 @@
+{% extends 'backbase.html.twig' %}
+
+
+{% block title %}
+	Ajouter Reponse
+{% endblock %}
+
+
+{% block body %}
+
+
+	
+		<div class="card">
+			<div class="card-body">
+				<div class="chartjs-size-monitor">
+					<div class="chartjs-size-monitor-expand">
+						<div class=""></div>
+					</div>
+					<div class="chartjs-size-monitor-shrink">
+						<div class=""></div>
+					</div>
+				</div>
+				<h4 class="card-title">Statistiques</h4>
+                <a href="{{ path ('app_reclamation_reponse') }}" class="btn btn-success btn-fw float-right">Retour</a>
+				<canvas id="doughnutChart" style="height: 600px; width: 100%; margin: 0 auto;"></canvas>
+
+
+			</div>
+		</div>
+	
+
+ <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	<script>
+
+		// Get the canvas element
+var doughnutChart = document.getElementById('doughnutChart');
+
+// Parse the Sujets JSON data received from the server
+var sujetsData = JSON.parse('{{ Sujets | raw }}');
+
+// Create a new instance of the Chart object
+var myChart = new Chart(doughnutChart, {
+    type: 'doughnut',
+    data: {
+        labels: ['Service', 'Livreur', 'Retard de livraison', 'Autres'],
+        datasets: [{
+            label: '# of Reclamations',
+            data: sujetsData,
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(110, 800, 192, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(110, 800, 192, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        responsive: false,
+        plugins: {
+            legend: {
+                position: 'top',
+            },
+            title: {
+                display: true,
+                text: 'Reclamations Par Rapport au Subject'
+            }
+        }
+    }
+});
+
+
+	</script>
+
+{% endblock %}

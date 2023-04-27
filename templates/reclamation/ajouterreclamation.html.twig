@@ -113,7 +113,17 @@
 					<td colspan="2">{{ form_widget(form.Reclamer, {'attr': {'style': 'font-size: 18px; padding: 15px 20px; margin-left: 150px; margin-top: 10px;'}}
 						) }}</td>
 				</tr>
+
+
 			</table>
+
+			{% if app.session.flashBag.has('error') %}
+				<div class="alert alert-danger alert-custom" style="font-size: 20px; font-weight: bold;">
+					{% for message in app.session.flashBag.get('error') %}
+						{{ message }}
+					{% endfor %}
+				</div>
+			{% endif %}
 
 
 			{{form_end(form)}}

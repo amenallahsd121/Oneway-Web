@@ -17,6 +17,7 @@
 				<h4 class="card-title">Ajouter Livreur</h4>
 				<p class="card-description">Veuillez saisir les details de Livreur :</p>
 
+
 				<form class="forms-sample">
 					<div class="form-group mt-3">
 						{{ form_label(form.cinLivreur, "CIN", {'attr': {'style': 'color: #fff;' }}) }}
@@ -42,13 +43,11 @@
 						{{ form_errors(form.vehicule) }}
 					</div>
 
-
 					<div class="form-group mt-3">
 						{{ form_widget(form.Ajouter) }}
 
 
 						<a href="{{ path ('app_livreur') }}" class="btn btn-dark">Annuler</a>
-
 
 					</form>
 				</div>
@@ -56,5 +55,6 @@
 		</div>
 
 		{{ form_end(form) }}
+
 
 	{% endblock %}

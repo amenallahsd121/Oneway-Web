@@ -1,7 +1,7 @@
 {% extends 'backbase.html.twig' %}
 
 {% block title %}
-	Liste des Livreurs
+	Liste des Livraison non Affectées
 {% endblock %}
 
 {% block body %}
@@ -11,6 +11,9 @@
 				<div class="card-body">
 					<h4 class="card-title">Liste des Colis Non Affectés</h4>
 
+					<a href="#">
+						<i class="bi bi-file-earmark-pdf"></i>
+					</a>
 
 					<div class="table-responsive">
 						<table class="table">
@@ -26,14 +29,15 @@
 									<th>Etat</th>
 									<th>Suppression</th>
 									<th>Modification</th>
+									
 								</tr>
 							</thead>
 							{% for data in list %}
 
 								<tr>
-									<td>{{ data.colis.poids }}</td>
+									<td>{{ data.colis.poids }} Kg</td>
 									<td>{{ data.colis.typeColis }}</td>
-									<td>{{ data.colis.prix }}</td>
+									<td>{{ data.colis.prix }} DT </td>
 									<td>{{ data.colis.lieuDepart }}</td>
 									<td>{{ data.colis.lieuArrive }}</td>
 									<td>{{ data.livreur.prenom }}</td>
@@ -45,6 +49,7 @@
 									<td>
 										<a href="{{ path('update_livraison', {'id': data.idLivraison}) }}" class="btn btn-outline-warning btn-fw;">Modifier</a>
 									</td>
+								
 								</tr>
 
 							{% endfor %}

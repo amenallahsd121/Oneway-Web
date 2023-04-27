@@ -95,6 +95,18 @@ class Reclamation
         return $this;
     }
 
+    public function getId_User(): ?Utilisateur
+    {
+        return $this->id_user;
+    }
+
+    public function setId_User(?Utilisateur $id_user): self
+    {
+        $this->id_user = $id_user;
+
+        return $this;
+    }
+
     public function getIdReclamation(): ?int
     {
         return $this->id_reclamation;

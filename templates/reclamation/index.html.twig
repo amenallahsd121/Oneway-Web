@@ -6,72 +6,105 @@
 {% block body %}
 
 
-	<style>
+<style>
 
-		body {
-			background-color: #000c20;
-		}
+	body {
+		background-color: #000c20;
+	}
 
-		.note-icon {
-			font-size: 5rem; /* Set the font size to 2 times the default size */
-			color: white; /* Set the color to white */
-			margin-bottom: 1rem;
+	.note-icon {
+		font-size: 5rem; /* Set the font size to 2 times the default size */
+		color: white; /* Set the color to white */
+		margin-bottom: 1rem;
 
-		}
-		p {
-			margin-top: 3rem; /* Add a 1-rem margin to the top of the title and description elements */
-		}
-	</style>
+	}
+	p {
+		margin-top: 3rem; /* Add a 1-rem margin to the top of the title and description elements */
+	}
 
-	<div class="categories-area section-padding30">
-		<div class="container">
+	.pagination a {
+		display: inline-block;
+		padding: 15px 30px;
+		margin-right: 5px;
+		color: #fff;
+		background-color: #37434f;
+		border-radius: 5px;
+		text-decoration: none;
+		font-weight: bold;
+		font-size: 15px; /* add font size */
+		text-align: center; /* center the text */
+	}
 
-			<div class="row">
-				<div
-					class="col-lg-12">
-					<!-- Section Title -->
-					<div class="section-title text-center mb-80">
-						<h2 style="font-size: 32px; color: white; margin-top: -70px; margin-right: 10px;">Mes Reclamations</h>
+	.pagination {
+		display: flex;
+		justify-content: center;
+		margin-top: 50px;
+		align-items: center; /* center vertically */
+	}
+
+	.pagination a:hover {
+		background-color: #3d5466;
+	}
+
+	.pagination .active {
+		background-color: #fff;
+		color: #000c20;
+	}
+</style>
 
 
-					</div>
+<div class="categories-area section-padding30">
+	<div class="container">
+
+		<div class="row">
+			<div
+				class="col-lg-12">
+				<!-- Section Title -->
+				<div class="section-title text-center mb-80">
+					<h2 style="font-size: 32px; color: white; margin-top: -70px; margin-right: 10px;">Mes Reclamations</h>
+
+
 				</div>
 			</div>
+		</div>
 
-			<div class="row">
+		<div class="row">
 
-				{% for data in list %}
+			{% for data in list %}
 
-					<div class="col-lg-4 col-md-6 col-sm-6">
-						<div class="single-cat text-center mb-50">
-							<div class="cat-icon">
-								<span<i class="bi bi-sticky note-icon"></i>
-							</span>
-						</div>
-						<div class="cat-cap">
-							<h5>
-								<a style="font-size: 28px; color: white;  margin-top: 30px;">Détails de Reclamation :
-								</a>
-							</h5>
-							<p style="font-size: 22px; color: white;">
-								Sujet :
-								{{ data.sujet}}
-							</p>
-							<p style="font-size: 22px; color: white; max-height: 200px; overflow: auto; word-wrap: break-word;">
-								Text reclamation:
-								{{ data.text_rec }}
-							</p>
+				<div class="col-lg-4 col-md-6 col-sm-6">
+					<div class="single-cat text-center mb-50">
+						<div class="cat-icon">
+							<span<i class="bi bi-sticky note-icon"></i>
+						</span>
+					</div>
+					<div class="cat-cap">
+						<h5>
+							<a style="font-size: 28px; color: white;  margin-top: 30px;">Détails de Reclamation :
+							</a>
+						</h5>
+						<p style="font-size: 22px; color: white;">
+							Sujet :
+							{{ data.sujet}}
+						</p>
+						<p style="font-size: 22px; color: white; max-height: 200px; overflow: auto; word-wrap: break-word;">
+							Text reclamation:
+							{{ data.text_rec }}
+						</p>
 
 
-							<p style="font-size: 22px; color: white; max-height: 200px; overflow: auto; word-wrap: break-word;">
-								Text Réponse:
-								{% if data.reponse is null %}
-									En Cours
-								{% else %}
-									{{ data.reponse.text_rep }}
-								{% endif %}
-							</p>
+						<p style="font-size: 22px; color: white; max-height: 200px; overflow: auto; word-wrap: break-word;">
+							Text Réponse:
+							{% if data.reponse is null %}
+								En Cours
 
+							{% else %}
+								{{ data.reponse.text_rep }}
+							{% endif %}
+						</p>
+
+
+						{% if data.reponse is null %}
 
 							<a href="{{ path('delete_reclamation', {'id': data.id_reclamation}) }}" class="btn btn-light" style="padding: 0.75rem 1rem;">
 								<i class="bi bi-trash"></i>
@@ -81,11 +114,23 @@
 							</a>
 
 
-						</div>
+						{% else %}
+							<a href="{{ path('app_pdfr', {'id': data.id_reclamation}) }}" class="btn btn-light" style="padding: 0.75rem 1rem;">
+								<i class="bi bi-file-earmark-pdf"></i>
+							</a>
+
+						{% endif %}
+
+
 					</div>
 				</div>
-			{% endfor %}
+			</div>
+		{% endfor %}
 
-		</div>
 	</div>
-</div>{% endblock %}
+
+
+	
+
+
+</div></div><div class="pagination">{{ knp_pagination_render(list) }}</div></div>{% endblock %}
