@@ -114,19 +114,9 @@ class TwigExtraConfig implements \Symfony\Component\Config\Builder\ConfigBuilder
         return $this->intl;
     }
 
-    /**
-     * @return \Symfony\Config\TwigExtra\CssinlinerConfig|$this
-     */
-    public function cssinliner($value = [])
+    public function cssinliner(array $value = []): \Symfony\Config\TwigExtra\CssinlinerConfig
     {
-        if (!\is_array($value)) {
-            $this->_usedProperties['cssinliner'] = true;
-            $this->cssinliner = $value;
-
-            return $this;
-        }
-
-        if (!$this->cssinliner instanceof \Symfony\Config\TwigExtra\CssinlinerConfig) {
+        if (null === $this->cssinliner) {
             $this->_usedProperties['cssinliner'] = true;
             $this->cssinliner = new \Symfony\Config\TwigExtra\CssinlinerConfig($value);
         } elseif (0 < \func_num_args()) {
@@ -213,7 +203,7 @@ class TwigExtraConfig implements \Symfony\Component\Config\Builder\ConfigBuilder
 
         if (array_key_exists('cssinliner', $value)) {
             $this->_usedProperties['cssinliner'] = true;
-            $this->cssinliner = \is_array($value['cssinliner']) ? new \Symfony\Config\TwigExtra\CssinlinerConfig($value['cssinliner']) : $value['cssinliner'];
+            $this->cssinliner = new \Symfony\Config\TwigExtra\CssinlinerConfig($value['cssinliner']);
             unset($value['cssinliner']);
         }
 
@@ -250,7 +240,7 @@ class TwigExtraConfig implements \Symfony\Component\Config\Builder\ConfigBuilder
             $output['intl'] = $this->intl instanceof \Symfony\Config\TwigExtra\IntlConfig ? $this->intl->toArray() : $this->intl;
         }
         if (isset($this->_usedProperties['cssinliner'])) {
-            $output['cssinliner'] = $this->cssinliner instanceof \Symfony\Config\TwigExtra\CssinlinerConfig ? $this->cssinliner->toArray() : $this->cssinliner;
+            $output['cssinliner'] = $this->cssinliner->toArray();
         }
         if (isset($this->_usedProperties['inky'])) {
             $output['inky'] = $this->inky instanceof \Symfony\Config\TwigExtra\InkyConfig ? $this->inky->toArray() : $this->inky;

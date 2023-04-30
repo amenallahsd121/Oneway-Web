@@ -3,38 +3,58 @@
 {% block title %}Demande index{% endblock %}
 
 {% block body %}
-    <h1>Demande index</h1>
+<style>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                 <th>offre </th>
+		body {
+			background-color: #000c20;
 
-                <th>Description</th>
-                <th>Prix</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
+		}
+	</style>
+<!--? slider Area Start-->
+        <div class="slider-area ">
+            <div class="single-slider hero-overly slider-height2 d-flex align-items-center" data-background="assets/img/hero/about.jpg">
+               <div class="container">
+               <div class="row">
+        <div class="col-lg-8 mb-5 mb-lg-0">
+    <div class="row">
+       <h1 style="font-size: 40px; color: white;">les demandes </h1>
+    </div></div>
+        <div class="col-lg-8 mb-5 mb-lg-0">
+            <div class="blog_left_sidebar">
+            
         {% for demande in demandes %}
-            <tr>
-                <td>{{ demande.iddemande }}</td>
-                <td>{{ demande.idoffre.descriptionoffre}}</td>
+                <article class="blog_item">
+                    <div class="blog_item_img">
+                        <img class="card-img rounded-0" src="assets/img/blog/single_blog_1.png" alt="">
+                        <a href="#" class="blog_item_date">
+                           {{ demande.idoffre.idtrajetoffre.description}}
+                        </a>
+                    </div>
 
-                <td>{{ demande.descriptiondemande }}</td>
-                <td>{{ demande.prix }}</td>
-                <td>
-                    <a href="{{ path('app_demande_show', {'iddemande': demande.iddemande}) }}">show</a>
-                    <a href="{{ path('app_demande_edit', {'iddemande': demande.iddemande}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="4">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+                    <div class="blog_details">
+                        <a class="d-inline-block" href="#">
+                            <h2>demande </h2>
+                        </a>
+                        <p>{{ demande.descriptiondemande  }}</p>
+                        <ul class="blog-info-link">
+                                                    <li><a href="#"><i class="fas fa-dollar-sign"></i>{{demande.idpersonne.email}}</a></li>
 
+                            <li><a href="#"><i class="fas fa-dollar-sign"></i>{{demande.prix}}</a></li>
+                                    <i class="bi bi-plus"></i></a></li>
+                            <li><a href="{{ path('app_demande_delete', {'iddemande': demande.iddemande}) }}" class="btn btn-light" style="padding: 0.75rem 1rem;">
+                                    <i class="bi bi-trash"></i>
+                            </a></li>
+                        </ul>
+                    </div>
+                </article>
+                {% endfor %}
+
+{{ knp_pagination_render(pagination, '@KnpPaginator/Pagination/bootstrap_v5_pagination.html.twig') }}
+
+          </div>
+        </div>
+    </div>
+</div>
+                  </div></div> </div>
+          
 {% endblock %}

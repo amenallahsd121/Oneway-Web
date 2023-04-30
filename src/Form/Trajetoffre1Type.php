@@ -18,7 +18,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
-
 class Trajetoffre1Type extends AbstractType
 {  private $entityManager;
 
@@ -32,11 +31,7 @@ class Trajetoffre1Type extends AbstractType
         $builder
         ->add('limitekmoffre', IntegerType::class, [
             'constraints' => [
-                new IsTrue([
-                    'message' => 'La limite de km doit être un nombre entier.',
-                    'callback' => function ($value) {
-                        return is_int($value);
-                    }]),
+                
                 new NotBlank(['message' => 'La limite de km est obligatoire.']),
                 new Type([
                     'type' => 'integer',

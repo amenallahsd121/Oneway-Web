@@ -1,0 +1,231 @@
+    <section class="contact-form-area section-bg pt-115 pb-120 fix" data-background="assets/img/gallery/section_bg02.jpg">
+  <div class="container">
+    <div class="row justify-content-end">
+      <!-- Contact wrapper -->
+      <div class="col-xl-8 col-lg-9">
+        <div class="contact-form-wrapper">
+          <!-- Form title -->
+          <div class="row">
+            <div class="col-lg-12">
+              <!-- Section Title -->
+              <div class="section-title mb-50">
+                <span>Get a Quote For Free</span>
+                <h2>Request a Free Quote</h2>
+                <p>Brook presents your services with flexible, convenient and cdpose layouts. You can select your favorite layouts &amp; elements for.</p>
+              </div>
+            </div>
+          </div>
+{{ form_start(form, {'attr': {'class': 'contact-form', 'novalidate': 'novalidate'}}) }}
+
+            <div class="page" id="page1">
+              <!-- Form fields -->
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="input-form">
+                    {{ form_widget(form.descriptionoffre, {'attr': {'placeholder': 'Description'}}) }}
+                    {% if form_errors(form.descriptionoffre) is not empty %}
+                      <div class="alert alert-danger">
+                        {{ form_errors(form.descriptionoffre) }}
+                      </div>
+                    {% endif %}
+                  </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                  <div class="input-form">
+                    {{ form_widget(form.datesortieoffre, {'attr': {'placeholder': 'YYYY-MM-DD'}}) }}
+                    {% if form_errors(form.datesortieoffre) is not empty %}
+                      <div class="alert alert-danger">
+                        {{ form_errors(form.datesortieoffre) }}
+                      </div>
+                    {% endif %}
+                  </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                  <div class="input-form">
+                    {{ form_widget(form.maxretard, {'attr': {'placeholder': 'Retard maximum'}}) }}
+                    {% if form_errors(form.maxretard) is not empty %}
+                      <div class="alert alert-danger">
+                        {{ form_errors(form.maxretard) }}
+                      </div>
+                    {% endif %}
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="select-items">
+                    <select name="select" id="select1">
+                      <option value="">With Depalacements</option>
+                      <option value="">Without Deplacement</option>
+                      <option value="">Categories Two</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                  <div class="input-form">
+                    <input type="text" placeholder="Incoterms">
+                  </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                  <div class="input-form">
+                    <input type="text" placeholder="Weight">
+                  </div>
+                </div>
+                <!-- Height Width length -->
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                  <div class="input-form">
+                    <input type="text" placeholder="Height">
+                  </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                  <div class="input-form">
+                    <input type="text" placeholder="Width">
+                  </div>
+                </div>
+                                <div class="col-lg-4 col-md-6 col-sm-6">
+                                    <div class="input-form">
+                                        <input type="text" placeholder="length">
+                                    </div>
+                                </div>
+                                <!-- Radio Button -->
+                                <div class="col-lg-12">
+                                    <div class="radio-wrapper mb-30 mt-15">
+                                        <label>Extra services:</label>
+                                        <div class="select-radio">
+                                            <div class="radio">
+                                                <input id="radio-1" name="radio" type="radio" checked="">
+                                                <label for="radio-1" class="radio-label">Fragile</label>
+                                            </div>
+                                            <div class="radio">
+                                                <input id="radio-2" name="radio" type="radio">
+                                                <label for="radio-2" class="radio-label">regide</label>
+                                            </div>
+                                           
+                                        </div>
+                                    </div> 
+                                </div>
+                                <!-- Button -->
+                                <div class="col-lg-12">
+                                  <button class="next" type="button">Suivant</button>
+                                </div>
+                            </div>
+                           
+                   
+           </div>
+           <div class="page" id="page2">
+                        <!-- form -->
+                       
+                       
+                            <div class="row"> <div class="col-lg-12">
+                                    <div class="input-form">
+                                        
+       {{ form_label(form.idtrajetoffre," Votre Trajet :") }}
+     {{ form_widget(form.idtrajetoffre,{'attr':{'class':'from-control'}}) }}
+     {% if form_errors(form.idtrajetoffre) is not empty %}
+     <div class="alert alert-danger">
+     {{ form_errors(form.idtrajetoffre) }}
+</div>
+{% endif %}
+                                    </div>
+                                </div>
+                      <div class="col-lg-12"> 
+                     <div id="map" data-container="map"></div></div>
+                                <!-- Button -->
+                                <div class="col-lg-12">
+                                    <button class="prev" type="button">Précédent</button>
+                <button class="next" type="button">Suivant</button>
+</div>
+                          
+                            </div>
+                        	
+                        </div>
+                        <div class="page" id="page3">
+    <!-- form -->
+    
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="input-form">
+                    {{ form_label(form.catoffreid," La Categorie D'offre  :") }}
+                    {{ form_widget(form.catoffreid,{'attr':{'class':'from-control'}}) }}
+                    {% if form_errors(form.catoffreid) is not empty %}
+                        <div class="alert alert-danger">
+                            {{ form_errors(form.catoffreid) }}
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col-lg-12"> 
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Poids</th>
+                            <th>Nbrecolis</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="3">
+                                <div style="height: 100px; overflow-y: scroll;">
+                                    <table class="table">
+                                        {% for categorieoffre in categorieoffres %}
+                                            <tr>    
+                                                <td>{{ categorieoffre.typeoffre }}</td>
+                                                <td>{{ categorieoffre.poidsoffre }} kg /colis</td>
+                                                <td>{{ categorieoffre.nbrecolisoffre }} colis</td>
+                                            </tr>
+                                        {% else %}
+                                            <tr>
+                                                <td colspan="3">aucune categorie ! </td>
+                                            </tr>
+                                        {% endfor %}
+                                    </table>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>                                    
+            <!-- Button -->
+            <div class="col-lg-12">
+                <button class="prev" type="button">Précédent</button>
+                <button class="next" type="button">Suivant</button>
+            </div>
+        </div>
+    	
+</div>
+
+         <div class="page" id="page4">
+                        <!-- form -->
+                       
+                            <div class="row"> <div class="col-lg-12">
+                                    <div class="input-form">
+                                        
+     {{ form_label(form.prixoffre," Prix :") }}
+     {{ form_widget(form.prixoffre,{'attr': {'placeholder': 'Prix '}}) }}
+     {% if form_errors(form.prixoffre) is not empty %}
+     <div class="alert alert-danger">
+     {{ form_errors(form.prixoffre) }}
+</div>
+{% endif %}
+                                    </div>
+                                </div>
+                     
+                                 
+
+
+
+                                <!-- Button -->
+                                <div class="col-lg-12">
+                                    <button class="prev" type="button">Précédent</button>
+                                    
+               {{ form_widget(form.save, {'attr': {'style': 'font-size: 15px; padding: 15px 20px; margin-left: 50px; margin-top: 10px;'}} ) }}</td>
+</div>
+                          
+                            </div>
+{{ form_end(form) }}
+                       </div>
+                </div>
+            </div>
+             </div>
+             </div>
+      
+    </section>

@@ -4,6 +4,13 @@
     {% block title %}Home{% endblock %}
 
     {% block body %}
+    <style>
+        #calendrier{
+            width: 80%;
+            margin: auto;
+
+        }
+    </style>
         <div class="page-content-wrapper sp-y">
             <div class="blog-details-page-wrapper">
                 <div class="container container-wide">
@@ -36,83 +43,63 @@
                             </article>
 							        {% endfor %}
 
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="product-description-review">
-                                        <!-- Product Description Tab Menu -->
-                                        <ul class="nav nav-tabs desc-review-tab-menu" id="desc-review-tab" role="tablist">
-                                            <li>
-                                                <a class="active" id="desc-tab" data-toggle="tab" href="#descriptionContent" role="tab">Commentaire</a>
-                                            </li>
-                                        </ul>
-                            <div class="tab-content" id="myTabContent">
-                                <div class="tab-pane fade show active" id="descriptionContent">
-                                    <div class="description-content">
-
-                                    </div>
-                                </div>
-<div class="product-rating-wrap">
-                            <div class="display-ratings">
-                               
-                                    <h6>Le Commentaire :</h6>
-
-                                <div class="rating-item">
-                                    <div class="rating-author-txt">
-                                        <div class="rating-author-pic">
-                                        </div>
-                                        <div class="rating-meta">
-                                            <h3> av.nom </h3>
-                                            <span class="time">-   av.email </span>
-                                        </div>
-
-                                        <p>av.description</p>
-                                        <h3 align="right"> <i class="ion-ios-undo"></i></a></h3>
-                                    </div>
-
-                                </div>
-                                    <h6>Les réponses :</h6>
-                                        <div class="rating-item">
-                                            <div class="rating-author-txt">
-                                                <div class="rating-author-pic">
-                                                </div>
-                                                <div class="rating-meta">
-                                                    <h3> r.nom </h3>
-                                                    <span class="time">-   r.email </span>
-                                                </div>
-
-                                                <p>r.description</p>
-
-                                            </div>
-                                        </div>
-                                   
-
-
-
-                                        
-
-                                </div>
-
-                            </form>
-
+                           
                         </div>
 
                     </div>
                 </div>
             </div>
                             </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+                                    
 
-   
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.3.0/main.min.css" integrity="sha256-uq9PNlMzB+1h01Ij9cx7zeE2OR2pLAfRw3uUUOOPKdA=" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.3.0/main.min.js" integrity="sha256-DBxkGZLxKsLKhz054qUpBqtotG00r9AELGpSigJujLg=" crossorigin="anonymous"></script>
 
-        </div>
-        <!--== End Slider Area Wrapper ==-->
-    {% endblock %}
+    <script>
+    window.onload = () => {
+            let calendarEl = document.querySelector("#calendrier");
+            let calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                locale: 'fr',
+                timezone: 'Europe/paris',
+                headerToolbar: {
+                    start: 'prev,next today',
+                    center: 'title',
+                    end: 'dayGridMonth,timeGridWeek'
+                },
+                events : {{ data|raw }},
+                editable : true,
+                eventResizableFormStart : true
+            })
+            calendar.on('eventChange', (e) => {
+
+                let url = `{{path('app_api_edit',{'id':"Re"})}}`
+                url = url.replace("Re",e.event.id)
+
+                let donnees ={
+
+
+                    "title": e.event.title,
+                    "start": e.event.start,
+                    "end": e.event.end,
+
+
+
+
+
+                }
+                console.log(donnees);
+                let xhr = new XMLHttpRequest
+
+                xhr.open("POST", url)
+                xhr.send(JSON.stringify(donnees))
+            })
+                                calendar.render()
+
+    
+
+    }
+
+    </script>    {% endblock %}
 
 

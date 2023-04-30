@@ -59,6 +59,7 @@ class ConnectionConfig
     private $options;
     private $mappingTypes;
     private $defaultTableOptions;
+    private $schemaManagerFactory;
     private $slaves;
     private $replicas;
     private $_usedProperties = [];
@@ -493,6 +494,7 @@ class ConnectionConfig
     /**
      * @default null
      * @param ParamConfigurator|mixed $value
+     * @deprecated The "platform_service" configuration key is deprecated since doctrine-bundle 2.9. DBAL 4 will not support setting a custom platform via connection params anymore.
      * @return $this
      */
     public function platformService($value): self
@@ -681,6 +683,19 @@ class ConnectionConfig
     {
         $this->_usedProperties['defaultTableOptions'] = true;
         $this->defaultTableOptions[$name] = $value;
+
+        return $this;
+    }
+
+    /**
+     * @default 'doctrine.dbal.legacy_schema_manager_factory'
+     * @param ParamConfigurator|mixed $value
+     * @return $this
+     */
+    public function schemaManagerFactory($value): self
+    {
+        $this->_usedProperties['schemaManagerFactory'] = true;
+        $this->schemaManagerFactory = $value;
 
         return $this;
     }
@@ -1007,6 +1022,12 @@ class ConnectionConfig
             unset($value['default_table_options']);
         }
 
+        if (array_key_exists('schema_manager_factory', $value)) {
+            $this->_usedProperties['schemaManagerFactory'] = true;
+            $this->schemaManagerFactory = $value['schema_manager_factory'];
+            unset($value['schema_manager_factory']);
+        }
+
         if (array_key_exists('slaves', $value)) {
             $this->_usedProperties['slaves'] = true;
             $this->slaves = array_map(function ($v) { return \is_array($v) ? new \Symfony\Config\Doctrine\Dbal\ConnectionConfig\SlaveConfig($v) : $v; }, $value['slaves']);
@@ -1164,6 +1185,9 @@ class ConnectionConfig
         }
         if (isset($this->_usedProperties['defaultTableOptions'])) {
             $output['default_table_options'] = $this->defaultTableOptions;
+        }
+        if (isset($this->_usedProperties['schemaManagerFactory'])) {
+            $output['schema_manager_factory'] = $this->schemaManagerFactory;
         }
         if (isset($this->_usedProperties['slaves'])) {
             $output['slaves'] = array_map(function ($v) { return $v instanceof \Symfony\Config\Doctrine\Dbal\ConnectionConfig\SlaveConfig ? $v->toArray() : $v; }, $this->slaves);

@@ -38,6 +38,15 @@ class DemandeRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+    public function findByIdUser($value): array
+    {
+        return $this->createQueryBuilder('o')
+            ->andWhere('o.idpersonne= :val')
+          ->setParameter('val', $value)
+           ->getQuery()
+            ->getResult()
+   ;
+  }
 
   
 //    public function findByExampleField($value): array

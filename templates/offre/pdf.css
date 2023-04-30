@@ -1,0 +1,95 @@
+
+
+body {
+    background-color: #000c20;
+    color: #fff ;
+}
+
+.logo {
+    margin: 0 auto; /* center the logo horizontally */
+    margin-left : 20px ;
+    width: 150px;
+    height: auto;
+    display: block;
+    margin-top: 50px; /* add some top margin */
+}
+.car {
+    margin: 0 auto; /* center the logo horizontally */
+    margin-left : 465px ;
+    width: 100px;
+    height: auto;
+    display: block;
+    margin-top: 50px; /* add some top margin */
+}
+
+.container {
+    height: 100vh;
+}
+
+table.info {
+    margin-top: 50px;
+    border-collapse: collapse;
+    width: 70%;
+    margin: 0 auto; /* center the table horizontally */
+}
+
+table.info th,
+table.info td {
+    padding: 10px;
+    border: 1px solid #fff;
+    text-align: center;
+}
+
+table.info th {
+    background-color: #37434f;
+    font-weight: bold;
+}
+
+table.info tr:nth-child(even) {
+    background-color: #3d5466;
+}
+
+h2 {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 50px 0 20px;
+    text-align: center; /* center the h2 tag horizontally */
+}
+h5 {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 50px 0 20px;
+    text-align: center; /* center the h2 tag horizontally */
+    margin-top: 0px;
+}
+
+p {
+    text-align: center; /* center the p tag horizontally */
+}
+
+caption {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.social-buttons {
+    margin-top: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.social-buttons a {
+    margin: 0 10px;
+}
+
+.rights-reserved {
+    margin-top: 50px;
+    font-size: 20px;
+    text-align: center;
+}
+
+.social-buttons a i {
+    font-size: 2em;
+}

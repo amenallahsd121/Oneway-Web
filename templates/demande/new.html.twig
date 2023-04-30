@@ -50,6 +50,7 @@
     font-weight: bold;
 }
 </style>
+<section class="contact-form-area section-bg pt-115 pb-120 fix" data-background="{{ asset('assets/img/offre/this2.png') }}">
 
  {% block form %}
 {{form_start(form,{'attr': {'novalidate': 'novalidate'}} )}}
@@ -59,5 +60,6 @@
     {{ include('demande/_form.html.twig') }}
 
     {{form_end(form)}}
+	</select>
 {% endblock %}
 {% endblock %}

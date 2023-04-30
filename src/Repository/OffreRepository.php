@@ -38,6 +38,17 @@ class OffreRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+    public function findByIdUser($value): array
+        {
+            return $this->createQueryBuilder('o')
+                ->andWhere('o.iduser = :val')
+              ->setParameter('val', $value)
+               ->orderBy('o.datesortieoffre', 'ASC')
+              ->setMaxResults(10)
+               ->getQuery()
+                ->getResult()
+       ;
+      }
 
 //    /**
 //     * @return Offre[] Returns an array of Offre objects

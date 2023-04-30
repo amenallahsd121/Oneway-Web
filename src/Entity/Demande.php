@@ -54,12 +54,12 @@ private ?Colis $idcolis = null;
         return $this;
     }
 
-    public function getIdpersonne(): ?int
+    public function getIdpersonne(): ?Utilisateur
     {
         return $this->idpersonne;
     }
 
-    public function setIdpersonne(int $idpersonne): self
+    public function setIdpersonne(?Utilisateur $idpersonne): self
     {
         $this->idpersonne = $idpersonne;
 

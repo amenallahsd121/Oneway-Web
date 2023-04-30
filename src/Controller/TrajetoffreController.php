@@ -10,6 +10,7 @@ use App\Repository\TrajetoffreRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\UX\Chartjs\Builder\ChartBuilderInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -97,7 +98,8 @@ class TrajetoffreController extends AbstractController
             'form' => $form,
         ]);
     }
-
+    
+ 
     #[Route('/{idtrajetoffre}', name: 'app_trajetoffre_delete', methods: ['POST'])]
     public function delete(Request $request, Trajetoffre $trajetoffre, TrajetoffreRepository $trajetoffreRepository): Response
     {

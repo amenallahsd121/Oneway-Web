@@ -4,6 +4,7 @@ namespace App\Entity;
 use App\Entity\Utilisateur;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\OffreRepository;
+use DateTime;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 
@@ -38,13 +39,13 @@ private ?string  $maxretard = null;
 private ?float $prixoffre = null;
 
 
-#[ORM\Column(length: 255)]
-private ?string $dateoffre = null;
+#[ORM\Column]
+private ?DateTime $dateoffre = null;
 
    
 
-#[ORM\Column(length: 255)]
-private ?string $datesortieoffre = null;
+#[ORM\Column]
+private ?DateTime $datesortieoffre = null;
 
 
 #[ORM\Column(length: 255)]
@@ -147,24 +148,24 @@ private ?Utilisateur $iduser = null;
         return $this;
     }
 
-    public function getDateoffre(): ?string
+    public function getDateoffre(): ?DateTime
     {
         return $this->dateoffre;
     }
 
-    public function setDateoffre(?string $dateoffre): self
+    public function setDateoffre(?DateTime $dateoffre): self
     {
         $this->dateoffre = $dateoffre;
 
         return $this;
     }
 
-    public function getDatesortieoffre(): ?string
+    public function getDatesortieoffre(): ?DateTime
     {
         return $this->datesortieoffre;
     }
 
-    public function setDatesortieoffre(?string $datesortieoffre): self
+    public function setDatesortieoffre(?DateTime $datesortieoffre): self
     {
         $this->datesortieoffre = $datesortieoffre;
 

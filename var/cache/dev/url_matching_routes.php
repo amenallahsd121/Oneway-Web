@@ -8,6 +8,8 @@
 return [
     false, // $matchHost
     [ // $staticRoutes
+        '/api' => [[['_route' => 'api', '_controller' => 'App\\Controller\\ApiController::index'], null, null, null, false, false, null]],
+        '/calendar' => [[['_route' => 'app_calendar', '_controller' => 'App\\Controller\\CalendarController::index'], null, null, null, false, false, null]],
         '/categorieoffre' => [[['_route' => 'app_categorieoffre_index', '_controller' => 'App\\Controller\\CategorieoffreController::index'], null, ['GET' => 0], null, true, false, null]],
         '/categorieoffre/new' => [[['_route' => 'app_categorieoffre_new', '_controller' => 'App\\Controller\\CategorieoffreController::new'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
         '/colis' => [[['_route' => 'app_colis', '_controller' => 'App\\Controller\\ColisController::index'], null, null, null, false, false, null]],
@@ -28,91 +30,97 @@ return [
     ],
     [ // $regexpList
         0 => '{^(?'
+                .'|/api/([^/]++)/edit(*:25)'
                 .'|/c(?'
                     .'|ategorieoffre/([^/]++)(?'
-                        .'|(*:37)'
-                        .'|/edit(*:49)'
-                        .'|(*:56)'
+                        .'|(*:62)'
+                        .'|/edit(*:74)'
+                        .'|(*:81)'
                     .')'
                     .'|olis/(?'
-                        .'|update/([^/]++)(*:87)'
-                        .'|delete/([^/]++)(*:109)'
+                        .'|update/([^/]++)(*:112)'
+                        .'|delete/([^/]++)(*:135)'
                     .')'
                 .')'
                 .'|/demande/(?'
                     .'|([^/]++)(?'
-                        .'|(*:142)'
-                        .'|/new(*:154)'
+                        .'|(*:168)'
+                        .'|/new(*:180)'
                     .')'
+                    .'|Listdemandes(*:201)'
                     .'|detail(?'
-                        .'|/([^/]++)(*:181)'
-                        .'|back/([^/]++)(*:202)'
+                        .'|/([^/]++)(*:227)'
+                        .'|back/([^/]++)(*:248)'
                     .')'
                     .'|([^/]++)(?'
-                        .'|/edit(*:227)'
-                        .'|(*:235)'
+                        .'|/edit(*:273)'
+                        .'|(*:281)'
                     .')'
                 .')'
                 .'|/offre/(?'
+                    .'|your\\-route/([^/]++)(*:321)'
                     .'|([^/]++)(?'
-                        .'|(*:266)'
+                        .'|(*:340)'
                         .'|/(?'
-                            .'|edit(*:282)'
-                            .'|demande(*:297)'
+                            .'|edit(*:356)'
+                            .'|demande(*:371)'
                         .')'
-                        .'|(*:306)'
+                        .'|(*:380)'
                     .')'
-                    .'|pdf/generator/([^/]++)(*:337)'
+                    .'|pdf/generator/([^/]++)(*:411)'
                 .')'
                 .'|/trajetoffre/([^/]++)(?'
-                    .'|(*:370)'
-                    .'|/edit(*:383)'
-                    .'|(*:391)'
+                    .'|(*:444)'
+                    .'|/edit(*:457)'
+                    .'|(*:465)'
                 .')'
                 .'|/_(?'
-                    .'|error/(\\d+)(?:\\.([^/]++))?(*:431)'
-                    .'|wdt/([^/]++)(*:451)'
+                    .'|error/(\\d+)(?:\\.([^/]++))?(*:505)'
+                    .'|wdt/([^/]++)(*:525)'
                     .'|profiler/([^/]++)(?'
                         .'|/(?'
-                            .'|search/results(*:497)'
-                            .'|router(*:511)'
+                            .'|search/results(*:571)'
+                            .'|router(*:585)'
                             .'|exception(?'
-                                .'|(*:531)'
-                                .'|\\.css(*:544)'
+                                .'|(*:605)'
+                                .'|\\.css(*:618)'
                             .')'
                         .')'
-                        .'|(*:554)'
+                        .'|(*:628)'
                     .')'
                 .')'
             .')/?$}sDu',
     ],
     [ // $dynamicRoutes
-        37 => [[['_route' => 'app_categorieoffre_show', '_controller' => 'App\\Controller\\CategorieoffreController::show'], ['idcatoffre'], ['GET' => 0], null, false, true, null]],
-        49 => [[['_route' => 'app_categorieoffre_edit', '_controller' => 'App\\Controller\\CategorieoffreController::edit'], ['idcatoffre'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
-        56 => [[['_route' => 'app_categorieoffre_delete', '_controller' => 'App\\Controller\\CategorieoffreController::delete'], ['idcatoffre'], ['POST' => 0], null, false, true, null]],
-        87 => [[['_route' => 'update_colis', '_controller' => 'App\\Controller\\ColisController::update'], ['id'], null, null, false, true, null]],
-        109 => [[['_route' => 'delete_colis', '_controller' => 'App\\Controller\\ColisController::delete'], ['id'], null, null, false, true, null]],
-        142 => [[['_route' => 'app_demande_indexoffre', '_controller' => 'App\\Controller\\DemandeController::indexbyoffre'], ['idoffre'], ['GET' => 0], null, false, true, null]],
-        154 => [[['_route' => 'app_demande_new', '_controller' => 'App\\Controller\\DemandeController::new'], ['idOffre'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
-        181 => [[['_route' => 'app_demande_show', '_controller' => 'App\\Controller\\DemandeController::show'], ['iddemande'], ['GET' => 0], null, false, true, null]],
-        202 => [[['_route' => 'app_demande_showback', '_controller' => 'App\\Controller\\DemandeController::showback'], ['iddemande'], ['GET' => 0], null, false, true, null]],
-        227 => [[['_route' => 'app_demande_edit', '_controller' => 'App\\Controller\\DemandeController::edit'], ['iddemande'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
-        235 => [[['_route' => 'app_demande_delete', '_controller' => 'App\\Controller\\DemandeController::delete'], ['iddemande'], ['POST' => 0], null, false, true, null]],
-        266 => [[['_route' => 'app_offre_show', '_controller' => 'App\\Controller\\OffreController::show'], ['idoffre'], ['GET' => 0], null, false, true, null]],
-        282 => [[['_route' => 'app_offre_edit', '_controller' => 'App\\Controller\\OffreController::edit'], ['idoffre'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
-        297 => [[['_route' => 'app_offre_demande', '_controller' => 'App\\Controller\\OffreController::demande'], ['idoffre'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
-        306 => [[['_route' => 'app_offre_delete', '_controller' => 'App\\Controller\\OffreController::delete'], ['idoffre'], ['POST' => 0], null, false, true, null]],
-        337 => [[['_route' => 'pdf_generator', '_controller' => 'App\\Controller\\OffreController::pdf'], ['idoffre'], ['GET' => 0], null, false, true, null]],
-        370 => [[['_route' => 'app_trajetoffre_show', '_controller' => 'App\\Controller\\TrajetoffreController::show'], ['idtrajetoffre'], ['GET' => 0], null, false, true, null]],
-        383 => [[['_route' => 'app_trajetoffre_edit', '_controller' => 'App\\Controller\\TrajetoffreController::edit'], ['idtrajetoffre'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
-        391 => [[['_route' => 'app_trajetoffre_delete', '_controller' => 'App\\Controller\\TrajetoffreController::delete'], ['idtrajetoffre'], ['POST' => 0], null, false, true, null]],
-        431 => [[['_route' => '_preview_error', '_controller' => 'error_controller::preview', '_format' => 'html'], ['code', '_format'], null, null, false, true, null]],
-        451 => [[['_route' => '_wdt', '_controller' => 'web_profiler.controller.profiler::toolbarAction'], ['token'], null, null, false, true, null]],
-        497 => [[['_route' => '_profiler_search_results', '_controller' => 'web_profiler.controller.profiler::searchResultsAction'], ['token'], null, null, false, false, null]],
-        511 => [[['_route' => '_profiler_router', '_controller' => 'web_profiler.controller.router::panelAction'], ['token'], null, null, false, false, null]],
-        531 => [[['_route' => '_profiler_exception', '_controller' => 'web_profiler.controller.exception_panel::body'], ['token'], null, null, false, false, null]],
-        544 => [[['_route' => '_profiler_exception_css', '_controller' => 'web_profiler.controller.exception_panel::stylesheet'], ['token'], null, null, false, false, null]],
-        554 => [
+        25 => [[['_route' => 'app_api_edit', '_controller' => 'App\\Controller\\ApiController::majEvent'], ['id'], ['POST' => 0], null, false, false, null]],
+        62 => [[['_route' => 'app_categorieoffre_show', '_controller' => 'App\\Controller\\CategorieoffreController::show'], ['idcatoffre'], ['GET' => 0], null, false, true, null]],
+        74 => [[['_route' => 'app_categorieoffre_edit', '_controller' => 'App\\Controller\\CategorieoffreController::edit'], ['idcatoffre'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        81 => [[['_route' => 'app_categorieoffre_delete', '_controller' => 'App\\Controller\\CategorieoffreController::delete'], ['idcatoffre'], ['POST' => 0], null, false, true, null]],
+        112 => [[['_route' => 'update_colis', '_controller' => 'App\\Controller\\ColisController::update'], ['id'], null, null, false, true, null]],
+        135 => [[['_route' => 'delete_colis', '_controller' => 'App\\Controller\\ColisController::delete'], ['id'], null, null, false, true, null]],
+        168 => [[['_route' => 'app_demande_indexoffre', '_controller' => 'App\\Controller\\DemandeController::indexbyoffre'], ['idoffre'], ['GET' => 0], null, false, true, null]],
+        180 => [[['_route' => 'app_demande_new', '_controller' => 'App\\Controller\\DemandeController::new'], ['idOffre'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        201 => [[['_route' => 'app_demande_Front', '_controller' => 'App\\Controller\\DemandeController::FrontList'], [], ['GET' => 0], null, false, false, null]],
+        227 => [[['_route' => 'app_demande_show', '_controller' => 'App\\Controller\\DemandeController::show'], ['iddemande'], ['GET' => 0], null, false, true, null]],
+        248 => [[['_route' => 'app_demande_showback', '_controller' => 'App\\Controller\\DemandeController::showback'], ['iddemande'], ['GET' => 0], null, false, true, null]],
+        273 => [[['_route' => 'app_demande_edit', '_controller' => 'App\\Controller\\DemandeController::edit'], ['iddemande'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        281 => [[['_route' => 'app_demande_delete', '_controller' => 'App\\Controller\\DemandeController::delete'], ['iddemande'], ['POST' => 0], null, false, true, null]],
+        321 => [[['_route' => 'your_route_name', '_controller' => 'App\\Controller\\OffreController::yourMethod'], ['idtrajetoffre'], ['GET' => 0], null, false, true, null]],
+        340 => [[['_route' => 'app_offre_show', '_controller' => 'App\\Controller\\OffreController::show'], ['idoffre'], ['GET' => 0], null, false, true, null]],
+        356 => [[['_route' => 'app_offre_edit', '_controller' => 'App\\Controller\\OffreController::edit'], ['idoffre'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        371 => [[['_route' => 'app_offre_demande', '_controller' => 'App\\Controller\\OffreController::demande'], ['idoffre'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        380 => [[['_route' => 'app_offre_delete', '_controller' => 'App\\Controller\\OffreController::delete'], ['idoffre'], ['POST' => 0], null, false, true, null]],
+        411 => [[['_route' => 'pdf_generator', '_controller' => 'App\\Controller\\OffreController::pdf'], ['idoffre'], ['GET' => 0], null, false, true, null]],
+        444 => [[['_route' => 'app_trajetoffre_show', '_controller' => 'App\\Controller\\TrajetoffreController::show'], ['idtrajetoffre'], ['GET' => 0], null, false, true, null]],
+        457 => [[['_route' => 'app_trajetoffre_edit', '_controller' => 'App\\Controller\\TrajetoffreController::edit'], ['idtrajetoffre'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        465 => [[['_route' => 'app_trajetoffre_delete', '_controller' => 'App\\Controller\\TrajetoffreController::delete'], ['idtrajetoffre'], ['POST' => 0], null, false, true, null]],
+        505 => [[['_route' => '_preview_error', '_controller' => 'error_controller::preview', '_format' => 'html'], ['code', '_format'], null, null, false, true, null]],
+        525 => [[['_route' => '_wdt', '_controller' => 'web_profiler.controller.profiler::toolbarAction'], ['token'], null, null, false, true, null]],
+        571 => [[['_route' => '_profiler_search_results', '_controller' => 'web_profiler.controller.profiler::searchResultsAction'], ['token'], null, null, false, false, null]],
+        585 => [[['_route' => '_profiler_router', '_controller' => 'web_profiler.controller.router::panelAction'], ['token'], null, null, false, false, null]],
+        605 => [[['_route' => '_profiler_exception', '_controller' => 'web_profiler.controller.exception_panel::body'], ['token'], null, null, false, false, null]],
+        618 => [[['_route' => '_profiler_exception_css', '_controller' => 'web_profiler.controller.exception_panel::stylesheet'], ['token'], null, null, false, false, null]],
+        628 => [
             [['_route' => '_profiler', '_controller' => 'web_profiler.controller.profiler::panelAction'], ['token'], null, null, false, true, null],
             [null, null, null, null, false, false, 0],
         ],

@@ -9,9 +9,9 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Validator\Constraints\Range;
+use VictorPrdh\RecaptchaBundle\Form\ReCaptchaType;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\Callback;
-use Symfony\Component\Validator\Constraints\DateTime;
 
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Positive;
@@ -54,13 +54,13 @@ class OffreType extends AbstractType
                     new Positive(['message' => 'Le prix doit être un nombre positif.']),
                     new Range([
                         'min' => 5,
-                        
                         'minMessage' => 'Le prix doit être supérieur à 5 DT.',
                     ]),],
             ])
-            ->add('datesortieoffre', TextType::class, [
+            ->add('datesortieoffre', DateType::class, [
                 'required' => false,
-                
+                'widget' => 'single_text',
+
                
                 'constraints' => [
                     new NotBlank(['message' => 'Le Date est obligatoire.']),
@@ -77,15 +77,19 @@ class OffreType extends AbstractType
             ->add('idtrajetoffre', EntityType::class, [
                 'class' => Trajetoffre::class,
                 'choice_label' => 'description',
+                'choice_value' => 'idtrajetoffre', // Assuming 'id' is the property representing the unique identifier of Trajetoffre
+
                 'constraints' => [
                     new NotBlank(['message' => 'Le trajet est obligatoire.']),
                 ],
             ])
+           ->add("recaptcha", ReCaptchaType::class)
+
             ->add('save', SubmitType::class, ['label' => 'Enregister']) ;
     }
     public function validateDatesortieoffre($value, ExecutionContextInterface $context)
     {
-        if ($value && $value >= new \DateTime()) {
+        if ($value && $value > new \DateTime()) {
             $context->buildViolation('La date de sortie doit être supérieure à la date actuelle.')
                 ->addViolation();
         }
