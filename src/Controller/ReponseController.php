@@ -103,19 +103,19 @@ class ReponseController extends AbstractController
 
             /////////////////////////////////////////////////////////////////////////
 
-             // Create a Transport object
+             // les donnee mte3 el mail eli bech nesta3mloh /: el mot de passe eli 3taholna el gmail bech nesta3mloh@ apres el serveur el gmail sli testa3mlou fih 465:port
         $transport = Transport::fromDsn('smtp://oneway.noreplay@gmail.com:ruhgodtwnckgjezy@smtp.gmail.com:465');
 
-        // Create a Mailer object
+        // Create a Mailer object(exp yahoo ,gmail....)
         $mailer = new Mailer($transport);
 
         // Create an Email object
         $email = (new Email());
 
-        // Set the "From address"
-        $email->from('amenallahbensmida@gmail.com');
+        // Set the "From address" bech inforsi el ba3then
+        $email->from('oneway.noreplay@gmail.com');
 
-        // Set the "To address"
+        // mail mte3 el client emailc
         $email->to(
             $emailc
         );
@@ -125,8 +125,7 @@ class ReponseController extends AbstractController
         // Set a "subject"
         $email->subject('Réclamation Traitée !');
 
-        // Set the plain-text "Body"
-        $email->text('Test Recu Mail.');
+        
 
         // Set HTML "Body"
         $email->html('
@@ -147,6 +146,7 @@ class ReponseController extends AbstractController
 
 
         // Sending email with status
+        // verification mte3 envoyer mail sinon ikharej erreura
         try {
             // Send email
             $mailer->send($email);
@@ -251,8 +251,10 @@ public function delete($id) {
       }
       
       // On convertit le tableau en format JSON pour pouvoir l'utiliser avec Chart.js
+    //   hawel  el tableau mte3i format json bech ya9raha
       $sujetsJson = json_encode(array_values($sujets));
-      
+    
+      //raja3 el tableau eli deja hawelneh
       return $this->render('reponse/stat.html.twig', [
           'Sujets' => $sujetsJson
       ]);

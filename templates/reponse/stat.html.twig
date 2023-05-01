@@ -2,7 +2,7 @@
 
 
 {% block title %}
-	Ajouter Reponse
+	Statistique des reponses
 {% endblock %}
 
 
@@ -22,7 +22,8 @@
 				</div>
 				<h4 class="card-title">Statistiques</h4>
                 <a href="{{ path ('app_reclamation_reponse') }}" class="btn btn-success btn-fw float-right">Retour</a>
-				<canvas id="doughnutChart" style="height: 600px; width: 100%; margin: 0 auto;"></canvas>
+				{# el roue eli fel template #}
+                <canvas id="doughnutChart" style="height: 600px; width: 100%; margin: 0 auto;"></canvas>
 
 
 			</div>
@@ -30,15 +31,16 @@
 	
 
  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+ {#  appele lel alwen lel decoration mte3 el roue #}
 	<script>
 
-		// Get the canvas element
+		// les elment mte3 el canvas eli heya el roue
 var doughnutChart = document.getElementById('doughnutChart');
 
-// Parse the Sujets JSON data received from the server
+// tableau eli convertineh
 var sujetsData = JSON.parse('{{ Sujets | raw }}');
 
-// Create a new instance of the Chart object
+// Create a new instance of the Chart object bech inhoto fiha les cle et les couleurs
 var myChart = new Chart(doughnutChart, {
     type: 'doughnut',
     data: {

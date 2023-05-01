@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Yectep\Bundle\DatatableBundle\DataTable\DataTableFactory;
 use Symfony\Component\Process\Exception\ProcessFailedException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 
 
@@ -38,15 +38,22 @@ class LivreurController extends AbstractController
 
 
     #[Route('/livreur', name: 'app_livreur')]
-    public function index(): Response
+    public function index(NormalizerInterface $normalizer): Response
     {
-
-
         $data = $this->getDoctrine()->getRepository(Livreur::class)->findAll();
-        return $this->render('\livreur\index.html.twig', [
+        $datanormalized = $normalizer->normalize($data, 'json');
+////////////////////////////////////////////////////////////////////////////////////
+        //$json = json_encode($datanormalized);
+        $jsonResponse = new JsonResponse($datanormalized);
+
+        
+        $template = $this->render('\livreur\index.html.twig', [
             'list' => $data
         ]);
+        
+        return new Response($jsonResponse->getContent());
     }
+    
 
 
 

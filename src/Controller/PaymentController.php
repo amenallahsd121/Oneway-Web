@@ -137,7 +137,7 @@ class PaymentController extends AbstractController
         $email->subject('Validation Paiement !');
 
         // Set the plain-text "Body"
-        $email->text('Test Recu Mail.');
+        // $email->text('Test Recu Mail.');
 
         // Set HTML "Body"
         $email->html('

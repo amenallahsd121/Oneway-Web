@@ -175,30 +175,6 @@ public function delete($id) {
   
 
 
-/////////////////////////////////////////////////     STRIPE    /////////////////////////////////////////////////////
-
-
-
-  #[Route('/colis/payer', name: 'app_payer')]
-    public function payer(Request $req): Response {
-    {
-        $form = $this->createForm(PaiementType::class);
-        $form->handleRequest($req);
-        
-
-        if($form->isSubmitted() && $form->isValid()) {
-           
-      
-            return $this->redirectToRoute('app_colis');
-        }
-
-        return $this->renderForm('colis/paiement.html.twig',['form'=>$form]);
-    }
-}
-
-
-
-
 
 
 
@@ -234,7 +210,7 @@ public function pdf($id): Response
 
   
     // Render the HTML as PDF
-    $dompdf->render();
+    $dompdf->render(); 
 
     // Output the generated PDF to Browser (force download)
     $output = $dompdf->output();

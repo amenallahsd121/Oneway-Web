@@ -61,7 +61,7 @@ class ReclamationController extends AbstractController
 
 
     #[Route('/reclamation/add', name: 'add_reclamation')]
-    public function addreclamation(ManagerRegistry $doctrine, Request $req, NotifierInterface $notifier): Response
+    public function addreclamation(ManagerRegistry $doctrine, Request $req): Response
     {
         $badWords = ['merde','fuck','shit','con','connart','putain','pute','chier','bitch','bèullshit','bollocks','damn','putin'];
        
@@ -107,7 +107,7 @@ class ReclamationController extends AbstractController
         $form->handleRequest($req);
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $id = 68;
+            $id = 123;
             $utilisateur = $this->entityManager->getRepository(Utilisateur::class)->find($id);
             $reclamation->setIdUser($utilisateur);
             $this->entityManager->persist($reclamation);
@@ -154,36 +154,39 @@ class ReclamationController extends AbstractController
     #[Route('/reclamation/pdf/{id}', name: 'app_pdfr')]
     public function pdf($id): Response
     {
-        // Configure Dompdf according to your needs
+        // configurer les option de pdf
         $pdfOptions = new Options();
         $pdfOptions->set('isRemoteEnabled', true);
 
         $reclamation = $this->getDoctrine()->getRepository(Reclamation::class)->find($id);
 
-        // Instantiate Dompdf with our options
+        // pdf jdid hotli fiha les option
         $dompdf = new Dompdf($pdfOptions);
 
 
 
-        // Retrieve the HTML generated in our twig file
+        
         $html = $this->renderView('reclamation/pdf.html.twig', [
+            // variale html  bech inraja3 fiha el page el mezayna
             'reclamation' => [$reclamation]
         ]);
 
 
-        // Load HTML to Dompdf
-        $dompdf->loadHtml($html);
+        // el variable eli feha les option  pdf option + html
+          $dompdf->loadHtml($html);
 
         // (Optional) Setup the paper size and orientation 'portrait' or 'portrait'
-        $dompdf->setPaper('A4', 'landscape');
+        $dompdf->setPaper('A4', 'landscape'); 
 
 
         // Render the HTML as PDF
         $dompdf->render();
 
-        // Output the generated PDF to Browser (force download)
+        
+        // resultat
         $output = $dompdf->output();
         $response = new Response($output);
+        // el google chrome bech ya9rahom
         $response->headers->set('Content-Type', 'application/pdf');
         $response->headers->set('Content-Disposition', 'attachment;filename=mypdf.pdf');
         $response->headers->set('Pragma', 'public');
