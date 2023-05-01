@@ -44,8 +44,8 @@ class UserFormType extends AbstractType
             ])
             ->add('password',TextareaType::class,[
                 "attr"=>[
-                    "class" => "form-control",
-                    'mapped' => false,
+                    "class" => "form-control ",
+                    
                 ]
             ])
         ;

@@ -6,6 +6,8 @@ use App\Repository\RelaisRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\DBAL\Types\Types;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: RelaisRepository::class)]
 class Relais
@@ -16,24 +18,42 @@ class Relais
     private ?int $id = null;
 
     #[ORM\Column(length: 20)]
+    #[Assert\NotBlank(message: "Tu dois saisir votre nom ")]
+    #[Assert\Regex(
+        pattern: '/^[a-zA-Z]+$/',
+        message: "Le nom  doit contenir des caractères alphabétiques uniquement."
+    )]
     private ?string $name = null;
 
     #[ORM\Column(length: 20)]
+    #[Assert\NotBlank(message: "Tu dois saisir votre prenom")]
+    #[Assert\Regex(
+        pattern: '/^[a-zA-Z]+$/',
+        message: "Le prenom  doit contenir des caractères alphabétiques uniquement."
+    )]
     private ?string $lastname = null;
 
     #[ORM\Column(length: 20)]
+    #[Assert\NotBlank(message: "Tu dois saisir votre mot de passe")]
+    #[Assert\Email(
+        message: 'email {{ value }} est invalide',
+    )]    
     private ?string $email = null;
 
     #[ORM\Column(length: 20)]
     private ?string $adresse = null;
 
     #[ORM\Column(length: 20)]
+    #[Assert\Regex(
+        pattern : "/^(Ariana|Beja|Ben Arous|Bizerte|Gabes|Gafsa|Jendouba|Kairouan|Kasserine|Kebili|Kef|Mahdia|Manouba|Medenine|Monastir|Nabeul|Sfax|Sidi Bouzid|Siliana|Sousse|Tataouine|Tozeur|Tunis|Zaghouan)$/",
+        message : "the city must be a valid Tunisian city."
+    )]
     private ?string $city = null;
 
     #[ORM\Column]
     private ?int $number = null;
 
-    #[ORM\OneToMany(mappedBy: 'id_relai', targetEntity: Location::class)]
+    #[ORM\OneToMany(mappedBy: 'relai', targetEntity: Location::class)]
     private Collection $locations;
 
     public function __construct()

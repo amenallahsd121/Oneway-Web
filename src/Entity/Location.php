@@ -24,7 +24,7 @@ class Location
 
     #[ORM\ManyToOne(inversedBy: 'locations')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?relais $id_relai = null;
+    private ?Relais $relai = null;
 
     public function getId(): ?int
     {
@@ -69,12 +69,12 @@ class Location
 
     public function getIdRelai(): ?relais
     {
-        return $this->id_relai;
+        return $this->relai;
     }
 
     public function setIdRelai(?relais $id_relai): self
     {
-        $this->id_relai = $id_relai;
+        $this->relai = $id_relai;
 
         return $this;
     }
