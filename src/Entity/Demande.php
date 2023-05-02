@@ -103,4 +103,8 @@ private ?Colis $idcolis = null;
     }
 
 
+    public function __toString()
+    {
+        return (string) $this->idpersonne->getEmail()  ;
+    }  
 }

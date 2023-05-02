@@ -5,8 +5,8 @@
     <parameter key="kernel.environment">dev</parameter>
     <parameter key="kernel.runtime_environment">%env(default:kernel.environment:APP_RUNTIME_ENV)%</parameter>
     <parameter key="kernel.debug">true</parameter>
-    <parameter key="kernel.build_dir">C:/Users/utilisateur/MeryemGIT/OneWay-symfony-/var/cache/dev</parameter>
-    <parameter key="kernel.cache_dir">C:/Users/utilisateur/MeryemGIT/OneWay-symfony-/var/cache/dev</parameter>
+    <parameter key="kernel.build_dir">C:\Users\utilisateur\MeryemGIT\OneWay-symfony-\var\cache\dev</parameter>
+    <parameter key="kernel.cache_dir">C:\Users\utilisateur\MeryemGIT\OneWay-symfony-\var\cache\dev</parameter>
     <parameter key="kernel.logs_dir">C:\Users\utilisateur\MeryemGIT\OneWay-symfony-\var\log</parameter>
     <parameter key="kernel.bundles" type="collection">
       <parameter key="FrameworkBundle">Symfony\Bundle\FrameworkBundle\FrameworkBundle</parameter>
@@ -24,6 +24,7 @@
       <parameter key="WebpackEncoreBundle">Symfony\WebpackEncoreBundle\WebpackEncoreBundle</parameter>
       <parameter key="KnpPaginatorBundle">Knp\Bundle\PaginatorBundle\KnpPaginatorBundle</parameter>
       <parameter key="RecaptchaBundle">VictorPrdh\RecaptchaBundle\RecaptchaBundle</parameter>
+      <parameter key="EndroidQrCodeBundle">Endroid\QrCodeBundle\EndroidQrCodeBundle</parameter>
     </parameter>
     <parameter key="kernel.bundles_metadata" type="collection">
       <parameter key="FrameworkBundle" type="collection">
@@ -86,6 +87,10 @@
         <parameter key="path">C:\Users\utilisateur\MeryemGIT\OneWay-symfony-\vendor\victor-prdh\recaptcha-bundle\src</parameter>
         <parameter key="namespace">VictorPrdh\RecaptchaBundle</parameter>
       </parameter>
+      <parameter key="EndroidQrCodeBundle" type="collection">
+        <parameter key="path">C:\Users\utilisateur\MeryemGIT\OneWay-symfony-\vendor\endroid\qr-code-bundle\src</parameter>
+        <parameter key="namespace">Endroid\QrCodeBundle</parameter>
+      </parameter>
     </parameter>
     <parameter key="kernel.charset">UTF-8</parameter>
     <parameter key="kernel.container_class">App_KernelDevDebugContainer</parameter>
@@ -127,14 +132,14 @@
     <parameter key="translator.logging">false</parameter>
     <parameter key="translator.default_path">C:\Users\utilisateur\MeryemGIT\OneWay-symfony-/translations</parameter>
     <parameter key="debug.error_handler.throw_at">-1</parameter>
-    <parameter key="debug.container.dump">C:/Users/utilisateur/MeryemGIT/OneWay-symfony-/var/cache/dev/App_KernelDevDebugContainer.xml</parameter>
+    <parameter key="debug.container.dump">C:\Users\utilisateur\MeryemGIT\OneWay-symfony-\var\cache\dev/App_KernelDevDebugContainer.xml</parameter>
     <parameter key="router.request_context.host">localhost</parameter>
     <parameter key="router.request_context.scheme">http</parameter>
     <parameter key="router.request_context.base_url"></parameter>
     <parameter key="router.resource">kernel::loadRoutes</parameter>
     <parameter key="request_listener.http_port">80</parameter>
     <parameter key="request_listener.https_port">443</parameter>
-    <parameter key="serializer.mapping.cache.file">C:/Users/utilisateur/MeryemGIT/OneWay-symfony-/var/cache/dev/serialization.php</parameter>
+    <parameter key="serializer.mapping.cache.file">C:\Users\utilisateur\MeryemGIT\OneWay-symfony-\var\cache\dev/serialization.php</parameter>
     <parameter key="cache.prefix.seed">_C:\Users\utilisateur\MeryemGIT\OneWay-symfony-.App_KernelDevDebugContainer</parameter>
     <parameter key="session.metadata.storage_key">_sf2_meta</parameter>
     <parameter key="session.storage.options" type="collection">
@@ -148,11 +153,11 @@
     <parameter key="session.metadata.update_threshold">0</parameter>
     <parameter key="form.type_extension.csrf.enabled">true</parameter>
     <parameter key="form.type_extension.csrf.field_name">_token</parameter>
-    <parameter key="validator.mapping.cache.file">C:/Users/utilisateur/MeryemGIT/OneWay-symfony-/var/cache/dev/validation.php</parameter>
+    <parameter key="validator.mapping.cache.file">C:\Users\utilisateur\MeryemGIT\OneWay-symfony-\var\cache\dev/validation.php</parameter>
     <parameter key="validator.translation_domain">validators</parameter>
     <parameter key="profiler_listener.only_exceptions">false</parameter>
     <parameter key="profiler_listener.only_main_requests">false</parameter>
-    <parameter key="profiler.storage.dsn">file:C:/Users/utilisateur/MeryemGIT/OneWay-symfony-/var/cache/dev/profiler</parameter>
+    <parameter key="profiler.storage.dsn">file:C:\Users\utilisateur\MeryemGIT\OneWay-symfony-\var\cache\dev/profiler</parameter>
     <parameter key="doctrine.dbal.configuration.class">Doctrine\DBAL\Configuration</parameter>
     <parameter key="doctrine.data_collector.class">Doctrine\Bundle\DoctrineBundle\DataCollector\DoctrineDataCollector</parameter>
     <parameter key="doctrine.dbal.connection.event_manager.class">Symfony\Bridge\Doctrine\ContainerAwareEventManager</parameter>
@@ -217,7 +222,7 @@
     <parameter key="doctrine.orm.second_level_cache.regions_configuration.class">Doctrine\ORM\Cache\RegionsConfiguration</parameter>
     <parameter key="doctrine.orm.auto_generate_proxy_classes">true</parameter>
     <parameter key="doctrine.orm.enable_lazy_ghost_objects">false</parameter>
-    <parameter key="doctrine.orm.proxy_dir">C:/Users/utilisateur/MeryemGIT/OneWay-symfony-/var/cache/dev/doctrine/orm/Proxies</parameter>
+    <parameter key="doctrine.orm.proxy_dir">C:\Users\utilisateur\MeryemGIT\OneWay-symfony-\var\cache\dev/doctrine/orm/Proxies</parameter>
     <parameter key="doctrine.orm.proxy_namespace">Proxies</parameter>
     <parameter key="doctrine.migrations.preferred_em">null</parameter>
     <parameter key="doctrine.migrations.preferred_connection">null</parameter>
@@ -557,7 +562,7 @@
       </argument>
     </service>
     <service id="http_cache.store" class="Symfony\Component\HttpKernel\HttpCache\Store">
-      <argument>C:/Users/utilisateur/MeryemGIT/OneWay-symfony-/var/cache/dev/http_cache</argument>
+      <argument>C:\Users\utilisateur\MeryemGIT\OneWay-symfony-\var\cache\dev/http_cache</argument>
     </service>
     <service id="url_helper" class="Symfony\Component\HttpFoundation\UrlHelper">
       <argument type="service" id="request_stack"/>
@@ -567,7 +572,7 @@
       <tag name="container.no_preload"/>
       <argument type="tagged_iterator" tag="kernel.cache_warmer"/>
       <argument>true</argument>
-      <argument>C:/Users/utilisateur/MeryemGIT/OneWay-symfony-/var/cache/dev/App_KernelDevDebugContainerDeprecations.log</argument>
+      <argument>C:\Users\utilisateur\MeryemGIT\OneWay-symfony-\var\cache\dev/App_KernelDevDebugContainerDeprecations.log</argument>
     </service>
     <service id="cache_clearer" class="Symfony\Component\HttpKernel\CacheClearer\ChainCacheClearer" public="true">
       <tag name="container.private" package="symfony/framework-bundle" version="5.2"/>
@@ -1434,7 +1439,7 @@
       <argument></argument>
       <argument>0</argument>
       <argument>%container.build_id%</argument>
-      <argument>C:/Users/utilisateur/MeryemGIT/OneWay-symfony-/var/cache/dev/pools/system</argument>
+      <argument>C:\Users\utilisateur\MeryemGIT\OneWay-symfony-\var\cache\dev/pools/system</argument>
       <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
@@ -1464,7 +1469,7 @@
       <tag name="monolog.logger" channel="cache"/>
       <argument></argument>
       <argument>0</argument>
-      <argument>C:/Users/utilisateur/MeryemGIT/OneWay-symfony-/var/cache/dev/pools/app</argument>
+      <argument>C:\Users\utilisateur\MeryemGIT\OneWay-symfony-\var\cache\dev/pools/app</argument>
       <argument type="service" id="cache.default_marshaller" on-invalid="ignore"/>
       <call method="setLogger">
         <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
@@ -1750,7 +1755,7 @@
         </argument>
       </argument>
       <argument type="collection">
-        <argument key="cache_dir">C:/Users/utilisateur/MeryemGIT/OneWay-symfony-/var/cache/dev/translations</argument>
+        <argument key="cache_dir">C:\Users\utilisateur\MeryemGIT\OneWay-symfony-\var\cache\dev/translations</argument>
         <argument key="debug">true</argument>
         <argument key="resource_files" type="collection">
           <argument key="af" type="collection">
@@ -2088,6 +2093,7 @@
           <argument>C:\Users\utilisateur\MeryemGIT\OneWay-symfony-\vendor\sensio\framework-extra-bundle\src/translations</argument>
           <argument>C:\Users\utilisateur\MeryemGIT\OneWay-symfony-\vendor\symfony\ux-chartjs/translations</argument>
           <argument>C:\Users\utilisateur\MeryemGIT\OneWay-symfony-\vendor\symfony\webpack-encore-bundle\src/translations</argument>
+          <argument>C:\Users\utilisateur\MeryemGIT\OneWay-symfony-\vendor\endroid\qr-code-bundle\src/translations</argument>
         </argument>
         <argument key="cache_vary" type="collection">
           <argument key="scanned_directories" type="collection">
@@ -2110,6 +2116,7 @@
             <argument>C:\Users\utilisateur\MeryemGIT\OneWay-symfony-\vendor\sensio\framework-extra-bundle\src/translations</argument>
             <argument>C:\Users\utilisateur\MeryemGIT\OneWay-symfony-\vendor\symfony\ux-chartjs/translations</argument>
             <argument>C:\Users\utilisateur\MeryemGIT\OneWay-symfony-\vendor\symfony\webpack-encore-bundle\src/translations</argument>
+            <argument>C:\Users\utilisateur\MeryemGIT\OneWay-symfony-\vendor\endroid\qr-code-bundle\src/translations</argument>
           </argument>
         </argument>
       </argument>
@@ -3059,7 +3066,7 @@
       <argument type="service" id=".service_locator.NUKe30Y.router.default"/>
       <argument>kernel::loadRoutes</argument>
       <argument type="collection">
-        <argument key="cache_dir">C:/Users/utilisateur/MeryemGIT/OneWay-symfony-/var/cache/dev</argument>
+        <argument key="cache_dir">C:\Users\utilisateur\MeryemGIT\OneWay-symfony-\var\cache\dev</argument>
         <argument key="debug">true</argument>
         <argument key="generator_class">Symfony\Component\Routing\Generator\CompiledUrlGenerator</argument>
         <argument key="generator_dumper_class">Symfony\Component\Routing\Generator\Dumper\CompiledUrlGeneratorDumper</argument>
@@ -3172,13 +3179,13 @@
     <service id="annotations.cache_warmer" class="Symfony\Bundle\FrameworkBundle\CacheWarmer\AnnotationsCacheWarmer">
       <tag name="kernel.cache_warmer"/>
       <argument type="service" id="annotations.reader"/>
-      <argument>C:/Users/utilisateur/MeryemGIT/OneWay-symfony-/var/cache/dev/annotations.php</argument>
+      <argument>C:\Users\utilisateur\MeryemGIT\OneWay-symfony-\var\cache\dev/annotations.php</argument>
       <argument>#^Symfony\\(?:Component\\HttpKernel\\|Bundle\\FrameworkBundle\\Controller\\(?!.*Controller$))#</argument>
       <argument>true</argument>
     </service>
     <service id="annotations.cache_adapter" class="Symfony\Component\Cache\Adapter\PhpArrayAdapter">
       <tag name="container.hot_path"/>
-      <argument>C:/Users/utilisateur/MeryemGIT/OneWay-symfony-/var/cache/dev/annotations.php</argument>
+      <argument>C:\Users\utilisateur\MeryemGIT\OneWay-symfony-\var\cache\dev/annotations.php</argument>
       <argument type="service" id="cache.annotations"/>
       <factory class="Symfony\Component\Cache\Adapter\PhpArrayAdapter" method="create"/>
     </service>
@@ -3317,10 +3324,10 @@
           </service>
         </argument>
       </argument>
-      <argument>C:/Users/utilisateur/MeryemGIT/OneWay-symfony-/var/cache/dev/serialization.php</argument>
+      <argument>C:\Users\utilisateur\MeryemGIT\OneWay-symfony-\var\cache\dev/serialization.php</argument>
     </service>
     <service id="serializer.mapping.cache.symfony" class="Psr\Cache\CacheItemPoolInterface">
-      <argument>C:/Users/utilisateur/MeryemGIT/OneWay-symfony-/var/cache/dev/serialization.php</argument>
+      <argument>C:\Users\utilisateur\MeryemGIT\OneWay-symfony-\var\cache\dev/serialization.php</argument>
       <argument type="service" id="cache.serializer"/>
       <factory class="Symfony\Component\Cache\Adapter\PhpArrayAdapter" method="create"/>
     </service>
@@ -3459,7 +3466,7 @@
       <argument>true</argument>
     </service>
     <service id="session.storage.factory.mock_file" class="Symfony\Component\HttpFoundation\Session\Storage\MockFileSessionStorageFactory">
-      <argument>C:/Users/utilisateur/MeryemGIT/OneWay-symfony-/var/cache/dev/sessions</argument>
+      <argument>C:\Users\utilisateur\MeryemGIT\OneWay-symfony-\var\cache\dev/sessions</argument>
       <argument>MOCKSESSID</argument>
       <argument type="service">
         <service class="Symfony\Component\HttpFoundation\Session\Storage\MetadataBag">
@@ -3683,10 +3690,10 @@
     <service id="validator.mapping.cache_warmer" class="Symfony\Bundle\FrameworkBundle\CacheWarmer\ValidatorCacheWarmer">
       <tag name="kernel.cache_warmer"/>
       <argument type="service" id="validator.builder"/>
-      <argument>C:/Users/utilisateur/MeryemGIT/OneWay-symfony-/var/cache/dev/validation.php</argument>
+      <argument>C:\Users\utilisateur\MeryemGIT\OneWay-symfony-\var\cache\dev/validation.php</argument>
     </service>
     <service id="validator.mapping.cache.adapter" class="Symfony\Component\Cache\Adapter\PhpArrayAdapter">
-      <argument>C:/Users/utilisateur/MeryemGIT/OneWay-symfony-/var/cache/dev/validation.php</argument>
+      <argument>C:\Users\utilisateur\MeryemGIT\OneWay-symfony-\var\cache\dev/validation.php</argument>
       <argument type="service" id="cache.validator"/>
       <factory class="Symfony\Component\Cache\Adapter\PhpArrayAdapter" method="create"/>
     </service>
@@ -4085,7 +4092,7 @@
       </call>
     </service>
     <service id="profiler.storage" class="Symfony\Component\HttpKernel\Profiler\FileProfilerStorage">
-      <argument>file:C:/Users/utilisateur/MeryemGIT/OneWay-symfony-/var/cache/dev/profiler</argument>
+      <argument>file:C:\Users\utilisateur\MeryemGIT\OneWay-symfony-\var\cache\dev/profiler</argument>
     </service>
     <service id="profiler_listener" class="Symfony\Component\HttpKernel\EventListener\ProfilerListener">
       <tag name="kernel.event_subscriber"/>
@@ -4132,7 +4139,7 @@
       <tag name="monolog.logger" channel="profiler"/>
       <tag name="data_collector" template="@WebProfiler/Collector/logger.html.twig" id="logger" priority="300"/>
       <argument type="service" id="monolog.logger.profiler" on-invalid="ignore"/>
-      <argument>C:/Users/utilisateur/MeryemGIT/OneWay-symfony-/var/cache/dev/App_KernelDevDebugContainer</argument>
+      <argument>C:\Users\utilisateur\MeryemGIT\OneWay-symfony-\var\cache\dev/App_KernelDevDebugContainer</argument>
       <argument type="service" id="request_stack" on-invalid="ignore"/>
     </service>
     <service id="data_collector.time" class="Symfony\Component\HttpKernel\DataCollector\TimeDataCollector">
@@ -4644,7 +4651,7 @@
         <argument type="service" id=".doctrine.orm.default_metadata_driver"/>
       </call>
       <call method="setProxyDir">
-        <argument>C:/Users/utilisateur/MeryemGIT/OneWay-symfony-/var/cache/dev/doctrine/orm/Proxies</argument>
+        <argument>C:\Users\utilisateur\MeryemGIT\OneWay-symfony-\var\cache\dev/doctrine/orm/Proxies</argument>
       </call>
       <call method="setProxyNamespace">
         <argument>Proxies</argument>
@@ -5010,7 +5017,7 @@
       <argument type="service" id="twig.loader.native_filesystem"/>
       <argument type="collection">
         <argument key="autoescape">name</argument>
-        <argument key="cache">C:/Users/utilisateur/MeryemGIT/OneWay-symfony-/var/cache/dev/twig</argument>
+        <argument key="cache">C:\Users\utilisateur\MeryemGIT\OneWay-symfony-\var\cache\dev/twig</argument>
         <argument key="charset">UTF-8</argument>
         <argument key="debug">true</argument>
         <argument key="strict_variables">true</argument>
@@ -5086,6 +5093,9 @@
       </call>
       <call method="addExtension">
         <argument type="service" id="knp_paginator.twig.extension.pagination"/>
+      </call>
+      <call method="addExtension">
+        <argument type="service" id="Endroid\QrCodeBundle\Twig\QrCodeExtension"/>
       </call>
       <call method="addGlobal">
         <argument>app</argument>
@@ -5288,7 +5298,7 @@
       <argument>,</argument>
     </service>
     <service id="twig.runtime_loader" class="Twig\RuntimeLoader\ContainerRuntimeLoader">
-      <argument type="service" id=".service_locator.pTeli0u"/>
+      <argument type="service" id=".service_locator.8QzOt3J"/>
     </service>
     <service id="twig.error_renderer.html" class="Symfony\Bridge\Twig\ErrorRenderer\TwigErrorRenderer">
       <argument type="service" id="twig"/>
@@ -6481,10 +6491,10 @@
       <argument type="collection">
         <argument key="_default">C:\Users\utilisateur\MeryemGIT\OneWay-symfony-/public/build/entrypoints.json</argument>
       </argument>
-      <argument>C:/Users/utilisateur/MeryemGIT/OneWay-symfony-/var/cache/dev/webpack_encore.cache.php</argument>
+      <argument>C:\Users\utilisateur\MeryemGIT\OneWay-symfony-\var\cache\dev/webpack_encore.cache.php</argument>
     </service>
     <service id="webpack_encore.cache" class="Symfony\Component\Cache\Adapter\PhpArrayAdapter">
-      <argument>C:/Users/utilisateur/MeryemGIT/OneWay-symfony-/var/cache/dev/webpack_encore.cache.php</argument>
+      <argument>C:\Users\utilisateur\MeryemGIT\OneWay-symfony-\var\cache\dev/webpack_encore.cache.php</argument>
       <argument type="service" id="cache.webpack_encore"/>
       <factory class="Symfony\Component\Cache\Adapter\PhpArrayAdapter" method="create"/>
     </service>
@@ -6581,6 +6591,96 @@
     <service id="victor_prdh.recaptcha" class="ReCaptcha\ReCaptcha" public="true">
       <argument>%env(GOOGLE_RECAPTCHA_SECRET_KEY)%</argument>
     </service>
+    <service id="Endroid\QrCodeBundle\Controller\GenerateController" class="Endroid\QrCodeBundle\Controller\GenerateController" public="true" autowire="true" autoconfigure="true">
+      <tag name="controller.service_arguments"/>
+      <argument type="service" id="Endroid\QrCode\Builder\BuilderRegistry"/>
+    </service>
+    <service id="Endroid\QrCode\Writer\BinaryWriter" class="Endroid\QrCode\Writer\BinaryWriter" autowire="true" autoconfigure="true"/>
+    <service id="Endroid\QrCode\Writer\DebugWriter" class="Endroid\QrCode\Writer\DebugWriter" autowire="true" autoconfigure="true"/>
+    <service id="Endroid\QrCode\Writer\EpsWriter" class="Endroid\QrCode\Writer\EpsWriter" autowire="true" autoconfigure="true"/>
+    <service id="Endroid\QrCode\Writer\GifWriter" class="Endroid\QrCode\Writer\GifWriter" autowire="true" autoconfigure="true"/>
+    <service id="Endroid\QrCode\Writer\PdfWriter" class="Endroid\QrCode\Writer\PdfWriter" autowire="true" autoconfigure="true"/>
+    <service id="Endroid\QrCode\Writer\PngWriter" class="Endroid\QrCode\Writer\PngWriter" autowire="true" autoconfigure="true"/>
+    <service id="Endroid\QrCode\Writer\SvgWriter" class="Endroid\QrCode\Writer\SvgWriter" autowire="true" autoconfigure="true"/>
+    <service id="Endroid\QrCode\Writer\WebPWriter" class="Endroid\QrCode\Writer\WebPWriter" autowire="true" autoconfigure="true"/>
+    <service id="Endroid\QrCode\Builder\Builder" class="Endroid\QrCode\Builder\Builder" autowire="true" autoconfigure="true"/>
+    <service id="Endroid\QrCode\Builder\BuilderRegistry" class="Endroid\QrCode\Builder\BuilderRegistry" autowire="true" autoconfigure="true">
+      <call method="addBuilder">
+        <argument>default</argument>
+        <argument type="service">
+          <service class="Endroid\QrCode\Builder\Builder" public="true" autowire="true">
+            <call method="writer">
+              <argument type="service" id="Endroid\QrCode\Writer\PngWriter"/>
+            </call>
+            <call method="size">
+              <argument>300</argument>
+            </call>
+            <call method="margin">
+              <argument>10</argument>
+            </call>
+            <call method="encoding">
+              <argument type="service">
+                <service class="Endroid\QrCode\Encoding\Encoding">
+                  <argument>UTF-8</argument>
+                </service>
+              </argument>
+            </call>
+            <call method="errorCorrectionLevel">
+              <argument type="service">
+                <service class="Endroid\QrCode\ErrorCorrectionLevel\ErrorCorrectionLevelLow"/>
+              </argument>
+            </call>
+            <call method="roundBlockSizeMode">
+              <argument type="service">
+                <service class="Endroid\QrCode\RoundBlockSizeMode\RoundBlockSizeModeMargin"/>
+              </argument>
+            </call>
+            <call method="validateResult">
+              <argument>false</argument>
+            </call>
+          </service>
+        </argument>
+      </call>
+    </service>
+    <service id="Endroid\QrCodeBundle\Twig\QrCodeExtension" class="Endroid\QrCodeBundle\Twig\QrCodeExtension" autowire="true" autoconfigure="true">
+      <tag name="twig.extension"/>
+    </service>
+    <service id="Endroid\QrCodeBundle\Twig\QrCodeRuntime" class="Endroid\QrCodeBundle\Twig\QrCodeRuntime" autowire="true" autoconfigure="true">
+      <tag name="twig.runtime"/>
+      <argument type="service" id="Endroid\QrCode\Builder\BuilderRegistry"/>
+      <argument type="service" id="router.default"/>
+    </service>
+    <service id="endroid_qr_code.default_builder" class="Endroid\QrCode\Builder\Builder" public="true" autowire="true">
+      <call method="writer">
+        <argument type="service" id="Endroid\QrCode\Writer\PngWriter"/>
+      </call>
+      <call method="size">
+        <argument>300</argument>
+      </call>
+      <call method="margin">
+        <argument>10</argument>
+      </call>
+      <call method="encoding">
+        <argument type="service">
+          <service class="Endroid\QrCode\Encoding\Encoding">
+            <argument>UTF-8</argument>
+          </service>
+        </argument>
+      </call>
+      <call method="errorCorrectionLevel">
+        <argument type="service">
+          <service class="Endroid\QrCode\ErrorCorrectionLevel\ErrorCorrectionLevelLow"/>
+        </argument>
+      </call>
+      <call method="roundBlockSizeMode">
+        <argument type="service">
+          <service class="Endroid\QrCode\RoundBlockSizeMode\RoundBlockSizeModeMargin"/>
+        </argument>
+      </call>
+      <call method="validateResult">
+        <argument>false</argument>
+      </call>
+    </service>
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\ApiController" class="App\Controller\ApiController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\ApiController" class="App\Controller\ApiController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\ApiController" class="App\Controller\ApiController" autowire="true" autoconfigure="true" abstract="true"/>
@@ -6642,6 +6742,10 @@
     <service id=".abstract.instanceof.App\Repository\UtilisateurRepository" class="App\Repository\UtilisateurRepository" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Validator\ConstraintValidatorInterface.0.victor_prdh_recaptcha_bundle.recaptcha_validator" class="VictorPrdh\RecaptchaBundle\Validator\Constraints\IsValidCaptchaValidator" public="true" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.victor_prdh_recaptcha_bundle.recaptcha_validator" class="VictorPrdh\RecaptchaBundle\Validator\Constraints\IsValidCaptchaValidator" public="true" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Twig\Extension\ExtensionInterface.0.Endroid\QrCodeBundle\Twig\QrCodeExtension" class="Endroid\QrCodeBundle\Twig\QrCodeExtension" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.Endroid\QrCodeBundle\Twig\QrCodeExtension" class="Endroid\QrCodeBundle\Twig\QrCodeExtension" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Twig\Extension\RuntimeExtensionInterface.0.Endroid\QrCodeBundle\Twig\QrCodeRuntime" class="Endroid\QrCodeBundle\Twig\QrCodeRuntime" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.Endroid\QrCodeBundle\Twig\QrCodeRuntime" class="Endroid\QrCodeBundle\Twig\QrCodeRuntime" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".service_locator.gSv9zYw" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -7020,31 +7124,43 @@
         <argument key="doctrine" type="service_closure" id="doctrine"/>
       </argument>
     </service>
-    <service id=".service_locator.YfThcBc" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.kP7jntT" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
+        <argument key="demandeRepository" type="service_closure" id="App\Repository\DemandeRepository"/>
+        <argument key="offre" type="service_closure" id=".errored..service_locator.kP7jntT.App\Entity\Offre"/>
+      </argument>
+    </service>
+    <service id=".service_locator.p61LK1i" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="UtilisateurRepository" type="service_closure" id="App\Repository\UtilisateurRepository"/>
+        <argument key="offre" type="service_closure" id=".errored..service_locator.p61LK1i.App\Entity\Offre"/>
         <argument key="offreRepository" type="service_closure" id="App\Repository\DemandeRepository"/>
         <argument key="paginator" type="service_closure" id="knp_paginator"/>
       </argument>
     </service>
-    <service id=".service_locator.vwssv54" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator"/>
-      <argument type="collection">
-        <argument key="demandeRepository" type="service_closure" id="App\Repository\DemandeRepository"/>
-      </argument>
-    </service>
-    <service id=".service_locator.MLmbfNW" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.Pr71bG7" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="demandeRepository" type="service_closure" id="App\Repository\DemandeRepository"/>
         <argument key="mailer" type="service_closure" id="mailer.mailer"/>
+        <argument key="offreRepository" type="service_closure" id="App\Repository\OffreRepository"/>
       </argument>
     </service>
-    <service id=".service_locator.g4arXWl" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.dXEmttQ" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="DemandeRepository" type="service_closure" id="App\Repository\DemandeRepository"/>
+        <argument key="UtilisateurRepository" type="service_closure" id="App\Repository\UtilisateurRepository"/>
         <argument key="paginator" type="service_closure" id="knp_paginator"/>
+      </argument>
+    </service>
+    <service id=".service_locator._Nmr6y3" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="DemandeRepository" type="service_closure" id="App\Repository\DemandeRepository"/>
+        <argument key="UtilisateurRepository" type="service_closure" id="App\Repository\UtilisateurRepository"/>
       </argument>
     </service>
     <service id=".service_locator.RFYj4bd" class="Symfony\Component\DependencyInjection\ServiceLocator">
@@ -7058,6 +7174,20 @@
       <argument type="collection">
         <argument key="demande" type="service_closure" id=".errored..service_locator.whSsKfw.App\Entity\Demande"/>
         <argument key="demandeRepository" type="service_closure" id="App\Repository\DemandeRepository"/>
+      </argument>
+    </service>
+    <service id=".service_locator.s6VMFZP" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="Demande" type="service_closure" id=".errored..service_locator.s6VMFZP.App\Entity\Demande"/>
+      </argument>
+    </service>
+    <service id=".service_locator.fihvSuO" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="demande" type="service_closure" id=".errored..service_locator.fihvSuO.App\Entity\Demande"/>
+        <argument key="demandeRepository" type="service_closure" id="App\Repository\DemandeRepository"/>
+        <argument key="offreRepository" type="service_closure" id="App\Repository\OffreRepository"/>
       </argument>
     </service>
     <service id=".service_locator.ZDu8hFs" class="Symfony\Component\DependencyInjection\ServiceLocator">
@@ -7095,6 +7225,14 @@
         <argument key="offre" type="service_closure" id=".errored..service_locator.6rKICIw.App\Entity\Offre"/>
       </argument>
     </service>
+    <service id=".service_locator.Dp9f_JG" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="categorieoffreRepository" type="service_closure" id="App\Repository\CategorieoffreRepository"/>
+        <argument key="offre" type="service_closure" id=".errored..service_locator.Dp9f_JG.App\Entity\Offre"/>
+        <argument key="offreRepository" type="service_closure" id="App\Repository\OffreRepository"/>
+      </argument>
+    </service>
     <service id=".service_locator.uQRUBkf" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -7123,7 +7261,7 @@
         <argument key="trajetoffreRepository" type="service_closure" id="App\Repository\TrajetoffreRepository"/>
       </argument>
     </service>
-    <service id=".service_locator.u5AU1M1" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.fBIDk9k" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Controller\CalendarController::index" type="service_closure" id=".service_locator.4kyR72U"/>
@@ -7133,18 +7271,19 @@
         <argument key="App\Controller\CategorieoffreController::new" type="service_closure" id=".service_locator.RSwt_75"/>
         <argument key="App\Controller\CategorieoffreController::show" type="service_closure" id=".service_locator.4Q4Nqb9"/>
         <argument key="App\Controller\ColisController::addcolis" type="service_closure" id=".service_locator.GQZbvNR"/>
-        <argument key="App\Controller\DemandeController::FrontList" type="service_closure" id=".service_locator.g4arXWl"/>
-        <argument key="App\Controller\DemandeController::delete" type="service_closure" id=".service_locator.whSsKfw"/>
+        <argument key="App\Controller\DemandeController::FrontList" type="service_closure" id=".service_locator.dXEmttQ"/>
+        <argument key="App\Controller\DemandeController::delete" type="service_closure" id=".service_locator.fihvSuO"/>
         <argument key="App\Controller\DemandeController::edit" type="service_closure" id=".service_locator.whSsKfw"/>
-        <argument key="App\Controller\DemandeController::index" type="service_closure" id=".service_locator.YfThcBc"/>
-        <argument key="App\Controller\DemandeController::indexbyoffre" type="service_closure" id=".service_locator.vwssv54"/>
-        <argument key="App\Controller\DemandeController::new" type="service_closure" id=".service_locator.MLmbfNW"/>
-        <argument key="App\Controller\DemandeController::show" type="service_closure" id=".service_locator.RFYj4bd"/>
+        <argument key="App\Controller\DemandeController::index" type="service_closure" id=".service_locator.p61LK1i"/>
+        <argument key="App\Controller\DemandeController::index3" type="service_closure" id=".service_locator.s6VMFZP"/>
+        <argument key="App\Controller\DemandeController::indexbyoffre" type="service_closure" id=".service_locator.kP7jntT"/>
+        <argument key="App\Controller\DemandeController::new" type="service_closure" id=".service_locator.Pr71bG7"/>
+        <argument key="App\Controller\DemandeController::show" type="service_closure" id=".service_locator._Nmr6y3"/>
         <argument key="App\Controller\DemandeController::showback" type="service_closure" id=".service_locator.RFYj4bd"/>
         <argument key="App\Controller\OffreController::FrontList" type="service_closure" id=".service_locator.fgwi7ll"/>
         <argument key="App\Controller\OffreController::delete" type="service_closure" id=".service_locator.uQRUBkf"/>
         <argument key="App\Controller\OffreController::demande" type="service_closure" id=".service_locator.uQRUBkf"/>
-        <argument key="App\Controller\OffreController::edit" type="service_closure" id=".service_locator.uQRUBkf"/>
+        <argument key="App\Controller\OffreController::edit" type="service_closure" id=".service_locator.Dp9f_JG"/>
         <argument key="App\Controller\OffreController::index" type="service_closure" id=".service_locator.ZDu8hFs"/>
         <argument key="App\Controller\OffreController::new" type="service_closure" id=".service_locator.6uX_ybR"/>
         <argument key="App\Controller\OffreController::pdf" type="service_closure" id=".service_locator.6rKICIw"/>
@@ -7166,18 +7305,19 @@
         <argument key="App\Controller\CategorieoffreController:new" type="service_closure" id=".service_locator.RSwt_75"/>
         <argument key="App\Controller\CategorieoffreController:show" type="service_closure" id=".service_locator.4Q4Nqb9"/>
         <argument key="App\Controller\ColisController:addcolis" type="service_closure" id=".service_locator.GQZbvNR"/>
-        <argument key="App\Controller\DemandeController:FrontList" type="service_closure" id=".service_locator.g4arXWl"/>
-        <argument key="App\Controller\DemandeController:delete" type="service_closure" id=".service_locator.whSsKfw"/>
+        <argument key="App\Controller\DemandeController:FrontList" type="service_closure" id=".service_locator.dXEmttQ"/>
+        <argument key="App\Controller\DemandeController:delete" type="service_closure" id=".service_locator.fihvSuO"/>
         <argument key="App\Controller\DemandeController:edit" type="service_closure" id=".service_locator.whSsKfw"/>
-        <argument key="App\Controller\DemandeController:index" type="service_closure" id=".service_locator.YfThcBc"/>
-        <argument key="App\Controller\DemandeController:indexbyoffre" type="service_closure" id=".service_locator.vwssv54"/>
-        <argument key="App\Controller\DemandeController:new" type="service_closure" id=".service_locator.MLmbfNW"/>
-        <argument key="App\Controller\DemandeController:show" type="service_closure" id=".service_locator.RFYj4bd"/>
+        <argument key="App\Controller\DemandeController:index" type="service_closure" id=".service_locator.p61LK1i"/>
+        <argument key="App\Controller\DemandeController:index3" type="service_closure" id=".service_locator.s6VMFZP"/>
+        <argument key="App\Controller\DemandeController:indexbyoffre" type="service_closure" id=".service_locator.kP7jntT"/>
+        <argument key="App\Controller\DemandeController:new" type="service_closure" id=".service_locator.Pr71bG7"/>
+        <argument key="App\Controller\DemandeController:show" type="service_closure" id=".service_locator._Nmr6y3"/>
         <argument key="App\Controller\DemandeController:showback" type="service_closure" id=".service_locator.RFYj4bd"/>
         <argument key="App\Controller\OffreController:FrontList" type="service_closure" id=".service_locator.fgwi7ll"/>
         <argument key="App\Controller\OffreController:delete" type="service_closure" id=".service_locator.uQRUBkf"/>
         <argument key="App\Controller\OffreController:demande" type="service_closure" id=".service_locator.uQRUBkf"/>
-        <argument key="App\Controller\OffreController:edit" type="service_closure" id=".service_locator.uQRUBkf"/>
+        <argument key="App\Controller\OffreController:edit" type="service_closure" id=".service_locator.Dp9f_JG"/>
         <argument key="App\Controller\OffreController:index" type="service_closure" id=".service_locator.ZDu8hFs"/>
         <argument key="App\Controller\OffreController:new" type="service_closure" id=".service_locator.6uX_ybR"/>
         <argument key="App\Controller\OffreController:pdf" type="service_closure" id=".service_locator.6rKICIw"/>
@@ -7864,12 +8004,12 @@
       <argument type="service" id="security.token_storage"/>
     </service>
     <service id="debug.argument_resolver.service.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
-      <argument type="service" id=".service_locator.u5AU1M1"/>
+      <argument type="service" id=".service_locator.fBIDk9k"/>
     </service>
     <service id="debug.argument_resolver.default.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver"/>
     <service id="debug.argument_resolver.variadic.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\VariadicValueResolver"/>
     <service id="debug.argument_resolver.not_tagged_controller.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
-      <argument type="service" id=".service_locator.u5AU1M1"/>
+      <argument type="service" id=".service_locator.fBIDk9k"/>
     </service>
     <service id="debug.traced.messenger.bus.default.inner" class="Symfony\Component\Messenger\MessageBus">
       <argument type="iterator">
@@ -7891,9 +8031,14 @@
     <service id=".errored..service_locator.xUrKPVU.Symfony\Component\Config\Loader\LoaderInterface" class="Symfony\Component\Config\Loader\LoaderInterface"/>
     <service id=".errored..service_locator.4Q4Nqb9.App\Entity\Categorieoffre" class="App\Entity\Categorieoffre"/>
     <service id=".errored..service_locator.rOSfREu.App\Entity\Categorieoffre" class="App\Entity\Categorieoffre"/>
+    <service id=".errored..service_locator.kP7jntT.App\Entity\Offre" class="App\Entity\Offre"/>
+    <service id=".errored..service_locator.p61LK1i.App\Entity\Offre" class="App\Entity\Offre"/>
     <service id=".errored..service_locator.RFYj4bd.App\Entity\Demande" class="App\Entity\Demande"/>
     <service id=".errored..service_locator.whSsKfw.App\Entity\Demande" class="App\Entity\Demande"/>
+    <service id=".errored..service_locator.s6VMFZP.App\Entity\Demande" class="App\Entity\Demande"/>
+    <service id=".errored..service_locator.fihvSuO.App\Entity\Demande" class="App\Entity\Demande"/>
     <service id=".errored..service_locator.6rKICIw.App\Entity\Offre" class="App\Entity\Offre"/>
+    <service id=".errored..service_locator.Dp9f_JG.App\Entity\Offre" class="App\Entity\Offre"/>
     <service id=".errored..service_locator.uQRUBkf.App\Entity\Offre" class="App\Entity\Offre"/>
     <service id=".errored..service_locator.O7K0vWk.App\Entity\Trajetoffre" class="App\Entity\Trajetoffre"/>
     <service id=".errored..service_locator.aKYUUrp.App\Entity\Trajetoffre" class="App\Entity\Trajetoffre"/>
@@ -8595,7 +8740,7 @@
     <service id="cache.app.recorder_inner" class="Symfony\Component\Cache\Adapter\FilesystemAdapter">
       <argument>D7XnZKX-9Q</argument>
       <argument>0</argument>
-      <argument>C:/Users/utilisateur/MeryemGIT/OneWay-symfony-/var/cache/dev/pools/app</argument>
+      <argument>C:\Users\utilisateur\MeryemGIT\OneWay-symfony-\var\cache\dev/pools/app</argument>
       <argument type="service" id="cache.default_marshaller" on-invalid="ignore"/>
       <call method="setLogger">
         <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
@@ -8605,7 +8750,7 @@
       <argument>ZHR0pYF7SQ</argument>
       <argument>0</argument>
       <argument>%container.build_id%</argument>
-      <argument>C:/Users/utilisateur/MeryemGIT/OneWay-symfony-/var/cache/dev/pools/system</argument>
+      <argument>C:\Users\utilisateur\MeryemGIT\OneWay-symfony-\var\cache\dev/pools/system</argument>
       <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
@@ -8613,7 +8758,7 @@
       <argument>WMuGBYl-dL</argument>
       <argument>0</argument>
       <argument>%container.build_id%</argument>
-      <argument>C:/Users/utilisateur/MeryemGIT/OneWay-symfony-/var/cache/dev/pools/system</argument>
+      <argument>C:\Users\utilisateur\MeryemGIT\OneWay-symfony-\var\cache\dev/pools/system</argument>
       <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
@@ -8621,7 +8766,7 @@
       <argument>L0NWdH5qyF</argument>
       <argument>0</argument>
       <argument>%container.build_id%</argument>
-      <argument>C:/Users/utilisateur/MeryemGIT/OneWay-symfony-/var/cache/dev/pools/system</argument>
+      <argument>C:\Users\utilisateur\MeryemGIT\OneWay-symfony-\var\cache\dev/pools/system</argument>
       <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
@@ -8629,7 +8774,7 @@
       <argument>DjleN8En-u</argument>
       <argument>0</argument>
       <argument>%container.build_id%</argument>
-      <argument>C:/Users/utilisateur/MeryemGIT/OneWay-symfony-/var/cache/dev/pools/system</argument>
+      <argument>C:\Users\utilisateur\MeryemGIT\OneWay-symfony-\var\cache\dev/pools/system</argument>
       <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
@@ -8637,14 +8782,14 @@
       <argument>08Cv+db9So</argument>
       <argument>0</argument>
       <argument>%container.build_id%</argument>
-      <argument>C:/Users/utilisateur/MeryemGIT/OneWay-symfony-/var/cache/dev/pools/system</argument>
+      <argument>C:\Users\utilisateur\MeryemGIT\OneWay-symfony-\var\cache\dev/pools/system</argument>
       <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
     <service id="cache.messenger.restart_workers_signal.recorder_inner" class="Symfony\Component\Cache\Adapter\FilesystemAdapter">
       <argument>EVbz59iKhl</argument>
       <argument>0</argument>
-      <argument>C:/Users/utilisateur/MeryemGIT/OneWay-symfony-/var/cache/dev/pools/app</argument>
+      <argument>C:\Users\utilisateur\MeryemGIT\OneWay-symfony-\var\cache\dev/pools/app</argument>
       <argument type="service" id="cache.default_marshaller" on-invalid="ignore"/>
       <call method="setLogger">
         <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
@@ -8654,7 +8799,7 @@
       <argument>O1rupeATKn</argument>
       <argument>0</argument>
       <argument>%container.build_id%</argument>
-      <argument>C:/Users/utilisateur/MeryemGIT/OneWay-symfony-/var/cache/dev/pools/system</argument>
+      <argument>C:\Users\utilisateur\MeryemGIT\OneWay-symfony-\var\cache\dev/pools/system</argument>
       <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
@@ -8664,7 +8809,7 @@
       <argument>uwM8od0xYC</argument>
       <argument>0</argument>
       <argument>%container.build_id%</argument>
-      <argument>C:/Users/utilisateur/MeryemGIT/OneWay-symfony-/var/cache/dev/pools/system</argument>
+      <argument>C:\Users\utilisateur\MeryemGIT\OneWay-symfony-\var\cache\dev/pools/system</argument>
       <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
@@ -8672,17 +8817,18 @@
       <argument>mmVkQomBrQ</argument>
       <argument>0</argument>
       <argument>%container.build_id%</argument>
-      <argument>C:/Users/utilisateur/MeryemGIT/OneWay-symfony-/var/cache/dev/pools/system</argument>
+      <argument>C:\Users\utilisateur\MeryemGIT\OneWay-symfony-\var\cache\dev/pools/system</argument>
       <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
-    <service id=".service_locator.pTeli0u" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.8QzOt3J" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="Symfony\Bridge\Twig\Extension\CsrfRuntime" type="service_closure" id="twig.runtime.security_csrf"/>
         <argument key="Symfony\Bridge\Twig\Extension\HttpKernelRuntime" type="service_closure" id="twig.runtime.httpkernel"/>
         <argument key="Symfony\Bridge\Twig\Extension\SerializerRuntime" type="service_closure" id="twig.runtime.serializer"/>
         <argument key="Symfony\Component\Form\FormRenderer" type="service_closure" id="twig.form.renderer"/>
+        <argument key="Endroid\QrCodeBundle\Twig\QrCodeRuntime" type="service_closure" id="Endroid\QrCodeBundle\Twig\QrCodeRuntime"/>
       </argument>
     </service>
     <service id="Psr\Container\ContainerInterface" alias="service_container">
@@ -8853,9 +8999,12 @@
     <service id="Symfony\WebpackEncoreBundle\Asset\EntrypointLookupCollectionInterface" alias="webpack_encore.entrypoint_lookup_collection"/>
     <service id="Symfony\WebpackEncoreBundle\Asset\EntrypointLookupInterface" alias="webpack_encore.entrypoint_lookup[_default]"/>
     <service id="Knp\Component\Pager\PaginatorInterface" alias="knp_paginator"/>
+    <service id="Endroid\QrCode\Builder\BuilderInterface" alias="Endroid\QrCode\Builder\Builder"/>
+    <service id="Endroid\QrCode\Builder\BuilderRegistryInterface" alias="Endroid\QrCode\Builder\BuilderRegistry"/>
+    <service id="Endroid\QrCode\Builder\BuilderInterface $defaultQrCodeBuilder" alias="endroid_qr_code.default_builder"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.gSv9zYw" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.u5AU1M1"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.fBIDk9k"/>
     <service id="session" alias=".session.do-not-use" public="true">
       <deprecated package="symfony/framework-bundle" version="5.3">The "%alias_id%" service and "SessionInterface" alias are deprecated, use "$requestStack-&gt;getSession()" instead.</deprecated>
     </service>
@@ -8881,10 +9030,16 @@
     <service id=".service_locator.XDGmiR3" alias=".1_ServiceLocator~SZ4bq2F"/>
     <service id=".service_locator.0GV1BZZ" alias=".service_locator.gSv9zYw"/>
     <service id=".service_locator.TCV13j7" alias=".service_locator.RSwt_75"/>
+    <service id=".service_locator.3V_bxSn" alias=".service_locator.p61LK1i"/>
+    <service id=".service_locator.s2DST1d" alias=".service_locator.Pr71bG7"/>
+    <service id=".service_locator.ncc9RDA" alias=".service_locator.dXEmttQ"/>
+    <service id=".service_locator.Qgx_0r0" alias=".service_locator._Nmr6y3"/>
+    <service id=".service_locator.LWWVv2v" alias=".service_locator.fihvSuO"/>
     <service id=".service_locator.WPKYtA1" alias=".service_locator.fgwi7ll"/>
     <service id=".service_locator.O1yYoBm" alias=".service_locator.6uX_ybR"/>
+    <service id=".service_locator.TxH805t" alias=".service_locator.Dp9f_JG"/>
     <service id=".service_locator.8V.gPmo" alias=".service_locator.F5ORLwU"/>
-    <service id=".service_locator.DzgFzcj" alias=".service_locator.u5AU1M1"/>
+    <service id=".service_locator.dup4x0N" alias=".service_locator.fBIDk9k"/>
     <service id=".service_locator.C_sXwkA" alias=".service_locator.lrGgBvN"/>
     <service id=".service_locator.NQKfBlp" alias=".service_locator.BFhDobE"/>
     <service id=".service_locator.nk0lT0X" alias=".service_locator.1kmbKC8"/>
@@ -8918,17 +9073,21 @@
     <service id=".service_locator.aoNjsh7" alias=".service_locator.4Q4Nqb9"/>
     <service id=".service_locator.Uw09fmL" alias=".service_locator.rOSfREu"/>
     <service id=".service_locator.FPFiL9q" alias=".service_locator.GQZbvNR"/>
-    <service id=".service_locator.6zsVFmX" alias=".service_locator.YfThcBc"/>
-    <service id=".service_locator.hquEXms" alias=".service_locator.vwssv54"/>
-    <service id=".service_locator.TjX7Tpo" alias=".service_locator.MLmbfNW"/>
-    <service id=".service_locator.BgVeWzQ" alias=".service_locator.g4arXWl"/>
+    <service id=".service_locator.YnWeejC" alias=".service_locator.kP7jntT"/>
+    <service id=".service_locator.aLtlJga" alias=".service_locator.p61LK1i"/>
+    <service id=".service_locator.txg5T67" alias=".service_locator.Pr71bG7"/>
+    <service id=".service_locator.qtN2ayR" alias=".service_locator.dXEmttQ"/>
+    <service id=".service_locator.BHbwp.5" alias=".service_locator._Nmr6y3"/>
     <service id=".service_locator.zEoJKJL" alias=".service_locator.RFYj4bd"/>
     <service id=".service_locator.EAp4xXj" alias=".service_locator.whSsKfw"/>
+    <service id=".service_locator.WHadS77" alias=".service_locator.s6VMFZP"/>
+    <service id=".service_locator.0IeOVmb" alias=".service_locator.fihvSuO"/>
     <service id=".service_locator.jbMaTa6" alias=".service_locator.ZDu8hFs"/>
     <service id=".service_locator.FSMcV5h" alias=".service_locator.3BqWL_x"/>
     <service id=".service_locator.kLliVtF" alias=".service_locator.fgwi7ll"/>
     <service id=".service_locator.DRfHqqi" alias=".service_locator.6uX_ybR"/>
     <service id=".service_locator.0KAtJqa" alias=".service_locator.6rKICIw"/>
+    <service id=".service_locator.cBvvMhI" alias=".service_locator.Dp9f_JG"/>
     <service id=".service_locator.kC.se5l" alias=".service_locator.uQRUBkf"/>
     <service id=".service_locator.S0UeBLP" alias=".service_locator.F5ORLwU"/>
     <service id=".service_locator.wIeT6ig" alias=".service_locator.O7K0vWk"/>

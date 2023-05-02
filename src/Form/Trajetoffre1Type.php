@@ -9,6 +9,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\Type;
+use Symfony\Component\Validator\Constraints\Regex;
 use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\Callback;
@@ -18,6 +19,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
+
 class Trajetoffre1Type extends AbstractType
 {  private $entityManager;
 
@@ -42,6 +44,10 @@ class Trajetoffre1Type extends AbstractType
         ])
         ->add('adddepartoffre', TextType::class, [
             'constraints' => [
+                new Regex([
+                    'pattern' => '/^[A-Z]/',
+                    'message' => 'le premier lettre doit etre majiscule',
+                ]),
                 new NotBlank(['message' => 'L\'adresse de départ est obligatoire.']),
                 new Length([
                     'min' => 3,
@@ -55,6 +61,10 @@ class Trajetoffre1Type extends AbstractType
         ])
         ->add('addarriveoffre', TextType::class, [
             'constraints' => [
+                new Regex([
+                    'pattern' => '/^[A-Z]/',
+                    'message' => 'le premier lettre doit etre majiscule',
+                ]),
                 new NotBlank(['message' => 'L\'adresse d\'arrivée est obligatoire.']),
                 new Length([
                     'min' => 3,
@@ -76,11 +86,11 @@ class Trajetoffre1Type extends AbstractType
       
         ->add('nbreescaleoffre', IntegerType::class, [
             'constraints' => [
+                
                 new Type([
                     'type' => 'integer',
                     'message' => 'Le nombre d\'escales doit être un nombre entier.'
                 ]),
-                new Positive(['message' => 'Le nombre d\'escales doit être un nombre positif ou zéro.']),
             ]
         ])
 

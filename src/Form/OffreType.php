@@ -12,7 +12,8 @@ use Symfony\Component\Validator\Constraints\Range;
 use VictorPrdh\RecaptchaBundle\Form\ReCaptchaType;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\Callback;
-
+use Symfony\Component\Validator\Constraints\GreaterThan;
+use Symfony\Component\Validator\Constraints\DateTime;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Positive;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -43,8 +44,6 @@ class OffreType extends AbstractType
             ])
             ->add('maxretard', IntegerType::class, [
                 'constraints' => [
-                    new NotBlank(['message' => 'Le nombre maximum de minutes de retard est obligatoire.']),
-                    new Positive(['message' => 'Le nombre maximum de minutes de retard doit être un entier positif.']),
                 ],
             ])
             ->add('prixoffre', MoneyType::class, [
@@ -61,10 +60,10 @@ class OffreType extends AbstractType
                 'required' => false,
                 'widget' => 'single_text',
 
-               
+              
                 'constraints' => [
+                    new GreaterThan('today'),
                     new NotBlank(['message' => 'Le Date est obligatoire.']),
-                    new Callback([$this, 'validateDatesortieoffre']),
                 ],
             ])
             ->add('catoffreid', EntityType::class, [
@@ -87,13 +86,7 @@ class OffreType extends AbstractType
 
             ->add('save', SubmitType::class, ['label' => 'Enregister']) ;
     }
-    public function validateDatesortieoffre($value, ExecutionContextInterface $context)
-    {
-        if ($value && $value > new \DateTime()) {
-            $context->buildViolation('La date de sortie doit être supérieure à la date actuelle.')
-                ->addViolation();
-        }
-    }
+ 
 
 
     public function configureOptions(OptionsResolver $resolver): void

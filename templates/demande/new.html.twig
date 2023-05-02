@@ -1,65 +1,14 @@
 {% extends 'baseBack.html.twig' %}
 
-{% block title %}Nouveau  Demande{% endblock %}
+{% block title %}Ajouter Demande{% endblock %}
 
 {% block body %}
-<style>
-		body {
-			background-color: #000c20;
-		}
-		.form-container {
-			margin-top: -120px;
-		}
-		form {
-			padding: 200px;
-			background-color: #000c20;
-			margin-left: 100px; /* add margin to move form to the right */
-		}
-		input[type="text"],
-		select {
-			width: 500px; /* set width of text inputs and select */
-			font-size: 19px; /* set font size for text inputs and select */
-			padding: 18px; /* set padding for text inputs and select */
-			border: none; /* remove border */
-			background-color: white; /* set background color for text inputs and select */
-			border-radius: 5px; /* round the corners of text inputs and select */
-			margin-bottom: 10px; /* add some space between form fields */
-		}
-		label {
-			display: inline-block;
-			width: 100px; /* adjust as needed */
-			margin-right: 7px; /* adjust as needed */
-			font-size: 16px; /* set font size for labels */
-			font-weight: bold; /* make labels bold */
-			color: white;
-		}
-        .form-table {
-    width: 100%;
-    max-width: 600px;
-    margin: 0 auto;
-    border-collapse: collapse;
-    margin-left: -145px;
-    	margin-top: -80px;
-}
-.form-table td {
-    padding: 10px;
-  
-}
-.form-table td:first-child {
-    width: 150px;
-    font-weight: bold;
-}
-</style>
-<section class="contact-form-area section-bg pt-115 pb-120 fix" data-background="{{ asset('assets/img/offre/this2.png') }}">
+						{{ include('demande/_form.html.twig') }}
 
- {% block form %}
-{{form_start(form,{'attr': {'novalidate': 'novalidate'}} )}}
-    <h1> Demande</h1>
-    <a href="{{ path('app_offre_Front') }}">retour</a>
-
-    {{ include('demande/_form.html.twig') }}
-
-    {{form_end(form)}}
-	</select>
 {% endblock %}
-{% endblock %}
+
+
+					
+
+	
+

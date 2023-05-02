@@ -1,12 +1,14 @@
 <?php
 
 namespace App\Entity;
+use DateTime;
 use App\Entity\Utilisateur;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\OffreRepository;
-use DateTime;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Mapping\ClassMetadata;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: OffreRepository::class)]
 
@@ -208,6 +210,6 @@ private ?Utilisateur $iduser = null;
 
         return $this;
     }
-  
+ 
 
 }

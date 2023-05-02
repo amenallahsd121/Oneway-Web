@@ -1,60 +1,125 @@
-{% extends 'base.html.twig' %}
+{% extends 'baseback.html.twig' %}
 
-{% block title %}Demande index{% endblock %}
+{% block title %}Demandes
+{% endblock %}
 
 {% block body %}
-<style>
+        <link rel="stylesheet" href="assets/css/slicknav.css">
+        <link rel="stylesheet" href="assets/css/slick.css">
+
+	<style>
 
 		body {
 			background-color: #000c20;
 
 		}
 	</style>
-<!--? slider Area Start-->
-        <div class="slider-area ">
-            <div class="single-slider hero-overly slider-height2 d-flex align-items-center" data-background="assets/img/hero/about.jpg">
-               <div class="container">
-               <div class="row">
-        <div class="col-lg-8 mb-5 mb-lg-0">
-    <div class="row">
-       <h1 style="font-size: 40px; color: white;">les demandes </h1>
-    </div></div>
-        <div class="col-lg-8 mb-5 mb-lg-0">
-            <div class="blog_left_sidebar">
-            
-        {% for demande in demandes %}
-                <article class="blog_item">
-                    <div class="blog_item_img">
-                        <img class="card-img rounded-0" src="assets/img/blog/single_blog_1.png" alt="">
-                        <a href="#" class="blog_item_date">
-                           {{ demande.idoffre.idtrajetoffre.description}}
-                        </a>
-                    </div>
+	<!--? slider Area Start-->
+	<section  class="contact-form-area section-bg pt-115  fix" data-background="{{ asset('assets/img/offre/d1.jpg') }}">
+		<div class="row">
+			<div
+				class="col-lg-12">
+				<!-- Section Tittle -->
+				<div class="section-tittle text-center mb-80">
+					<h2>
+						les Demandes  a l'Offre N°{{ Offre.idoffre}}
+					</h2>
 
-                    <div class="blog_details">
-                        <a class="d-inline-block" href="#">
-                            <h2>demande </h2>
-                        </a>
-                        <p>{{ demande.descriptiondemande  }}</p>
-                        <ul class="blog-info-link">
-                                                    <li><a href="#"><i class="fas fa-dollar-sign"></i>{{demande.idpersonne.email}}</a></li>
+					<span>vous avez
+						{{ Offre.nbredemande}}
+						Demandes
+					</span>
+					<span>vous pouvez Scanner Qrcode et obtenir les informations de demandeurs</span>
+	
+          <a href="{{ path('app_offre_Front') }}" class="btn btn-light" style=" margin-left: 10px;margin-bottom: 10px;">
+		Retour 
+								</a>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section class="blog_area section-padding">
+		<div class="container">
+			<div class="row">
 
-                            <li><a href="#"><i class="fas fa-dollar-sign"></i>{{demande.prix}}</a></li>
-                                    <i class="bi bi-plus"></i></a></li>
-                            <li><a href="{{ path('app_demande_delete', {'iddemande': demande.iddemande}) }}" class="btn btn-light" style="padding: 0.75rem 1rem;">
-                                    <i class="bi bi-trash"></i>
-                            </a></li>
-                        </ul>
-                    </div>
-                </article>
-                {% endfor %}
+				<div class="col-lg-8 mb-5 mb-lg-0">
+					<div class="blog_left_sidebar">
 
-{{ knp_pagination_render(pagination, '@KnpPaginator/Pagination/bootstrap_v5_pagination.html.twig') }}
+						{% for demande in pagination %}
+							<article class="blog_item">
+								<div class="blog_item_img">
+									<img class="card-img rounded-0" src="assets/img/blog/single_blog_1.png" alt="">
+									<a href="#" class="blog_item_date">
+										{{ demande.idoffre.idtrajetoffre.description}}
+									</a>
+								</div>
 
-          </div>
-        </div>
-    </div>
-</div>
-                  </div></div> </div>
-          
+								<div class="blog_details">
+									<a class="d-inline-block" href="#">
+										<h2>demande
+										</h2>
+									</a>
+									<p>{{ demande.descriptiondemande  }}</p>
+									<ul class="blog-info-link">
+
+										<li>
+											<a href="#">
+												<i class="fas fa-dollar-sign"></i>
+												{{demande.prix}}
+											</a>
+										</li>
+										<i class="bi bi-plus"></i>
+
+										<li >
+											{{ include('demande/_delete_form.html.twig') }}
+										</li>
+									</ul>
+
+								</div>
+							</article>
+
+
+						{% else %}
+							<tr>
+								<td colspan="4">no records found</td>
+							</tr>
+						{% endfor %}
+
+
+					</div>
+
+				</div>
+
+				<div class="col-lg-4">
+					<div class="blog_right_sidebar">
+
+						{% for demande in pagination %}
+
+
+							<asideclass="blog_item">
+								<article class="blog_item">
+									<div class="card">
+
+										<div class="card-body">
+
+											<div class='text-center'>
+												<h2>Contactez le Demandeur!</h2>
+												<img src="{{ qr_code_data_uri(demande) }}" alt="QR code" class="img-fluid" style='max-width:55%;height: auto;'>
+											</div>
+										</div>
+									</div>
+								</article>
+							</aside>
+						{% endfor %}
+					</div>
+				</div>
+			</div>
+		</div>
+ <nav class="blog-pagination justify-content-center d-flex">
+                                                	{{ knp_pagination_render(pagination, '@KnpPaginator/Pagination/bootstrap_v5_pagination.html.twig') }}
+
+                                </ul>
+                            </nav>
+	</section>
 {% endblock %}
+

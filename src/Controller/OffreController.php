@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use DateTime;
+use DateTimeZone;
 use Dompdf\Dompdf;
 use Dompdf\Options;
 use App\Entity\Offre;
@@ -68,6 +69,7 @@ class OffreController extends AbstractController
 public function FrontList(OffreRepository $offreRepository,UtilisateurRepository $utilisateurRepository,Request $request, PaginatorInterface $paginator,): Response
 {
     // Retrieve offers using findBy method
+    
     $offres = $offreRepository->findByIdUser(69);
     $user = $utilisateurRepository->find(69);
     $rdvs = [];
@@ -94,31 +96,21 @@ public function FrontList(OffreRepository $offreRepository,UtilisateurRepository
     public function new(TexterInterface $texter, UtilisateurRepository $UtilisateurRepository,Request $request, OffreRepository $offreRepository, CategorieoffreRepository $categorieoffreRepository): Response
     { 
         $offre = new Offre();
+        
         $form = $this->createForm(OffreType::class, $offre);
-        $timezone = new \DateTimeZone('Europe/Paris');
-        $now = \DateTime::createFromFormat('Y-m-d H:i:s', '2023-04-08 12:00:00', $timezone);
-        $datetime = new DateTime();
-        $formData = $form->getData();
-
-        $datetime = $formData->getDatesortieoffre();
-        if ($now >=  $datetime) {
-            $offre=$offre->setEtat("en cours");
-        } else {
-            $dateString = 'N/A';
-        }
-
-        if ($now !== null) {
-            $offre->setDateoffre($now);
-        } 
-        
-
-        
-        if ($datetime !== null) {
-            $formData->setDatesortieoffre($dateString);
-        } 
+        $now = new DateTime();
+        $now->setTimezone(new DateTimeZone('Europe/London'));    // Another way
+        $now->getTimezone();
+        $offre->setDateoffre($now);
+         $offre=$offre->setEtat("en cours");
         $user=$UtilisateurRepository->find(69);
-        $formData->setIdUser($user);
+        $offre=$offre->setIdUser($user);
+       $of=$offreRepository->findAll();
+       foreach ($of as $f){
+$h=$f ->getDatesortieoffre();   
 
+if ($h < $now){            $offreRepository->remove($f, true);
+}   }
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -158,7 +150,7 @@ public function FrontList(OffreRepository $offreRepository,UtilisateurRepository
     }
 
     #[Route('/{idoffre}/edit', name: 'app_offre_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Offre $offre, OffreRepository $offreRepository): Response
+    public function edit(Request $request, Offre $offre, OffreRepository $offreRepository, CategorieoffreRepository $categorieoffreRepository): Response
     {
         $form = $this->createForm(OffreType::class, $offre);
         $form->handleRequest($request);
@@ -172,6 +164,9 @@ public function FrontList(OffreRepository $offreRepository,UtilisateurRepository
         return $this->renderForm('offre/edit.html.twig', [
             'offre' => $offre,
             'form' => $form,
+            'categorieoffres' => $categorieoffreRepository->findAll(),
+            'offres' => $offreRepository->findAll(),
+
         ]);
     }
     #[Route('/{idoffre}/demande', name: 'app_offre_demande', methods: ['GET', 'POST'])]

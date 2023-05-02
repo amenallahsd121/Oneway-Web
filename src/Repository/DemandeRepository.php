@@ -47,8 +47,16 @@ class DemandeRepository extends ServiceEntityRepository
             ->getResult()
    ;
   }
-
-  
+  public function findByidoffre($value): array
+  {
+      return $this->createQueryBuilder('o')
+          ->andWhere('o.idoffre= :val')
+        ->setParameter('val', $value)
+         ->getQuery()
+          ->getResult()
+ ;
+}
+}
 //    public function findByExampleField($value): array
 //    {
 //        return $this->createQueryBuilder('d')
@@ -70,4 +78,4 @@ class DemandeRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
-}
+
