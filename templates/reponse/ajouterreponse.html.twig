@@ -1,0 +1,48 @@
+{% extends 'backbase.html.twig' %}
+
+
+{% block title %}
+	Ajouter Reponse
+{% endblock %}
+
+
+{% block body %}
+
+
+{{ form_start(form,{'attr': {'novalidate': 'novalidate'}}) }}
+
+<div class="col-12 grid-margin stretch-card">
+  <div class="card">
+    <div class="card-body">
+      <h4 class="card-title">Ajouter Reponse</h4>
+      <p class="card-description">Veuillez saisir la  reponse :</p>
+
+      {{ form_start(form,{'attr': {'novalidate': 'novalidate'}}) }}
+
+      <div class="form-group">
+        <textarea 
+          {{ form_widget(form.text_rep, {
+            'attr': {
+              'class': 'form-control',
+              'id': 'exampleTextarea1',
+              'rows': 4,
+            }
+          }) }}
+          
+        </textarea>
+        {{ form_errors(form.text_rep) }}
+      </div>
+      
+      <div class="form-group">
+        {{ form_widget(form.Repondre) }}
+        <a href="{{ path ('app_reponse') }}" class="btn btn-dark">Annuler</a>
+      </div>
+      
+      {{ form_end(form) }}
+    </div>
+  </div>
+</div>
+
+{{ form_end(form) }}
+
+{% endblock %}

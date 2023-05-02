@@ -2,6 +2,18 @@
 
 namespace App\Entity;
 
+<<<<<<< HEAD
+use Doctrine\DBAL\Types\Types;
+use Doctrine\ORM\Mapping as ORM;
+use App\Repository\UtilisateurRepository;
+
+
+
+
+#[ORM\MappedSuperclass]
+#[ORM\Entity(repositoryClass: UtilisateurRepository::class)]
+
+=======
 use App\Repository\UtilisateurRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -9,11 +21,53 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 
 #[ORM\Entity(repositoryClass: UtilisateurRepository::class)]
+>>>>>>> origin/main
 class Utilisateur
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+<<<<<<< HEAD
+    private ?int $id = null ;
+
+
+
+    #[ORM\Column(length:50)]
+    private ?string $name = null ;
+   
+
+    #[ORM\Column(length:50)]
+    private ?string $lastname = null ;
+   
+    #[ORM\Column(length:50)]
+    private ?string $email = null ;
+   
+
+
+    #[ORM\Column(length:50)]
+    private ?string $adresse = null ;
+
+
+    #[ORM\Column(length:50)]
+    private ?string $type = null ;
+    
+
+    #[ORM\Column(type: "date")]
+    private $birthdate;
+
+
+    #[ORM\Column(length:50)]
+    private ?string $password = null ;
+  
+
+    #[ORM\Column(length:50)]
+    private ?int $nbPoint = null ;
+ 
+
+    #[ORM\Column(length:50)]
+    private ?int $code = null ;
+
+=======
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
@@ -81,6 +135,7 @@ class Utilisateur
 
         return $this;
     }
+>>>>>>> origin/main
 
     public function getId(): ?int
     {
@@ -173,12 +228,21 @@ class Utilisateur
 
     public function getNbPoint(): ?int
     {
+<<<<<<< HEAD
+        return $this->nbPoint;
+    }
+
+    public function setNbPoint(int $nbPoint): self
+    {
+        $this->nbPoint = $nbPoint;
+=======
         return $this->nb_point;
     }
 
     public function setNbPoint(?int $nb_point): self
     {
         $this->nb_point = $nb_point;
+>>>>>>> origin/main
 
         return $this;
     }
@@ -194,4 +258,9 @@ class Utilisateur
 
         return $this;
     }
+<<<<<<< HEAD
+
 }
+=======
+}
+>>>>>>> origin/main

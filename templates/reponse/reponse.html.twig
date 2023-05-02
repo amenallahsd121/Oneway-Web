@@ -1,0 +1,72 @@
+{% extends 'backbase.html.twig' %}
+
+
+{% block title %}
+	Liste des Reclamations repondus
+{% endblock %}
+
+
+{% block body %}
+
+
+	<div class="row ">
+		<div class="col-12 grid-margin">
+			<div class="card">
+				<div class="card-body">
+
+					<h4 class="card-title">Liste des reclamations repondus</h4>
+
+
+					<div class="table-responsive">
+						<table class="table">
+							<thead>
+								<tr>
+									<th>
+										Sujet
+									</th>
+									<th>
+										Text reclamation
+									</th>
+									<th>
+										text reponse
+									</th>
+									
+									<th>
+										Suppression
+									</th>
+									<th>
+										Modification
+									</th>
+
+								</tr>
+							</thead>
+
+							{% for data in list %}
+								<tr>
+
+									<td>
+										{{ data.reclamation.sujet }}
+									</td>
+									<td>
+										{{ data.reclamation.text_rec }}
+									</td>
+									<td>
+										{{ data.text_rep }}
+                                        </td>
+									
+									<td>
+                                    
+										<a href="{{ path('delete_reponse', {'id': data.id_reponse}) }}"  class="btn btn-outline-danger btn-fw;">Supprimer</a>
+									</td>
+
+                                   
+									<td>
+										<a  href="{{ path('update_reponse', {'id': data.id_reponse}) }}" class="btn btn-outline-warning btn-fw;">
+											Modifier</a>
+									</td>
+								</tr>
+
+							{% endfor %}
+
+
+						{% endblock %}
