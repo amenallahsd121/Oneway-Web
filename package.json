@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "leaflet": "^1.9.3",
+    "mapbox-gl": "^2.14.1"
+  }
+}
