@@ -1,0 +1,42 @@
+{% extends 'backbase.html.twig' %}
+
+{% block body %}
+<div id="map" style="height: 680px;"></div>
+
+<script src="https://api.mapbox.com/mapbox-gl-js/v2.4.1/mapbox-gl.js"></script>
+<link href="https://api.mapbox.com/mapbox-gl-js/v2.4.1/mapbox-gl.css" rel="stylesheet" />
+
+<script>
+
+var locationx = {{ xx|json_encode|raw }};
+var locationy = {{ yy|json_encode|raw }};
+        console.log(locationx);
+        console.log(locationy);
+
+
+
+const positions = [
+  {lat: locationx, lng: locationy, name: "Position A"}
+];
+    mapboxgl.accessToken = 'pk.eyJ1IjoiYW1lbjEyMSIsImEiOiJjbGgxcXhicWwwamZ5M2Rxb3ZlYzE1bWcyIn0.7qhH8n67HHskDcN2RzOu_Q';
+    const map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/satellite-streets-v11',
+        center: [positions[0].lng, positions[0].lat],
+        zoom: 6
+    });
+    // add marker for each position
+  positions.forEach(pos => {
+  const marker = new mapboxgl.Marker()
+    .setLngLat([pos.lng, pos.lat])
+    .addTo(map)});
+
+    const popup = new mapboxgl.Popup({ offset: 25 })
+    .setHTML(`<h3>${pos.name}</h3>`)
+  
+  marker.setPopup(popup);
+  
+
+
+</script>
+{% endblock %}

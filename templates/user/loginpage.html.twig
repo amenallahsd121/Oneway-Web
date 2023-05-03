@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<!-- Required meta tags -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<title>Corona Admin</title>
+		<!-- plugins:css -->
+
+
+		<link rel="stylesheet" href={{asset('asset/vendors/mdi/css/materialdesignicons.min.css')}}>
+		<link rel="stylesheet" href={{asset('asset/vendors/css/vendor.bundle.base.css')}}>
+		<!-- endinject -->
+		<!-- Plugin css for this page -->
+		<!-- End plugin css for this page -->
+		<!-- inject:css -->
+		<!-- endinject -->
+		<!-- Layout styles -->
+
+		<link rel="stylesheet" href={{asset('asset/css/style.css')}}> 
+    <!-- End layout styles -->
+		<link rel="shortcut icon" href={{asset('asset/images/favicon.png')}}>
+	</head>
+	<body>
+		<div class="container-scroller">
+			<div class="container-fluid page-body-wrapper full-page-wrapper">
+				<div class="row w-100 m-0">
+					<div class="content-wrapper full-page-wrapper d-flex align-items-center auth login-bg">
+						<div class="card col-lg-4 mx-auto">
+							<div class="card-body px-5 py-5">
+								<h3 class="card-title text-left mb-3">Login</h3>
+
+								{{ form_start(formL) }}
+								<form class="forms-sample">
+									<div class="form-group">
+										{{ form_label(formL.name)}}
+										{{ form_widget(formL.name)}}
+										{{ form_errors(formL.name) }}
+									</div>
+									<div class="form-group">
+										{{ form_label(formL.password)}}
+										{{ form_widget(formL.password)}}
+										{{ form_errors(formL.password) }}
+
+									</div>
+									<div class="g-recaptcha" data-sitekey="6LcNYcUlAAAAAAtejxmZ0O3KJwF8U84mSBcLBlWH"></div>
+
+									<div
+										class="form-group d-flex align-items-center justify-content-between">
+										<!-- <div class="form-check">
+										                      <label class="form-check-label">
+										                        <input type="checkbox" class="form-check-input "> Remember me </label>
+										                    </div> -->
+										<a href="{{path('check_pass')}}" class="forgot-pass btn-outline-warning">Forgot password</a>
+										{{ form_row(formL.stayLoggedIn, { label: 'Stay Logged In' }) }}
+									</div>
+									<div class="text-center">
+										<button type="submit" class="btn btn-warning btn-block enter-btn">Login</button>
+									</div>
+									<p class="terms">Already have an Account?<a href="{{ path('signup_user') }}" class="btn-outline-warning">
+											Sign up</a>
+									</p>
+									{{ form_end(formL) }}
+								</form>
+							</div>
+						</div>
+					</div>
+					<!-- content-wrapper ends -->
+				</div>
+				<!-- row ends -->
+			</div>
+			<!-- page-body-wrapper ends -->
+		</div>
+		<!-- container-scroller -->
+		<!-- plugins:js -->
+		<script src="{{asset ("./asset/vendors/js/vendor.bundle.base.js")}}"></script>
+		<!-- endinject -->
+		<!-- Plugin js for this page -->
+		<!-- End plugin js for this page -->
+		<!-- inject:js --><script src="{{ asset ('./assets/js/off-canvas.js')}}"> </script>
+		<script src="{{ asset ('./asset/js/hoverable-collapse.js')}}"></script>
+		<script src="{{ asset ('./asset/js/misc.js')}}"></script>
+		<script src="{{ asset ('./asset/js/settings.js')}}"></script>
+		<script src="{{ asset ('./asset/js/todolist.js')}}"></script>
+		<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+		<!-- endinject -->
+	</body>
+</html>

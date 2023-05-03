@@ -39,6 +39,20 @@ class VehiculeRepository extends ServiceEntityRepository
         }
     }
 
+    public function getAll(string $term, string $category): array
+    {
+        $query = $this->createQueryBuilder('v')
+            ->where('v.matricule LIKE :term')
+            ->orWhere('v.marque LIKE :term');
+        if (!empty($category)) {
+            $query = $query->andWhere('v.idCategorie = :idCat')
+                ->setParameter('idCat', $category);
+        }
+        return $query->orderBy('v.matricule', 'ASC')
+            ->setParameter('term', '%'.$term.'%')
+            ->getQuery()->getResult();
+    }
+
 //    /**
 //     * @return Vehicule[] Returns an array of Vehicule objects
 //     */

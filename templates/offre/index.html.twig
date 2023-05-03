@@ -1,0 +1,102 @@
+{% extends 'backbase.html.twig' %}
+
+{% block title %}Offre index{% endblock %}
+
+{% block body %}
+<style>
+
+body {
+  background-color: #000c20;
+}
+
+
+
+label {
+
+  display: inline-block;   
+  width: 300px; /* adjust as needed */
+  margin-right: 2px; /* adjust as needed */
+  font-size: 2px; /* set font size for labels */
+  font-weight: bold; /* make labels bold */
+       color: white;
+}
+.table th{
+   width: 100px; /* adjust as needed */
+  margin-right: 2px; /* adjust as needed */
+  font-size: 12px; 
+  font-weight: bold; /* make labels bold */
+       color: white;
+}
+
+
+
+
+.table td{
+    width: 300px; /* adjust as needed */
+  margin-right: 2px; /* adjust as needed */
+  font-size: 10px;
+       color: white;
+}
+
+
+
+
+
+
+
+
+
+</style>
+
+    <h1>Les Offres </h1>
+
+<table class="table" >
+      <thead >
+            <tr>
+                <th >Idoffre</th>
+                <th>Trajets</th>
+                <th>Descriptionoffre</th>
+                  <th>categorie</th>
+
+                <th>Maxretard</th>
+                <th>Prixoffre</th>
+                <th>Dateoffre</th>
+                <th>Datesortieoffre</th>
+                <th>Etat</th>
+                <th>Nbredemande</th>
+                <th>details</th>
+                                <th>Demandes</th>
+
+            </tr>
+        </thead>
+        <tbody>
+        {% for offre in offres %}
+            <tr>
+                <td>{{ offre.idoffre }}</td>
+                <td><a href="{{ path('app_trajetoffre_show', {'idtrajetoffre':offre.idtrajetoffre.idtrajetoffre}) }}">{{ offre.idtrajetoffre.description }}</a></td>
+                <td>{{ offre.descriptionoffre }}</td>
+                <td>  <a href="{{ path('app_categorieoffre_show', {'idcatoffre': offre.catoffreid.idcatoffre}) }}">{{ offre.catoffreid.typeoffre }}</a></td>
+
+                <td>{{ offre.maxretard }}</td>
+                <td>{{ offre.prixoffre }}</td>
+                <td>{{ offre.dateoffre | date ("d/m/Y") }}</td>
+                <td>{{ offre.datesortieoffre| date("d/m/Y")  }}</td>
+                <td>{{ offre.etat }}</td>
+                <td>{{ offre.nbredemande }}</td>
+                <td>
+                    <a href="{{ path('app_offre_show', {'idoffre': offre.idoffre}) }}"><img src="{{ asset('asset/images/offrefront/show.png') }}"/></a>
+                                      </td>
+
+                       <td> <a href="{{ path('app_demande_indexoffre', {'idoffre': offre.idoffre}) }}"><img src="{{ asset('asset/images/offrefront/list.png') }}"/></a>
+
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="10">aucun offres</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

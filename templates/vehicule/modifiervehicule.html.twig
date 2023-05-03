@@ -9,7 +9,9 @@
 {% block body %}
 
 
-{{ form_start(form,{'attr': {'novalidate': 'novalidate'}}) }}
+{# {{ form_start(form,{'attr': {'novalidate': 'novalidate'}}) }} #}
+{{form_start(form,{'attr': {'novalidate': 'novalidate'}}
+			)}}
 
 <div class="col-12 grid-margin stretch-card">
   <div class="card">
@@ -22,16 +24,22 @@
         
 
         <div class="form-group mt-3">
-          {{ form_label(form.type, "matricule") }}
-          {{ form_widget(form.type, {'attr': {'class': 'form-control'}}) }}
-          {{ form_errors(form.type) }}
+          {{ form_label(form.matricule, "matricule") }}
+          {{ form_widget(form.matricule, {'attr': {'class': 'form-control'}}) }}
+          {{ form_errors(form.matricule) }}
         </div>
 
          <div class="form-group mt-3">
-          {{ form_label(form.type, "marque") }}
-          {{ form_widget(form.type, {'attr': {'class': 'form-control'}}) }}
-          {{ form_errors(form.type) }}
-        </div>
+          {{ form_label(form.marque, "marque") }}
+          {{ form_widget(form.marque, {'attr': {'class': 'form-control'}}) }}
+          {{ form_errors(form.marque) }}
+        </div> 
+
+            <div class="form-group mt-3">
+          {{ form_label(form.idCategorie, "type") }}
+          {{ form_widget(form.idCategorie, {'attr': {'class': 'form-control'}}) }}
+          {{ form_errors(form.idCategorie) }}
+        </div> 
 
        
 

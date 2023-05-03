@@ -1,0 +1,97 @@
+{% extends 'backbase.html.twig' %}
+{% block title %}
+	Liste des Clients
+{% endblock %}
+
+{% block body %}
+
+	<div class="row">
+		<div class="col-lg-12 grid-margin stretch-card">
+			<div class="card">
+				<div class="card-body">
+
+					<h4 class="card-title">Liste des Admin<a href="{{ path ('add_admin') }}" class="btn btn-success btn-fw float-right">Ajouter Admin</a>
+          	<h4 class="card-title"> <a href="{{ path('aff_admin', { 'sort': 'asc' }) }}" class="btn btn-dark btn-fw float-right">tri asc </a>
+              	<h4 class="card-title"><a href="{{ path('aff_admin', { 'sort': 'desc' }) }}" class="btn btn-dark btn-fw float-right">tri desc </a>
+						<form class="nav-link mt-2 mt-md-0 d-none d-lg-flex search" method="get" action="{{ path('aff_admin') }}">
+							<input class="form-control" type="text" name="q" value="{{ searchQuery }}" placeholder="Search users">
+
+						
+
+
+
+						</form>
+						<div class="table-responsive">
+							<table class="table table-striped">
+								<thead>
+									<tr>
+										<!--<th> </th>-->
+										<th>
+											Prenom
+										</th>
+										<th>
+											Nom
+										</th>
+										<th>
+											Email
+										</th>
+										<th>
+											Adresse
+										</th>
+										<th>
+											Date Naissance
+										</th>
+									
+										<th>
+											Points
+										</th>
+										<th>Suppression</th>
+										<th>Modification</th>
+									</tr>
+								</thead>
+								<tbody>
+
+									{% for e in user %}
+
+										<!--<tr>
+										                            <td class="py-1">
+										                              <img src="{{asset ("admin/assets/images/faces-clipart/pic-1.png")}}" alt="image" />
+										                            </td>-->
+
+										<td>
+											{{ e.name }}
+										</td>
+										<td>
+											{{e.Lastname }}
+										</td>
+										<td>
+											{{e.email}}
+										</td>
+										<td>
+											{{e.Adresse}}
+										</td>
+										<td>
+											{{e.Birthdate|date('Y-m-d')}}
+										</td>
+									
+										<td>
+											{{e.NbPoint}}
+										</td>
+										<td>
+                    <a href="{{ path('user_delete', {"id": e.Id}) }}" class="btn btn-outline-danger btn-fw;">Supprimer</a>
+										
+										</td>
+										<td>
+                    <a href=href="{{ path('user_edit', {"id": e.Id}) }}" class="btn btn-outline-warning btn-fw;">Modifier</a>
+										
+										</td>
+									</form>
+								</tbody>
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>{% endblock %}

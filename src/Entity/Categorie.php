@@ -22,6 +22,8 @@ class Categorie
     
 
     #[ORM\Column(length:50)]
+    #[Assert\NotBlank(message: "Remplir vos champs")]
+    #[Assert\Length(min: 3)] 
     private ?string $type = null ;
     
 

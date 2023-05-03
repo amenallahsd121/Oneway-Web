@@ -7,7 +7,49 @@
 
 
 {% block body %}
+<style>
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  background: rgb(0, 12, 32);
+  width: 100%;
+}
 
+        .pagination a {
+  display: block;
+  margin: 0 5px;
+  padding: 10px;
+  background-color: black; /* change background color to black */
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  color: #fff; /* change text color to white */
+  text-decoration: none;
+  font-family: Arial;
+  transition: background-color 0.3s ease;
+}
+        .pagination a:hover {
+          background-color: #ddd;
+        }
+        .pagination .active {
+          background-color: #007bff;
+          color: #fff;
+          border-color: #007bff;
+        }
+        .pagination .disabled {
+          opacity: 0.5;
+          cursor: not-allowed;
+        }
+        .pagination li:hover {
+          background-color: #007bff;
+          color: #fff;
+          border-color: #007bff;
+        }
+        .pagination li:hover a {
+          color: #fff;
+        }
+    </style>
 
 
 	 <div class="row ">
@@ -42,7 +84,9 @@
                           <td> {{ data.dateFinEvent|date("m/d/Y") }} </td>
                           
                           <td> {{ data.awards }} </td>
-                       
+                         <td>
+                             <a href="{{path('app_evenement_qrcode' , {'id_event': data.id_event }) }}"  class="btn "> GenerateQR</a>
+                          </td>
 
 
                       
@@ -54,13 +98,17 @@
                           <td>
                              <a href="{{ path('update_evenement', {'id': data.idEvent}) }}"  class="btn btn-outline-warning btn-fw;"> Modifier</a>
                           </td>
+                          
                         </tr> 
                           
                          {% endfor %}
+                         
                        
                          
                 
-
+ <div class="pagination">
+             {{ knp_pagination_render(list) }}
+      </div>
 {% endblock %}
 
 

@@ -1,0 +1,47 @@
+{% extends 'backbase.html.twig' %}
+
+{% block title %}Trajetoffre index{% endblock %}
+
+{% block body %}
+
+    <h1>Liste de Trajets  :<a href="{{ path('app_trajetoffre_new') }}"style="margin-left:650px ; font-size:17px ; color:white"><img src="{{ asset('asset/images/categorieoffre/add.png') }}"/>Ajouter</a>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Limitekm</th>
+                <th>Addarriveoffre</th>
+                <th>Adddepartoffre</th>
+                <th>Nbreescaleoffre</th>
+                <th>Nombre</th>
+                <th>Description</th>
+                <th>Details</th>
+                <th>Modifier</th>
+
+            </tr>
+        </thead>
+        <tbody>
+        {% for trajetoffre in trajetoffres %}
+            <tr>
+                <td>{{ trajetoffre.idtrajetoffre }}</td>
+                <td>{{ trajetoffre.limitekmoffre }}</td>
+                <td>{{ trajetoffre.addarriveoffre }}</td>
+                <td>{{ trajetoffre.adddepartoffre }}</td>
+                <td>{{ trajetoffre.nbreescaleoffre }}</td>
+                <td>{{ trajetoffre.nbreoffre }}</td>
+                <td>{{ trajetoffre.description }}</td>
+                <td>
+                    <a href="{{ path('app_trajetoffre_show', {'idtrajetoffre': trajetoffre.idtrajetoffre}) }}"><img src="{{ asset('asset/images/offrefront/show.png') }}"/></a></td>
+                 <td>   <a href="{{ path('app_trajetoffre_edit', {'idtrajetoffre': trajetoffre.idtrajetoffre}) }}"><img src="{{ asset('asset/images/categorieoffre/edit.png') }}"/></a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

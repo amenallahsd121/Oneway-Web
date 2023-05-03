@@ -155,4 +155,9 @@ class Evenement
        
     }
 
+    public function __toString()
+    {
+        return (string)  ' evenement :'.$this->nom .'  date debut :'. $this->dateDebutEvent->format('Y-m-d') .'   date Fin :'.$this->dateFinEvent->format('Y-m-d')  .'  Awards :'. $this->awards.' Description  :'.$this->description ;
+    }  
+
 }

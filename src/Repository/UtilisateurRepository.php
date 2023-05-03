@@ -38,7 +38,29 @@ class UtilisateurRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
-
+    public function searchUsers(string $query): array
+    {
+        $qb = $this->createQueryBuilder('u');
+        $qb->where('u.type = :type')->setParameter('type', 'Client');
+        $qb->andWhere($qb->expr()->orX(
+            $qb->expr()->like('u.name', ':query'),
+            $qb->expr()->like('u.lastname', ':query'),
+            $qb->expr()->like('u.email', ':query')
+        ))->setParameter('query', '%'.$query.'%');
+        
+        return $qb->getQuery()->getResult();
+    }public function searchAdmins(string $query): array
+    {
+        $qb = $this->createQueryBuilder('u');
+        $qb->where('u.type = :type')->setParameter('type', 'Admin');
+        $qb->andWhere($qb->expr()->orX(
+            $qb->expr()->like('u.name', ':query'),
+            $qb->expr()->like('u.lastname', ':query'),
+            $qb->expr()->like('u.email', ':query')
+        ))->setParameter('query', '%'.$query.'%');
+        
+        return $qb->getQuery()->getResult();
+    }
 //    /**
 //     * @return Utilisateur[] Returns an array of Utilisateur objects
 //     */

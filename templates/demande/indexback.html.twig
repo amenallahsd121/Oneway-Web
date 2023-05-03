@@ -1,0 +1,40 @@
+{% extends 'backbase.html.twig' %}
+
+{% block title %}Demande{% endblock %}
+
+{% block body %}
+<a href="{{ path('app_offre_index') }}">retour</a>
+
+    <h1> les  Demandes D'offre {{offre.idoffre}}</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                 <th>offre </th>
+
+                <th>Description</th>
+                <th>Prix</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for demande in demandes %}
+            <tr>
+                <td>{{ demande.iddemande }}</td>
+                <td>{{ demande.idoffre.descriptionoffre}}</td>
+
+                <td>{{ demande.descriptiondemande }}</td>
+                <td>{{ demande.prix }}</td>
+                <td>
+                    <a href="{{ path('app_demande_showback', {'iddemande': demande.iddemande}) }}"><img src="{{ asset('asset/images/offrefront/show.png') }}"/></a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">Aucune Demande</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

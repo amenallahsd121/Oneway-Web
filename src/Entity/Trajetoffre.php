@@ -4,65 +4,45 @@ namespace App\Entity;
 
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use App\Repository\TrajetoffreRepository;
 
-/**
- * Trajetoffre
- *
- * @ORM\Table(name="trajetoffre", uniqueConstraints={@ORM\UniqueConstraint(name="AddOffre", columns={"AddArriveOffre", "AddDepartOffre"}), @ORM\UniqueConstraint(name="description", columns={"description"})})
- * @ORM\Entity
- */
+#[ORM\Entity(repositoryClass: TrajetoffreRepository::class)]
 class Trajetoffre
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="IdTrajetOffre", type="bigint", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $idtrajetoffre;
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    private ?int $idtrajetoffre = null;
+    
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="LimiteKmOffre", type="integer", nullable=false)
-     */
-    private $limitekmoffre;
+    
+#[ORM\Column]
 
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="AddArriveOffre", type="string", length=255, nullable=true, options={"default"="NULL"})
-     */
-    private $addarriveoffre = 'NULL';
+private ?int $limitekmoffre = null;
+    
 
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="AddDepartOffre", type="string", length=255, nullable=true, options={"default"="NULL"})
-     */
-    private $adddepartoffre = 'NULL';
+    #[ORM\Column(length: 255)]
+    private ?string $addarriveoffre= null;
 
-    /**
-     * @var int|null
-     *
-     * @ORM\Column(name="NbreEscaleOffre", type="integer", nullable=true, options={"default"="NULL"})
-     */
-    private $nbreescaleoffre = NULL;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="nbreOffre", type="integer", nullable=false)
-     */
-    private $nbreoffre = '0';
+    #[ORM\Column(length: 255)]
+    private ?string $adddepartoffre= null;
+    
 
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="description", type="string", length=255, nullable=true, options={"default"="NULL"})
-     */
-    private $description = 'NULL';
+    #[ORM\Column]
+
+private ?int $nbreescaleoffre = null;
+
+    
+#[ORM\Column]
+
+private ?int $nbreoffre = null;
+    
+#[ORM\Column]
+private ?string  $description = null;
+    
 
     public function getIdtrajetoffre(): ?string
     {
@@ -134,12 +114,15 @@ class Trajetoffre
         return $this->description;
     }
 
-    public function setDescription(?string $description): self
+    public function setDescription(): self
     {
-        $this->description = $description;
+        $this->description = $this->getAdddepartoffre() . ' - ' . $this->getAddarriveoffre();
 
         return $this;
     }
 
-
+    public function __toString()
+    {
+        return $this->getDescription(); // Return the title of the task as the string representation
+    }
 }

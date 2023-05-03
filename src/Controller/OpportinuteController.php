@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Opportinute;
 use App\Form\OpportinuteType;
+use App\Repository\OpportinuteRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -93,6 +94,35 @@ public function delete($id) {
 
       return $this->redirectToRoute('app_opportinute');
   }
+
+//   #[Route('/calendar/opp', name: 'app_evenement_opp')]
+//   public function calendaropp(OpportinuteRepository $opp): Response
+//   {
+//       $opprtunits= $opp->findAll();
+//       $rdvs = [];
+
+//       foreach($opprtunits as $o){
+//         $rdvs[] = [
+         
+//             'start' => $o->getDate()->format('Y-m-d'),
+            
+//             'title' => $o->getDepart(),
+            
+//              'color' => 'red', 
+             
+         
+//         ];
+//     }
+
+//     $donnes = json_encode($rdvs);
+
+      
+    
+//       return $this->renderForm('\evenement\calendar.html.twig',[
+//         'form'=>$donnes]);
+//   }
+
+
 
 
 }

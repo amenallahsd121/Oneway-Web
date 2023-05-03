@@ -2,31 +2,43 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Categorie;
 use App\Form\CategorieType;
-use Doctrine\Persistence\ManagerRegistry;
-use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Persistence\ManagerRegistry;
 use SebastianBergmann\Environment\Console;
+use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 
 class CategorieController extends AbstractController
 {
     #[Route('/categorie', name: 'app_categorie')]
-    public function index(): Response
+    public function index(Request $request, PaginatorInterface $paginator): Response
     {
 
-
-        $data = $this->getDoctrine()->getRepository(Categorie::class)->findAll();
+        $entityManager = $this->getDoctrine()->getManager();
+        $repository = $entityManager->getRepository(Categorie::class);
+        $query = $repository->createQueryBuilder('c')
+        ->orderBy('c.idCategorie', 'DESC');
+          
+            
+        $data = $paginator->paginate(
+            $query, // Requête contenant les données à paginer (ici notre requête custom)
+            $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
+            3 // Nombre de résultats par page
+        );
+        
         return $this->render('\categorie\index.html.twig', [
             'list' => $data   
         ]);
        
             
     }
+
 
 
     #[Route('/categorie/add', name: 'add_categorie')]

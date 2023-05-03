@@ -1,102 +1,76 @@
 <?php
 
 namespace App\Entity;
-
+use DateTime;
+use App\Entity\Utilisateur;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\OffreRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Mapping\ClassMetadata;
+use Symfony\Component\Validator\Constraints as Assert;
 
-/**
- * Offre
- *
- * @ORM\Table(name="offre", indexes={@ORM\Index(name="categorieOffre", columns={"CatOffreId"}), @ORM\Index(name="trajetOffre", columns={"IdTrajetOffre"})})
- * @ORM\Entity
- */
+#[ORM\Entity(repositoryClass: OffreRepository::class)]
+
+
+
 class Offre
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="IdOffre", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $idoffre;
+    #[ORM\Id]
+#[ORM\GeneratedValue]
+#[ORM\Column]
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="IdCatColis", type="integer", nullable=false)
-     */
-    private $idcatcolis;
+private ?int $idoffre = null;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="CatOffreId", type="string", length=255, nullable=false)
-     */
-    private $catoffreid;
+   
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="IdTrajetOffre", type="string", length=255, nullable=false)
-     */
-    private $idtrajetoffre;
+#[ORM\Column]
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="DescriptionOffre", type="string", length=255, nullable=false)
-     */
-    private $descriptionoffre;
+private ?int $idcatcolis = null;
+    
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="MaxRetard", type="string", length=255, nullable=false)
-     */
-    private $maxretard;
+   #[ORM\Column(length: 225) ]
+private ?string  $descriptionoffre = null;
 
-    /**
-     * @var float
-     *
-     * @ORM\Column(name="prixOffre", type="float", precision=10, scale=0, nullable=false)
-     */
-    private $prixoffre;
 
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="DateOffre", type="string", length=255, nullable=true, options={"default"="NULL"})
-     */
-    private $dateoffre = 'NULL';
+#[ORM\Column(length: 158) ]
+private ?string  $maxretard = null;
+  
 
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="DateSortieOffre", type="string", length=255, nullable=true, options={"default"="NULL"})
-     */
-    private $datesortieoffre = 'NULL';
+#[ORM\Column]
+private ?float $prixoffre = null;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="Etat", type="string", length=255, nullable=false)
-     */
-    private $etat;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="nbreDemande", type="integer", nullable=false)
-     */
-    private $nbredemande;
+#[ORM\Column]
+private ?DateTime $dateoffre = null;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="IdUser", type="integer", nullable=false)
-     */
-    private $iduser;
+   
+
+#[ORM\Column]
+private ?DateTime $datesortieoffre = null;
+
+
+#[ORM\Column(length: 255)]
+private ?string $etat= null;
+
+
+#[ORM\Column]
+
+private ?int $nbredemande = null;
+
+#[ORM\ManyToOne (targetEntity:'App\Entity\Categorieoffre')]
+#[ORM\JoinColumn(name:"CatOffreId", referencedColumnName:"idcatoffre")]
+private ?Categorieoffre $catoffreid = null;
+
+#[ORM\ManyToOne (targetEntity:'App\Entity\Trajetoffre')]
+#[ORM\JoinColumn(name:"IdTrajetOffre", referencedColumnName:"idtrajetoffre")]
+private ?Trajetoffre $idtrajetoffre = null;
+
+
+#[ORM\ManyToOne (targetEntity:'App\Entity\Utilisateur')]
+#[ORM\JoinColumn(name: "iduser",referencedColumnName:"id")]
+private ?Utilisateur $iduser = null;
+    
 
     public function getIdoffre(): ?int
     {
@@ -115,29 +89,30 @@ class Offre
         return $this;
     }
 
-    public function getCatoffreid(): ?string
+    public function getCatoffreid(): ?Categorieoffre
     {
         return $this->catoffreid;
     }
 
-    public function setCatoffreid(string $catoffreid): self
+    public function setCatoffreid( ?Categorieoffre $catoffreid): self
     {
         $this->catoffreid = $catoffreid;
 
         return $this;
     }
 
-    public function getIdtrajetoffre(): ?string
+    public function getIdtrajetoffre(): ?Trajetoffre
     {
         return $this->idtrajetoffre;
     }
-
-    public function setIdtrajetoffre(string $idtrajetoffre): self
+    public function setIdtrajetoffre(?TrajetOffre $idtrajetoffre ): self
     {
-        $this->idtrajetoffre = $idtrajetoffre;
+        $this->idtrajetoffre 
+        = $idtrajetoffre ;
 
         return $this;
     }
+   
 
     public function getDescriptionoffre(): ?string
     {
@@ -175,24 +150,24 @@ class Offre
         return $this;
     }
 
-    public function getDateoffre(): ?string
+    public function getDateoffre(): ?DateTime
     {
         return $this->dateoffre;
     }
 
-    public function setDateoffre(?string $dateoffre): self
+    public function setDateoffre(?DateTime $dateoffre): self
     {
         $this->dateoffre = $dateoffre;
 
         return $this;
     }
 
-    public function getDatesortieoffre(): ?string
+    public function getDatesortieoffre(): ?DateTime
     {
         return $this->datesortieoffre;
     }
 
-    public function setDatesortieoffre(?string $datesortieoffre): self
+    public function setDatesortieoffre(?DateTime $datesortieoffre): self
     {
         $this->datesortieoffre = $datesortieoffre;
 
@@ -223,17 +198,18 @@ class Offre
         return $this;
     }
 
-    public function getIduser(): ?int
+    public function getIduser(): ?Utilisateur
     {
         return $this->iduser;
     }
 
-    public function setIduser(int $iduser): self
+ 
+    public function setIduser(?Utilisateur $iduser): self
     {
         $this->iduser = $iduser;
 
         return $this;
     }
-
+ 
 
 }

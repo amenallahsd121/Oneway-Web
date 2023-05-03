@@ -8,16 +8,16 @@ use App\Form\LivreurType;
 use Symfony\Component\Process\Process;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Yectep\Bundle\DatatableBundle\DataTable\DataTableFactory;
 use Symfony\Component\Process\Exception\ProcessFailedException;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
-
-
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class LivreurController extends AbstractController
 {
@@ -41,23 +41,17 @@ class LivreurController extends AbstractController
     public function index(NormalizerInterface $normalizer): Response
     {
         $data = $this->getDoctrine()->getRepository(Livreur::class)->findAll();
-        $datanormalized = $normalizer->normalize($data, 'json');
-////////////////////////////////////////////////////////////////////////////////////
-        //$json = json_encode($datanormalized);
-        $jsonResponse = new JsonResponse($datanormalized);
+       
 
-        
-        $template = $this->render('\livreur\index.html.twig', [
-            'list' => $data
-        ]);
-        
-        return new Response($jsonResponse->getContent());
+        return $this->render('livreur\index.html.twig', [
+            'list' => $data   
+]);
     }
-    
 
 
 
-    
+
+
 
     #[Route('/livreur/add', name: 'add_livreur')]
     public function addcolis(ManagerRegistry $doctrine, Request $req): Response
@@ -201,8 +195,8 @@ class LivreurController extends AbstractController
         $Livreur = $session->get('livreur');
 
         $em = $doctrine->getManager();
-        
-       
+
+
 
 
         $form = $this->createForm(LivreurType::class, $Livreur);
@@ -219,10 +213,89 @@ class LivreurController extends AbstractController
 
         return $this->renderForm('livreur/ajouterlivreur.html.twig', ['form' => $form]);
     }
+
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////// Mobile ////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+    #[Route('/displaylivreur', name: 'displaylivreur')]
+    public function displaylivreur(NormalizerInterface $normalizer): Response
+    {
+        $livreur = $this->getDoctrine()->getRepository(Livreur::class)->findAll();
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($livreur);
+      
+        return new JsonResponse($formatted);
+    }
+    
+    
+    #[Route('/addlivreur', name: 'categorie_new_Mobile')]
+    public function new(ManagerRegistry $doctrine, Request $request)
+    {
+        $entityManager = $doctrine->getManagerForClass(Livreur::class);
+
+        $livreur = new Livreur();
+
+        $livreur->setcinLivreur($request->get('CinLivreur'));
+        $livreur->setNom($request->get('Nom'));
+        $livreur->setPrenom($request->get('Prenom'));
+        $livreur->setVehicule($request->get('Vehicule'));
+        
+
+        $entityManager->persist($livreur);
+        $entityManager->flush();
+
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($livreur);
+        return new JsonResponse($formatted);
+
+    }
+
+    #[Route('/livreurmodify/{id}', name: 'update_categorie_mobile')]
+
+    public function modify(ManagerRegistry $doctrine, Request $request, $id)
+    {
+        $entityManager = $doctrine->getManagerForClass(Livreur::class);
+        $livreur = $entityManager->getRepository(Livreur::class)->find($id);
+
+        $livreur->setcinLivreur($request->get('CinLivreur'));
+        $livreur->setNom($request->get('Nom'));
+        $livreur->setPrenom($request->get('Prenom'));
+        $livreur->setVehicule($request->get('Vehicule'));
+        
+
+        $entityManager->persist($livreur);
+
+        $entityManager->flush();
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($request);
+        return new JsonResponse($formatted);
+    }
+
+    #[Route('/livreurdelete/{id}', name: 'delete_categorie_Mobile')]
+    public function deleteliv(ManagerRegistry $doctrine, $id): Response
+    {
+        $entityManager = $doctrine->getManagerForClass(Livreur::class);
+        $livreur = $entityManager->getRepository(Livreur::class)->find($id);
+
+        if ($livreur != null) {
+            $entityManager->remove($livreur);
+            $entityManager->flush();
+            $serializer = new Serializer([new ObjectNormalizer()]);
+            $formatted = $serializer->normalize("Category deleted succefully");
+            return new JsonResponse($formatted);
+        }
+        return new JsonResponse("Category not found");
+    }
+
+
+    
 }
-
-
-
-
-
 // throw new \RuntimeException(sprintf('Output is not null: %s', $output));
