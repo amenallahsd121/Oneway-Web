@@ -1,0 +1,61 @@
+{% extends 'backbase.html.twig' %}
+
+
+{% block title %}
+	Modifier maintenance
+{% endblock %}
+
+
+{% block body %}
+
+
+{{ form_start(form,{'attr': {'novalidate': 'novalidate'}}) }}
+
+<div class="col-12 grid-margin stretch-card">
+  <div class="card">
+    <div class="card-body">
+      <h4 class="card-title">Modifier maintenance</h4>
+      <p class="card-description">Veuillez saisir les details de maintenance :</p>
+
+      <form class="forms-sample">
+       
+        
+
+        <div class="form-group mt-3">
+          {{ form_label(form.etat, "etat") }}
+          {{ form_widget(form.etat, {'attr': {'class': 'form-control'}}) }}
+          {{ form_errors(form.etat) }}
+        </div>
+
+         <div class="form-group mt-3">
+          {{ form_label(form.nomSosRep, "nomSosRep") }}
+          {{ form_widget(form.nomSosRep, {'attr': {'class': 'form-control'}}) }}
+          {{ form_errors(form.nomSosRep) }}
+        </div> 
+
+            <div class="form-group mt-3">
+          {{ form_label(form.idVehicule, "matricule") }}
+          {{ form_widget(form.idVehicule, {'attr': {'class': 'form-control'}}) }}
+          {{ form_errors(form.idVehicule) }}
+        </div> 
+
+       
+
+          
+        <div class="form-group mt-3">
+          {{ form_widget(form.Ajouter) }}
+           
+
+
+
+        <a href="{{ path ('app_maintenance') }}" class="btn btn-dark">Annuler</a>
+
+
+      </form>
+    </div>
+  </div>
+</div>
+
+{{ form_end(form) }}
+
+{% endblock %}
