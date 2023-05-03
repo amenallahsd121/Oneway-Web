@@ -2,66 +2,64 @@
 
 namespace App\Entity;
 
+use App\Repository\RelaisRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\DBAL\Types\Types;
+use Symfony\Component\Validator\Constraints as Assert;
 
-/**
- * Relais
- *
- * @ORM\Table(name="relais")
- * @ORM\Entity
- */
+#[ORM\Entity(repositoryClass: RelaisRepository::class)]
 class Relais
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $id;
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    private ?int $id = null;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="name", type="string", length=20, nullable=false)
-     */
-    private $name;
+    #[ORM\Column(length: 20)]
+    #[Assert\NotBlank(message: "Tu dois saisir votre nom ")]
+    #[Assert\Regex(
+        pattern: '/^[a-zA-Z]+$/',
+        message: "Le nom  doit contenir des caractères alphabétiques uniquement."
+    )]
+    private ?string $name = null;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="lastname", type="string", length=20, nullable=false)
-     */
-    private $lastname;
+    #[ORM\Column(length: 20)]
+    #[Assert\NotBlank(message: "Tu dois saisir votre prenom")]
+    #[Assert\Regex(
+        pattern: '/^[a-zA-Z]+$/',
+        message: "Le prenom  doit contenir des caractères alphabétiques uniquement."
+    )]
+    private ?string $lastname = null;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="email", type="string", length=20, nullable=false)
-     */
-    private $email;
+    #[ORM\Column(length: 20)]
+    #[Assert\NotBlank(message: "Tu dois saisir votre mot de passe")]
+    #[Assert\Email(
+        message: 'email {{ value }} est invalide',
+    )]    
+    private ?string $email = null;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="adresse", type="string", length=20, nullable=false)
-     */
-    private $adresse;
+    #[ORM\Column(length: 20)]
+    private ?string $adresse = null;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="city", type="string", length=20, nullable=false)
-     */
-    private $city;
+    #[ORM\Column(length: 20)]
+    #[Assert\Regex(
+        pattern : "/^(Ariana|Beja|Ben Arous|Bizerte|Gabes|Gafsa|Jendouba|Kairouan|Kasserine|Kebili|Kef|Mahdia|Manouba|Medenine|Monastir|Nabeul|Sfax|Sidi Bouzid|Siliana|Sousse|Tataouine|Tozeur|Tunis|Zaghouan)$/",
+        message : "the city must be a valid Tunisian city."
+    )]
+    private ?string $city = null;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="number", type="integer", nullable=false)
-     */
-    private $number;
+    #[ORM\Column]
+    private ?int $number = null;
+
+    #[ORM\OneToMany(mappedBy: 'relai', targetEntity: Location::class)]
+    private Collection $locations;
+
+    public function __construct()
+    {
+        $this->locations = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -140,5 +138,33 @@ class Relais
         return $this;
     }
 
+    /**
+     * @return Collection<int, Location>
+     */
+    public function getLocations(): Collection
+    {
+        return $this->locations;
+    }
 
+    public function addLocation(Location $location): self
+    {
+        if (!$this->locations->contains($location)) {
+            $this->locations->add($location);
+            $location->setIdRelai($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLocation(Location $location): self
+    {
+        if ($this->locations->removeElement($location)) {
+            // set the owning side to null (unless already changed)
+            if ($location->getIdRelai() === $this) {
+                $location->setIdRelai(null);
+            }
+        }
+
+        return $this;
+    }
 }

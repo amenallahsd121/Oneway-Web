@@ -8,6 +8,7 @@ use App\Repository\ReclamationRepository;
 use App\Entity\Utilisateur;
 use App\Entity\Reponse;
 use ORM\Table;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ReclamationRepository::class)]
 
@@ -18,7 +19,7 @@ use ORM\Table;
 class Reclamation
 {
     #[ORM\Id]
-    #[ORM\GeneratedValue]
+     #[ORM\GeneratedValue]//auto increment
     #[ORM\Column]
     private ?int $id_reclamation = null;
 
@@ -27,6 +28,7 @@ class Reclamation
 
 
     #[ORM\Column(length: 250)]
+    #[Assert\NotBlank(message: "Tu dois saisir le texte de votre reclamation")]
     private ?string $text_rec = null;
 
 
@@ -35,7 +37,8 @@ class Reclamation
 
 
     #[ORM\ManyToOne(targetEntity: Utilisateur::class)]
-    #[ORM\JoinColumn(name: "id_user", referencedColumnName: "id")]
+     #[ORM\JoinColumn(name: "id_user", referencedColumnName: "id")]
+     //le cle etranger
     protected $id_user;
 
 
@@ -86,6 +89,18 @@ class Reclamation
     }
 
     public function setIdUser(?Utilisateur $id_user): self
+    {
+        $this->id_user = $id_user;
+
+        return $this;
+    }
+
+    public function getId_User(): ?Utilisateur
+    {
+        return $this->id_user;
+    }
+
+    public function setId_User(?Utilisateur $id_user): self
     {
         $this->id_user = $id_user;
 
