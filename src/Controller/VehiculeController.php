@@ -141,4 +141,9 @@ class VehiculeController extends AbstractController
         return new QrCodeResponse($qrCode);
     } 
     
+
+    
+
+
+
 }

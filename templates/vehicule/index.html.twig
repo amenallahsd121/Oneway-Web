@@ -6,18 +6,37 @@
 {% endblock %}
 
 
+
+
 {% block body %}
+
+
+<body>
+	
+
+<style>
+
+
+
+
+</style>
+
+
+	
+
 
 
 	<div class="row ">
 		<div class="col-12 grid-margin">
-			<div class="card">
+			<div class="card ">
 				<div class="card-body">
 
 					<div class="card-title">
 						<h4>Liste des Vehicules</h4>
 						<div>
-							<form action="/Oneway/public/index.php/vehicule" type="GET">
+						
+
+							<form action="/onewaymayssen/public/index.php/vehicule" type="GET">
 								<input type="text" name="term" placeholder="Recherche" value="{{ app.request.get('term') }}">
 								<select name="category" onchange="this.form.submit()">
 									<option value="">Toutes</option>
@@ -29,7 +48,7 @@
 							<a href=" {{ path ('add_vehicule') }} " class="btn btn-success btn-fw float-right">Ajouter Vehicule</a>
 						</div>
 					</div>
-
+                    
 
 					<div class="table-responsive">
 						<table class="table">
@@ -85,10 +104,47 @@
 											<i class="fas fa-qrcode"></i>
 										</a>
 									</td>
+									
 
 								</tr>
 
+
 							{% endfor %}
+
+</body>
+
+<script>
+  $(document).ready(() => {
+    const body = document.querySelector('body');
+    const modeToggle = document.querySelector('#theme-toggle');
+
+    modeToggle.addEventListener('click', () => {
+      body.classList.toggle('light-mode');
+    });
+  });
+</script>
+
+
+<script>
+
+function updateNotifications() {
+    $.ajax({
+        url: '/ajax-notifications',
+        method: 'POST',
+        success: function(data) {
+            var notificationsHtml = '';
+            $.each(data, function(index, notification) {
+                notificationsHtml += '<div class="alert alert-' + notification.type + '">' + notification.message + '</div>';
+            });
+            $('#notifications').html(notificationsHtml);
+        }
+    });
+}
+
+// Mettre à jour les notifications toutes les 10 secondes
+setInterval(updateNotifications, 10000);
+</script>
+
 
 
 						{% endblock %}

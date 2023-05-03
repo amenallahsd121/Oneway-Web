@@ -2,19 +2,18 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Maintenance;
 use App\Form\MaintenanceType;
-use Doctrine\Persistence\ManagerRegistry;
-use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
-use SebastianBergmann\Environment\Console;
-use PHPExcel;
-use PHPExcel_IOFactory;
+use Doctrine\Persistence\ManagerRegistry;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use SebastianBergmann\Environment\Console;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 
 
@@ -110,87 +109,30 @@ class MaintenanceController extends AbstractController
     public function exportExcel(Request $req, $id): Response
     {
         $maintenance = $this->getDoctrine()->getRepository(Maintenance::class)->find($id);
-        // récupérer les données à exporter
-        // $data = [
-        //     ['Etat', 'Nom de la societe', 'Matricule'],
-        //     ['Bonne etat', 'auto plus' , '165TUN6845'],
-            
-        //         ];
-
-       // $maintenance = $this->entityManager->getRepository(Maintenance::class)->find($id);
-        
-
-        // ->data('Les details de votre maintenance sont   : ' . $etat . $nomSosRep .  $idVehicule . $vehicule )
 
 
-        // créer un nouvel objet PHPExcel
-        // $objPHPExcel = new PHPExcel();
+        $etat =  $maintenance-> getetat();
+        $nomSosRep =  $maintenance-> getnomSosRep();
+        $idVehicule =  $maintenance-> getidVehicule();
+        $vehicule = $idVehicule-> getmatricule();
 
-        // $etat = $maintenance->getEtat();
-        // $nomSosRep = $maintenance->getNomSosRep();
-        // $idVehicule = $maintenance->getIdVehicule();
-        // $vehicule = $idVehicule->getMatricule();
-
-        // $data = [
-        //          ['Etat', 'Nom de la societe', 'Matricule'],
-        //         ['Bonne etat', 'auto plus' , '165TUN6845'],
-                
-        //            ];
-
-        // // définir les propriétés du document
-        // $objPHPExcel->getProperties()->setCreator("Mon application Symfony")
-        //     ->setLastModifiedBy("Mon application Symfony")
-        //     ->setTitle("Export Excel")
-        //     ->setSubject("Export Excel")
-        //     ->setDescription("Export Excel");
-
-        // // ajouter des données au document
-        // $objPHPExcel->getActiveSheet()->fromArray($data, NULL, 'A1');
-
-        // // formater les cellules du document
-        // $objPHPExcel->getActiveSheet()->getStyle('A1:C1')->getFont()->setBold(true);
-        // $objPHPExcel->getActiveSheet()->getColumnDimension('A')->setAutoSize(true);
-        // $objPHPExcel->getActiveSheet()->getColumnDimension('B')->setAutoSize(true);
-        // $objPHPExcel->getActiveSheet()->getColumnDimension('C')->setAutoSize(true);
-
-        // // créer un objet Writer pour enregistrer le document au format Excel
-        // $writer = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
-
-        // // envoyer le document au navigateur pour le téléchargement
-        // $response = new Response();
-        // $response->headers->set('Content-Type', 'application/vnd.ms-excel');
-        // $response->headers->set('Content-Disposition', 'attachment;filename="export.xls"');
-        // $response->headers->set('Cache-Control', 'max-age=0');
-        // $writer->save('php://output');
-        // $response->send();
-
-        // return $response;
-
-       
-        
-        // Créer un objet Spreadsheet
+        // Create a new Spreadsheet object and populate it with the data
         $spreadsheet = new Spreadsheet();
-        
-        // Sélectionner la feuille active
-        $sheet = $spreadsheet->getActiveSheet();
-        
-        // Remplir les données de la feuille
-        $sheet->fromArray([
-            ['Etat', 'Nom de la société', 'Matricule'],
-            [$maintenance->getEtat(), $maintenance->getNomSosRep(), $maintenance->getIdVehicule()->getMatricule()],
-        ]);
-        
-        // Créer un objet Writer pour exporter les données en Excel
+        $worksheet = $spreadsheet->getActiveSheet();
+        $worksheet->setCellValue('A1', 'Etat');
+        $worksheet->setCellValue('A2', 'nom de la sociéte');
+        $worksheet->setCellValue('A3', 'Matricule');
+        $worksheet->setCellValue('B1', $etat);
+        $worksheet->setCellValue('B2', $nomSosRep);
+        $worksheet->setCellValue('B3', $vehicule);
+
+        // Create a new Xlsx writer and write the Spreadsheet object to it
         $writer = new Xlsx($spreadsheet);
-        
-        // Envoyer les en-têtes HTTP pour forcer le téléchargement du fichier
-        $response = new \Symfony\Component\HttpFoundation\BinaryFileResponse($writer->write('php://output'));
-        $response->setContentDisposition(\Symfony\Component\HttpFoundation\ResponseHeaderBag::DISPOSITION_ATTACHMENT, 'export.xlsx');
-        
+        $writer->save('maintenance.xlsx');
+
+        // Send the Excel file as a download to the user
+        $response = new BinaryFileResponse('maintenance.xlsx');
+        $response->setContentDisposition(\Symfony\Component\HttpFoundation\ResponseHeaderBag::DISPOSITION_ATTACHMENT, 'maintenance.xlsx');
         return $response;
-        
-
-
     }
-
 }
