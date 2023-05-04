@@ -3,48 +3,42 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use App\Repository\CategorieoffreRepository;
+use Symfony\Component\Validator\Constraints as Assert;
+#[ORM\Entity(repositoryClass: CategorieoffreRepository::class)]
+#[ORM\Table(name: "Categorieoffre")]
+#[ORM\Index(name: "typeoffre", columns: ["typeoffre"])]
 
-/**
- * Categorieoffre
- *
- * @ORM\Table(name="categorieoffre", uniqueConstraints={@ORM\UniqueConstraint(name="TypeOffre", columns={"TypeOffre"})})
- * @ORM\Entity
- */
 class Categorieoffre
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="IdCatOffre", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $idcatoffre;
+    
+#[ORM\Id]
+#[ORM\GeneratedValue]
+#[ORM\Column]
+private ?int  $idcatoffre  = null;
 
-    /**
-     * @var float
-     *
-     * @ORM\Column(name="poidsOffre", type="float", precision=10, scale=0, nullable=false)
-     */
-    private $poidsoffre;
+#[ORM\Column]
+#[Assert\NotBlank (message:"le champ est vide!")]
+#[Assert\Type(type:"float", message:"Ce champ doit être de type float")]
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="nbreColisOffre", type="integer", nullable=false)
-     */
-    private $nbrecolisoffre;
+private ?float $poidsoffre = null;
+   
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="TypeOffre", type="string", length=255, nullable=false)
-     */
-    private $typeoffre;
+    #[ORM\Column]
+    #[Assert\NotBlank (message:"le champ est vide!")]
+
+private ?int $nbrecolisoffre = null;
+
+#[ORM\Column(name:"typeoffre",unique:true)]  
+#[Assert\NotBlank (message:"le champ est vide!")]
+
+private ?string  $typeoffre = null;
 
     public function getIdcatoffre(): ?int
     {
-        return $this->idcatoffre;
+        return $this->idcatoffre ;
     }
 
     public function getPoidsoffre(): ?float
@@ -83,5 +77,8 @@ class Categorieoffre
         return $this;
     }
 
-
+    public function __toString()
+    {
+        return $this->getTypeoffre(); // Return the title of the task as the string representation
+    }
 }

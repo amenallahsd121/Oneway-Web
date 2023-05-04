@@ -1,0 +1,895 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block title %}les  Offres{% endblock %}
+
+{% block body %}
+<link href="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css" rel="stylesheet">
+<script src="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js"></script>
+
+<style>
+
+    .custom-popup {
+      max-width: 300px;
+      padding: 10px;
+      background-color: #fff;
+      border-radius: 4px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    .popup-title {
+      font-size: 18px;
+      margin: 0 0 10px;
+    }
+
+    .popup-content img {
+      max-width: 100%;
+      margin-bottom: 10px;
+    }
+
+    .popup-content p {
+      margin: 10px;
+    }
+
+    .popup-content a {
+      display: inline-block;
+      background-color: #0078ff;
+      color: #fff;
+      padding: 8px 16px;
+      text-decoration: none;
+      border-radius: 4px;
+    }
+.scroll-container {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    width: 100%;
+}
+    /* Customize the scrollbar width, height, and color */
+    ::-webkit-scrollbar {
+        height: 10px;
+    }
+
+    /* Handle style */
+    ::-webkit-scrollbar-thumb {
+        background-color: #888;
+        border-radius: 5px;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+        background-color: #555;
+    }
+
+       #map { padding-left:100px;top:50px; bottom: 0;width: 100%;  height: 400px;}
+body {
+  background-color: #000c20;
+}
+.cont {
+width: 700px;
+  height: 500px;
+    }
+main{
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    transform: translate(-25%, -50%);
+}
+input[type="text"], select {
+    border: 1px solid blue;
+    border-radius: 20%;
+    background-color: #000c20;
+  width: 400px; /* set width of text inputs and select */
+  font-size: 19px; /* set font size for text inputs and select */
+  padding: 25px; /* set padding for text inputs and select */
+  border: none; /* remove border */
+  background-color: white; /* set background color for text inputs and select */
+  border-radius: 5px; /* round the corners of text inputs and select */
+  margin-bottom: 40px; /* add some space between form fields */
+  display: block;
+}
+ 
+ .page {
+              display: none;
+
+    }
+
+
+
+
+
+
+
+label {
+
+  display: inline-block;   
+  width: 100px; /* adjust as needed */
+  margin-right: 7px; /* adjust as needed */
+  font-size: 16px; /* set font size for labels */
+  font-weight: bold; /* make labels bold */
+       color: orange;
+}
+
+
+.divv {
+      display: inline-block;   
+
+  margin-right: 7px; /* adjust as needed */
+  font-size: 16px; /* set font size for labels */
+       color: black;
+    padding-left: 150px;
+
+}
+
+
+
+
+
+.page-num{
+      display: inline-block;   
+  margin-left:25px; /* adjust as needed */
+  margin-right:0px; /* adjust as needed */
+
+    border: 1px solid blue;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+font-size:15px;
+
+    padding: 30px;
+}
+
+.active{
+    color: white;
+    background-color: blue;
+}
+
+button{border: 1px solid blue;
+    border-radius: 20%;
+    
+     text-align: center;
+font-size:15px;
+ color: white;
+    background-color: #000c20;
+     width:300px;
+    height: 30px;
+    margin-left:50px;
+    margin-top:15px;
+}
+
+
+
+
+    .contact-form-area {
+        display: flex;
+        justify-content: flex-start;
+    }
+
+   .contact-form-wrapper {
+        width:700px;
+        height:900px;
+
+        padding: 20px;
+        
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        margin-left:-400px; /* Ajout de la marge à gauche */
+    }
+.table {padding-left:100px;top:50px; bottom: 0;width: 100%;  height: 300px;}
+   
+</style>
+    <!--? About Area Start -->
+
+<div class="categories-area ">
+<section class="contact-form-area section-bg pt-115  fix" data-background="{{ asset('assets/img/offre/b5.jpg') }}">
+
+		<div class="container">
+
+			<div class="row" >
+				<div
+					class="col-lg-12">
+					<!-- Section Title -->
+					<div class="section-title text-center mb-80" >
+						<div class="row">
+                <div class="col-lg-12">
+                    <!-- Section Tittle -->
+                    <div class="section-tittle text-center mb-80">
+                        <h2>Les  Offres </h2>
+                        <span> N'hesitez pas de Demander on est les meilleures :</span>
+                        	<a href="{{ path('app_offre_Front') }}" class="btn btn-light" style=" margin-left: 10px;">
+		 Mes Offres </i>
+								</a>
+              
+                    </div>
+                </div>
+            </div>
+
+					</div>
+				</div>
+			</div>
+      </section>
+<div class="scroll-container" style="white-space: nowrap; overflow-x: auto;">
+    {% for offres in offres %}
+        <div class="col-lg-4 col-md-6 col-sm-6">		
+						<div class="single-cat text-center mb-50">
+							<div class="cat-icon">
+								<span class="flaticon-shipped"></span>
+							</div>
+							<div class="cat-cap">
+								<h5>
+									<a style="font-size: 32px; color: white;">Détails d'offre :
+									</a>
+								</h5>
+								<p style="font-size: 22px; color: white;">
+									mon Trajets :
+									{{ offres.idtrajetoffre.description}}
+									Kg</p>
+								<p style="font-size: 22px; color: white;">
+									Type :
+									{{ offres.catoffreid.typeoffre }}</p>
+								<p style="font-size: 22px; color: white;">
+									La Date de sorie Sera Le:
+									{{ offres.datesortieoffre | date("d/m/Y") }}
+									</p>
+								<p style="font-size: 22px; color: white;">
+									Prix :
+									{{ offres.prixoffre }} DT</p>
+								<p style="font-size: 22px; color: white;">
+									Description :
+									{{ offres.descriptionoffre }}</p>
+                  
+
+								
+								<a href="{{ path('app_offre_demande', {'idoffre': offres.idoffre}) }}" class="btn btn-light" style="padding: 0.75rem 1rem; margin-left: 10px;">
+									<i class="bi bi-plus"></i>
+								</a>
+
+
+							</div>
+						</div>
+					   </div>
+               {% else %}
+<section class="contact-form-area section-bg pt-115  fix"  >
+
+		<div class="container">
+
+			<div class="row" >
+				<div
+					class="col-lg-12">
+					<!-- Section Title -->
+					<div class="section-title text-center mb-80" >
+						<div class="row">
+                <div class="col-lg-12">
+                    <!-- Section Tittle -->
+                    <div class="section-tittle text-center mb-80">
+                        <h2>Aucun Offre  </h2>
+                        <span> N'hesitez pas  on est les meilleures :</span>
+                  
+              
+                    </div>
+                </div>
+            </div>
+
+					</div>
+				</div>
+			</div>
+      </section>    {% endfor %}
+</div>
+		</div>
+	</div>
+  
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    <!-- About Area End -->
+    <!--? contact-form start -->
+<section class="contact-form-area section-bg pt-115 pb-120 fix" data-background="{{ asset('assets/img/offre/this2.png') }}">
+  <div class="container">
+  <section class=" label fix" > <div class="row">
+                <div class="col-lg-12">
+                    <!-- Section Tittle -->
+                    <div class="section-tittle text-center mb-80">
+                        <h2>Nouveau Offre</h2>
+                        <span>  Ajouter vos propres offres :</span>
+                    </div>
+                </div>
+            </div></section>
+    <div class="row justify-content-end">
+      <!-- Contact wrapper -->
+      <div class="col-xl-8 col-lg-9">
+        <div class="contact-form-wrapper">
+          <!-- Form title -->
+          <div class="row">
+            <div class="col-lg-12">
+              <!-- Section Title -->
+              <div class="section-title mb-50">
+                <span>Remplissez le formulaire et profitez De Nos Services :</span>
+                <h2>Le Chef C'est Vous !</h2>
+                <p>On vous propose le prix convenable ,c'est a vous a Decider. </p>
+              </div>
+            </div>
+          </div>
+{{ form_start(form, {'attr': {'class': 'contact-form', 'novalidate': 'novalidate'}}) }}
+
+            <div class="page" id="page1">
+              <!-- Form fields -->
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="input-form">
+                    {{ form_widget(form.descriptionoffre, {'attr': {'placeholder': 'Description'}}) }}
+                    {% if form_errors(form.descriptionoffre) is not empty %}
+                      <div class="alert alert-danger">
+                        {{ form_errors(form.descriptionoffre) }}
+                      </div>
+                    {% endif %}
+                  </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                  <div class="input-form">
+                    {{ form_widget(form.datesortieoffre, {'attr': {'placeholder': 'YYYY-MM-DD'}}) }}
+                    {% if form_errors(form.datesortieoffre) is not empty %}
+                      <div class="alert alert-danger">
+                        {{ form_errors(form.datesortieoffre) }}
+                      </div>
+                    {% endif %}
+                  </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                  <div class="input-form">
+                    {{ form_widget(form.maxretard, {'attr': {'placeholder': 'Retard maximum'}}) }}
+                    {% if form_errors(form.maxretard) is not empty %}
+                      <div class="alert alert-danger">
+                        {{ form_errors(form.maxretard) }}
+                      </div>
+                    {% endif %}
+                  </div>
+                </div>
+                <div class="col-lg-6">
+    <div class="select-items">
+        <select name="select" id="select1">
+                    <option value="Categories Two">les options</option>
+
+            <option value="With Depalacements">With Depalacements</option>
+            <option value="Without Deplacement">Without Deplacement</option>
+        </select>
+    </div>
+</div>
+<div class="col-lg-6 col-md-6 col-sm-6">
+    <div class="input-form">
+        <input type="text" id="incoterms" placeholder="Incoterms">
+    </div>
+</div>
+<div class="col-lg-6 col-md-6 col-sm-6">
+    <div class="input-form">
+        <input type="text" id="weight" placeholder="Weight">
+    </div>
+</div>
+<!-- Height Width length -->
+<div class="col-lg-4 col-md-6 col-sm-6">
+    <div class="input-form">
+        <input type="text" id="height" placeholder="Height">
+    </div>
+</div>
+<div class="col-lg-4 col-md-6 col-sm-6">
+    <div class="input-form">
+        <input type="text" id="width" placeholder="Width">
+    </div>
+</div>
+<div class="col-lg-4 col-md-6 col-sm-6">
+    <div class="input-form">
+        <input type="text" id="length" placeholder="Length">
+    </div>
+</div>
+<!-- Radio Button -->
+<div class="col-lg-12">
+    <div class="radio-wrapper mb-30 mt-15">
+        <label>Extra services:</label>
+        <div class="select-radio">
+            <div class="radio">
+                <input id="radio-1" name="radio" type="radio">
+                <label for="radio-1" class="radio-label">Fragile</label>
+            </div>
+            <div class="radio">
+                <input id="radio-2" name="radio" type="radio">
+                <label for="radio-2" class="radio-label">Rigid</label>
+            </div>
+        </div>
+    </div> 
+</div>
+
+                                <!-- Button -->
+                                <div class="col-lg-12">
+                                  <button class="next" type="button">Suivant</button>
+                                </div>
+                            </div>
+                           
+                   
+           </div>
+           <div class="page" id="page2">
+                        <!-- form -->
+                       
+                       
+                            <div class="row"> <div class="col-lg-12">
+    <div class="input-form">
+      {{ form_label(form.idtrajetoffre, "Votre Trajet :") }}
+      {{ form_widget(form.idtrajetoffre, {'attr': {'class': 'from-control', 'class': 'addresses', 'onchange': 'updateMap()'}}) }}
+      {% if form_errors(form.idtrajetoffre) is not empty %}
+      <div class="alert alert-danger">
+        {{ form_errors(form.idtrajetoffre) }}
+      </div>
+      {% endif %}
+    </div>
+  </div>
+
+                      <div class="col-lg-12"> 
+    <div id="map"></div></div>
+                                <!-- Button -->
+                                <div class="col-lg-12">
+                                    <button class="prev" type="button">Précédent</button>
+                <button class="next" type="button">Suivant</button>
+</div>
+                          
+                            </div>
+                        	
+                        </div>
+                        <div class="page" id="page3">
+    <!-- form -->
+    
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="input-form">
+                    {{ form_label(form.catoffreid," La Categorie D'offre  :") }}
+                    {{ form_widget(form.catoffreid,{'attr':{'class':'from-control'}}) }}
+                    {% if form_errors(form.catoffreid) is not empty %}
+                        <div class="alert alert-danger">
+                            {{ form_errors(form.catoffreid) }}
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col-lg-12"> 
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Poids</th>
+                            <th>Nbrecolis</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="3">
+                                <div style="height:300px; overflow-y: scroll;">
+                                    <table class="table">
+                                        {% for categorieoffre in categorieoffres %}
+                                            <tr>    
+                                                <td>{{ categorieoffre.typeoffre }}</td>
+                                                <td>{{ categorieoffre.poidsoffre }} kg /colis</td>
+                                                <td>{{ categorieoffre.nbrecolisoffre }} colis</td>
+                                            </tr>
+                                        {% else %}
+                                            <tr>
+                                                <td colspan="3">aucune categorie ! </td>
+                                            </tr>
+                                        {% endfor %}
+                                    </table>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>                                    
+            <!-- Button -->
+            <div class="col-lg-12">
+                <button class="prev" type="button">Précédent</button>
+                <button class="next" type="button">Suivant</button>
+            </div>
+        </div>
+    	
+</div>
+
+ <div class="page" id="page4">
+    <!-- form -->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="input-form">
+                {{ form_label(form.prixoffre, "Prix :") }}
+                {{ form_widget(form.prixoffre, {'attr': {'class': 'prixoffre', 'placeholder': 'Prix'}}) }}
+                {% if form_errors(form.prixoffre) is not empty %}
+                <div class="alert alert-danger">
+                    {{ form_errors(form.prixoffre) }}
+                </div>
+                {% endif %}
+            </div>
+        </div>
+       
+         <div class="col-lg-25" >
+         
+          <table class="no-table">
+          <td>
+
+        <div class="col-lg-8 col-md-8 col-sm-2">		
+						<div class="single-cat  mb-50" style="
+     border: 2px solid orange;height: 350px;
+    width:200px;
+  border-radius: 25px;margin-left:20px
+" >
+
+
+
+
+
+
+
+							<div class="cat-cap" style="
+    height: 350px;
+    width:350px; padding : 0 0 15px 15px; 
+" ><table class ="no_table">
+							<thead>	<th><h5>
+									<a style="font-size: 30px; color:#000c20 ;">Calcul Prix  	
+									</a>
+								</h5></th>
+                                <th><div class="cat-icon" style="padding : 0 0 0 40px;font-size:40px; color :green;">
+								<span class="fas fa-dollar-sign"></span>
+							</div></th>
+                                </thead>
+                                </table>
+                                                                <h6>
+
+									<a style="font-size: 15px; color: Orange;"> + Depalacements:
+
+									</a>
+								</h6>
+								<p style="font-size: 10px; color:  #000c20;">
+									With Depalacements : +5 DT
+									</p>
+                                    <h6>
+									<a style="font-size: 15px; color: orange;"> + Poids:
+
+									</a>
+								</h6>
+								<p style="font-size: 10px; color:  #000c20;">
+									 
+                                   1 kg = 1 DT</p>	<h6>
+                                   <a style="font-size: 15px; color: orange;"> + volume:
+
+									</a>
+								</h6>
+								<p style="font-size: 10px; color:  #000c20;">
+								  volume  : height * width * length;
+              <br> + volume/10
+									</p>
+                                    	<h6>
+                                    <a style="font-size:15px; color: orange;"> + Fragile :
+
+									</a>
+								</h6>
+								<p style="font-size: 10px; color:  #000c20;">
+								
+                                    *1.5
+									</p>
+							
+
+							</div>
+                            </td>
+<td>
+<div class="col-lg-6 col-md-6 col-sm-6">
+   <div class="input-form">
+                    {{ form_row(form.recaptcha) }} 
+
+                {% if form_errors(form.recaptcha) is not empty %}
+                <div class="alert alert-danger">
+                    {{ form_errors(form.recaptcha) }}
+                </div>
+                {% endif %}
+            </div>
+</div>
+</div>
+</div>
+</td>
+</table >
+						
+    </div>
+    
+
+
+
+
+
+
+
+                     
+                                 
+
+
+
+                                <!-- Button -->
+                                <div class="col-lg-12">
+                                    <button class="prev" type="button">Précédent</button>
+                                    
+               {{ form_widget(form.save, {'attr': {'style': 'font-size: 15px; padding: 15px 20px; margin-left: 50px; margin-top: 10px;'}} ) }}</td>
+</div>
+                          
+                            </div>
+{{ form_end(form) }}
+                       </div>
+                </div>
+            </div>
+             </div>
+             </div>
+      
+    </section>
+
+<!-- ... previous Twig code ... -->
+
+
+<!-- ... remaining Twig code ... -->
+
+<script>
+  const scrollContainer = document.querySelector('.scroll-container');
+
+    // Set the scrolling speed and direction
+    const speed = 1;
+    const direction = 'right'; // 'left' or 'right'
+
+    // Define the animation function
+    function animateScroll() {
+        if (direction === 'left') {
+            scrollContainer.scrollLeft -= speed;
+        } else {
+            scrollContainer.scrollLeft += speed;
+        }
+    }
+document.addEventListener('DOMContentLoaded', function() {
+    const prixOffreField = document.querySelector('.prixoffre');
+    const inputFields = document.querySelectorAll('input');
+
+    function calculatePrice() {
+        const selectValue = document.getElementById('select1').value;
+        const incotermsValue = document.getElementById('incoterms').value;
+        const weightValue = document.getElementById('weight').value;
+        const heightValue = document.getElementById('height').value;
+        const widthValue = document.getElementById('width').value;
+        const lengthValue = document.getElementById('length').value;
+        const radioValue = document.querySelector('input[name="radio"]:checked').value;
+
+        let price;
+
+        if (prixOffreField.value !== '') {
+            price = parseFloat(prixOffreField.value);
+        } else {
+            price = 0;
+
+            if (selectValue === 'With Depalacements') {
+                price += 5;
+            } else if (selectValue === 'Without Deplacement') {
+                price += 0;
+            }
+
+         
+
+            if (weightValue) {
+                price += parseInt(weightValue);
+            }
+
+            if (heightValue && widthValue && lengthValue) {
+                const volume = parseInt(heightValue) * parseInt(widthValue) * parseInt(lengthValue);
+                price += parseInt(volume/10);
+            }
+
+            if (radioValue === 'Fragile') {
+                price *= 1.5;
+            } else if (radioValue === 'Rigid') {
+                price *= 1;
+            }
+        }
+
+        // Display the calculated price
+        prixOffreField.value = price.toFixed(2);
+    }
+
+    // Attach the calculatePrice function to the input fields' input event
+    inputFields.forEach(input => {
+        input.addEventListener('input', calculatePrice);
+    });
+
+    // Trigger initial calculation
+    calculatePrice();
+});
+     
+    // Start the animation loop
+    setInterval(animateScroll, 20);
+   mapboxgl.accessToken = "pk.eyJ1IjoibWVyaWVtb25ld2F5IiwiYSI6ImNsZ3Y0MDRicDByZ3Ezc281M3lsbnBsMXMifQ.VSPCAkW-uii22tzbqgFaiw";
+
+  var marker1 = new mapboxgl.Marker({ color: 'red' });
+    var marker2 = new mapboxgl.Marker({ color: 'red' });
+    var map = new mapboxgl.Map({
+      container: 'map',
+      style: 'mapbox://styles/mapbox/streets-v11',
+            center: [9.5375, 33.8869],
+      zoom: 5
+    });
+    map.addControl(new mapboxgl.NavigationControl());
+        const selectElement = document.querySelector('.addresses');
+
+selectElement.addEventListener('change', function() {
+  updateMap();
+});
+
+function updateMap() {
+  var selectedOption = selectElement.options[selectElement.selectedIndex];
+  var selectedIdTrajet = selectedOption.value;
+  var selectedLabel = selectedOption.textContent;
+
+  var [address1, address2] = selectedLabel.split('-');
+
+console.log(address1);
+   mapboxgl.accessToken = "pk.eyJ1IjoibWVyaWVtb25ld2F5IiwiYSI6ImNsZ3Y0MDRicDByZ3Ezc281M3lsbnBsMXMifQ.VSPCAkW-uii22tzbqgFaiw";
+var geocodingUrl1 = 'https://api.mapbox.com/geocoding/v5/mapbox.places/' + encodeURIComponent(address1) + '.json?access_token=' + mapboxgl.accessToken;
+var geocodingUrl2 = 'https://api.mapbox.com/geocoding/v5/mapbox.places/' + encodeURIComponent(address2) + '.json?access_token=' + mapboxgl.accessToken;
+// Make an AJAX request to fetch the trajet data
+function getTrajetData(idtrajetoffre) {
+  // Create a new XMLHttpRequest object
+  var xhr = new XMLHttpRequest();
+
+  // Define the request URL
+ var url = "{{ path('your_route_name', {'idtrajetoffre': 'PLACEHOLDER'}) }}";
+  
+  // Replace the placeholder with the actual ID
+  url = url.replace('PLACEHOLDER', idtrajetoffre);
+  // Set the request method to GET
+  xhr.open('GET', url, true);
+
+  // Set the response type to JSON
+  xhr.responseType = 'json';
+
+  // Define the onload function to handle the response
+  xhr.onload = function () {
+    // Check if the request was successful
+    if (xhr.status === 200) {
+      // Access the response data
+      var trajetData = xhr.response;
+
+      // Process the trajetData as needed
+      console.log(trajetData);
+
+      // Access specific fields from the response
+      var nbreescaleoffre = trajetData.nbreescaleoffre;
+      var limitekmoffre = trajetData.limitekmoffre;
+      var description = trajetData.description;
+
+      // Do something with the retrieved data
+      console.log('nbreescaleoffre:', nbreescaleoffre);
+      console.log('limitekmoffre:', limitekmoffre);
+      console.log('description:', description);
+      // Add other necessary data fields
+ popup1.setHTML(
+  '<div class="custom-popup">' +
+            '<h3 class="popup-title"> Source Addresse : </h3>' +
+
+    '<h2 class="popup-title">' +
+    address1 +
+    '</h2>' +
+    '<div class="popup-content">' +
+   
+    '<p>' +
+    description +
+    '</p>' +
+    '<p>Numbre De Scales: ' +
+    nbreescaleoffre +
+    '</p>' +
+    '<p>Limite: ' +
+    limitekmoffre +
+    'km</p>' +
+    '<a href="https://fr.wikipedia.org/wiki/' + address1 + '" target="_blank">More Info</a>' +
+  '</div>' +
+  '</div>'
+);
+
+        // Update the popup content
+        popup2.setHTML(
+          '<div class="custom-popup">' +
+          '<h3 class="popup-title"> Destination Addresse : </h3>' +
+            '<h2 class="popup-title">' +
+            address2 +
+            '</h2>' +
+            '<div class="popup-content">' +
+            '<p>' +
+            description +
+            '</p>' +
+            '<p>Number of Scales: ' +
+            nbreescaleoffre +
+            '</p>' +
+            '<p>Limit: ' +
+            limitekmoffre +
+            'km</p>' +
+    '<a href="https://fr.wikipedia.org/wiki/' + address2 + '" target="_blank">More Info</a>' +
+            '</div>' +
+            '</div>'
+        );
+
+      
+
+        marker1.setLngLat(startCoordinates).addTo(map).setPopup(popup1);
+        marker2.setLngLat(endCoordinates).addTo(map).setPopup(popup2);
+    } else {
+      // Request was not successful, handle the error
+      console.error('Error: ' + xhr.status);
+    }
+  };
+
+  // Send the request
+  xhr.send();
+}
+
+// Usage: Call the getTrajetData function with the desired ID
+var idtrajetoffre = '66';
+getTrajetData(idtrajetoffre);
+var popup1 = new mapboxgl.Popup()
+  .setHTML('<div class="custom-popup">' +
+          '<h3 class="popup-title">'+address1+'</h3>' +
+          '<div class="popup-content">' +
+            '<img src="image.jpg" alt="Location Image">' +
+            '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vestibulum arcu eget arcu tincidunt, in sodales turpis hendrerit.</p>' +
+            '<a href="https://example.com" target="_blank">More Info</a>' +
+          '</div>' +
+        '</div>');
+
+
+var popup2 = new mapboxgl.Popup()
+  .setHTML('<div class="custom-popup">' +
+          '<h3 class="popup-title">'+address2+'</h3>' +
+          '<div class="popup-content">' +
+            '<img src="image.jpg" alt="Location Image">' +
+            '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vestibulum arcu eget arcu tincidunt, in sodales turpis hendrerit.</p>' +
+            '<a href="https://example.com" target="_blank">More Info</a>' +
+          '</div>' +
+        '</div>');
+
+
+  Promise.all([
+    fetch(geocodingUrl1).then(response => response.json()),
+    fetch(geocodingUrl2).then(response => response.json())
+  ])
+    .then(function(responses) {
+      var startCoordinates = responses[0].features[0].center;
+      var endCoordinates = responses[1].features[0].center;
+
+      marker1.setLngLat(startCoordinates).addTo(map);
+      marker2.setLngLat(endCoordinates).addTo(map);
+marker1.setLngLat(startCoordinates).addTo(map).setPopup(popup1);
+    marker2.setLngLat(endCoordinates).addTo(map).setPopup(popup2);
+      // Assuming you have a Mapbox Directions instance named 'directions'
+      var directions = new MapboxDirections({
+  accessToken: mapboxgl.accessToken,
+  unit: 'metric', // or 'imperial'
+  profile: 'mapbox/driving', // specify the desired travel profile
+  alternatives: false, // enable multiple routes
+  congestion: true, // enable traffic congestion display
+  controls: {
+    inputs: false, // hide the inputs control
+    instructions: false // show the instructions control
+  },
+  interactive: false // disable the default interactivity
+});
+
+// Add the directions control to the map
+map.addControl(directions, 'top-left');
+      directions.setOrigin(startCoordinates);
+      directions.setDestination(endCoordinates);
+    })
+    .catch(function(error) {
+      console.error('Error:', error);
+    });
+
+    }
+    
+</script>
+
+
+
+{% endblock %}

@@ -2,80 +2,52 @@
 
 namespace App\Entity;
 
-use App\Repository\LocationRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: LocationRepository::class)]
+/**
+ * Location
+ *
+ * @ORM\Table(name="location", indexes={@ORM\Index(name="id_relai", columns={"id_relai"})})
+ * @ORM\Entity
+ */
 class Location
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
 
-    #[ORM\Column(length: 20)]
-    private ?string $adresse = null;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="adresse", type="string", length=20, nullable=false)
+     */
+    private $adresse;
 
-    #[ORM\Column]
-    private ?float $Xaxe = null;
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="Xaxe", type="float", precision=10, scale=0, nullable=false)
+     */
+    private $xaxe;
 
-    #[ORM\Column]
-    private ?float $Yaxe = null;
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="Yaxe", type="float", precision=10, scale=0, nullable=false)
+     */
+    private $yaxe;
 
-    #[ORM\ManyToOne(inversedBy: 'locations')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Relais $relai = null;
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id_relai", type="integer", nullable=false)
+     */
+    private $idRelai;
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
 
-    public function getAdresse(): ?string
-    {
-        return $this->adresse;
-    }
-
-    public function setAdresse(string $adresse): self
-    {
-        $this->adresse = $adresse;
-
-        return $this;
-    }
-
-    public function getXaxe(): ?float
-    {
-        return $this->Xaxe;
-    }
-
-    public function setXaxe(float $Xaxe): self
-    {
-        $this->Xaxe = $Xaxe;
-
-        return $this;
-    }
-
-    public function getYaxe(): ?float
-    {
-        return $this->Yaxe;
-    }
-
-    public function setYaxe(float $Yaxe): self
-    {
-        $this->Yaxe = $Yaxe;
-
-        return $this;
-    }
-
-    public function getIdRelai(): ?relais
-    {
-        return $this->relai;
-    }
-
-    public function setIdRelai(?relais $id_relai): self
-    {
-        $this->relai = $id_relai;
-
-        return $this;
-    }
 }

@@ -3,9 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\ColisRepository;
-use App\Repository\LivraisonRepository;
 use App\Entity\Utilisateur;
-use App\Entity\Livraison;
 use ORM\Table;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -13,13 +11,14 @@ use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ColisRepository::class)]
 
+
 class Colis
 {
     
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id_colis = null ;
+    #[ORM\Column(name:"id_colis")]
+    private ?int $idColis = null ;
 
 
     #[ORM\Column]
@@ -45,18 +44,13 @@ class Colis
 #[ORM\JoinColumn(name: "id_client", referencedColumnName: "id")]
 protected $id_client;
 
-
-
-
-#[ORM\OneToOne(targetEntity: Livraison::class, mappedBy: 'colis')]
-    private $livraisons;
-
-
+    
+    
 
 
     public function getIdColis(): ?int
     {
-        return $this->id_colis;
+        return $this->idColis;
     }
 
     public function getPoids(): ?float
@@ -139,28 +133,6 @@ protected $id_client;
     public function setIdClient(?Utilisateur $id_client): self
     {
         $this->id_client = $id_client;
-
-        return $this;
-    }
-
-    public function getLivraisons(): ?Livraison
-    {
-        return $this->livraisons;
-    }
-
-    public function setLivraisons(?Livraison $livraisons): self
-    {
-        // unset the owning side of the relation if necessary
-        if ($livraisons === null && $this->livraisons !== null) {
-            $this->livraisons->setColis(null);
-        }
-
-        // set the owning side of the relation if necessary
-        if ($livraisons !== null && $livraisons->getColis() !== $this) {
-            $livraisons->setColis($this);
-        }
-
-        $this->livraisons = $livraisons;
 
         return $this;
     }

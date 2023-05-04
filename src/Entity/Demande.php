@@ -4,63 +4,38 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * Demande
- *
- * @ORM\Table(name="demande", indexes={@ORM\Index(name="demande_ibfk_3", columns={"IdPersonne"}), @ORM\Index(name="IdColis", columns={"IdColis"}), @ORM\Index(name="IdOffre", columns={"IdOffre"})})
- * @ORM\Entity
- */
+use App\Repository\DemandeRepository;
+
+#[ORM\Entity(repositoryClass: DemandeRepository::class)]
 class Demande
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="IdDemande", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $iddemande;
+      #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    
+    private ?int $iddemande = null;
+    
+       
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="DescriptionDemande", type="string", length=255, nullable=false)
-     */
-    private $descriptiondemande;
+    #[ORM\Column(length: 225) ]
+private ?string  $descriptiondemande = null;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="IdPersonne", type="integer", nullable=false, options={"default"="1"})
-     */
-    private $idpersonne = 1;
 
-    /**
-     * @var float
-     *
-     * @ORM\Column(name="prix", type="float", precision=10, scale=0, nullable=false)
-     */
-    private $prix;
+#[ORM\ManyToOne (targetEntity:'App\Entity\Utilisateur')]
+#[ORM\JoinColumn(name: "idpersonne", referencedColumnName: "id")]
+private ?Utilisateur $idpersonne = null;
+  
 
-    /**
-     * @var \Offre
-     *
-     * @ORM\ManyToOne(targetEntity="Offre")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="IdOffre", referencedColumnName="IdOffre")
-     * })
-     */
-    private $idoffre;
+#[ORM\Column]
+private ?float $prix= null;
 
-    /**
-     * @var \Colis
-     *
-     * @ORM\ManyToOne(targetEntity="Colis")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="IdColis", referencedColumnName="id_colis")
-     * })
-     */
-    private $idcolis;
+#[ORM\ManyToOne (targetEntity:'App\Entity\Offre')]
+#[ORM\JoinColumn(name: "idoffre", referencedColumnName: "idoffre")]
+private ?Offre $idoffre = null;
+#[ORM\ManyToOne (targetEntity:'App\Entity\Colis')]
+#[ORM\JoinColumn(name: "idcolis", referencedColumnName: 'id_colis')]
+private ?Colis $idcolis = null;
+
 
     public function getIddemande(): ?int
     {
@@ -79,12 +54,12 @@ class Demande
         return $this;
     }
 
-    public function getIdpersonne(): ?int
+    public function getIdpersonne(): ?Utilisateur
     {
         return $this->idpersonne;
     }
 
-    public function setIdpersonne(int $idpersonne): self
+    public function setIdpersonne(?Utilisateur $idpersonne): self
     {
         $this->idpersonne = $idpersonne;
 
@@ -128,4 +103,8 @@ class Demande
     }
 
 
+    public function __toString()
+    {
+        return (string) $this->idpersonne->getEmail()  ;
+    }  
 }

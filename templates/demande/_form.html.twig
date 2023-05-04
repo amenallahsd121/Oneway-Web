@@ -1,0 +1,297 @@
+{<link href="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css" rel="stylesheet">
+<script src="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js"></script>
+<link rel="stylesheet" href="{{ asset('build/flatpickr.min.css') }}"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<link href='https://api.mapbox.com/mapbox-gl-js/v2.4.1/mapbox-gl.css' rel='stylesheet'/>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.6.1/font/bootstrap-icons.css" rel="stylesheet">
+
+<link rel="stylesheet" href="assets/css/bo<link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.0/mapbox-gl-directions.css' type='text/css' />
+							otstrap.min.css">
+<script src='https://api.mapbox.com/mapbox-gl-js/v2.4.1/mapbox-gl.js'></script>
+<script src="{{asset('./assets/js/main.js')}}"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
+<script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.0/mapbox-gl-directions.js'></script>
+
+
+<style>
+
+	.custom-popup {
+		max-width: 300px;
+		padding: 10px;
+		background-color: #fff;
+		border-radius: 4px;
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+	}
+
+	.popup-title {
+		font-size: 18px;
+		margin: 0 0 10px;
+	}
+
+	.popup-content img {
+		max-width: 100%;
+		margin-bottom: 10px;
+	}
+
+	.popup-content p {
+		margin: 10px;
+	}
+
+	.popup-content a {
+		display: inline-block;
+		background-color: #0078ff;
+		color: #fff;
+		padding: 8px 16px;
+		text-decoration: none;
+		border-radius: 4px;
+	}
+	.scroll-container {
+		display: flex;
+		flex-wrap: nowrap;
+		overflow-x: auto;
+		-webkit-overflow-scrolling: touch;
+		scroll-snap-type: x mandatory;
+		width: 100%;
+	}
+	/* Customize the scrollbar width, height, and color */
+	::-webkit-scrollbar {
+		height: 10px;
+	}
+
+	/* Handle style */
+	::-webkit-scrollbar-thumb {
+		background-color: #888;
+		border-radius: 5px;
+	}
+
+	/* Handle on hover */
+	::-webkit-scrollbar-thumb:hover {
+		background-color: #555;
+	}
+
+	#map {
+		padding-left: 100px;
+		top: 50px;
+		bottom: 0;
+		width: 100%;
+		height: 400px;
+	}
+	body {
+		background-color: #000c20;
+	}
+	.cont {
+		width: 700px;
+		height: 500px;
+	}
+	main {
+		position: absolute;
+		top: 25%;
+		left: 50%;
+		transform: translate(-25%, -50%);
+	}
+	input[type="text"],
+	select {
+		border: 1px solid blue;
+		border-radius: 20%;
+		background-color: #000c20;
+		width: 400px; /* set width of text inputs and select */
+		font-size: 19px; /* set font size for text inputs and select */
+		padding: 25px; /* set padding for text inputs and select */
+		border: none; /* remove border */
+		background-color: white; /* set background color for text inputs and select */
+		border-radius: 5px; /* round the corners of text inputs and select */
+		margin-bottom: 40px; /* add some space between form fields */
+		display: block;
+	}
+
+	.page {
+		display: none;
+
+	}
+
+
+	label {
+
+		display: inline-block;
+		width: 100px; /* adjust as needed */
+		margin-right: 7px; /* adjust as needed */
+		font-size: 16px; /* set font size for labels */
+		font-weight: bold; /* make labels bold */
+		color: orange;
+	}
+
+
+	.divv {
+		display: inline-block;
+
+		margin-right: 7px; /* adjust as needed */
+		font-size: 16px; /* set font size for labels */
+		color: black;
+		padding-left: 150px;
+
+	}
+
+
+	.page-num {
+		display: inline-block;
+		margin-left: 25px; /* adjust as needed */
+		margin-right: 0; /* adjust as needed */
+
+		border: 1px solid blue;
+		border-radius: 50%;
+		width: 20px;
+		height: 20px;
+		text-align: center;
+		font-size: 15px;
+
+		padding: 30px;
+	}
+
+	.active {
+		color: white;
+		background-color: blue;
+	}
+
+	button {
+		border: 1px solid blue;
+		border-radius: 20%;
+
+		text-align: center;
+		font-size: 15px;
+		color: white;
+		background-color: #000c20;
+		width: 300px;
+		height: 30px;
+		margin-left: 50px;
+		margin-top: 15px;
+	}
+
+
+	.contact-form-area {
+		display: flex;
+		justify-content: flex-start;
+	}
+
+	.contact-form-wrapper {
+		width: 500px;
+		height:550px;
+
+		padding: 20px;
+
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+		margin-left: -400px; /* Ajout de la marge à gauche */
+	}
+	.table {
+		padding-left: 100px;
+		top: 50px;
+		bottom: 0;
+		width: 100%;
+		height: 300px;
+	}
+</style>
+
+<!-- About Area End -->
+<!--? contact-form start -->
+<section class="contact-form-area section-bg pt-115 pb-120 fix" data-background="{{ asset('assets/img/offre/offre.png') }}">
+	<div class="container">
+
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="col-lg-6 col-md-6 col-sm-6">
+					<a href="{{ path('app_offre_new') }}" class="btn btn-light" style=" margin-left: 10px;margin-bottom: 10px;">
+						Retour
+					</a>
+				</div>
+				<div>
+
+					<div
+						class="col-lg-12">
+
+						<!-- Section Title -->
+						<div class="section-title text-center mb-80">
+							<div class="row">
+								<div
+									class="col-lg-12">
+
+									<!-- Section Tittle -->
+									<div class="section-tittle text-center mb-80">
+										<h2 style='font-size:60px'>
+											Offre  {{demande.idoffre.idtrajetoffre}}</h2>
+                                          Max Retard : {{demande.idoffre.maxretard}} jours</h2>
+
+										<span style='color:black;font-size:20px'>
+									 demandez et  delivrez vos objet sans deplacer!
+										</span>
+
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+				<div
+					class="row justify-content-end">
+					<!-- Contact wrapper -->
+					<div>
+						<div
+							class="contact-form-wrapper">
+							<!-- Form title -->
+							<div class="row">
+								<div
+									class="col-lg-12">
+									<!-- Section Title -->
+									<div class="section-title mb-50">
+										<span>Lancez Une  Demande</span>
+										<h2>Demandez et facilitez la vie
+										</h2>
+										<p>donner vos prix et precisez vos besoins
+										</p>
+									</div>
+								</div>
+							</div>
+							{{ form_start(form, {'attr': {'class': 'contact-form', 'novalidate': 'novalidate'}}) }}
+
+							<!-- Form fields -->
+							<div class="row">
+								<div class="col-lg-12">
+									<div class="input-form">
+										{{ form_widget(form.descriptiondemande, {'attr': {'placeholder': 'Description'}}) }}
+										{% if form_errors(form.descriptiondemande) is not empty %}
+											<div class="alert alert-danger">
+												{{ form_errors(form.descriptiondemande) }}
+											</div>
+										{% endif %}
+									</div>
+								</div>
+								<div class="col-lg-12">
+									<div class="input-form">
+										{{ form_widget(form.prix, {'attr': {'placeholder': 'Donner vos propre prix'}}) }}
+										{% if form_errors(form.prix) is not empty %}
+											<div class="alert alert-danger">
+												{{ form_errors(form.prix) }}
+											</div>
+										{% endif %}
+									</div>
+								</div>
+
+
+							</div>
+	<div class="col-lg-12">
+                                <button class="btn" style= 'font-size: 15px;'>{{ button_label|default('Save') }}</button>
+
+						</div>
+	{{ form_end(form) }}
+							
+					</div>
+				</div>
+			</div>
+		
+
+		</div>
+
+	</div>
+
+</section><!-- ... previous Twig code ... -->
+
+

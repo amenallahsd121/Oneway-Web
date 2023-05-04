@@ -1,0 +1,41 @@
+{% extends 'backbase.html.twig' %}
+
+{% block title %}Categorieoffre{% endblock %}
+
+{% block body %}
+    <h1>Categories  :<a href="{{ path('app_categorieoffre_new') }}"style="margin-left:700px ; font-size:17px ; color:white"><img src="{{ asset('asset/images/categorieoffre/add.png') }}"/>Ajouter</a>
+</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Poids</th>
+                <th>Nbrecolis</th>
+                <th>Type</th>
+                <th>details</th>
+                                <th>Modifier</th>
+
+            </tr>
+        </thead>
+        <tbody>
+        {% for categorieoffre in categorieoffres %}
+            <tr>
+                <td>{{ categorieoffre.idcatoffre }}</td>
+                <td>{{ categorieoffre.poidsoffre }}</td>
+                <td>{{ categorieoffre.nbrecolisoffre }}</td>
+                <td>{{ categorieoffre.typeoffre }}</td>
+                <td>
+                    <a href="{{ path('app_categorieoffre_show', {'idcatoffre': categorieoffre.idcatoffre}) }}"><img src="{{ asset('asset/images/offrefront/show.png') }}"/></a></td>
+                 <td>   <a href="{{ path('app_categorieoffre_edit', {'idcatoffre': categorieoffre.idcatoffre}) }}"><img src="{{ asset('asset/images/categorieoffre/edit.png') }}"/></a></td>
+                
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">aucune categorie ! pouvez vous ajouter </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
