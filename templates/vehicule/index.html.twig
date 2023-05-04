@@ -1,0 +1,150 @@
+{% extends 'backbase.html.twig' %}
+
+
+{% block title %}
+	Liste des Vehicules
+{% endblock %}
+
+
+
+
+{% block body %}
+
+
+<body>
+	
+
+<style>
+
+
+
+
+</style>
+
+
+	
+
+
+
+	<div class="row ">
+		<div class="col-12 grid-margin">
+			<div class="card ">
+				<div class="card-body">
+
+					<div class="card-title">
+						<h4>Liste des Vehicules</h4>
+						<div>
+						
+
+							<form action="/onewaymayssen/public/index.php/vehicule" type="GET">
+								<input type="text" name="term" placeholder="Recherche" value="{{ app.request.get('term') }}">
+								<select name="category" onchange="this.form.submit()">
+									<option value="">Toutes</option>
+									{% for categorie in categories %}
+										<option {{ (app.request.get('category') == categorie.idCategorie) ? 'selected' : '' }} value="{{ categorie.idCategorie }}">{{ categorie.type }}</option>
+									{% endfor %}
+								</select>
+							</form>
+							<a href=" {{ path ('add_vehicule') }} " class="btn btn-success btn-fw float-right">Ajouter Vehicule</a>
+						</div>
+					</div>
+                    
+
+					<div class="table-responsive">
+						<table class="table">
+							<thead>
+								<tr>
+									<th>
+										Matricule
+									</th>
+									<th>
+										Marque
+									</th>
+									<th>
+										Type
+									</th>
+
+									<th>
+										Suppression
+									</th>
+									<th>
+										Modification
+									</th>
+									<th>
+										QR CODE
+									</th>
+								</tr>
+							</thead>
+
+							{% for data in list %}
+								<tr>
+
+									<td>
+										{{ data.matricule }}
+									</td>
+									<td>
+										{{ data.marque }}
+									</td>
+									<td>
+										{{ data.idCategorie.type }}
+									</td>
+
+
+									<td>
+										<a href="{{ path('delete_vehicule', {'id': data.idVehicule}) }}" class="btn btn-outline-danger btn-fw;">Supprimer</a>
+									</td>
+
+
+									<td>
+										<a href="{{ path('update_vehicule', {'id': data.idVehicule}) }}" class="btn btn-outline-warning btn-fw;">
+											Modifier</a>
+									</td>
+									<td>
+										<a href="{{ path('qrcode', {'id': data.idVehicule}) }}" class="btn btn-light" style="padding: 0.75rem 1rem;margin-left: 10px;">
+											<i class="fas fa-qrcode"></i>
+										</a>
+									</td>
+									
+
+								</tr>
+
+
+							{% endfor %}
+
+</body>
+
+<script>
+  $(document).ready(() => {
+    const body = document.querySelector('body');
+    const modeToggle = document.querySelector('#theme-toggle');
+
+    modeToggle.addEventListener('click', () => {
+      body.classList.toggle('light-mode');
+    });
+  });
+</script>
+
+
+<script>
+
+function updateNotifications() {
+    $.ajax({
+        url: '/ajax-notifications',
+        method: 'POST',
+        success: function(data) {
+            var notificationsHtml = '';
+            $.each(data, function(index, notification) {
+                notificationsHtml += '<div class="alert alert-' + notification.type + '">' + notification.message + '</div>';
+            });
+            $('#notifications').html(notificationsHtml);
+        }
+    });
+}
+
+// Mettre à jour les notifications toutes les 10 secondes
+setInterval(updateNotifications, 10000);
+</script>
+
+
+
+						{% endblock %}

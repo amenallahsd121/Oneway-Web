@@ -1,0 +1,85 @@
+{% extends 'backbase.html.twig' %}
+
+
+{% block title %}
+	Ajouter Opportunite
+{% endblock %}
+
+
+{% block body %}
+
+	<style>
+		/* Style for the date input field */
+		input[type="date"].form-control {
+			height: auto;
+			padding: 0.375rem 0.75rem;
+			line-height: 1.5;
+			border-radius: 0.25rem;
+			border: 1px solid #ced4da;
+		}
+
+		/* Style for the date input field when it is in focus */
+		input[type="date"].form-control:focus {
+			border-color: #80bdff;
+			box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+		}
+	</style>
+
+	{{ form_start(form,{'attr': {'novalidate': 'novalidate'}}) }}
+
+	<div class="col-12 grid-margin stretch-card">
+		<div class="card">
+			<div class="card-body">
+				<h4 class="card-title">Ajouter Opportunite</h4>
+				<p class="card-description">Veuillez saisir les details de Opportunite :</p>
+
+				<form class="forms-sample">
+					<div class="form-group mt-3">
+						{{ form_widget(form.date, {'attr': {'class': 'form-control'}}) }}
+						{{ form_errors(form.date) }}
+					</div>
+
+					<div class="form-group mt-3">
+						{{ form_label(form.depart, "depart") }}
+						{{ form_widget(form.depart, {'attr': {'class': 'form-control'}}) }}
+						{{ form_errors(form.depart) }}
+					</div>
+
+					<div class="form-group mt-3">
+						{{ form_label(form.heurDepart, "heurDepart  ") }}
+						{{ form_widget(form.heurDepart, {'attr': {'class': 'form-control'}}) }}
+						{{ form_errors(form.heurDepart) }}
+					</div>
+
+					<div class="form-group mt-3">
+						{{ form_label(form.arrivee, "arrivee ") }}
+						{{ form_widget(form.arrivee, {'attr': {'class': 'form-control'}}) }}
+						{{ form_errors(form.arrivee) }}
+					</div>
+
+					<div class="form-group mt-3">
+						{{ form_label(form.heurArrivee, "heurArrivee ") }}
+						{{ form_widget(form.heurArrivee, {'attr': {'class': 'form-control'}}) }}
+						{{ form_errors(form.heurArrivee) }}
+					</div>
+					<div class="form-group mt-3">
+						{{ form_label(form.description, "description ") }}
+						{{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
+						{{ form_errors(form.description) }}
+
+
+						<div class="form-group mt-3">
+							{{ form_widget(form.Ajouter) }}
+
+
+							<a href="{{ path ('app_opportinute') }}" class="btn btn-dark">Annuler</a>
+
+
+						</form>
+					</div>
+				</div>
+			</div>
+
+			{{ form_end(form) }}
+
+		{% endblock %}

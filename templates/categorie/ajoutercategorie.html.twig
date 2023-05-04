@@ -1,0 +1,49 @@
+{% extends 'backbase.html.twig' %}
+
+
+{% block title %}
+	Ajouter Categorie
+{% endblock %}
+
+
+{% block body %}
+
+
+{{ form_start(form,{'attr': {'novalidate': 'novalidate'}}) }}
+
+<div class="col-12 grid-margin stretch-card">
+  <div class="card">
+    <div class="card-body">
+      <h4 class="card-title">Ajouter Categorie</h4>
+      <p class="card-description">Veuillez saisir les details de Categorie :</p>
+
+      <form class="forms-sample">
+       
+        
+
+        <div class="form-group mt-3">
+          {{ form_label(form.type, "type") }}
+          {{ form_widget(form.type, {'attr': {'class': 'form-control'}}) }}
+          {{ form_errors(form.type) }}
+        </div>
+
+       
+
+          
+        <div class="form-group mt-3">
+          {{ form_widget(form.Ajouter) }}
+           
+
+
+
+        <a href="{{ path ('app_categorie') }}" class="btn btn-dark">Annuler</a>
+
+
+      </form>
+    </div>
+  </div>
+</div>
+
+{{ form_end(form) }}
+
+{% endblock %}

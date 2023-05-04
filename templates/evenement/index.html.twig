@@ -1,0 +1,114 @@
+{% extends 'backbase.html.twig' %}
+
+
+{% block title %}
+	Liste des Evenement
+{% endblock %}
+
+
+{% block body %}
+<style>
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  background: rgb(0, 12, 32);
+  width: 100%;
+}
+
+        .pagination a {
+  display: block;
+  margin: 0 5px;
+  padding: 10px;
+  background-color: black; /* change background color to black */
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  color: #fff; /* change text color to white */
+  text-decoration: none;
+  font-family: Arial;
+  transition: background-color 0.3s ease;
+}
+        .pagination a:hover {
+          background-color: #ddd;
+        }
+        .pagination .active {
+          background-color: #007bff;
+          color: #fff;
+          border-color: #007bff;
+        }
+        .pagination .disabled {
+          opacity: 0.5;
+          cursor: not-allowed;
+        }
+        .pagination li:hover {
+          background-color: #007bff;
+          color: #fff;
+          border-color: #007bff;
+        }
+        .pagination li:hover a {
+          color: #fff;
+        }
+    </style>
+
+
+	 <div class="row ">
+            <div class="col-12 grid-margin">
+              <div class="card">
+                <div class="card-body">
+
+               <h4 class="card-title">Liste des Evenement<a href=" {{ path ('add_evenement') }} " class="btn btn-success btn-fw float-right">Ajouter Evenement</a></h4>
+               <h4 class="card-title"><a href=" {{ path ('app_participation') }}" class="btn btn-success btn-fw float-right">list participant</a></h4>
+
+
+                  <div class="table-responsive">
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th> NOM </th>
+                          <th> Description </th>
+                          <th> Date début </th>
+                          <th> Date Fin </th>
+                          <th> Awards </th>
+                         
+                        </tr>
+                      </thead>
+
+                      {% for data in list %}
+                        <tr>
+                         
+                          <td> {{ data.nom }} </td>
+                          <td> {{ data.description }} </td>
+                          
+                          <td> {{ data.dateDebutEvent|date("m/d/Y") }} </td>
+                          <td> {{ data.dateFinEvent|date("m/d/Y") }} </td>
+                          
+                          <td> {{ data.awards }} </td>
+                         <td>
+                             <a href="{{path('app_evenement_qrcode' , {'id_event': data.id_event }) }}"  class="btn "> GenerateQR</a>
+                          </td>
+
+
+                      
+                          <td>
+  <a href="{{ path('delete_evenement', {'id': data.idEvent}) }}" class="btn btn-outline-danger btn-fw;">Supprimer</a>
+</td>
+
+
+                          <td>
+                             <a href="{{ path('update_evenement', {'id': data.idEvent}) }}"  class="btn btn-outline-warning btn-fw;"> Modifier</a>
+                          </td>
+                          
+                        </tr> 
+                          
+                         {% endfor %}
+                         
+                       
+                         
+                
+ <div class="pagination">
+             {{ knp_pagination_render(list) }}
+      </div>
+{% endblock %}
+
+
