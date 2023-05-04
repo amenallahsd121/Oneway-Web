@@ -151,11 +151,11 @@ class ParticipationController extends AbstractController
         ]);
 
         $dompdf->loadHtml($html);
-        $dompdf->setPaper('A4', 'portrait');
+        $dompdf->setPaper('A4', 'landscape');
         $dompdf->render();
 
         // On génère un nom de fichier
-        $fichier = 'Event-data-' .'.pdf';
+        $fichier = 'Event-data-ID'.$ident.'.pdf';
 
         // On envoie le PDF au navigateur
         $dompdf->stream($fichier, [

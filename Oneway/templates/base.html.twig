@@ -41,7 +41,6 @@
 
 
        
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.3.0/main.min.css" integrity="sha256-uq9PNlMzB+1h01Ij9cx7zeE2OR2pLAfRw3uUUOOPKdA=" crossorigin="anonymous">
         {% block stylesheets %}{% endblock %}
 
 </head>
@@ -59,7 +58,6 @@
 <!--? Preloader Start -->
 
 
- <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.3.0/main.min.js" integrity="sha256-DBxkGZLxKsLKhz054qUpBqtotG00r9AELGpSigJujLg=" crossorigin="anonymous"></script>
         {% block javascripts %}{% endblock %}
 
 <div id="preloader-active">
@@ -108,7 +106,14 @@
                                 <div class="main-menu d-none d-lg-block" style="margin-top: -75px;">
                                     <nav> 
                                         <ul id="navigation">                                                                                          
-                                            <li><a href="index.html">Mon Profil</a></li>
+                                            <li><a href="">Mon Profil</a>
+                                            <ul class="submenu">
+
+                                                    <li><a href=" {{path('app_evenement_calendar')}}">Calendrier</a></li>
+                                                    
+                                                  
+                                            </ul>
+                                            </li>
                                             <li><a href="{{ path ('app_participation_evenement') }} ">Evenement</a></li>
                                             <li><a href= " {{ path ('app_colis') }} ">Colis</a> 
                                             

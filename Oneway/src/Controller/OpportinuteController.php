@@ -95,32 +95,32 @@ public function delete($id) {
       return $this->redirectToRoute('app_opportinute');
   }
 
-  #[Route('/calendar/opp', name: 'app_evenement_opp')]
-  public function calendaropp(OpportinuteRepository $opp): Response
-  {
-      $opprtunits= $opp->findAll();
-      $rdvs = [];
+//   #[Route('/calendar/opp', name: 'app_evenement_opp')]
+//   public function calendaropp(OpportinuteRepository $opp): Response
+//   {
+//       $opprtunits= $opp->findAll();
+//       $rdvs = [];
 
-      foreach($opprtunits as $o){
-        $rdvs[] = [
+//       foreach($opprtunits as $o){
+//         $rdvs[] = [
          
-            'start' => $o->getDate()->format('Y-m-d'),
+//             'start' => $o->getDate()->format('Y-m-d'),
             
-            'title' => $o->getDepart(),
+//             'title' => $o->getDepart(),
             
-             'color' => 'red', 
+//              'color' => 'red', 
              
          
-        ];
-    }
+//         ];
+//     }
 
-    $donnes = json_encode($rdvs);
+//     $donnes = json_encode($rdvs);
 
       
     
-      return $this->renderForm('\evenement\calendar.html.twig',[
-        'form'=>$donnes]);
-  }
+//       return $this->renderForm('\evenement\calendar.html.twig',[
+//         'form'=>$donnes]);
+//   }
 
 
 

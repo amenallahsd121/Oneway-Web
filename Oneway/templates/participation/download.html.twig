@@ -1,15 +1,36 @@
-{% extends 'base-pdf.html.twig' %}
+
 
 
 
 
 {% block body %}
-{% for data in list %}
 
-    <h1>Liste des données de {{data.nom}} </h1>
-    <h2>les données</h2>
+  <style>
+    /* Center the table */
+table {
+  margin: 0 auto;
+}
+
+/* Style the title */
+h1 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+/* Add background color */
+body {
+  background-color: #B49050;
+}
+
+  </style>
+
+    <h1>Liste des données de {{list.nom}} </h1>
+        <h2>     les données</h2>
     <table border=1>
         <thead>
+
+
             <tr>
                          <th >Nom</th>
                           <th>Description</th>
@@ -21,11 +42,11 @@
         </thead>
         <tbody>
             <tr>
-                <td>{{ data.nom }}</td>
-                <td>{{ data.description }}</td>
-                <td>{{ data.dateDebutEvent|date("m/d/Y")  }}</td>
-                <td>{{ data.dateFinEvent|date("m/d/Y")  }}</td>
-                <td>{{ data.awards }}</td>
+                <td>{{ list.nom }}</td>
+                <td>{{ list.description }}</td>
+                <td>{{ list.dateDebutEvent|date("m/d/Y")  }}</td>
+                <td>{{ list.dateFinEvent|date("m/d/Y")  }}</td>
+                <td>{{ list.awards }}</td>
             </tr>
         </tbody>
     </table>
@@ -33,5 +54,5 @@
     
 
 
-    {% endfor %}
+   
 {% endblock %}

@@ -2,10 +2,13 @@
 
 namespace App\Controller;
 
+use DateTime;
 use Dompdf\Dompdf;
 use Dompdf\Options;
 use App\Entity\Evenement;
 use App\Form\EvenementType;
+use App\Entity\Affectationopcolis;
+use App\Entity\Opportinute;
 use App\Repository\EvenementRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\OpportinuteRepository;
@@ -14,6 +17,7 @@ use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class EvenementController extends AbstractController
@@ -134,14 +138,15 @@ public function delete($id) {
       $rdvs1 = [];
       foreach($events as $event){
         $rdvs[] = [
-          //  'id' => $event->getIdEvent(),
-            'start' => $event->getDateDebutEvent()->format('Y-m-d'),
+             'id' => $event->getIdEvent(),
+            'start' => $event->getDateDebutEvent()->format('Y-m-d') ,
             'end' => $event->getDateFinEvent()->format('Y-m-d'),
             'title' => $event->getNom(),
             
              'color' => 'red', 
              'borderColor' => 'bleu',
              'textColor' => 'bleu',
+             'url' => '../qrcode/'.$event->getIdEvent() .' ',
              'backgroundColor' => 'bleu',
          
         ];
@@ -150,11 +155,12 @@ public function delete($id) {
         $rdvs1[] = [
           
             'start' => $o->getDate()->format('Y-m-d'),
-            
+            'id' =>  $o->getIdOpp(),
             'title' => $o->getDepart(),
-            
+            // 'daysOfWeek'=> $o->getHeurDepart(),
+            // 'endTime'=> $o->getHeurArrivee(),
             'color' => 'red',
-            'url' => '../affectation/delete/'.$o->getIdOpp() .' '
+            
          
         ];
     }
@@ -166,14 +172,62 @@ public function delete($id) {
     
       return $this->render('\evenement\calendar.html.twig', compact('data','dataop'));
   }
-  #[Route("/participation/search", name:"participation_search")]
+
+  #[Route('/calendar/event/Admin', name: 'app_evenement_calendarAdmin', methods: ['GET'])]
+  public function calendarEventBack(EvenementRepository $evenment, OpportinuteRepository $opp): Response
+  {
+      $events= $evenment->findAll();
+      $ops= $opp->findAll();
+      $rdvs = [];
+      $rdvs1 = [];
+      foreach($events as $event){
+        $rdvs[] = [
+             'id' => $event->getIdEvent(),
+            'start' => $event->getDateDebutEvent()->format('Y-m-d') ,
+            'end' => $event->getDateFinEvent()->format('Y-m-d'),
+            'title' => $event->getNom(),
+            
+             'color' => 'red', 
+             'borderColor' => 'bleu',
+             'textColor' => 'bleu',
+             'url' => '../qrcode/'.$event->getIdEvent() .' ',
+             'backgroundColor' => 'bleu',
+         
+        ];
+    }
+    foreach($ops as $o){
+        $rdvs1[] = [
+          
+            'start' => $o->getDate()->format('Y-m-d'),
+            'id' =>  $o->getIdOpp(),
+            'title' => $o->getDepart(),
+            // 'daysOfWeek'=> $o->getHeurDepart(),
+            // 'endTime'=> $o->getHeurArrivee(),
+            'color' => 'red',
+            
+         
+        ];
+    }
+
+
+    $data = json_encode($rdvs);
+    $dataop = json_encode($rdvs1);
+      
+    
+      return $this->render('\evenement\cal.html.twig', compact('data','dataop'));
+  }
+
+  
+
+
+         #[Route("/participation/search", name:"participation_search")]
         public function search(Request $request , EntityManagerInterface $entityManager,PaginatorInterface $paginator )
         {   
            
 
             $searchQuery = $request->query->get('q');
 
-            //$em = $this->getDoctrine()->getManager();
+            
 
             $queryBuilder = $entityManager->createQueryBuilder()
                 ->select('e')
@@ -189,7 +243,7 @@ public function delete($id) {
                 $pagination = $paginator->paginate( $list , $request->query->getInt('page', 1 ), 3);  
 
             return $this->render('participation/search.html.twig', [
-               // 'offre' =>$pagination,
+               
                 'list' => $pagination,
                 'search_query' => $searchQuery
                 
@@ -197,6 +251,11 @@ public function delete($id) {
         }
 
 
+
+
+
+
+        
 
 
 }

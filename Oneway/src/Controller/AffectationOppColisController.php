@@ -113,6 +113,18 @@ class AffectationOppColisController extends AbstractController
           
                 return $this->redirectToRoute('app_affectation');
             }
+
+            #[Route('/qrcode/aff/{id_aff}', name: 'app_aff_qrcode')]
+    public function index4( Affectationopcolis $aff ): Response
+    {
+        
+        
+      
+        return $this->render('\affectation_opp_colis\dataop.html.twig', [
+            
+            'affectation' => $aff
+        ]);
+    }
   
 
       

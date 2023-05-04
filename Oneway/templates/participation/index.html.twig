@@ -189,7 +189,11 @@
 									<a href="{{ path('delete_participation', {'ide': data.Participation.idParticipation}) }}" class="btn btn-light" style="padding: 0.75rem 1rem; margin-left: 5px;">
 										<i class="bi bi-trash"></i>
 									</a>
-									<a href="" class="btn bleu"> Exporter PDF </a> <br>
+      
+       <a href="{{ path('event_data_download', {'ident': data.id_event}) }}" class="btn btn-light" style="padding: 0.75rem 1rem; margin-right: 5px;"><i class="fa fa-file-pdf-o"></i></a>
+       <a href="{{ path('app_evenement_qrcode', {'id_event': data.id_event}) }}  " class="btn btn-light" style="padding: 0.75rem 1rem; margin-right: 5px;"><i class="fa fa-qrcode"></i></a>
+
+<br>
 								{% endif %}
 
 
