@@ -2,73 +2,117 @@
 
 namespace App\Entity;
 
+use DateTime;
+use App\Entity\Colis;
+use App\Entity\Opportinute;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\AffectationopcolisRepository;
 
-/**
- * Affectationopcolis
- *
- * @ORM\Table(name="affectationopcolis", uniqueConstraints={@ORM\UniqueConstraint(name="UK_colis", columns={"id_colis"})}, indexes={@ORM\Index(name="fk_affOpp", columns={"id_opp"})})
- * @ORM\Entity
- */
+#[ORM\Entity(repositoryClass: AffectationopcolisRepository::class)]
+
 class Affectationopcolis
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id_aff", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $idAff;
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    private ?int $id_aff = null;
 
-    /**
-     * @var \Opportinute
-     *
-     * @ORM\ManyToOne(targetEntity="Opportinute")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_opp", referencedColumnName="id_opp")
-     * })
-     */
-    private $idOpp;
 
-    /**
-     * @var \Colis
-     *
-     * @ORM\ManyToOne(targetEntity="Colis")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_colis", referencedColumnName="id_colis")
-     * })
-     */
-    private $idColis;
+
+    #[ORM\OneToOne(targetEntity: Opportinute::class)]
+    #[ORM\JoinColumn(name: "id_opp", referencedColumnName: "id_opp")]
+
+    protected $id_opp;
+
+
+
+
+    #[ORM\OneToOne(targetEntity: Colis::class, inversedBy: 'id_coliss')]
+    #[ORM\JoinColumn(name: "id_colis", referencedColumnName: "id_colis")]
+    protected $id_colis;
+
+
+
+
+
+
+
+
 
     public function getIdAff(): ?int
     {
-        return $this->idAff;
+        return $this->id_aff;
+    }
+    public function getid_aff(): ?int
+    {
+        return $this->id_aff;
+    }
+
+    public function getRelation(): ?Opportinute
+    {
+        return $this->id_opp;
+    }
+
+    public function setRelation(?Opportinute $relation): self
+    {
+        $this->id_opp = $relation;
+
+        return $this;
+    }
+
+    public function getJoinColis(): ?Colis
+    {
+        return $this->id_colis;
+    }
+
+
+    public function setJoinColis(?Colis $joinColis): self
+    {
+        $this->id_colis = $joinColis;
+
+        return $this;
     }
 
     public function getIdOpp(): ?Opportinute
     {
-        return $this->idOpp;
+        return $this->id_opp;
+    }
+    public function getid_Opp(): ?Opportinute
+    {
+        return $this->id_opp;
     }
 
-    public function setIdOpp(?Opportinute $idOpp): self
+    public function setIdOpp(?Opportinute $id_opp): self
     {
-        $this->idOpp = $idOpp;
+        $this->id_opp = $id_opp;
 
         return $this;
     }
 
     public function getIdColis(): ?Colis
     {
-        return $this->idColis;
+        return $this->id_colis;
+    }
+    public function getid_colis(): ?Colis
+    {
+        return $this->id_colis;
     }
 
-    public function setIdColis(?Colis $idColis): self
+    public function setIdColis(?Colis $id_colis): self
     {
-        $this->idColis = $idColis;
+        $this->id_colis = $id_colis;
 
         return $this;
     }
 
 
+
+
+
+    public function __toString()
+    {
+
+
+        return (string)  'Vous avez Affecter votre colis de type ' . $this->id_colis->getTypeColis() . '  à  une Opportinute de depart   ' . $this->id_opp->getDepart() . ' à ' . $this->id_opp->getHeurDepart() . 'et s arrive à ' . $this->id_opp->getArrivee() . '  à  ' . $this->id_opp->getHeurArrivee();
+    }
 }

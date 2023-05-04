@@ -1,0 +1,157 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %}
+	Opportunite
+{% endblock %}
+
+
+{% block body %}
+
+
+	<style>
+
+		body {
+			background-color: #000c20;
+		}
+		
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  background: rgb(0, 12, 32);
+  width: 100%;
+}
+
+        .pagination a {
+  display: block;
+  margin: 0 5px;
+  padding: 10px;
+  background-color: black; /* change background color to black */
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  color: #fff; /* change text color to white */
+  text-decoration: none;
+  font-family: Arial;
+  transition: background-color 0.3s ease;
+}
+        .pagination a:hover {
+          background-color: #ddd;
+        }
+        .pagination .active {
+          background-color: #007bff;
+          color: #fff;
+          border-color: #007bff;
+        }
+        .pagination .disabled {
+          opacity: 0.5;
+          cursor: not-allowed;
+        }
+        .pagination li:hover {
+          background-color: #007bff;
+          color: #fff;
+          border-color: #007bff;
+        }
+        .pagination li:hover a {
+          color: #fff;
+        }
+ 
+	</style>
+
+	<div class="categories-area section-padding30">
+		<div class="container">
+
+			<div class="row">
+				<div
+					class="col-lg-12">
+					<!-- Section Title -->
+					<div class="section-title text-center mb-80">
+						<h2 style="font-size: 32px; color: white; margin-top: -70px; margin-right: 1050px;">Opportunite</h>
+
+
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+
+				{% for data in list %}
+
+					<div class="col-lg-4 col-md-6 col-sm-6">
+						<div class="single-cat text-center mb-50">
+							<div class="cat-icon">
+								<span class="fas fa-calendar-alt"></span>
+							</div>
+							<div class="cat-cap">
+								<h5>
+									<a style="font-size: 32px; color: white;">Détails d'Opportunite :
+									</a>
+								</h5>
+								<p style="font-size: 22px; color: white;">
+									Date :
+									{{ data.date|date('d-m-Y') }}
+								</p>
+								<p style="font-size: 22px; color: white;">
+									Depart :
+									{{ data.depart }}</p>
+								
+								<p style="font-size: 22px; color: white;">
+									Heur Depart :
+									{{ data.heurDepart }}</p>
+
+								<p style="font-size: 22px; color: white;">
+									Arrivé :
+									{{ data.arrivee }}</p>
+
+                                    <p style="font-size: 22px; color: white;">
+									Heur Arriveé :
+									{{ data.heurArrivee }}</p>
+
+                               <p style="font-size: 22px; color: white;">
+									 description :
+									{{ data.description }}</p>
+ 
+
+
+
+
+
+								 {% if data.Affectationopcolis is null %} 
+                                <p style="font-size: 22px; color: white;">
+											Affecter votre Colis Maintenant :
+										</p>
+									<a href="{{ path('add_affectation', {'ida': data.id_opp}) }}" class="btn btn-light" style="padding: 0.75rem 1rem; margin-right: 5px;">
+										<i class="fas fa-user-plus"></i>
+										
+
+									</a>
+
+								 {% else %} 
+<p style="font-size: 22px; color: white;">
+											Annuler Affectation :
+										</p>
+									<a href="{{ path('delete_Affectation', {'idk': data.Affectationopcolis.id_aff}) }}" class="btn btn-light" style="padding: 0.75rem 1rem; margin-left: 5px;">
+										<i class="bi bi-trash"></i>
+									</a>
+									       <a href="{{ path('app_aff_qrcode', {'id_aff': data.Affectationopcolis.id_aff}) }}  " class="btn btn-light" style="padding: 0.75rem 1rem; margin-right: 5px;"><i class="fa fa-qrcode"></i></a>
+
+								{% endif %}
+
+							</div>
+						</div>
+					</div>
+				{% endfor %}
+				 <div class="pagination">
+             {{ knp_pagination_render(list) }}
+               </div>
+
+			</div>
+		</div>
+	</div>
+	
+
+{% endblock %}
+
+
+
