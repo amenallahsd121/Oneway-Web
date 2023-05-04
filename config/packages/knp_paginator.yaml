@@ -1,4 +1,0 @@
-# config/packages/knp_paginator.yaml
-knp_paginator:
-    template:
-        pagination: '%kernel.project_dir%/vendor/knplabs/knp-paginator-bundle/templates\pagination/bootstrap_v5_pagination.html.twig'
