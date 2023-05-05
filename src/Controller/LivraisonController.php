@@ -17,9 +17,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Dompdf\Dompdf;
 use Dompdf\Options;
-
-
-
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class LivraisonController extends AbstractController
 {
@@ -35,8 +33,25 @@ class LivraisonController extends AbstractController
 
 
     #[Route('/livraison/colis', name: 'app_livraison_colis')]
-    public function indexcolis(): Response
+    public function indexcolis(SessionInterface $session): Response
     {
+        $session->start();
+        $t = $_SESSION['user_type']  ;
+        $username = $_SESSION['username'] ?? null;
+        if ($username === null) {
+
+            echo "<script>alert('Login first');</script>";
+            return $this->redirectToRoute("check_login");
+        }
+         else if($t == "Admin")
+        {
+           // echo "<script>alert('this user is  $username ');</script>";
+           
+        }
+        else {
+            echo "<script>alert('Logout first');</script>";
+            return $this->redirectToRoute("front_edit");
+        }
 
         $entityManager = $this->getDoctrine()->getManager();
         $colisRepository = $entityManager->getRepository(Colis::class);

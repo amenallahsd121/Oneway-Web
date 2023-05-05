@@ -41,7 +41,7 @@
 
     <link rel="stylesheet" href="assets/css/bo<link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.0/mapbox-gl-directions.css' type='text/css' />
 otstrap.min.css">
-    
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.3.0/main.min.css" integrity="sha256-uq9PNlMzB+1h01Ij9cx7zeE2OR2pLAfRw3uUUOOPKdA=" crossorigin="anonymous">
     {% endblock %}
 
 
@@ -259,6 +259,9 @@ otstrap.min.css">
 
     <!-- JS here -->
     {% block js %}
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.3.0/main.min.js" integrity="sha256-DBxkGZLxKsLKhz054qUpBqtotG00r9AELGpSigJujLg=" crossorigin="anonymous"></script>
+
+
     <script src="{{asset('./assets/js/script.js')}}"></script>
 
     <script src="{{asset('./assets/js/vendor/modernizr-3.5.0.min.js')}}"></script>

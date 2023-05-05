@@ -19,6 +19,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class EvenementController extends AbstractController
 {
@@ -38,9 +39,25 @@ class EvenementController extends AbstractController
 
 
     #[Route('/evenement', name: 'app_evenement')]
-    public function index(EntityManagerInterface $entityManager, Request $request, EvenementRepository $offreRepo, PaginatorInterface $paginator ): Response
+    public function index(EntityManagerInterface $entityManager, Request $request, EvenementRepository $offreRepo, PaginatorInterface $paginator,SessionInterface $session ): Response
     {
-        
+        $session->start();
+        $t = $_SESSION['user_type']  ;
+        $username = $_SESSION['username'] ?? null;
+        if ($username === null) {
+
+            echo "<script>alert('Login first');</script>";
+            return $this->redirectToRoute("check_login");
+        }
+         else if($t == "Admin")
+        {
+           // echo "<script>alert('this user is  $username ');</script>";
+           
+        }
+        else {
+            echo "<script>alert('Logout first');</script>";
+            return $this->redirectToRoute("front_edit");
+        }
         
         // $data = $this->getDoctrine()->getRepository(Evenement::class)->findAll();
         $list= $entityManager->getRepository(Evenement::class)->findAll();
@@ -214,7 +231,13 @@ public function delete($id) {
     $dataop = json_encode($rdvs1);
       
     
-      return $this->render('\evenement\cal.html.twig', compact('data','dataop'));
+     // return $this->render('\evenement\cal.html.twig', compact('data','dataop'));
+      return $this->render('evenement/cal.html.twig', [
+        'data'=>$data,
+         'dataop' => $dataop, 
+         
+         
+     ]);
   }
 
   

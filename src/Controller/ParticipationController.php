@@ -35,7 +35,7 @@ class ParticipationController extends AbstractController
 
 
     #[Route('/participation', name: 'app_participation')]
-    public function indexparticipation( ): Response
+    public function indexparticipation(SessionInterface $session  ): Response
     {
         $data = $this->getDoctrine()->getRepository(Participation::class)->findAll();
        
@@ -48,14 +48,17 @@ class ParticipationController extends AbstractController
 
 
     #[Route('/participation/evenement', name: 'app_participation_evenement')]
-    public function index(EntityManagerInterface $entityManager, Request $request, PaginatorInterface $paginator): Response
+    public function index(EntityManagerInterface $entityManager, Request $request, PaginatorInterface $paginator,SessionInterface $session ): Response
     {
         
         $list= $entityManager->getRepository(Evenement::class)->findAll();
+        $session->start();
+        $userId = $_SESSION['user_id'];
         $pagination = $paginator->paginate( $list , $request->query->getInt('page', 1 ), 3);  
         return $this->render('\participation\index.html.twig', [
             
-            'list' => $pagination
+            'list' => $pagination ,
+             'userId' => $userId,
         ]);
        
     }

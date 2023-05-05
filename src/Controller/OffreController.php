@@ -70,7 +70,7 @@ public function FrontList( SessionInterface $session,OffreRepository $offreRepos
 {
     // Retrieve offers using findBy method
     $session->start();
-            $id = $_SESSION['user_id'];
+      $id = $_SESSION['user_id'];
     $offres = $offreRepository->findByIdUser( $id);
     $user = $utilisateurRepository->find( $id);
     $rdvs = [];
@@ -151,7 +151,7 @@ if ($h < $now){            $offreRepository->remove($f, true);
         if ($form->isSubmitted() && $form->isValid()) {
             $offreRepository->save($offre, true);
 
-            return $this->redirectToRoute('app_offre_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_offre_Front', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('offre/edit.html.twig', [

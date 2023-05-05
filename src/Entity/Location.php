@@ -78,4 +78,16 @@ class Location
 
         return $this;
     }
+
+    public function getRelai(): ?Relais
+    {
+        return $this->relai;
+    }
+
+    public function setRelai(?Relais $relai): self
+    {
+        $this->relai = $relai;
+
+        return $this;
+    }
 }

@@ -87,10 +87,13 @@ class UserController extends AbstractController
 
             echo "<script>alert('Login first');</script>";
             return $this->redirectToRoute("check_login");
-        } else if($t == "Admin")
+        }
+         else if($t == "Admin")
         {
            // echo "<script>alert('this user is  $username ');</script>";
-        }else {
+           
+        }
+        else {
             echo "<script>alert('Logout first');</script>";
             return $this->redirectToRoute("front_edit");
         }
@@ -419,13 +422,6 @@ class UserController extends AbstractController
 
 
 
-
-
-
-
-
-
-
     #[Route('/sms', name: 'check_sms')]
     public function sms(Request $request, MailerInterface $mailer, ManagerRegistry $Doctrine, SessionInterface $session)
     {
@@ -451,7 +447,7 @@ class UserController extends AbstractController
 
                 $twilionumber = "+16073885845";
 
-                $client = new Client('AC954042c1468214186635e317b0d82cea', '831eb539737a03327f83cb791f8782c0');
+                $client = new Client('AC954042c1468214186635e317b0d82cea', '8da07148967b11550dca16f1e9cd853c');
                 $client->messages->create(
                     // Where to send a text message (your cell phone?)
                     $sms,
@@ -467,16 +463,6 @@ class UserController extends AbstractController
             "formL" => $formm->createView()
         ]);
     }
-
-
-
-
-
-
-
-
-
-
 
     #[Route('/code/{pcode}', name: 'check_code')]
     public function enterCode(Request $request, ManagerRegistry $Doctrine, LoggerInterface $logger, $pcode, SessionInterface $session)
@@ -515,9 +501,6 @@ class UserController extends AbstractController
             "formL" => $formm->createView()
         ]);
     }
-
-
-
 
 
 

@@ -12,6 +12,7 @@ use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class AffectationOppColisController extends AbstractController
@@ -36,23 +37,28 @@ class AffectationOppColisController extends AbstractController
 
 
    #[Route('/affectation/opportinute', name: 'app_affectation_opportinute')]
-    public function index(EntityManagerInterface $entityManager, Request $request, PaginatorInterface $paginator): Response
+    public function index(EntityManagerInterface $entityManager, Request $request, PaginatorInterface $paginator, SessionInterface $session): Response
     {
         
         $list= $entityManager->getRepository(Opportinute::class)->findAll();
+        $session->start();
+        $userId = $_SESSION['user_id'];
         $pagination = $paginator->paginate( $list , $request->query->getInt('page', 1 ), 3);  
 
        
         return $this->render('\affectation_opp_colis\index.html.twig', [
-            'list' => $pagination   
+            'list' => $pagination , 
+            'userId' => $userId ,   
         ]);
        
     }
 
 
     #[Route('/affectation/add/{ida}', name: 'add_affectation')]
-    public function addparticipation($ida , ManagerRegistry $doctrine,Request $req): Response {
-        
+    public function addparticipation($ida , ManagerRegistry $doctrine,Request $req,SessionInterface $session): Response {
+        $session->start();
+        $userId = $_SESSION['user_id'];
+
         $em = $doctrine->getManager();
         $aff = new Affectationopcolis();
         $form = $this->createForm(AffectationopcolisType::class,$aff);

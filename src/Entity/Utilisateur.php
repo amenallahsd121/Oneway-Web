@@ -63,24 +63,7 @@ class Utilisateur
     private ?int $code = null;
 
 
-    /**
-     * @ORM\Column(type="boolean", options={"default": false})
-     */
-    private $stayLoggedIn;
-
-    
-
-    public function getStayLoggedIn(): bool
-    {
-        return $this->stayLoggedIn;
-    }
-
-    public function setStayLoggedIn(bool $stayLoggedIn): self
-    {
-        $this->stayLoggedIn = $stayLoggedIn;
-
-        return $this;
-    }
+   
 
     public function getId(): ?int
     {

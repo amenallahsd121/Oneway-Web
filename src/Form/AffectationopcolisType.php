@@ -17,7 +17,7 @@ class AffectationopcolisType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $userId = 68; 
+        $userId = 123; 
         
         $builder
             ->add('id_colis', HiddenType::class, [ // add a hidden field to store the id of the selected Colis entity
@@ -30,7 +30,7 @@ class AffectationopcolisType extends AbstractType
                         ->where('c.id_client = :userId')
                         ->setParameter('userId', $userId);
                 },
-                'choice_label' => 'id_colis',
+                'choice_label' => 'typeColis',
                 'multiple' => false,
                 'expanded' => false,
             ])

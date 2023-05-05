@@ -18,7 +18,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class ApiController extends AbstractController
 {
-    #[Route('/api', name: 'app_api')]
+    #[Route('/apii', name: 'app_apii')]
     public function index(): Response
     {
         return $this->render('api/index.html.twig', [
@@ -27,11 +27,11 @@ class ApiController extends AbstractController
     }
 
 
-    #[Route('/api/{id}/edit', name: 'app_api_edit', methods: ['POST'])]
-    public function majEvent(?Opportinute $cal,$id, Request $request): Response
+    #[Route('/api/{idd}/editsof', name: 'app_api_editsof', methods: ['POST'])]
+    public function majEvent(?Opportinute $calendar,$idd, Request $request): Response
     {
         $donnees = json_decode($request->getContent());
-        $calendar = $this->getDoctrine()->getRepository(Opportinute::class)->find($id);
+        $calendar = $this->getDoctrine()->getRepository(Opportinute::class)->find($idd);
 
         if(
             isset($donnees->start) && !empty($donnees->start)
@@ -42,6 +42,7 @@ class ApiController extends AbstractController
 
 
             $d=new DateTime($donnees->start);
+            $d->modify('+1 day');
            // $formattedDate = $d->format('Y-m-d');
             $calendar->setDate($d);
 

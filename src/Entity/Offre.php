@@ -3,6 +3,7 @@
 namespace App\Entity;
 use DateTime;
 use App\Entity\Utilisateur;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\OffreRepository;
 use Doctrine\Common\Collections\Collection;

@@ -75,11 +75,12 @@ class Opportinute
     
     
 
-    public function getId_Opp(): ?int
+ 
+
+    public function getIdOpp(): ?int
     {
         return $this->id_opp;
     }
-
     
 
     public function getDepart(): ?string
@@ -154,15 +155,12 @@ class Opportinute
 
   
 
-    public function getIdOpp(): ?int
-    {
-        return $this->id_opp;
-    }
 
     public function getAffectationopcolis(): ?Affectationopcolis
     {
         return $this->Affectationopcolis;
     }
+    
 
     public function setAffectationopcolis(?Affectationopcolis $Affectationopcolis): self
     {

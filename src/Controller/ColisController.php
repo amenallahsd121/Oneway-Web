@@ -10,6 +10,7 @@ use App\Form\PaiementType;
 use Endroid\QrCode\QrCode;
 use App\Entity\Utilisateur;
 use Endroid\QrCode\LabelAlignment;
+use App\Repository\ColisRepository;
 use Endroid\QrCode\Builder\Builder;
 use Endroid\QrCode\Encoding\Encoding;
 use Doctrine\ORM\EntityManagerInterface;
@@ -17,12 +18,16 @@ use Endroid\QrCode\ErrorCorrectionLevel;
 use Doctrine\Persistence\ManagerRegistry;
 use Knp\Component\Pager\PaginatorInterface;
 use Endroid\QrCode\Builder\BuilderInterface;
+use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Endroid\QrCodeBundle\Response\QrCodeResponse;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Endroid\QrCode\Builder\BuilderRegistryInterface;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Endroid\QrCode\ErrorCorrectionLevel\ErrorCorrectionLevelHigh;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -34,6 +39,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ColisController extends AbstractController
 {
+
+    
 
 
     private $entityManager;
@@ -57,6 +64,23 @@ class ColisController extends AbstractController
     public function detail(Request $request, PaginatorInterface $paginator, SessionInterface $session): Response
     {
         $session->start();
+        
+        $t = $_SESSION['user_type']  ;
+        $username = $_SESSION['username'] ?? null;
+        if ($username === null) {
+
+            echo "<script>alert('Login first');</script>";
+            return $this->redirectToRoute("check_login");
+        }
+         else if($t == "Client")
+        {
+           // echo "<script>alert('this user is  $username ');</script>";
+           
+        }
+        else {
+            echo "<script>alert('Logout first');</script>";
+            return $this->redirectToRoute("aff_user");
+        }
         $userId = $_SESSION['user_id'];
         $entityManager = $this->getDoctrine()->getManager();
         $repository = $entityManager->getRepository(Colis::class);
@@ -246,7 +270,7 @@ class ColisController extends AbstractController
 
 
 
-    #[Route('colis/qrcode/{id}', name: 'qrcode')]
+    #[Route('colis/qrcode/{id}', name: 'qrcodee')]
     public function qrcode(BuilderInterface $customQrCodeBuilder, $id): Response
     {
         $colis = $this->entityManager->getRepository(Colis::class)->find($id);
@@ -261,4 +285,95 @@ class ColisController extends AbstractController
 
         return new QrCodeResponse($qrCode);
     }
+
+
+
+
+
+
+
+
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////// Mobile ////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+#[Route('/displaycolis', name: 'displaycolis')]
+public function displaycolis(ColisRepository $repo, NormalizerInterface $normalizer): Response
+{
+
+
+    $colis = $repo->findAll();
+    $colisNormalises = $normalizer->normalize($colis, 'json', ['groups' => "Colis"]);
+    $json = json_encode($colisNormalises);
+    return new Response($json);
+  
+}
+
+
+// #[Route('/addcolis', name: 'addcolis')]
+// public function new(ManagerRegistry $doctrine, Request $request)
+// {
+//     $entityManager = $doctrine->getManagerForClass(Livreur::class);
+
+//     $colis = new Colis();
+
+//     $colis->setcinLivreur($request->get('CinLivreur'));
+//     $colis->setNom($request->get('Nom'));
+//     $colis->setPrenom($request->get('Prenom'));
+//     $colis->setVehicule($request->get('Vehicule'));
+    
+
+//     $entityManager->persist($colis);
+//     $entityManager->flush();
+
+//     $serializer = new Serializer([new ObjectNormalizer()]);
+//     $formatted = $serializer->normalize($colis);
+//     return new JsonResponse($formatted);
+
+// }
+
+// #[Route('/colismodify/{id}', name: 'colismodify')]
+
+// public function modify(ManagerRegistry $doctrine, Request $request, $id)
+// {
+//     $entityManager = $doctrine->getManagerForClass(Livreur::class);
+//     $livreur = $entityManager->getRepository(Livreur::class)->find($id);
+
+//     $livreur->setcinLivreur($request->get('CinLivreur'));
+//     $livreur->setNom($request->get('Nom'));
+//     $livreur->setPrenom($request->get('Prenom'));
+//     $livreur->setVehicule($request->get('Vehicule'));
+    
+
+//     $entityManager->persist($livreur);
+
+//     $entityManager->flush();
+//     $serializer = new Serializer([new ObjectNormalizer()]);
+//     $formatted = $serializer->normalize($request);
+//     return new JsonResponse($formatted);
+// }
+
+// #[Route('/colisdelete/{id}', name: 'colisdelete')]
+// public function deleteliv(ManagerRegistry $doctrine, $id): Response
+// {
+//     $entityManager = $doctrine->getManagerForClass(Livreur::class);
+//     $livreur = $entityManager->getRepository(Livreur::class)->find($id);
+
+//     if ($livreur != null) {
+//         $entityManager->remove($livreur);
+//         $entityManager->flush();
+//         $serializer = new Serializer([new ObjectNormalizer()]);
+//         $formatted = $serializer->normalize("Category deleted succefully");
+//         return new JsonResponse($formatted);
+//     }
+//     return new JsonResponse("Category not found");
+// }
+
+
+
+
 }

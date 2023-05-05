@@ -13,11 +13,12 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Yectep\Bundle\DatatableBundle\DataTable\DataTableFactory;
 use Symfony\Component\Process\Exception\ProcessFailedException;
-use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class LivreurController extends AbstractController
 {
@@ -38,8 +39,25 @@ class LivreurController extends AbstractController
 
 
     #[Route('/livreur', name: 'app_livreur')]
-    public function index(NormalizerInterface $normalizer): Response
+    public function index(NormalizerInterface $normalizer,SessionInterface $session): Response
     {
+        $session->start();
+        $t = $_SESSION['user_type']  ;
+        $username = $_SESSION['username'] ?? null;
+        if ($username === null) {
+
+            echo "<script>alert('Login first');</script>";
+            return $this->redirectToRoute("check_login");
+        }
+         else if($t == "Admin")
+        {
+           // echo "<script>alert('this user is  $username ');</script>";
+           
+        }
+        else {
+            echo "<script>alert('Logout first');</script>";
+            return $this->redirectToRoute("front_edit");
+        }
         $data = $this->getDoctrine()->getRepository(Livreur::class)->findAll();
        
 
@@ -279,7 +297,7 @@ class LivreurController extends AbstractController
         return new JsonResponse($formatted);
     }
 
-    #[Route('/livreurdelete/{id}', name: 'delete_categorie_Mobile')]
+    #[Route('/livreurdelete/{id}', name: 'delete_livreur_Mobile')]
     public function deleteliv(ManagerRegistry $doctrine, $id): Response
     {
         $entityManager = $doctrine->getManagerForClass(Livreur::class);
@@ -289,7 +307,7 @@ class LivreurController extends AbstractController
             $entityManager->remove($livreur);
             $entityManager->flush();
             $serializer = new Serializer([new ObjectNormalizer()]);
-            $formatted = $serializer->normalize("Category deleted succefully");
+            $formatted = $serializer->normalize("Livreur deleted succefully");
             return new JsonResponse($formatted);
         }
         return new JsonResponse("Category not found");

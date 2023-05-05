@@ -37,18 +37,41 @@ class ReclamationController extends AbstractController
 
 
     #[Route('/reclamation', name: 'app_reclamation')]
-    public function index(Request $request, PaginatorInterface $paginator): Response
+    public function index(Request $request, PaginatorInterface $paginator, SessionInterface $session): Response
     {
+
+        $session->start();
+        
+        $t = $_SESSION['user_type']  ;
+        $username = $_SESSION['username'] ?? null;
+        if ($username === null) {
+
+            echo "<script>alert('Login first');</script>";
+            return $this->redirectToRoute("check_login");
+        }
+         else if($t == "Client")
+        {
+           // echo "<script>alert('this user is  $username ');</script>";
+           
+        }
+        else {
+            echo "<script>alert('Logout first');</script>";
+            return $this->redirectToRoute("aff_user");
+        }
+        
+        $userId = $_SESSION['user_id'];
         $entityManager = $this->getDoctrine()->getManager();
         $repository = $entityManager->getRepository(Reclamation::class);
         $query = $repository->createQueryBuilder('c')
+            ->leftJoin('c.id_user', 'user')
+            ->where('user.id = :userId')
+            ->setParameter('userId', $userId)
             ->orderBy('c.id_reclamation', 'DESC');
-
-
+    
         $data = $paginator->paginate(
-            $query, // Requête contenant les données à paginer (ici notre requête custom)
-            $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
-            3 // Nombre de résultats par page
+            $query,
+            $request->query->getInt('page', 1),
+            3
         );
 
         return $this->render('reclamation/index.html.twig', [
