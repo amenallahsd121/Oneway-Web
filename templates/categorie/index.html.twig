@@ -8,6 +8,39 @@
 
 {% block body %}
 
+<style>
+
+.pagination-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.pagination-wrapper ul {
+  list-style: none;
+  display: flex;
+}
+
+.pagination-wrapper li {
+  margin: 0 5px;
+}
+
+.pagination-wrapper a {
+  text-decoration: none;
+  color: #333;
+  padding: 5px 10px;
+  border: 1px solid #333;
+}
+
+.pagination-wrapper .current {
+  font-weight: bold;
+  background-color: #333;
+  color: #fff;
+}
+
+
+
+</style>
 
 
 	 <div class="row ">
@@ -46,13 +79,33 @@
                           <td>
                              <a href="{{ path('update_categorie', {'id': data.idCategorie}) }}"  class="btn btn-outline-warning btn-fw;"> Modifier</a>
                           </td>
-                        </tr>
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="pagination-wrapper">
+  {{ knp_pagination_render(list) }}
+</div>
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+{% endblock %}
+
+
+                        {# </tr>
                           
                          {% endfor %}
                        
-                         
+                    <div class="pagination">
+				{{ knp_pagination_render(list) }}
+			</div>     
                 
 
-{% endblock %}
+{% endblock %} #}
 
 

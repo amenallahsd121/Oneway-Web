@@ -2,7 +2,7 @@
 
 
 {% block title %}
-	Ajouter Livreur
+	Modifier Livreur
 {% endblock %}
 
 
@@ -14,19 +14,19 @@
 <div class="col-12 grid-margin stretch-card">
   <div class="card">
     <div class="card-body">
-      <h4 class="card-title">Ajouter Livraison</h4>
-      <p class="card-description">Veuillez saisir les details de Livraison :</p>
+      <h4 class="card-title">Modifier Livraison</h4>
+      <p class="card-description">Veuillez Modifier les details de Livraison :</p>
 
       <form class="forms-sample">
-        <div class="form-group mt-3">
+         <div class="form-group mt-3">
           {{ form_label(form.etat, "Etat") }}
-          {{ form_widget(form.etat, {'attr': {'class': 'form-control'}}) }}
+          {{ form_widget(form.etat, {'attr': {'class': 'form-control', 'style': 'color: #fff;' }}) }}
           {{ form_errors(form.etat) }}
         </div>
 
         <div class="form-group mt-3">
           {{ form_label(form.livreur, "Livreur") }}
-          {{ form_widget(form.livreur, {'attr': {'class': 'form-control'}}) }}
+          {{ form_widget(form.livreur, {'attr': {'class': 'form-control', 'style': 'color: #fff;' }}) }}
           {{ form_errors(form.livreur) }}
         </div>
 
@@ -34,7 +34,7 @@
         <div class="form-group mt-3">
           {{ form_widget(form.Affecter) }}
            
-         <a href="{{ path ('app_livraison_colis') }}" class="btn btn-dark">Annuler</a>
+         <a href="{{ path ('app_livraison') }}" class="btn btn-dark">Annuler</a>
 
 
       </form>

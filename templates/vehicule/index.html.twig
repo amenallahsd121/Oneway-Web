@@ -36,7 +36,7 @@
 						<div>
 						
 
-							<form action="/onewaymayssen/public/index.php/vehicule" type="GET">
+							<form action="/oneway/public/index.php/vehicule" type="GET">
 								<input type="text" name="term" placeholder="Recherche" value="{{ app.request.get('term') }}">
 								<select name="category" onchange="this.form.submit()">
 									<option value="">Toutes</option>
@@ -44,6 +44,13 @@
 										<option {{ (app.request.get('category') == categorie.idCategorie) ? 'selected' : '' }} value="{{ categorie.idCategorie }}">{{ categorie.type }}</option>
 									{% endfor %}
 								</select>
+                               {# <select name="marque" onchange="this.form.submit()">
+									<option value="">Toutes</option>
+									{% for vehicule in vehicules %}
+										<option {{ (app.request.get('marque') == vehicule.idVehicule) ? 'selected' : '' }} value="{{ vehicule.idVehicule }}">{{ vehicule.marque }}</option>
+									{% endfor %}
+								</select> #}
+
 							</form>
 							<a href=" {{ path ('add_vehicule') }} " class="btn btn-success btn-fw float-right">Ajouter Vehicule</a>
 						</div>

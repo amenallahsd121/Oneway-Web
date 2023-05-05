@@ -8,14 +8,40 @@
 
 {% block body %}
 
-
 	<style>
+
 
 		body {
 			background-color: #000c20;
 		}
+		.pagination a {
+			display: inline-block;
+			padding: 15px 30px;
+			margin-right: 5px;
+			color: #fff;
+			background-color: #37434f;
+			border-radius: 5px;
+			text-decoration: none;
+			font-weight: bold;
+			font-size: 15px; /* add font size */
+			text-align: center; /* center the text */
+		}
 
-		
+		.pagination {
+			display: flex;
+			justify-content: center;
+			margin-top: 50px;
+			align-items: center; /* center vertically */
+		}
+
+		.pagination a:hover {
+			background-color: #3d5466;
+		}
+
+		.pagination .active {
+			background-color: #fff;
+			color: #000c20;
+		}
 	</style>
 
 	<div class="categories-area section-padding30">
@@ -65,12 +91,31 @@
 									Lieu Arrivé :
 									{{ data.lieuArrive }}</p>
 
-								<a href="{{ path('delete_colis', {'id': data.idColis}) }}" class="btn btn-light" style="padding: 0.75rem 1rem;">
-									<i class="bi bi-trash"></i>
-								</a>
-								<a href="{{ path('update_colis', {'id': data.idColis}) }}" class="btn btn-light" style="padding: 0.75rem 1rem; margin-left: 10px;">
-									<i class="bi bi-arrow-clockwise"></i>
-								</a>
+								{% if '.' in data.typeColis %}
+									<a href="{{ path('app_pdf', {'id': data.idColis}) }}" class="btn btn-light" style="padding: 0.75rem 1rem;">
+										<i class="bi bi-file-earmark-pdf"></i>
+									</a>
+									<!-- Button to trigger the modal -->
+
+									<a href="{{ path('qrcodee', {'id': data.idColis}) }}" class="btn btn-light" style="padding: 0.75rem 1rem;margin-left: 10px;">
+										<i class="fas fa-qrcode"></i>
+									</a>
+
+
+								{% else %}
+
+									<a href="{{ path('delete_colis', {'id': data.idColis}) }}" class="btn btn-light" style="padding: 0.75rem 1rem;">
+										<i class="bi bi-trash"></i>
+									</a>
+									<a href="{{ path('update_colis', {'id': data.idColis}) }}" class="btn btn-light" style="padding: 0.75rem 1rem; margin-left: 10px;">
+										<i class="bi bi-arrow-clockwise"></i>
+									</a>
+									<a href="{{ path('checkout' , {'id': data.idColis}) }}" class="btn btn-light" style="padding: 0.75rem 1rem; margin-left: 10px;">
+										<i class="bi bi-credit-card"></i>
+									</a>
+
+
+								{% endif %}
 
 
 							</div>
@@ -78,6 +123,10 @@
 					</div>
 				{% endfor %}
 
+
+			</div>
+			<div class="pagination">
+				{{ knp_pagination_render(list) }}
 			</div>
 		</div>
 	</div>

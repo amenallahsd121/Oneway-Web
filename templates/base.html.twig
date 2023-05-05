@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <!doctype html>
 <html class="no-js" lang="zxx">
 <head>
@@ -34,8 +33,15 @@
     <link rel="stylesheet" href={{asset('assets/css/style.css')}}>
     <link rel="stylesheet" href={{asset('chosen/chosen.min.css')}}>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.6.1/font/bootstrap-icons.css" rel="stylesheet">
-   
-    
+    <link rel="stylesheet" href={{asset('assets/css/styless.css')}}>
+       <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.6.1/font/bootstrap-icons.css" rel="stylesheet">
+<link rel="stylesheet" href="{{ asset('build/flatpickr.min.css') }}" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+   <link href='https://api.mapbox.com/mapbox-gl-js/v2.4.1/mapbox-gl.css' rel='stylesheet' />
+
+    <link rel="stylesheet" href="assets/css/bo<link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.0/mapbox-gl-directions.css' type='text/css' />
+otstrap.min.css">
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.3.0/main.min.css" integrity="sha256-uq9PNlMzB+1h01Ij9cx7zeE2OR2pLAfRw3uUUOOPKdA=" crossorigin="anonymous">
     {% endblock %}
 
 
@@ -102,7 +108,16 @@
                                 <div class="main-menu d-none d-lg-block" style="margin-top: -55px;">
                                     <nav> 
                                         <ul id="navigation">                                                                                          
-                                            <li><a href="index.html">Mon Profil</a></li>
+                                            <li><a href="{{ path ('front_edit') }} ">Mon Profil</a>
+                                           
+                                            <ul class="submenu">
+
+                                                    <li><a href=" {{ path ('app_evenement_calendar') }} ">Calendrier</a></li>
+                                                    
+                                                  
+                                            </ul>
+
+                                            </li>
                                             <li><a href="{{ path ('app_participation_evenement') }} ">Evenement</a></li>
                                             <li><a href= " {{ path ('app_colis') }} ">Colis</a>  
                                              <ul class="submenu">
@@ -113,8 +128,13 @@
 
                                             </li> 
 
-                                            <li><a href="#">Offre et demande</a></li>
-                                            <li><a href="{{ path ('app_affectation_opportinute') }}">Opportunité</a></li>
+  <li><a href="#">Offre et demande</a>
+                                             <ul class="submenu">
+
+                                                    <li><a href=" {{ path ('app_offre_new') }} ">Ajouter Offre</a></li>
+                                                    <li><a href=" {{ path ('app_offre_Front') }} ">Mes Offres</a></li>
+                                                  
+                                            </ul>  </li>                                            <li><a href="{{ path ('app_affectation_opportinute') }}">Opportunité</a></li>
 
 
                                             <li><a href=" {{ path ('app_reclamation') }} ">Réclamation</a>
@@ -132,7 +152,7 @@
                                 </div>
                                 <!-- Header-btn -->
                                 <div class="header-right-btn d-none d-lg-block ml-20" style="margin-right: 20px;">
-                                    <a href="contact.html" class="btn header-btn">Se déconnecter</a>
+                                    <a href="logout" class="btn header-btn">Se déconnecter</a>
                                 </div>
                             </div>
                         </div> 
@@ -239,6 +259,11 @@
 
     <!-- JS here -->
     {% block js %}
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.3.0/main.min.js" integrity="sha256-DBxkGZLxKsLKhz054qUpBqtotG00r9AELGpSigJujLg=" crossorigin="anonymous"></script>
+
+
+    <script src="{{asset('./assets/js/script.js')}}"></script>
+
     <script src="{{asset('./assets/js/vendor/modernizr-3.5.0.min.js')}}"></script>
     <!-- Jquery, Popper, Bootstrap -->
     <script src="{{asset('./assets/js/vendor/jquery-1.12.4.min.js')}}"></script>
@@ -271,7 +296,16 @@
     <script src="{{asset('./assets/js/main.js')}}"></script>
     <script src="{{asset('./chosen/chosen.jquery.min.js')}}"></script>
     
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
+<script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.0/mapbox-gl-directions.js'></script>
 
+<script src="{{asset('./assets/js/script.js')}}"></script>
+<script src="{{ asset('build/flatpickr.min.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="assets/js/app.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+  
 
     <script>
   $(document).ready(function() {
@@ -285,66 +319,3 @@
 </body>
 
 </html>
-=======
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <!-- Required meta tags -->
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>Corona Admin</title>
-        <!-- End layout styles -->
-    <link rel="shortcut icon" href="{{asset ("admin/assets/images/favicon.png")}}"/>
-        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
-        {% block stylesheets %}
-           <!-- plugins:css -->
-    <link rel="stylesheet" href="{{asset ("admin/assets/vendors/mdi/css/materialdesignicons.min.css")}}">
-    <link rel="stylesheet" href="{{asset ("admin/assets/vendors/css/vendor.bundle.base.css")}}">
-    <!-- endinject -->
-    <!-- Plugin css for this page -->
-    <link rel="stylesheet" href="{{asset ("admin/assets/vendors/jvectormap/jquery-jvectormap.css")}}">
-    <link rel="stylesheet" href="{{asset ("admin/assets/vendors/flag-icon-css/css/flag-icon.min.css")}}">
-    <link rel="stylesheet" href="{{asset ("admin/assets/vendors/owl-carousel-2/owl.carousel.min.css")}}">
-    <link rel="stylesheet" href="{{asset ("admin/assets/vendors/owl-carousel-2/owl.theme.default.min.css")}}">
-    <!-- End plugin css for this page -->
-    <!-- inject:css -->
-    <!-- endinject -->
-    <!-- Layout styles -->
-    <link rel="stylesheet" href="{{asset ("admin/assets/css/style.css")}}">
-     
-        {% endblock %}
-
-
-        {% block javascripts %}
-            <!-- plugins:js -->
-    <script src="{{asset ("admin/assets/vendors/js/vendor.bundle.base.js")}}"></script>
-    <!-- endinject -->
-    <!-- Plugin js for this page -->
-    <script src="{{asset ("admin/assets/vendors/chart.js/Chart.min.js")}}"></script>
-    <script src="{{asset ("admin/assets/vendors/progressbar.js/progressbar.min.js")}}"></script>
-    <script src="{{asset ("admin/assets/vendors/jvectormap/jquery-jvectormap.min.js")}}"></script>
-    <script src="{{asset ("admin/assets/vendors/jvectormap/jquery-jvectormap-world-mill-en.js")}}"></script>
-    <script src="{{asset ("admin/assets/vendors/owl-carousel-2/owl.carousel.min.js")}}"></script>
-    <!-- End plugin js for this page -->
-    <!-- inject:js -->
-    <script src="{{asset ("admin/assets/js/off-canvas.js")}}"></script>
-    <script src="{{asset ("admin/assets/js/hoverable-collapse.js")}}"></script>
-    <script src="{{asset ("admin/assets/js/misc.js")}}"></script>
-    <script src="{{asset ("admin/assets/js/settings.js")}}"></script>
-    <script src="{{asset ("admin/assets/js/todolist.js")}}"></script>
-    <!-- endinject -->
-    <!-- Custom js for this page -->
-    <script src="{{asset ("admin/assets/js/dashboard.js")}}"></script>
-    <!-- End custom js for this page -->
-        {% endblock %}
-    </head>
-    <body>
-        {% block body %}
-
-        {% endblock %}
-    {{include ('includes/footer.html.twig')}}
-    </body>
-</html>
->>>>>>> origin/main

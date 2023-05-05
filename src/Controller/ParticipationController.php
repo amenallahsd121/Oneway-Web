@@ -17,6 +17,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\DependencyInjection\Loader\Configurator\session;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+
 
 
 class ParticipationController extends AbstractController
@@ -32,7 +35,7 @@ class ParticipationController extends AbstractController
 
 
     #[Route('/participation', name: 'app_participation')]
-    public function indexparticipation( ): Response
+    public function indexparticipation(SessionInterface $session  ): Response
     {
         $data = $this->getDoctrine()->getRepository(Participation::class)->findAll();
        
@@ -45,21 +48,24 @@ class ParticipationController extends AbstractController
 
 
     #[Route('/participation/evenement', name: 'app_participation_evenement')]
-    public function index(EntityManagerInterface $entityManager, Request $request, PaginatorInterface $paginator): Response
+    public function index(EntityManagerInterface $entityManager, Request $request, PaginatorInterface $paginator,SessionInterface $session ): Response
     {
         
         $list= $entityManager->getRepository(Evenement::class)->findAll();
+        $session->start();
+        $userId = $_SESSION['user_id'];
         $pagination = $paginator->paginate( $list , $request->query->getInt('page', 1 ), 3);  
         return $this->render('\participation\index.html.twig', [
             
-            'list' => $pagination
+            'list' => $pagination ,
+             'userId' => $userId,
         ]);
        
     }
 
 
     #[Route('/participation/add/{ide}', name: 'add_participation')]
-    public function addparticipation($ide , ManagerRegistry $doctrine,Request $req): Response {
+    public function addparticipation($ide , ManagerRegistry $doctrine,Request $req,SessionInterface $session): Response {
       
         $em = $doctrine->getManager();
         $Participation = new Participation();
@@ -67,7 +73,8 @@ class ParticipationController extends AbstractController
         
 
        
-        $id=68;
+        $session->start();
+        $id = $_SESSION['user_id'];
         $utilisateur = $this->entityManager->getRepository(Utilisateur::class)->find($id);
         $event = $this->entityManager->getRepository(Evenement::class)->find($ide);
         $Participation->setId_user($utilisateur);

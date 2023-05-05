@@ -18,12 +18,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 
 
+
 class MaintenanceController extends AbstractController
 {
     #[Route('/maintenance', name: 'app_maintenance')]
     public function index(): Response
     {
-
 
         $data = $this->getDoctrine()->getRepository(Maintenance::class)->findAll();
         return $this->render('\maintenance\index.html.twig', [

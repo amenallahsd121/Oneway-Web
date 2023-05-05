@@ -1,76 +1,180 @@
 {% extends 'backbase.html.twig' %}
 
-
 {% block title %}
 	Liste des Livreurs
 {% endblock %}
 
-
 {% block body %}
 
 
-	<div class="row ">
+	<div class="row">
 		<div class="col-12 grid-margin">
 			<div class="card">
 				<div class="card-body">
-
 					<h4 class="card-title">Liste des Colis Non Affectés</h4>
+					<h4 class="card-title">Filtrer Par :</h4>
 
 
-					<div class="table-responsive">
-						<table class="table">
-							<thead>
-								<tr>
-									<th>
-										Poids
-									</th>
-									<th>
-										Type
-									</th>
-									<th>
-										Prix
-									</th>
-									<th>
-										Lieu Départ
-									</th>
-									<th>
-										Lieu Arrivé
-									</th>
-									<th>
-										Affecter Colis
-									</th>
+					<div class="table-responsive" style="margin-top: -15px;">
+						<form class="form-inline">
 
-								</tr>
-							</thead>
+							<div class="form-check" style="margin-left: 20px;">
+								<input class="form-check-input" type="radio" name="filter" id="filter-all" value="all" checked>
+								<label class="form-check-label" for="filter-all">
+									Tous Les Colis
+								</label>
+							</div>
+							<div class="form-check" style="margin-left: 20px;">
+								<input class="form-check-input" type="radio" name="filter" id="filter-affecter" value="affecter">
+								<label class="form-check-label" for="filter-affecter">
+									Colis Payés
+								</label>
+							</div>
+							<div class="form-check" style="margin-left: 20px;">
+								<input class="form-check-input" type="radio" name="filter" id="filter-non-affecter" value="non-affecter">
+								<label class="form-check-label" for="filter-non-affecter">
+									Colis Non Payés
+								</label>
+							</div>
+							<input type="hidden" name="initial-filter" value="all">
+						</form>
+					</div>
 
+
+					<table class="table">
+						<thead>
+							<tr>
+								<th>Poids</th>
+								<th>Type</th>
+								<th>Prix</th>
+								<th>Lieu Départ</th>
+								<th>Lieu Arrivé</th>
+								<th>Etat Paiement</th>
+								<th>Affecter Colis</th>
+							</tr>
+						</thead>
+						<tbody>
 							{% for data in list %}
-								<tr>
+								{% if '.' in data.typeColis %}
+									<tr>
 
-									<td>
-										{{ data.poids }}
-									</td>
-									<td>
-										{{ data.typeColis }}
-									</td>
-									<td>
-										{{ data.prix }}</td>
-									<td>
-										{{ data.lieuDepart }}
-									</td>
+										<td>
+											{{ data.poids }}
+											Kg
+										</td>
+										<td>
+											{{ data.typeColis }}
+										</td>
+										<td>
+											{{ data.prix }}
+											DT
+										</td>
+										<td>
+											{{ data.lieuDepart }}
+										</td>
 
-									<td>
-										{{ data.lieuArrive }}
-									</td>
+										<td>
+											{{ data.lieuArrive }}
+										</td>
 
-						
 
-									<td>
-										<a href="{{ path('add_livraison', {'id': data.idColis}) }}"  class="btn btn-outline-success btn-fw;">
-											Affecter</a>
-									</td>
+										<td>
+											Colis Déja Payé
+										</td>
+
+										<td>
+											<a href="{{ path('add_livraison', {'id': data.idColis}) }}" class="btn btn-outline-success btn-fw;">
+												Affecter</a>
+										</td>
+									{% else %}
+										<td>
+											{{ data.poids }}
+											Kg
+										</td>
+										<td>
+											{{ data.typeColis }}
+										</td>
+										<td>
+											{{ data.prix }}
+											DT
+										</td>
+										<td>
+											{{ data.lieuDepart }}
+										</td>
+
+										<td>
+											{{ data.lieuArrive }}
+										</td>
+
+
+										<td>
+											Colis Non Payé
+										</td>
+										<td>
+											En attente de Paiement
+										</td>
+									{% endif %}
+
+
 								</tr>
+
 
 							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
 
 
-						{% endblock %}
+<script>
+	// Get a reference to the filter radio buttons
+var filterAll = document.getElementById('filter-all');
+var filterAffecter = document.getElementById('filter-affecter');
+var filterNonAffecter = document.getElementById('filter-non-affecter');
+
+// Get a reference to the initial filter value
+var initialFilter = document.querySelector('input[name="initial-filter"]').value;
+
+// Set the initial state of the filter radio buttons based on the initial filter value
+if (initialFilter === 'all') {
+filterAll.checked = true;
+} else if (initialFilter === 'affecter') {
+filterAffecter.checked = true;
+} else if (initialFilter === 'non-affecter') {
+filterNonAffecter.checked = true;
+}
+
+// Get a reference to the table rows
+var tableRows = document.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+
+// Add event listener to the filter radio buttons
+filterAll.addEventListener('change', function () {
+for (var i = 0; i < tableRows.length; i++) {
+tableRows[i].style.display = '';
+}
+});
+
+filterAffecter.addEventListener('change', function () {
+for (var i = 0; i < tableRows.length; i++) {
+if (tableRows[i].getElementsByTagName('td')[5].textContent.trim() !== 'Colis Déja Payé') {
+tableRows[i].style.display = 'none';
+} else {
+tableRows[i].style.display = '';
+}
+}
+});
+
+filterNonAffecter.addEventListener('change', function () {
+for (var i = 0; i < tableRows.length; i++) {
+if (tableRows[i].getElementsByTagName('td')[5].textContent.trim() !== 'Colis Non Payé') {
+tableRows[i].style.display = 'none';
+} else {
+tableRows[i].style.display = '';
+}
+}
+});
+</script>{% endblock %}

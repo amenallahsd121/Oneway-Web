@@ -19,6 +19,7 @@ use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 
@@ -42,10 +43,11 @@ class DemandeController extends AbstractController
 
     
     #[Route('offredemande/{idoffre}', name: 'app_demande_index', methods: ['GET'])]
-    public function index(UtilisateurRepository $UtilisateurRepository,DemandeRepository $offreRepository,Request $request, PaginatorInterface $paginator,Offre $offre,$idoffre): Response
-    {
+    public function index(SessionInterface $session,UtilisateurRepository $UtilisateurRepository,DemandeRepository $offreRepository,Request $request, PaginatorInterface $paginator,Offre $offre,$idoffre): Response
+    {$session->start();
+        $id = $_SESSION['user_id'];
         // Retrieve offers using findBy method
-        $d = $UtilisateurRepository->find(69);
+        $d = $UtilisateurRepository->find($id );
 
         $demandes = $offreRepository->findByidoffre($idoffre);
         $utilisateur = $d->getName();
@@ -76,13 +78,14 @@ class DemandeController extends AbstractController
 
 
     #[Route('/{idOffre}/new', name: 'app_demande_new', methods: ['GET', 'POST'])]
-    public function new( OffreRepository $offreRepository,Request $request, DemandeRepository $demandeRepository,$idOffre,MailerInterface $mailer): Response
+    public function new( SessionInterface $session,OffreRepository $offreRepository,Request $request, DemandeRepository $demandeRepository,$idOffre,MailerInterface $mailer): Response
     {    
         $demande = new Demande();
-$id=69;
-        $form = $this->createForm(Demande1Type::class, $demande);
+        $session->start();
+        $id = $_SESSION['user_id'];
+                $form = $this->createForm(Demande1Type::class, $demande);
         $formData = $form->getData();
-        $user= $this->getDoctrine()->getRepository(Utilisateur::class)->find(69);
+        $user= $this->getDoctrine()->getRepository(Utilisateur::class)->find($id);
         $demande->setIdpersonne($user);
         $Offre = $this->getDoctrine()->getRepository(Offre::class)->find($idOffre);
         $demande->setIdoffre($Offre);
@@ -134,12 +137,13 @@ $this->addFlash('success', 'VOTRE Demande  A ETE PASSE AVEC SUCCEE ');
         ]);
     }
     #[Route('/Listdemandes', name: 'app_demande_Front', methods: ['GET'])]
-    public function FrontList(UtilisateurRepository $UtilisateurRepository,DemandeRepository $DemandeRepository,Request $request, PaginatorInterface $paginator): Response
+    public function FrontList(SessionInterface $session,UtilisateurRepository $UtilisateurRepository,DemandeRepository $DemandeRepository,Request $request, PaginatorInterface $paginator): Response
     {
-        $d = $UtilisateurRepository->find(69);
-
+        
+        $session->start();
+        $id = $_SESSION['user_id'];
         // Retrieve offers using findBy method
-        $demande = $DemandeRepository->findByIdUser($d);
+        $demande = $DemandeRepository->findByIdUser($id);
       
         // Paginate the results
         $pagination = $paginator->paginate(

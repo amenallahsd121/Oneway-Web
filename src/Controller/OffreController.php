@@ -21,7 +21,7 @@ use Symfony\Component\Notifier\TexterInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\Notifier\Message\SmsMessage;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/offre')]
@@ -66,12 +66,13 @@ class OffreController extends AbstractController
     }
 
     #[Route('/ListOffre', name: 'app_offre_Front', methods: ['GET'])]
-public function FrontList(OffreRepository $offreRepository,UtilisateurRepository $utilisateurRepository,Request $request, PaginatorInterface $paginator,): Response
+public function FrontList( SessionInterface $session,OffreRepository $offreRepository,UtilisateurRepository $utilisateurRepository,Request $request, PaginatorInterface $paginator,): Response
 {
     // Retrieve offers using findBy method
-    
-    $offres = $offreRepository->findByIdUser(69);
-    $user = $utilisateurRepository->find(69);
+    $session->start();
+      $id = $_SESSION['user_id'];
+    $offres = $offreRepository->findByIdUser( $id);
+    $user = $utilisateurRepository->find( $id);
     $rdvs = [];
     foreach($offres as $offre){
         $rdvs[] = [
@@ -93,7 +94,7 @@ public function FrontList(OffreRepository $offreRepository,UtilisateurRepository
 
     
     #[Route('/new', name: 'app_offre_new', methods: ['GET', 'POST'])]
-    public function new(TexterInterface $texter, UtilisateurRepository $UtilisateurRepository,Request $request, OffreRepository $offreRepository, CategorieoffreRepository $categorieoffreRepository): Response
+    public function new(SessionInterface $session, UtilisateurRepository $UtilisateurRepository,Request $request, OffreRepository $offreRepository, CategorieoffreRepository $categorieoffreRepository): Response
     { 
         $offre = new Offre();
         
@@ -103,7 +104,9 @@ public function FrontList(OffreRepository $offreRepository,UtilisateurRepository
         $now->getTimezone();
         $offre->setDateoffre($now);
          $offre=$offre->setEtat("en cours");
-        $user=$UtilisateurRepository->find(69);
+         $session->start();
+            $id = $_SESSION['user_id'];
+        $user=$UtilisateurRepository->find($id);
         $offre=$offre->setIdUser($user);
        $of=$offreRepository->findAll();
        foreach ($of as $f){
@@ -118,16 +121,6 @@ if ($h < $now){            $offreRepository->remove($f, true);
             $offreRepository->save($offre, true);
     
 
-            $sms = new SmsMessage(
-                // the phone number to send the SMS message to
-                '+21693133746',
-                // the message
-                'A new login was detected!',
-                // optionally, you can override default "from" defined in transports
-                '+21693133746',
-            );
-
-            $sentMessage = $texter->send($sms);
             return $this->redirectToRoute('app_offre_Front', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -158,7 +151,7 @@ if ($h < $now){            $offreRepository->remove($f, true);
         if ($form->isSubmitted() && $form->isValid()) {
             $offreRepository->save($offre, true);
 
-            return $this->redirectToRoute('app_offre_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_offre_Front', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('offre/edit.html.twig', [

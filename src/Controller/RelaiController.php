@@ -52,10 +52,79 @@ class RelaiController extends AbstractController
 
     }
     #[Route('/relaimap/{id}', name: 'relai_map')]
-    public function map(  $id, ManagerRegistry $Doctrine) 
+    public function map( $id, ManagerRegistry $Doctrine) 
     {
 
         $em = $Doctrine->getManager();
+        $loc = new Location();
+        $relai= $em->getRepository(Relais::class)->find($id);
+        $city = $relai->getCity();
+        if($city == "Tunis")
+        {
+            $loc->setIdRelai($relai);
+            $loc->setXaxe(36.834435);
+            $loc->setYaxe(10.158705);
+            $loc->setAdresse("Tunis");
+            $em->persist($loc);
+            $em->flush();
+        }
+        if($city == "Gabes")
+        {
+            $loc->setIdRelai($relai);
+            $loc->setXaxe(33.891771);
+            $loc->setYaxe(10.099139);
+            $loc->setAdresse("Gabes");
+            $em->persist($loc);
+            $em->flush();
+        }
+        if($city == "Sousse")
+        {
+            $loc->setIdRelai($relai);
+            $loc->setXaxe(35.834312);
+            $loc->setYaxe(10.619770);
+            $loc->setAdresse("Sousse");
+            $em->persist($loc);
+            $em->flush();
+        }
+        if($city == "Ariana")
+        {
+            $loc->setIdRelai($relai);
+            $loc->setXaxe(36.891415);
+            $loc->setYaxe(10.183156);
+            $loc->setAdresse("Ariana");
+            $em->persist($loc);
+            $em->flush();
+        }
+        if($city == "Sfax")
+        {
+            $loc->setIdRelai($relai);
+            $loc->setXaxe(34.748109);
+            $loc->setYaxe(10.734812);
+            $loc->setAdresse("Sfax");
+            //36.834435, 10.158705
+            $em->persist($loc);
+            $em->flush();
+        }
+        if($city == "Beja")
+        {
+            $loc->setIdRelai($relai);
+            $loc->setXaxe(36.730809);
+            $loc->setYaxe(9.183482);
+            $loc->setAdresse("Beja");
+            //36.834435, 10.158705
+            $em->persist($loc);
+            $em->flush();
+        }
+        if($city == "Gafsa")
+        {
+            $loc->setIdRelai($relai);
+            $loc->setXaxe(34.427315);
+            $loc->setYaxe(8.778810);
+            $loc->setAdresse("Gafsa");
+            //36.834435, 10.158705
+            $em->persist($loc);
+            $em->flush();
+        }
         $locations= $em->getRepository(Location::class)->findBy(array('relai' => $id));
         for ($i = 0; $i < count($locations); $i++) {
             // Add each value to the new array using the [] syntax
@@ -66,8 +135,8 @@ class RelaiController extends AbstractController
             'xx' => $ArrayX,
             'yy' => $ArrayY,
         ]);
-
     }
+
     #[Route('/frontrelai', name: 'add_relai')]
     public function ajoutrelaiAction(Request $request,ManagerRegistry $Doctrine)
     {

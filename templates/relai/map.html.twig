@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'backbase.html.twig' %}
 
 {% block body %}
 <div id="map" style="height: 680px;"></div>
@@ -7,10 +7,13 @@
 <link href="https://api.mapbox.com/mapbox-gl-js/v2.4.1/mapbox-gl.css" rel="stylesheet" />
 
 <script>
+
 var locationx = {{ xx|json_encode|raw }};
 var locationy = {{ yy|json_encode|raw }};
         console.log(locationx);
         console.log(locationy);
+
+
 
 const positions = [
   {lat: locationx, lng: locationy, name: "Position A"}
@@ -32,6 +35,8 @@ const positions = [
     .setHTML(`<h3>${pos.name}</h3>`)
   
   marker.setPopup(popup);
+  
+
 
 </script>
 {% endblock %}

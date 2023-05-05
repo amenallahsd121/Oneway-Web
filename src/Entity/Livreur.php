@@ -3,51 +3,109 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\LivreurRepository;
+use App\Entity\Utilisateur;
+use ORM\Table;
+use Symfony\Component\Validator\Constraints as Assert;
 
-/**
- * Livreur
- *
- * @ORM\Table(name="livreur")
- * @ORM\Entity
- */
+ 
+#[ORM\Entity(repositoryClass: LivreurRepository::class)]
+
 class Livreur
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id_livreur", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $idLivreur;
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    private ?int $id_livreur = null ;
+    
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="cin_livreur", type="string", length=50, nullable=false)
-     */
-    private $cinLivreur;
+    #[ORM\Column(length:8)]
+    #[Assert\NotBlank(message: "Tu dois saisir le CIN du livreur")]
+    #[Assert\Regex(
+        pattern: '/^[0-9]{8}$/',
+        message: "Le CIN du livreur doit contenir exactement 8 chiffres."
+    )]
+    private ?string $cinLivreur = null;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="nom", type="string", length=50, nullable=false)
-     */
-    private $nom;
+   
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="prenom", type="string", length=50, nullable=false)
-     */
-    private $prenom;
+    #[ORM\Column(length: 50)]
+    #[Assert\NotBlank(message: "Tu dois saisir le nom du livreur")]
+    #[Assert\Regex(
+        pattern: '/^[a-zA-Z]+$/',
+        message: "Le nom du livreur doit contenir des caractères alphabétiques uniquement."
+    )]
+    private ?string $nom = null;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="vehicule", type="string", length=50, nullable=false)
-     */
-    private $vehicule;
+    
+
+
+    #[ORM\Column(length:50)]
+    #[Assert\NotBlank(message:"Tu dois saisir le prenom du livreur" )]
+    #[Assert\Regex(
+        pattern: '/^[a-zA-Z]+$/',
+        message: "Le nom du livreur doit contenir des caractères alphabétiques uniquement."
+    )]
+    private ?string $prenom = null ;
+   
+    
+
+    #[ORM\Column(length:50)]
+    private ?string $vehicule = null ;
+
+
+    public function getIdLivreur(): ?int
+    {
+        return $this->id_livreur;
+    }
+
+    public function getCinLivreur(): ?string
+    {
+        return $this->cinLivreur;
+    }
+
+    public function setCinLivreur(string $cinLivreur): self
+    {
+        $this->cinLivreur = $cinLivreur;
+
+        return $this;
+    }
+
+    public function getNom(): ?string
+    {
+        return $this->nom;
+    }
+
+    public function setNom(string $nom): self
+    {
+        $this->nom = $nom;
+
+        return $this;
+    }
+
+    public function getPrenom(): ?string
+    {
+        return $this->prenom;
+    }
+
+    public function setPrenom(string $prenom): self
+    {
+        $this->prenom = $prenom;
+
+        return $this;
+    }
+
+    public function getVehicule(): ?string
+    {
+        return $this->vehicule;
+    }
+
+    public function setVehicule(string $vehicule): self
+    {
+        $this->vehicule = $vehicule;
+
+        return $this;
+    }
 
 
 }

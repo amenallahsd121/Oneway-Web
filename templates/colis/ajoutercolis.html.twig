@@ -44,30 +44,22 @@
 		}
 
 
-        .form-table {
-    width: 100%;
-    max-width: 600px;
-    margin: 0 auto;
-    border-collapse: collapse;
-    margin-left: -145px;
-    	margin-top: -80px;
-}
+		.form-table {
+			width: 100%;
+			max-width: 600px;
+			margin: -80px auto 0 -145px;
+			border-collapse: collapse;
+		}
 
-.form-table td {
-    padding: 10px;
-  
-}
+		.form-table td {
+			padding: 10px;
 
-.form-table td:first-child {
-    width: 150px;
-    font-weight: bold;
-}
+		}
 
-
-
-
-
-
+		.form-table td:first-child {
+			width: 150px;
+			font-weight: bold;
+		}
 	</style>
 
 	<div class="form-container">
@@ -87,9 +79,13 @@
 					<td>
 						{{ form_widget(form.poids) }}
 					</td>
-					<td>
+
+
+					<span style="font-size: 22px; ">
 						{{ form_errors(form.poids) }}
-					</td>
+					</span>
+
+
 				</tr>
 				<br>
 					<tr></tr>
@@ -141,9 +137,9 @@
 						<td>
 							{{ form_widget(form.prix, {'attr': {'readonly': true}}) }}
 						</td>
-						<td>
-							{{ form_errors(form.prix) }}
-						</td>
+
+						
+
 					</tr>
 					<br>
 
@@ -152,7 +148,7 @@
 
 
 				<tr>
-					<td colspan="2">{{ form_widget(form.Payer, {'attr': {'style': 'font-size: 18px; padding: 15px 20px; margin-left: 130px; margin-top: 10px;'}}
+					<td colspan="2">{{ form_widget(form.Ajouter, {'attr': {'style': 'font-size: 18px; padding: 15px 20px; margin-left: 130px; margin-top: 10px;'}}
 						) }}</td>
 				</tr>
 			</table>
@@ -161,19 +157,24 @@
 			{{form_end(form)}}
 		{% endblock %}
 
-		<script>
-			var poidsField = document.getElementById('{{ form.poids.vars.id }}');
-var prixField = document.getElementById('{{ form.prix.vars.id }}');
+<script>
+    var poidsField = document.getElementById('{{ form.poids.vars.id }}');
+    var prixField = document.getElementById('{{ form.prix.vars.id }}');
 
-poidsField.addEventListener('input', function () {
-var poidsValue = parseFloat(poidsField.value) || 0;
-var prixValue = poidsValue * 7;
-if (poidsValue === 0) {
-prixField.value = '0.00 DT';
-} else {
-prixField.value = prixValue.toFixed(2);
-}
-});
-		</script>
+    poidsField.addEventListener('input', function () {
+        var poidsValue = parseFloat(poidsField.value) || 0;
+        var prixValue = 0;
+        if (poidsValue === 0) {
+            prixField.value = '0.00 DT';
+        } else if (poidsValue > 0 && poidsValue <= 1) {
+            prixValue = 7;
+            prixField.value = prixValue.toFixed(2);
+        } else {
+            prixValue = poidsValue * 7;
+            prixField.value = prixValue.toFixed(2);
+        }
+    });
+</script>
+
 
 	{% endblock %}

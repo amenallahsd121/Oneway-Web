@@ -2,12 +2,14 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
-
 use App\Repository\OffreRepository;
+use App\Repository\OpportinuteRepository;
+use Symfony\Component\HttpFoundation\Response;
+
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+
 class CalendarController extends AbstractController
 {
     /**
@@ -29,4 +31,5 @@ class CalendarController extends AbstractController
         $data = json_encode($rdvs);
         return $this->render('offre/showoffrefront.html.twig', compact('data'));
     }
+   
 }

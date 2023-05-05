@@ -17,6 +17,8 @@
 
                 <h4 class="card-title">Liste des Maintenances<a href=" {{ path ('add_maintenance') }} " class="btn btn-success btn-fw float-right">Ajouter Maintenance</a></h4> 
 
+                <form action="/oneway/public/index.php/maintenance" type="GET">
+								<input type="text" name="term" placeholder="Recherche" value="{{ app.request.get('term') }}">
 
                   <div class="table-responsive">
                     <table class="table">

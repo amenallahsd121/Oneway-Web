@@ -21,9 +21,6 @@ class ColisType extends AbstractType
 
             ->add('poids')
             ->add('prix')
-            
-
-
             ->add('typeColis', ChoiceType::class, [
                 'choices' => [
                     'Agro-Alimentaire' => 'Agro-Alimentaire',
@@ -86,7 +83,7 @@ class ColisType extends AbstractType
 
             ])
 
-            ->add('Payer', SubmitType::class);
+            ->add('Ajouter', SubmitType::class);
 
     }
 

@@ -2,22 +2,23 @@
 
 namespace App\Controller;
 
+use Dompdf\Dompdf;
+use Dompdf\Options;
 use App\Entity\Reclamation;
 use App\Entity\Utilisateur;
 use App\Form\ReclamationType;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Notifier\Notifier;
 use Doctrine\Persistence\ManagerRegistry;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Dompdf\Dompdf;
-use Dompdf\Options;
-use Symfony\Component\Notifier\Notification\Notification;
 use Symfony\Component\Notifier\NotifierInterface;
-use Symfony\Component\Notifier\Notifier;
 use Symfony\Component\Notifier\Recipient\AdminRecipient;
+use Symfony\Component\Notifier\Notification\Notification;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 
 
@@ -36,18 +37,41 @@ class ReclamationController extends AbstractController
 
 
     #[Route('/reclamation', name: 'app_reclamation')]
-    public function index(Request $request, PaginatorInterface $paginator): Response
+    public function index(Request $request, PaginatorInterface $paginator, SessionInterface $session): Response
     {
+
+        $session->start();
+        
+        $t = $_SESSION['user_type']  ;
+        $username = $_SESSION['username'] ?? null;
+        if ($username === null) {
+
+            echo "<script>alert('Login first');</script>";
+            return $this->redirectToRoute("check_login");
+        }
+         else if($t == "Client")
+        {
+           // echo "<script>alert('this user is  $username ');</script>";
+           
+        }
+        else {
+            echo "<script>alert('Logout first');</script>";
+            return $this->redirectToRoute("aff_user");
+        }
+        
+        $userId = $_SESSION['user_id'];
         $entityManager = $this->getDoctrine()->getManager();
         $repository = $entityManager->getRepository(Reclamation::class);
         $query = $repository->createQueryBuilder('c')
+            ->leftJoin('c.id_user', 'user')
+            ->where('user.id = :userId')
+            ->setParameter('userId', $userId)
             ->orderBy('c.id_reclamation', 'DESC');
-
-
+    
         $data = $paginator->paginate(
-            $query, // Requête contenant les données à paginer (ici notre requête custom)
-            $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
-            3 // Nombre de résultats par page
+            $query,
+            $request->query->getInt('page', 1),
+            3
         );
 
         return $this->render('reclamation/index.html.twig', [
@@ -61,7 +85,7 @@ class ReclamationController extends AbstractController
 
 
     #[Route('/reclamation/add', name: 'add_reclamation')]
-    public function addreclamation(ManagerRegistry $doctrine, Request $req): Response
+    public function addreclamation(ManagerRegistry $doctrine, Request $req,SessionInterface $session): Response
     {
         $badWords = ['merde','fuck','shit','con','connart','putain','pute','chier','bitch','bèullshit','bollocks','damn','putin'];
        
@@ -80,7 +104,8 @@ class ReclamationController extends AbstractController
                 }
             }
     
-            $id = 123;
+            $session->start();
+            $id = $_SESSION['user_id'];
             $utilisateur = $this->entityManager->getRepository(Utilisateur::class)->find($id);
             $reclamation->setIdUser($utilisateur);
             $em->persist($reclamation);
@@ -107,9 +132,7 @@ class ReclamationController extends AbstractController
         $form->handleRequest($req);
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $id = 123;
-            $utilisateur = $this->entityManager->getRepository(Utilisateur::class)->find($id);
-            $reclamation->setIdUser($utilisateur);
+            
             $this->entityManager->persist($reclamation);
             $this->entityManager->flush();
 

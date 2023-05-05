@@ -1,81 +1,54 @@
 {% extends 'backbase.html.twig' %}
 
-{% block title %}Calendrier{% endblock %}
 
-{% block stylesheets %}
-    <style>
+{% block title %}
+	Event
+{% endblock %}
+
+
+{% block body %}
+   
+
+	<style>
         #calendrier{
             width: 100%;
             margin: auto;
-            background-color: black;
+
         }
-    </style>
-{% endblock %}
 
-{% block body %}
- 
+		body {
+			background-color: #000c20;
 
-    <div id="calendrier">
+		}
+
+	</style>
+	<div class="categories-area section-padding30"  data-background="{{ asset('assets/img/offre/calendar.jpg') }}">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <!-- Section Tittle -->
+                    <div class="section-tittle text-center mb-80">
+                     
+                        <h1>voici votre Calendrier d'offre :</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="background-color: white;background-radius: 10px;border-radius: 10px; padding: 50px;">
+                <div class="container">
+         <div id="calendrier">
+
+           </div>
     </div>
+        </div>
+    </div>
+
+
+
+		<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.0/slick.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.3.0/main.min.css" integrity="sha256-uq9PNlMzB+1h01Ij9cx7zeE2OR2pLAfRw3uUUOOPKdA=" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.3.0/main.min.js" integrity="sha256-DBxkGZLxKsLKhz054qUpBqtotG00r9AELGpSigJujLg=" crossorigin="anonymous"></script>
-{% endblock %}
-
-
- {# <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.3.0/main.min.css" integrity="sha256-uq9PNlMzB+1h01Ij9cx7zeE2OR2pLAfRw3uUUOOPKdA=" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.3.0/main.min.js" integrity="sha256-DBxkGZLxKsLKhz054qUpBqtotG00r9AELGpSigJujLg=" crossorigin="anonymous"></script>
-
-<script>
-
-
-
-    window.onload = () => {
-
-          let events = {{ data|raw }}.concat({{ dataop|raw }});
-        let calendarElt = document.querySelector("#calendrier");
-        
-        let calendar = new FullCalendar.Calendar(calendarElt, {
-            initialView: 'dayGridMonth',
-            locale: 'fr',
-            timeZone: 'Europe/Paris',
-            headerToolbar: {
-                start: 'prev,next today',
-                center: 'title',
-                end: 'dayGridMonth,timeGridWeek'
-            },
-             events: events,
-             editable: true,
-            eventResizableFromStart: true,
-            
-               })
-         calendar.on('eventChange', (e) => {
-             let url =  'api/' + e.event.id + '/edit'
-  
-  let start = e.event.start.toISOString().substr(0, 10);
-
-  let donnees = {
-    "start": start
-  };
-
-           console.log(donnees)
-           let xhr = new XMLHttpRequest
-            xhr.open("POST", url)
-            xhr.send(JSON.stringify(donnees))
-  
-            
-
-                
-            
-            
-        })
-     
-
-calendar.render();
-    }
-   
-</script> #}
-{% block javascripts %}
-
 
     <script>
     window.onload = () => {
@@ -83,7 +56,7 @@ calendar.render();
             let calendar = new FullCalendar.Calendar(calendarEl, {
                 initialView: 'dayGridMonth',
                 locale: 'fr',
-                timezone: 'Europe/Paris',
+                timezone: 'Europe/paris',
                 headerToolbar: {
                     start: 'prev,next today',
                     center: 'title',
@@ -91,20 +64,19 @@ calendar.render();
                 },
                 events : {{ dataop|raw }},
                 editable : true,
-                eventResizableFormStart : true,
+                eventResizableFormStart : true
             })
             calendar.on('eventChange', (e) => {
 
-               let url = 'api/'+e.event.id+'/edit'
-                // let url = {{path('app_api_edit',{'id':"Re"})}}
-                 //  url = url.replace("Re",e.event.id) 
+                let url = `{{path('app_api_editsof',{'idd':"Re"})}}`
+                url = url.replace("Re",e.event.id)
 
                 let donnees ={
 
 
-                    
+                    "title": e.event.title,
                     "start": e.event.start,
-                   
+                    "end": e.event.end,
 
 
 
@@ -122,7 +94,19 @@ calendar.render();
     
 
     }
+	$('.slider-services').slick({
+				dots: false,
+				arrows: true,
+				prevArrow: '<button type="button" class="slick-prev  btn btn-light"  ><i class="ti-angle-left"></i> </button>',
+				nextArrow: '<button type="button" class="slick-next  btn btn-light" > <i class="ti-angle-right"></i>  </button>',
+				appendArrows:$('.slider-arrows'),
+				slidesToShow: 3,
 
-    </script>
+			});
+
+    </script>  
+
+
+
 
 {% endblock %}

@@ -41,11 +41,15 @@ class VehiculeController extends AbstractController
     {
         $term = $request->query->get('term', '');
         $categoryId = $request->query->get('category', '');
+        $vehiculeId = $request->query->get('marque', '');
         $data = $this->getDoctrine()->getRepository(Vehicule::class)->getAll($term, $categoryId);
         $categories = $this->getDoctrine()->getRepository(Categorie::class)->findAll();
+        $vehicules = $this->getDoctrine()->getRepository(Vehicule::class)->findAll();
         return $this->render('\vehicule\index.html.twig', [
             'list' => $data,
-            'categories' => $categories
+            'categories' => $categories, 
+            
+
         ]);
     }
 

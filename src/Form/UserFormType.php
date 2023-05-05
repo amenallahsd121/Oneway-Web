@@ -37,11 +37,8 @@ class UserFormType extends AbstractType
                     "class" => "form-control"
                 ]
             ])
-            ->add('birthdate',DateType::class,[
-                "attr"=>[
-                    "class" => "form-control"
-                ]
-            ])
+            ->add('birthdate',DateType::class)
+            
             ->add('password',TextareaType::class,[
                 "attr"=>[
                     "class" => "form-control ",

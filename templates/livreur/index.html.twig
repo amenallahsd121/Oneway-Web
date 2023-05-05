@@ -7,56 +7,97 @@
 
 
 {% block body %}
+	<style>
+		.my-class {
+			color: red;
+			font-size: 18px;
+			text-align: center;
+		}
+		form {
+			display: flex;
+			flex-direction: column;
+			align-items: right;
+		}
 
 
+		input[type="file"] {
+			margin-top: 0.5rem;
+			margin-left: 10px;
+		}
 
-	 <div class="row ">
-            <div class="col-12 grid-margin">
-              <div class="card">
-                <div class="card-body">
+		button[type="submit"] {
+			margin-top: -20px;
+			padding: 0.5rem 1rem;
+			background-color: #4CAF50;
+			color: white;
+			border: none;
+			border-radius: 4px;
+			cursor: pointer;
+			font-size: 16px;
+			font-weight: bold;
+		}
 
-               <h4 class="card-title">Liste des Livreurs<a href=" {{ path ('add_livreur') }} " class="btn btn-success btn-fw float-right">Ajouter Livreur</a></h4>
-
-
-                  <div class="table-responsive">
-                    <table class="table">
-                      <thead>
-                        <tr>
-                          <th> CIN </th>
-                          <th> Prénom </th>
-                          <th> Nom </th>
-                          <th> Véhicule </th>
-                          <th> Suppression </th>
-                          <th> Modification </th>
-                        </tr>
-                      </thead>
-
-                      {% for data in list %}
-                        <tr>
-                         
-                          <td> {{ data.cinLivreur }} </td>
-                          <td> {{ data.prenom }} </td>
-                          <td> {{ data.nom }} </td>
-                          <td> {{ data.vehicule }} </td>
-                       
+		button[type="submit"]:hover {
+			background-color: #3e8e41;
 
 
-                      
-                         <td>
-  <a href="{{ path('delete_livreur', {'id': data.idLivreur}) }}" class="btn btn-outline-danger btn-fw;">Supprimer</a>
-</td>
+		}
+	</style>
+
+	<div class="row">
+		<div class="col-12 grid-margin">
+			<div class="card">
+				<div class="card-body">
+					<h4 class="card-title">Liste des Livreurs<a href="{{ path ('add_livreur') }}" class="btn btn-success btn-fw float-right">Ajouter Livreur</a>
+					</h4>
+					
+					<div class="float-left">
+    <form method="post" action="{{ path('orc') }}" enctype="multipart/form-data">
+        <div>
+            <input type="file" id="image" name="image" accept="image/*" required>
+            <button type="submit">Ajouter Livreur Par image</button>
+        </div>
+        <br>
+    </form>
+</div>
 
 
-                          <td>
-                             <a href="{{ path('update_livreur', {'id': data.idLivreur}) }}"  class="btn btn-outline-warning btn-fw;"> Modifier</a>
-                          </td>
-                        </tr>
-                          
-                         {% endfor %}
-                       
-                         
-                
+					<div id="output"></div>
+					<div class="table-responsive">
+						<table class="table" id="table_id">
+							<thead>
+								<tr>
+									<th>N ° CIN</th>
+									<th>Prénom</th>
+									<th>Nom</th>
+									<th>Véhicule</th>
+									<th>Suppression</th>
+									<th>Modification</th>
+								</tr>
+							</thead>
 
-{% endblock %}
+
+							<tbody>
+								{% for data in list %}
+									<tr>
+										<td>{{ data.cinLivreur }}</td>
+										<td>{{ data.prenom }}</td>
+										<td>{{ data.nom }}</td>
+										<td>{{ data.vehicule }}</td>
+										<td>
+											<a href="{{ path('delete_livreur', {'id': data.idLivreur}) }}" class="btn btn-outline-danger btn-fw;">Supprimer</a>
+										</td>
+										<td>
+											<a href="{{ path('update_livreur', {'id': data.idLivreur}) }}" class="btn btn-outline-warning btn-fw;">Modifier</a>
+										</td>
+									</tr>
+
+								{% endfor %}
+							</tbody>
+						</table>
 
 
+					</div>
+
+
+				{% endblock %}

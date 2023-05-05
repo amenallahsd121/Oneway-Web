@@ -38,9 +38,6 @@ class UtilisateurRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
-<<<<<<< HEAD
-
-=======
     public function searchUsers(string $query): array
     {
         $qb = $this->createQueryBuilder('u');
@@ -64,7 +61,6 @@ class UtilisateurRepository extends ServiceEntityRepository
         
         return $qb->getQuery()->getResult();
     }
->>>>>>> origin/main
 //    /**
 //     * @return Utilisateur[] Returns an array of Utilisateur objects
 //     */

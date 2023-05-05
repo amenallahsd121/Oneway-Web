@@ -174,7 +174,7 @@
 
 								{% if data.Participation is null %}
                                 <p style="font-size: 22px; color: white;">
-											Participer Maintenant :
+											Participer Maintenant :   
 										</p>
 									<a href="{{ path('add_participation', {'ide': data.id_event}) }}" class="btn btn-light" style="padding: 0.75rem 1rem; margin-right: 5px;">
 										<i class="fas fa-user-plus"></i>
@@ -182,7 +182,9 @@
 
 									</a>
 
-								{% else %}
+								{% elseif  data.Participation.id_user.id == userId  %}
+
+                
 <p style="font-size: 22px; color: white;">
 											Déja Participer :
 										</p>
@@ -192,8 +194,18 @@
       
        <a href="{{ path('event_data_download', {'ident': data.id_event}) }}" class="btn btn-light" style="padding: 0.75rem 1rem; margin-right: 5px;"><i class="fa fa-file-pdf-o"></i></a>
        <a href="{{ path('app_evenement_qrcode', {'id_event': data.id_event}) }}  " class="btn btn-light" style="padding: 0.75rem 1rem; margin-right: 5px;"><i class="fa fa-qrcode"></i></a>
-
+        
 <br>
+	{% else %}
+       <p style="font-size: 22px; color: white;">
+											Participer Maintenant :   
+										</p>
+									<a href="{{ path('add_participation', {'ide': data.id_event}) }}" class="btn btn-light" style="padding: 0.75rem 1rem; margin-right: 5px;">
+										<i class="fas fa-user-plus"></i>
+										
+
+									</a>
+
 								{% endif %}
 
 
